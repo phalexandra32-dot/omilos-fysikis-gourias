@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Όμιλος Φυσικής & Χημείας | Γυμνάσιο Γουριάς (2026-2027)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=OpenDyslexic&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-physics: #0d47a1;
+            --secondary-physics: #1976d2;
+            --primary-chem: #004d40;
+            --secondary-chem: #00796b;
+            --accent: #ff6f00;
+            --bg-light: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-dark: #212121;
+            --font-size-base: 16px;
+        }
+
+        body.high-contrast {
+            --bg-light: #000000;
+            --card-bg: #121212;
+            --text-dark: #ffff00;
+            --primary-physics: #00ffff;
+            --secondary-physics: #0088ff;
+            --primary-chem: #00ff66;
+            --secondary-chem: #00cc44;
+            color: #ffff00 !important;
+        }
+
+        body.dyslexia-font {
+            font-family: 'OpenDyslexic', sans-serif !important;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+        }
+
+        /* Accessibility Bar */
+        .access-bar {
+            background: #263238;
+            color: white;
+            padding: 8px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .access-btn {
+            background: #37474f;
+            color: white;
+            border: 1px solid #546e7a;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 5px;
+            font-size: 0.85rem;
+        }
+        .access-btn:hover { background: #455a64; }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-physics), var(--primary-chem));
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        header h1 { font-size: 2.2rem; margin-bottom: 5px; }
+        header p { font-size: 1.1rem; opacity: 0.9; }
+        .school-year {
+            background: rgba(255,255,255,0.2);
+            padding: 3px 12px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+
+        /* Main Navigation */
+        nav.club-nav {
+            display: flex;
+            justify-content: center;
+            background: #ffffff;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .club-tab {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: #666;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .club-tab.active-physics {
+            color: var(--primary-physics);
+            border-bottom: 4px solid var(--primary-physics);
+            background: #e3f2fd;
+        }
+        .club-tab.active-chem {
+            color: var(--primary-chem);
+            border-bottom: 4px solid var(--primary-chem);
+            background: #e0f2f1;
+        }
+
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
+
+        /* Category Filters */
+        .cat-filters {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .cat-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            background: #e0e0e0;
+            color: #333;
+            cursor: pointer;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+        .cat-btn.active { background: var(--accent); color: white; }
+
+        /* Action Buttons */
+        .action-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .btn-add {
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Card Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            border: 1px solid #e0e0e0;
+            transition: transform 0.2s;
+        }
+        .card:hover { transform: translateY(-3px); }
+        .card-header {
+            padding: 12px 15px;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+        .bg-physics { background: var(--secondary-physics); }
+        .bg-chem { background: var(--secondary-chem); }
+
+        .card-body { padding: 15px; }
+        .card-title { font-size: 1.1rem; margin-bottom: 8px; }
+        .card-desc { font-size: 0.9rem; color: #555; margin-bottom: 12px; }
+
+        /* Sections */
+        .section-box {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Poster Display */
+        .poster-container {
+            text-align: center;
+            background: #111;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .poster-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            max-height: 500px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: #1a237e;
+            color: white;
+            padding: 30px 20px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .footer-info {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        .footer-info a { color: #80d8ff; text-decoration: none; }
+        .footer-info a:hover { text-decoration: underline; }
+        .copyright-notice {
+            margin-top: 15px;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 12px;
+        }
+
+        /* Modal Form */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            justify-content: center; align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 90%; max-width: 500px;
+        }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <!-- Accessibility Controls -->
+    <div class="access-bar">
+        <div>
+            <strong><i class="fa-solid fa-universal-access"></i> Προσβασιμότητα:</strong>
+            <button class="access-btn" onclick="changeFontSize(1)">Α+</button>
+            <button class="access-btn" onclick="changeFontSize(-1)">Α-</button>
+            <button class="access-btn" onclick="toggleContrast()">Υψηλή Αντίθεση</button>
+            <button class="access-btn" onclick="toggleDyslexiaFont()">Δυσλεξία</button>
+        </div>
+        <div>
+            <button class="access-btn" onclick="readPage()"><i class="fa-solid fa-volume-high"></i> Εκφώνηση</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <h1><i class="fa-solid fa-flask-vial"></i> Εκπαιδευτικός Όμιλος Φυσικής & Χημείας</h1>
+        <p>Γυμνάσιο Γουριάς "Κ. Σ. Κώνστας"</p>
+        <span class="school-year"><i class="fa-regular fa-calendar"></i> Σχολικό Έτος 2026 - 2027</span>
+    </header>
+
+    <!-- Main Navigation Tabs -->
+    <nav class="club-nav">
+        <button class="club-tab active-physics" id="tab-physics" onclick="switchClub('physics')">
+            <i class="fa-solid fa-atom"></i> Όμιλος Φυσικής
+        </button>
+        <button class="club-tab" id="tab-chem" onclick="switchClub('chem')">
+            <i class="fa-solid fa-vial"></i> Όμιλος Χημείας
+        </button>
+    </nav>
+
+    <div class="container">
+
+        <!-- Futuristic Poster Section -->
+        <div class="section-box">
+            <div class="section-title">
+                <i class="fa-solid fa-scroll"></i> Επίσημο Πόστερ Ομίλου (Β' & Γ' Γυμνασίου)
+            </div>
+            <div class="poster-container">
+                <img src="https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=1000&q=80" alt="Φουτουριστικό Πόστερ Ομίλου Φυσικής & Χημείας" class="poster-img">
+                <p style="color: #bbb; margin-top: 10px; font-size: 0.9rem;">
+                    <strong>Εβδομαδιαίες Συναντήσεις στο Σχολικό Εργαστήριο!</strong><br>
+                    Πειράματα • Παιχνίδια Γνώσεων • Κατασκευές
+                </p>
+            </div>
+        </div>
+
+        <!-- Controls & Categories -->
+        <div class="action-row">
+            <div class="cat-filters">
+                <button class="cat-btn active" onclick="filterCat('all', this)">Όλα</button>
+                <button class="cat-btn" onclick="filterCat('video', this)">🎥 Βίντεο</button>
+                <button class="cat-btn" onclick="filterCat('photo', this)">📷 Φωτογραφίες</button>
+                <button class="cat-btn" onclick="filterCat('sheet', this)">📄 Φύλλα Εργασίας</button>
+                <button class="cat-btn" onclick="filterCat('bio', this)">🔬 Βιογραφίες</button>
+                <button class="cat-btn" onclick="filterCat('special', this)">♿ Ειδική Αγωγή</button>
+            </div>
+            <button class="btn-add" onclick="openModal()"><i class="fa-solid fa-plus"></i> Προσθήκη Υλικού</button>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid" id="content-grid">
+            <!-- Dynamic Content Injected Here -->
+        </div>
+
+        <!-- Interactive Simulations Hub -->
+        <div class="section-box" style="margin-top: 30px;">
+            <div class="section-title">
+                <i class="fa-solid fa-laptop-code"></i> Διαδραστικές Προσομοιώσεις & Εργαλεία (PhET / phyphox)
+            </div>
+            <p>Εργαλείο ψηφιακών πειραμάτων για τους μαθητές των Ομίλων:</p>
+            <ul style="margin-left: 20px; margin-top: 8px;">
+                <li><a href="https://phet.colorado.edu/el/" target="_blank" style="color: var(--secondary-physics); font-weight: bold;">PhET Interactive Simulations - Φυσική & Χημεία</a></li>
+                <li><strong>phyphox Mobile Labs:</strong> Χρήση αισθητήρων έξυπνων συσκευών για πειράματα ακουστικής και μηχανικής.</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Modal Form for Adding Content -->
+    <div class="modal" id="addModal">
+        <div class="modal-content">
+            <h3>Προσθήκη Νέου Υλικού</h3>
+            <form id="addForm" onsubmit="saveItem(event)">
+                <div class="form-group">
+                    <label>Όμιλος:</label>
+                    <select id="itemClub">
+                        <option value="physics">Όμιλος Φυσικής</option>
+                        <option value="chem">Όμιλος Χημείας</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Τίτλος:</label>
+                    <input type="text" id="itemTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Κατηγορία:</label>
+                    <select id="itemCat">
+                        <option value="video">Βίντεο Πειράματος</option>
+                        <option value="photo">Φωτογραφία</option>
+                        <option value="sheet">Φύλλο Εργασίας</option>
+                        <option value="bio">Βιογραφία Επιστήμονα</option>
+                        <option value="special">Άρθρο Ειδικής Αγωγής</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Περιγραφή:</label>
+                    <textarea id="itemDesc" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Σύνδεσμος (URL):</label>
+                    <input type="url" id="itemLink" placeholder="https://..." required>
+                </div>
+                <button type="submit" class="btn-add" style="width: 100%; justify-content: center;">Αποθήκευση</button>
+                <button type="button" onclick="closeModal()" style="width: 100%; margin-top: 8px; padding: 8px; background: #ccc; border: none; border-radius: 4px; cursor: pointer;">Ακύρωση</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-info">
+            <p><strong>Υπεύθυνη Ομίλου:</strong> Αλεξάνδρα Κούση | Καθηγήτρια Φυσικής PhD, MSc, MEd</p>
+            <p><i class="fa-solid fa-envelope"></i> Email Επικοινωνίας: <a href="mailto:phAlexandra32@gmail.com">phAlexandra32@gmail.com</a></p>
+            <p><i class="fa-solid fa-school"></i> Σχολική Μονάδα: <a href="https://blogs.sch.gr/gymgouri/" target="_blank">Γυμνάσιο Γουριάς "Κ. Σ. Κώνστας"</a></p>
+            <div class="copyright-notice">
+                © 2026 - 2027 Αλεξάνδρα Κούση. Με επιφύλαξη παντός δικαιώματος (Copyright Protected).<br>
+                Απαγορεύεται η αναπαραγωγή ή αντιγραφή του υλικού χωρίς άδεια.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentClub = 'physics';
+        let currentCat = 'all';
+        let fontSize = 16;
+
+        // Anti-Copy & Protection Scripts
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode == 123 || 
+                (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || 
+                (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 83 || e.keyCode == 67))) {
+                e.preventDefault();
+                alert('Το περιεχόμενο προστατεύεται από Copyright © 2026-2027 Αλεξάνδρα Κούση.');
+            }
+        });
+
+        // Accessibility Functions
+        function changeFontSize(delta) {
+            fontSize += delta;
+            document.body.style.fontSize = fontSize + 'px';
+        }
+        function toggleContrast() {
+            document.body.classList.toggle('high-contrast');
+        }
+        function toggleDyslexiaFont() {
+            document.body.classList.toggle('dyslexia-font');
+        }
+        function readPage() {
+            const msg = new SpeechSynthesisUtterance("Καλώς ήρθατε στον Εκπαιδευτικό Όμιλο Φυσικής και Χημείας του Γυμνασίου Γουριάς για το σχολικό έτος 2026-2027.");
+            msg.lang = 'el-GR';
+            window.speechSynthesis.speak(msg);
+        }
+
+        // Data Storage
+        const defaultData = [
+            // Physics Items
+            { id: 1, club: 'physics', cat: 'sheet', title: 'Φύλλο Εργασίας: Νόμος του Hooke', desc: 'Δραστηριότητα μέτρησης επιμήκυνσης ελατηρίου και κατασκευής διαγράμματος.', link: '#' },
+            { id: 2, club: 'physics', cat: 'bio', title: 'Albert Einstein (1879–1955)', desc: 'Θεμελιωτής της Θεωρίας της Σχετικότητας και του φωτοηλεκτρικού φαινομένου.', link: '#' },
+            { id: 3, club: 'physics', cat: 'special', title: 'Πολυτροπική Διδασκαλία Φυσικής', desc: 'Προσαρμογή εργαστηρίων με ηχητική ανάδραση (Sonification) για μαθητές με προβλήματα όρασης.', link: '#' },
+            
+            // Chemistry Items
+            { id: 4, club: 'chem', cat: 'sheet', title: 'Φύλλο Εργασίας: Χημικές Αντιδράσεις', desc: 'Μελέτη παρατήρησης αλλαγής χρώματος και παραγωγής αερίου.', link: '#' },
+            { id: 5, club: 'chem', cat: 'bio', title: 'Dmitri Mendeleev (1834–1907)', desc: 'Δημιουργός του Περιοδικού Πίνακα των Χημικών Στοιχείων.', link: '#' },
+            { id: 6, club: 'chem', cat: 'special', title: 'Απτικά Μοντέλα Μορίων στη Χημεία', desc: 'Χρήση ανάγλυφων μοντέλων για την κατανόηση της χημικής δομής από όλους τους μαθητές.', link: '#' }
+        ];
+
+        function getItems() {
+            const stored = localStorage.getItem('club_data_2026');
+            return stored ? JSON.parse(stored) : defaultData;
+        }
+
+        function switchClub(club) {
+            currentClub = club;
+            document.getElementById('tab-physics').className = 'club-tab' + (club === 'physics' ? ' active-physics' : '');
+            document.getElementById('tab-chem').className = 'club-tab' + (club === 'chem' ? ' active-chem' : '');
+            render();
+        }
+
+        function filterCat(cat, btn) {
+            currentCat = cat;
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            render();
+        }
+
+        function render() {
+            const grid = document.getElementById('content-grid');
+            grid.innerHTML = '';
+            const items = getItems().filter(i => i.club === currentClub && (currentCat === 'all' || i.cat === currentCat));
+
+            if (items.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #888;">Δεν υπάρχει διαθέσιμο υλικό σε αυτή την κατηγορία.</p>';
+                return;
+            }
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                const bgClass = item.club === 'physics' ? 'bg-physics' : 'bg-chem';
+                
+                card.innerHTML = `
+                    <div class="card-header ${bgClass}">
+                        <span>${getCatLabel(item.cat)}</span>
+                        <i class="fa-solid ${getCatIcon(item.cat)}"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title"><strong>${item.title}</strong></div>
+                        <div class="card-desc">${item.desc}</div>
+                        <a href="${item.link}" target="_blank" style="color: var(--secondary-physics); font-weight: bold; font-size: 0.9rem;">Προβολή Υλικού <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function getCatLabel(cat) {
+            const labels = { video: 'Βίντεο', photo: 'Φωτογραφία', sheet: 'Φύλλο Εργασίας', bio: 'Βιογραφία', special: 'Ειδική Αγωγή' };
+            return labels[cat] || 'Υλικό';
+        }
+
+        function getCatIcon(cat) {
+            const icons = { video: 'fa-video', photo: 'fa-image', sheet: 'fa-file-lines', bio: 'fa-user-nurse', special: 'fa-hand-holding-hand' };
+            return icons[cat] || 'fa-folder';
+        }
+
+        function openModal() { document.getElementById('addModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('addModal').style.display = 'none'; }
+
+        function saveItem(e) {
+            e.preventDefault();
+            const items = getItems();
+            const newItem = {
+                id: Date.now(),
+                club: document.getElementById('itemClub').value,
+                cat: document.getElementById('itemCat').value,
+                title: document.getElementById('itemTitle').value,
+                desc: document.getElementById('itemDesc').value,
+                link: document.getElementById('itemLink').value
+            };
+            items.push(newItem);
+            localStorage.setItem('club_data_2026', JSON.stringify(items));
+            closeModal();
+            render();
+        }
+
+        // Initial Render
+        render();
+    </script>
+</body>
+</html>
