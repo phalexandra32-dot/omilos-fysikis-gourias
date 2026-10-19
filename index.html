@@ -38,8 +38,22 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        body, p, h1, h2, h3, h4, h5, h6, span, div, a, li, td, th {
             user-select: none;
             -webkit-user-select: none;
+        }
+
+        input, textarea, select {
+            user-select: text !important;
+            -webkit-user-select: text !important;
+            touch-action: manipulation;
+        }
+
+        button, a[href], [onclick] {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(0,0,0,0.1);
         }
 
         body {
@@ -1193,7 +1207,7 @@
                         <option value="4">4 Ομάδες</option>
                     </select>
                 </div>
-                <div id="team-names" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
+                <div id="team-names" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-bottom:14px;">
                     <input id="team1" placeholder="Ομάδα 1 (π.χ. Αϊνστάιν)" style="padding:8px;border-radius:6px;border:none;font-size:.9rem;" value="Αϊνστάιν">
                     <input id="team2" placeholder="Ομάδα 2 (π.χ. Κιουρί)" style="padding:8px;border-radius:6px;border:none;font-size:.9rem;" value="Κιουρί">
                 </div>
@@ -1211,7 +1225,7 @@
             <div id="scoreboard" style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;"></div>
             <div id="current-team-banner" style="background:#ffd600;color:#1a237e;padding:8px 16px;border-radius:8px;font-weight:700;text-align:center;margin-bottom:12px;font-size:1rem;"></div>
             <div id="q-text" style="background:rgba(255,255,255,.12);border-radius:10px;padding:16px;margin-bottom:14px;font-size:1.05rem;line-height:1.5;"></div>
-            <div id="q-options" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
+            <div id="q-options" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;"></div>
             <div id="q-feedback" style="display:none;margin-top:12px;padding:12px;border-radius:8px;font-weight:600;text-align:center;font-size:1rem;"></div>
             <button id="next-btn" onclick="nextQuestion()" style="display:none;background:#4caf50;color:white;border:none;padding:10px 24px;border-radius:8px;font-size:.95rem;font-weight:700;cursor:pointer;margin-top:12px;width:100%;">Επόμενη Ερώτηση ➡️</button>
         </div>
@@ -1482,7 +1496,7 @@
                 html += `<input id="team${i+1}" placeholder="Ομάδα ${i+1}" style="padding:8px;border-radius:6px;border:none;font-size:.9rem;" value="${names[i]}">`;
             }
             document.getElementById('team-names').innerHTML = html;
-            document.getElementById('team-names').style.gridTemplateColumns = n > 2 ? '1fr 1fr' : '1fr 1fr';
+            document.getElementById('team-names').style.gridTemplateColumns = 'repeat(auto-fill,minmax(140px,1fr))';
         }
 
         function startQuiz() {
