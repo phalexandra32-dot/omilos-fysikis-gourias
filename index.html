@@ -495,7 +495,7 @@
         }
     </style>
 </head>
-<body oncontextmenu="return false;">
+<body>
 
     <!-- Accessibility Controls -->
     <div class="access-bar">
@@ -1257,13 +1257,12 @@
         let currentCat = 'all';
         let fontSize = 16;
 
-        // Anti-Copy & Protection Scripts
+        // Anti-Copy & Protection Scripts (keyboard only – no alert on mobile)
         document.addEventListener('keydown', function(e) {
             if (e.keyCode == 123 ||
                 (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) ||
                 (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 83 || e.keyCode == 67))) {
                 e.preventDefault();
-                alert('Το περιεχόμενο προστατεύεται από Copyright © 2026-2027 Αλεξάνδρα Κούση.');
             }
         });
 
