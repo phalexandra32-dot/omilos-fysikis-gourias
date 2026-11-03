@@ -106,6 +106,25 @@
             margin-top: 8px;
             font-weight: bold;
         }
+        .pretest-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 14px;
+            padding: 10px 22px;
+            background: #fff;
+            color: var(--primary-physics);
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: transform .15s, box-shadow .15s;
+        }
+        .pretest-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+        }
 
         /* Main Navigation */
         nav.club-nav {
@@ -516,6 +535,10 @@
         <h1><i class="fa-solid fa-flask-vial"></i> Εκπαιδευτικός Όμιλος Φυσικής & Χημείας</h1>
         <p>Γυμνάσιο Γουριάς "Κ. Σ. Κώνστας"</p>
         <span class="school-year"><i class="fa-regular fa-calendar"></i> Σχολικό Έτος 2026 - 2027</span>
+        <br>
+        <a href="pretest.html" class="pretest-btn">
+            <i class="fa-solid fa-pencil"></i> Αρχική Δοκιμασία
+        </a>
     </header>
 
     <!-- Main Navigation Tabs -->
