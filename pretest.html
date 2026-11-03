@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Αρχική Δοκιμασία — Όμιλος Φυσικών Επιστημών Γυμνασίου Γουριάς</title>
+
+<!-- ============================================================
+  ΟΔΗΓΙΕΣ ΡΥΘΜΙΣΗΣ (διάβασε πριν ενεργοποιήσεις):
+  1. Δημιούργησε λογαριασμό στο https://formspree.io (Sign up with Google)
+  2. Πάτα "New Form" → δώσε όνομα π.χ. "Αρχικές Δοκιμασίες Ομίλου"
+  3. Αντέγραψε το endpoint URL (μορφή: https://formspree.io/f/XXXXXXXX)
+  4. Αντικατάστησε ΠΑΡΑΚΑΤΩ το YOUR_FORMSPREE_ID με τον κωδικό X αυτού
+  5. Άλλαξε το SECRET_CODE αν θέλεις διαφορετικό κωδικό
+  6. Κάνε git add, commit, push
+============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600&family=Noto+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* =========================================================
+   CUSTOM STYLES — pretest page
+   ========================================================= */
+:root {
+  --b: #1a4d7a;
+  --c: #7a2d12;
+  --success: #1a6b3a;
+  --danger: #b02020;
+  --warn: #c47a00;
+  --radius: 6px;
+}
+
+body { max-width: 760px; margin: 0 auto; padding: 24px 16px 60px; }
+
+/* ---- header ---- */
+.pt-header { border-bottom: 2px solid #d4d2cc; padding-bottom: 18px; margin-bottom: 28px; }
+.pt-header h1 { font-family: 'Noto Serif', serif; font-size: 1.25rem; margin: 0 0 4px; }
+.pt-header p  { font-size: 0.85rem; color: #6b6960; margin: 0; }
+
+/* ---- screens ---- */
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* ---- code gate ---- */
+.gate-box { max-width: 420px; margin: 60px auto; text-align: center; }
+.gate-box h2 { font-family: 'Noto Serif', serif; font-size: 1.3rem; margin-bottom: 10px; }
+.gate-box p  { color: #6b6960; font-size: 0.9rem; margin-bottom: 20px; }
+.gate-input {
+  width: 100%; padding: 12px 16px; font-size: 1.1rem; letter-spacing: 0.15em;
+  text-align: center; border: 2px solid #d4d2cc; border-radius: var(--radius);
+  font-family: 'Noto Sans', sans-serif; outline: none; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.gate-input:focus { border-color: var(--b); }
+.gate-btn {
+  width: 100%; padding: 11px; background: var(--b); color: #fff; border: none;
+  border-radius: var(--radius); font-size: 1rem; font-weight: 600; cursor: pointer;
+  font-family: 'Noto Sans', sans-serif;
+}
+.gate-btn:hover { opacity: 0.88; }
+.gate-error { color: var(--danger); font-size: 0.88rem; margin-top: 8px; display: none; }
+
+/* ---- already submitted ---- */
+.already-box { max-width: 420px; margin: 60px auto; text-align: center; }
+.already-box .icon { font-size: 3rem; margin-bottom: 14px; }
+.already-box h2 { font-family: 'Noto Serif', serif; font-size: 1.2rem; margin-bottom: 8px; }
+.already-box p  { color: #6b6960; font-size: 0.9rem; }
+.btn-reset { margin-top: 16px; padding: 8px 20px; border: 1px solid #d4d2cc;
+  border-radius: var(--radius); background: none; cursor: pointer; font-size: 0.85rem;
+  color: #6b6960; font-family: 'Noto Sans', sans-serif; }
+.btn-reset:hover { border-color: #6b6960; }
+
+/* ---- form ---- */
+.meta-row { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; margin-bottom: 20px; }
+@media (max-width: 480px) { .meta-row { grid-template-columns: 1fr; } }
+.field label { display: block; font-size: 0.78rem; font-weight: 600; color: #6b6960;
+  letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 5px; }
+.field input, .field select {
+  width: 100%; padding: 9px 11px; border: 1px solid #d4d2cc; border-radius: var(--radius);
+  font-family: 'Noto Sans', sans-serif; font-size: 0.95rem; outline: none; box-sizing: border-box;
+}
+.field input:focus, .field select:focus { border-color: var(--b); }
+
+.test-pick { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+.tp-btn {
+  border: 2px solid #d4d2cc; border-radius: var(--radius); padding: 13px 16px;
+  background: none; cursor: pointer; text-align: left; font-family: 'Noto Sans', sans-serif;
+}
+.tp-btn:hover { border-color: #9a9890; }
+.tp-btn.sel-b { border-color: var(--b); background: rgba(26,77,122,0.07); }
+.tp-btn.sel-c { border-color: var(--c); background: rgba(122,45,18,0.07); }
+.tp-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 2px; }
+.tp-sub   { font-size: 0.78rem; color: #6b6960; }
+
+.section-sep { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--b); border-bottom: 1px solid #d4d2cc;
+  padding-bottom: 5px; margin: 22px 0 16px; }
+.form-c .section-sep { color: var(--c); }
+
+.question { margin-bottom: 18px; }
+.q-stem   { font-size: 0.93rem; font-weight: 500; margin-bottom: 8px; }
+.q-num    { font-weight: 700; min-width: 22px; display: inline-block; }
+.mc-opts  { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 14px; padding-left: 24px; }
+@media (max-width: 480px) { .mc-opts { grid-template-columns: 1fr; } }
+.mc-opt   { display: flex; align-items: flex-start; gap: 7px; font-size: 0.88rem;
+  cursor: pointer; padding: 3px 0; }
+.mc-opt input { margin-top: 3px; width: 15px; height: 15px; cursor: pointer; flex-shrink: 0; }
+.form-b .mc-opt input { accent-color: var(--b); }
+.form-c .mc-opt input { accent-color: var(--c); }
+.open-area { padding-left: 24px; margin-top: 6px; }
+.open-area textarea {
+  width: 100%; padding: 7px 10px; border: 1px solid #d4d2cc; border-radius: var(--radius);
+  font-family: 'Noto Sans', sans-serif; font-size: 0.88rem; resize: vertical;
+  min-height: 54px; outline: none; box-sizing: border-box;
+}
+.open-area textarea:focus { border-color: var(--b); }
+.form-c .open-area textarea:focus { border-color: var(--c); }
+.hint { display: inline-block; font-size: 0.8rem; color: #6b6960; background: #f0eeea;
+  border-radius: 3px; padding: 3px 10px; margin-bottom: 7px; font-family: monospace; }
+
+.submit-row { display: flex; align-items: center; gap: 14px; margin-top: 28px; flex-wrap: wrap; }
+.btn-submit {
+  padding: 11px 30px; border: none; border-radius: var(--radius); background: var(--b);
+  color: #fff; font-size: 1rem; font-weight: 600; cursor: pointer;
+  font-family: 'Noto Sans', sans-serif;
+}
+.btn-submit.c { background: var(--c); }
+.btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+.submit-note { font-size: 0.82rem; color: #6b6960; }
+.form-err { color: var(--danger); font-size: 0.88rem; margin-top: 8px;
+  padding: 8px 12px; background: rgba(176,32,32,0.07); border-radius: var(--radius); }
+
+/* ---- success ---- */
+.done-box { max-width: 440px; margin: 60px auto; text-align: center; }
+.done-box .icon { font-size: 3.5rem; margin-bottom: 14px; }
+.done-box h2 { font-family: 'Noto Serif', serif; font-size: 1.3rem; margin-bottom: 10px; }
+.done-box p  { color: #6b6960; }
+</style>
+</head>
+<body>
+
+<div class="pt-header">
+  <h1>🔬 Γυμνάσιο Γουριάς — Όμιλος Φυσικών Επιστημών</h1>
+  <p>Αρχική Δοκιμασία · Σχολικό Έτος 2026–2027</p>
+</div>
+
+<!-- ===== SCREEN: ALREADY SUBMITTED ===== -->
+<div id="screen-already" class="screen">
+  <div class="already-box">
+    <div class="icon">✅</div>
+    <h2>Έχεις ήδη υποβάλει δοκιμασία</h2>
+    <p>Η απάντησή σου έχει καταγραφεί. Αν νομίζεις ότι έγινε λάθος, ζήτησε από τον/την καθηγητή/τρια να σβήσει την προηγούμενη υποβολή σου.</p>
+    <button class="btn-reset" onclick="resetSubmission()">Θέλω να ξαναυποβάλω (χρειάζεται κωδικός)</button>
+  </div>
+</div>
+
+<!-- ===== SCREEN: CODE GATE ===== -->
+<div id="screen-gate" class="screen active">
+  <div class="gate-box">
+    <div style="font-size:2.2rem;margin-bottom:12px">🔐</div>
+    <h2>Εισαγωγή κωδικού πρόσβασης</h2>
+    <p>Πληκτρολόγησε τον κωδικό που σου έδωσε ο/η καθηγητής/τρια για να αποκτήσεις πρόσβαση στη δοκιμασία.</p>
+    <input class="gate-input" id="code-input" type="text" placeholder="ΚΩΔΙΚΟΣ"
+      maxlength="20" autocomplete="off" autocorrect="off" spellcheck="false"
+      onkeydown="if(event.key==='Enter')checkCode()">
+    <button class="gate-btn" onclick="checkCode()">Είσοδος →</button>
+    <div class="gate-error" id="gate-error">❌ Λάθος κωδικός. Δοκίμασε ξανά.</div>
+  </div>
+</div>
+
+<!-- ===== SCREEN: FORM ===== -->
+<div id="screen-form" class="screen">
+
+  <form id="pretest-form"
+        action="https://formspree.io/f/YOUR_FORMSPREE_ID"
+        method="POST"
+        onsubmit="return handleSubmit(event)">
+
+    <!-- hidden fields -->
+    <input type="hidden" name="_subject" value="Νέα αρχική δοκιμασία — Όμιλος Φυσικής">
+    <input type="hidden" name="_next"    value="about:blank">
+    <input type="hidden" id="hid-test"  name="δοκιμασία" value="">
+
+    <div class="meta-row">
+      <div class="field">
+        <label>Ονοματεπώνυμο *</label>
+        <input type="text" name="ονοματεπώνυμο" id="f-name"
+               placeholder="π.χ. Γεωργία Παπαδοπούλου" required autocomplete="name">
+      </div>
+      <div class="field">
+        <label>Τμήμα</label>
+        <input type="text" name="τμήμα" id="f-class" placeholder="π.χ. Β1">
+      </div>
+    </div>
+
+    <div class="test-pick">
+      <button type="button" class="tp-btn" id="tp-b" onclick="pickTest('b')">
+        <div class="tp-title">Β΄ Γυμνάσιο</div>
+        <div class="tp-sub">Θερμότητα — θερμοκρασία, αλλαγές φάσης</div>
+      </button>
+      <button type="button" class="tp-btn" id="tp-c" onclick="pickTest('c')">
+        <div class="tp-title">Γ΄ Γυμνάσιο</div>
+        <div class="tp-sub">Ηλεκτρισμός — Ohm, κυκλώματα, Joule</div>
+      </button>
+    </div>
+
+    <!-- B' questions -->
+    <div id="qb" class="form-b" style="display:none">
+      <div class="section-sep">Μέρος Α΄ — Πολλαπλής Επιλογής (10 × 1 βαθμός)</div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">1.</span> Τι μετρά το θερμόμετρο;</div>
+        <div class="mc-opts">
+          <label class="mc-opt"><input type="radio" name="b_q1" value="α"> <span>α) Τη θερμότητα ενός σώματος</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q1" value="β"> <span>β) Τη θερμοκρασία ενός σώματος</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q1" value="γ"> <span>γ) Τη μάζα ενός σώματος</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q1" value="δ"> <span>δ) Την ενέργεια ενός σώματος</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">2.</span> Σε ποιες μονάδες μετράμε τη θερμοκρασία στο SI;</div>
+        <div class="mc-opts">
+          <label class="mc-opt"><input type="radio" name="b_q2" value="α"> <span>α) Βαθμούς Κελσίου (°C)</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q2" value="β"> <span>β) Joule (J)</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q2" value="γ"> <span>γ) Kelvin (K)</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q2" value="δ"> <span>δ) Watt (W)</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">3.</span> Δύο σώματα διαφ. θερμοκρασίας έρχονται σε επαφή. Τι θα συμβεί;</div>
+        <div class="mc-opts">
+          <label class="mc-opt"><input type="radio" name="b_q3" value="α"> <span>α) Θερμότητα: ψυχρό → θερμό</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q3" value="β"> <span>β) Θερμότητα: θερμό → ψυχρό</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q3" value="γ"> <span>γ) Τίποτα δεν αλλάζει</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q3" value="δ"> <span>δ) Και τα δύο δέχονται θερμότητα</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">4.</span> Ποιος τύπος εκφράζει τη θερμότητα κατά θέρμανση;</div>
+        <div class="mc-opts">
+          <label class="mc-opt"><input type="radio" name="b_q4" value="α"> <span>α) Q = m · L</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q4" value="β"> <span>β) Q = m · c · ΔΤ</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q4" value="γ"> <span>γ) Q = m · g · h</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q4" value="δ"> <span>δ) Q = ½ · m · υ²</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">5.</span> Τι δείχνει η ειδική θερμοχωρητικότητα (c);</div>
+        <div class="mc-opts">
+          <label class="mc-opt"><input type="radio" name="b_q5" value="α"> <span>α) Τη μάζα 1 kg υλικού</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q5" value="β"> <span>β) Τη θερμοκρασία τήξης</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q5" value="γ"> <span>γ) Θερμότητα για αύξηση κατά 1°C 1 kg υλικού</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q5" value="δ"> <span>δ) Θερμότητα αλλαγής φάσης</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">6.</span> Ποιος τρόπος μεταφοράς ΔΕΝ απαιτεί ύλη (γίνεται στο κενό);</div>
+        <div class="mc-opts">
+          <label class="mc-opt"><input type="radio" name="b_q6" value="α"> <span>α) Αγωγή</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q6" value="β"> <span>β) Μεταφορά</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q6" value="γ"> <span>γ) Ακτινοβολία</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q6" value="δ"> <span>δ) Εξάτμιση</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">7.</span> Κατά τη θερμική διαστολή ενός μετάλλου, τι αλλάζει;</div>
+        <div class="mc-opts">
+          <label class="mc-opt"><input type="radio" name="b_q7" value="α"> <span>α) Η μάζα αυξάνεται</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q7" value="β"> <span>β) Οι διαστάσεις αυξάνονται</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q7" value="γ"> <span>γ) Η χημική σύσταση αλλάζει</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q7" value="δ"> <span>δ) Τίποτα δεν αλλάζει</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">8.</span> Τι ονομάζεται «τήξη»;</div>
+        <div class="mc-opts">
+          <label class="mc-opt"><input type="radio" name="b_q8" value="α"> <span>α) Υγρό → αέριο</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q8" value="β"> <span>β) Στερεό → υγρό</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q8" value="γ"> <span>γ) Αέριο → υγρό</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q8" value="δ"> <span>δ) Υγρό → στερεό</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">9.</span> Τι γίνεται η θερμοκρασία κατά τη διάρκεια αλλαγής φάσης;</div>
+        <div class="mc-opts">
+          <label class="mc-opt"><input type="radio" name="b_q9" value="α"> <span>α) Αυξάνεται συνεχώς</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q9" value="β"> <span>β) Μειώνεται απότομα</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q9" value="γ"> <span>γ) Παραμένει σταθερή</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q9" value="δ"> <span>δ) Εξαρτάται από τη μάζα</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">10.</span> Ποιος τύπος για θερμότητα κατά αλλαγή φάσης;</div>
+        <div class="mc-opts">
+          <label class="mc-opt"><input type="radio" name="b_q10" value="α"> <span>α) Q = m · c · ΔΤ</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q10" value="β"> <span>β) Q = m · L</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q10" value="γ"> <span>γ) Q = F · d</span></label>
+          <label class="mc-opt"><input type="radio" name="b_q10" value="δ"> <span>δ) Q = P · t</span></label>
+        </div>
+      </div>
+
+      <div class="section-sep">Μέρος Β΄ — Σύντομες Απαντήσεις (3 × 2 βαθμοί)</div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">11.</span> Τι είναι η «λανθάνουσα θερμότητα» (L) ενός υλικού;</div>
+        <div class="open-area"><textarea name="b_q11" placeholder="Γράψε με δικά σου λόγια…" rows="2"></textarea></div>
+      </div>
+      <div class="question">
+        <div class="q-stem"><span class="q-num">12.</span> Ποια η διαφορά μεταξύ <em>αγωγής</em> και <em>μεταφοράς</em> θερμότητας; Δώσε από ένα παράδειγμα.</div>
+        <div class="open-area"><textarea name="b_q12" placeholder="Αγωγή: … / Μεταφορά: …" rows="2"></textarea></div>
+      </div>
+      <div class="question">
+        <div class="q-stem"><span class="q-num">13.</span> Γιατί αφήνουν κενά (αρμούς διαστολής) στις σιδηροτροχιές;</div>
+        <div class="open-area"><textarea name="b_q13" placeholder="…" rows="2"></textarea></div>
+      </div>
+
+      <div class="section-sep">Μέρος Γ΄ — Πρόβλημα (3 βαθμοί) + Bonus (1 βαθμός)</div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">14.</span> Πόση θερμότητα χρειάζεται για να θερμανθεί 0,5 kg νερού από 20°C σε 80°C;</div>
+        <div class="hint">c<sub>νερού</sub> = 4 200 J/(kg·°C)   |   Q = m·c·ΔΤ</div>
+        <div class="open-area"><textarea name="b_q14" placeholder="Λύση: …" rows="2"></textarea></div>
+      </div>
+      <div class="question">
+        <div class="q-stem"><span class="q-num">15.</span> (Bonus) Πόση θερμότητα για να λιώσουν 200 g πάγου στους 0°C;</div>
+        <div class="hint">L<sub>τήξης</sub> = 334 000 J/kg   |   Q = m·L</div>
+        <div class="open-area"><textarea name="b_q15" placeholder="Q = …" rows="1"></textarea></div>
+      </div>
+    </div><!-- /#qb -->
+
+    <!-- C' questions -->
+    <div id="qc" class="form-c" style="display:none">
+      <div class="section-sep">Μέρος Α΄ — Πολλαπλής Επιλογής (10 × 1 βαθμός)</div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">1.</span> Πόσα είδη ηλεκτρικού φορτίου υπάρχουν;</div>
+        <div class="mc-opts">
+          <label class="mc-opt"><input type="radio" name="c_q1" value="α"> <span>α) Ένα (μόνο θετικό)</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q1" value="β"> <span>β) Δύο (θετικό και αρνητικό)</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q1" value="γ"> <span>γ) Τρία</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q1" value="δ"> <span>δ) Κανένα</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">2.</span> Δύο αντικείμενα με ομώνυμα φορτία:</div>
+        <div class="mc-opts">
+          <label class="mc-opt"><input type="radio" name="c_q2" value="α"> <span>α) Έλκονται</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q2" value="β"> <span>β) Απωθούνται</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q2" value="γ"> <span>γ) Δεν αλληλεπιδρούν</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q2" value="δ"> <span>δ) Εξουδετερώνονται</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">3.</span> Τι μετρά το αμπερόμετρο και πώς συνδέεται;</div>
+        <div class="mc-opts">
+          <label class="mc-opt"><input type="radio" name="c_q3" value="α"> <span>α) Τάση — παράλληλα</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q3" value="β"> <span>β) Ένταση ρεύματος — σε σειρά</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q3" value="γ"> <span>γ) Αντίσταση — παράλληλα</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q3" value="δ"> <span>δ) Ισχύ — σε σειρά</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">4.</span> Ποιος είναι ο νόμος του Ohm;</div>
+        <div class="mc-opts">
+          <label class="mc-opt"><input type="radio" name="c_q4" value="α"> <span>α) V = I · R</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q4" value="β"> <span>β) P = m · g · h</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q4" value="γ"> <span>γ) Q = m · c · ΔΤ</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q4" value="δ"> <span>δ) F = m · a</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">5.</span> Σε κύκλωμα σε σειρά, η ένταση ρεύματος:</div>
+        <div class="mc-opts">
+          <label class="mc-opt"><input type="radio" name="c_q5" value="α"> <span>α) Διαφέρει σε κάθε αντιστάτη</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q5" value="β"> <span>β) Είναι ίδια παντού</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q5" value="γ"> <span>γ) Μηδενίζεται στον 2ο</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q5" value="δ"> <span>δ) Διπλασιάζεται</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">6.</span> Σε παράλληλο κύκλωμα, η τάση:</div>
+        <div class="mc-opts">
+          <label class="mc-opt"><input type="radio" name="c_q6" value="α"> <span>α) Διαιρείται εξίσου</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q6" value="β"> <span>β) Είναι ίδια και για τους δύο</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q6" value="γ"> <span>γ) Είναι μηδέν στον έναν</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q6" value="δ"> <span>δ) Εξαρτάται μόνο από τη μάζα</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">7.</span> Ποια η μονάδα ηλεκτρικής αντίστασης;</div>
+        <div class="mc-opts">
+          <label class="mc-opt"><input type="radio" name="c_q7" value="α"> <span>α) Ampere (A)</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q7" value="β"> <span>β) Volt (V)</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q7" value="γ"> <span>γ) Ohm (Ω)</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q7" value="δ"> <span>δ) Watt (W)</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">8.</span> Τι εκφράζει το «φαινόμενο Joule»;</div>
+        <div class="mc-opts">
+          <label class="mc-opt"><input type="radio" name="c_q8" value="α"> <span>α) Μαγνητική δύναμη σε αγωγό</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q8" value="β"> <span>β) Θερμότητα που παράγεται σε αντιστάτη από ρεύμα</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q8" value="γ"> <span>γ) Αποθήκευση ηλεκτρισμού σε πυκνωτή</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q8" value="δ"> <span>δ) Ηλεκτρόλυση νερού</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">9.</span> Ποιος τύπος δίνει την ηλεκτρική ισχύ;</div>
+        <div class="mc-opts">
+          <label class="mc-opt"><input type="radio" name="c_q9" value="α"> <span>α) P = V · I</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q9" value="β"> <span>β) P = m · g</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q9" value="γ"> <span>γ) P = Q / m</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q9" value="δ"> <span>δ) P = c · ΔΤ</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">10.</span> Λαμπτήρας 60 W συνδεδεμένος 2 ώρες. Πόση ενέργεια;</div>
+        <div class="mc-opts">
+          <label class="mc-opt"><input type="radio" name="c_q10" value="α"> <span>α) 60 J</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q10" value="β"> <span>β) 120 J</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q10" value="γ"> <span>γ) 432 000 J</span></label>
+          <label class="mc-opt"><input type="radio" name="c_q10" value="δ"> <span>δ) 3 600 J</span></label>
+        </div>
+      </div>
+
+      <div class="section-sep">Μέρος Β΄ — Σύντομες Απαντήσεις (3 × 2 βαθμοί)</div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">11.</span> Γιατί τα μέταλλα άγουν ηλεκτρισμό ενώ το πλαστικό όχι;</div>
+        <div class="open-area"><textarea name="c_q11" placeholder="…" rows="2"></textarea></div>
+      </div>
+      <div class="question">
+        <div class="q-stem"><span class="q-num">12.</span> Σε ποιες καθημερινές συσκευές χρησιμοποιείται το φαινόμενο Joule; Δώσε 2 παραδείγματα.</div>
+        <div class="open-area"><textarea name="c_q12" placeholder="…" rows="2"></textarea></div>
+      </div>
+      <div class="question">
+        <div class="q-stem"><span class="q-num">13.</span> Γιατί στο σπίτι οι ηλεκτρικές συσκευές συνδέονται παράλληλα κι όχι σε σειρά;</div>
+        <div class="open-area"><textarea name="c_q13" placeholder="…" rows="2"></textarea></div>
+      </div>
+
+      <div class="section-sep">Μέρος Γ΄ — Πρόβλημα (3 βαθμοί) + Bonus (1 βαθμός)</div>
+
+      <div class="question">
+        <div class="q-stem"><span class="q-num">14.</span> Σε κύκλωμα: V = 12 V, R = 4 Ω. Βρες: (α) I, (β) P.</div>
+        <div class="hint">I = V/R   |   P = V·I</div>
+        <div class="open-area"><textarea name="c_q14" placeholder="(α) I = … A / (β) P = … W" rows="2"></textarea></div>
+      </div>
+      <div class="question">
+        <div class="q-stem"><span class="q-num">15.</span> (Bonus) Q = ? αντιστάτης 10 Ω, ρεύμα 2 A, χρόνος 5 min.</div>
+        <div class="hint">Q = I²·R·t</div>
+        <div class="open-area"><textarea name="c_q15" placeholder="Q = …" rows="1"></textarea></div>
+      </div>
+    </div><!-- /#qc -->
+
+    <div id="form-err" class="form-err" style="display:none"></div>
+
+    <div class="submit-row">
+      <button type="submit" class="btn-submit" id="btn-sub" disabled>Υποβολή Δοκιμασίας</button>
+      <span class="submit-note" id="sub-note">Επέλεξε πρώτα Β΄ ή Γ΄ και συμπλήρωσε το όνομά σου.</span>
+    </div>
+  </form>
+</div><!-- /#screen-form -->
+
+<!-- ===== SCREEN: SUCCESS ===== -->
+<div id="screen-done" class="screen">
+  <div class="done-box">
+    <div class="icon">🎉</div>
+    <h2>Η δοκιμασία υποβλήθηκε!</h2>
+    <p id="done-msg"></p>
+    <p style="margin-top:12px;font-size:0.82rem;color:#9a9890">
+      Μπορείς να κλείσεις αυτή τη σελίδα.
+    </p>
+  </div>
+</div>
+
+<script>
+// =========================================================
+//  ΡΥΘΜΙΣΕΙΣ — αλλαξε εδω μονο αν θελεις
+// =========================================================
+const SECRET_CODE   = 'ΦΥΣΙΚΗ2026';   // <-- κωδικός που δίνεις στους μαθητές
+const LS_KEY        = 'omilos_pretest_submitted_v1';  // localStorage key
+const LS_GATE_KEY   = 'omilos_pretest_unlocked_v1';   // gate passed flag
+// =========================================================
+
+let currentTest = null;
+
+// --- check localStorage on load ---
+window.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem(LS_KEY)) {
+    showScreen('screen-already');
+  } else if (localStorage.getItem(LS_GATE_KEY)) {
+    showScreen('screen-form');
+  } else {
+    showScreen('screen-gate');
+  }
+  document.getElementById('f-name').addEventListener('input', updateBtn);
+});
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// --- gate ---
+function checkCode() {
+  const val = document.getElementById('code-input').value.trim().toUpperCase();
+  if (val === SECRET_CODE.toUpperCase()) {
+    try { localStorage.setItem(LS_GATE_KEY, '1'); } catch(e) {}
+    showScreen('screen-form');
+  } else {
+    document.getElementById('gate-error').style.display = '';
+    document.getElementById('code-input').focus();
+  }
+}
+
+// --- reset (for teacher or accidental block) ---
+function resetSubmission() {
+  const confirmed = confirm('Για να ξαναυποβάλεις, θα πρέπει να βάλεις τον κωδικό ξανά.');
+  if (!confirmed) return;
+  try {
+    localStorage.removeItem(LS_KEY);
+    localStorage.removeItem(LS_GATE_KEY);
+  } catch(e) {}
+  showScreen('screen-gate');
+  document.getElementById('code-input').value = '';
+  document.getElementById('gate-error').style.display = 'none';
+}
+
+// --- test pick ---
+function pickTest(t) {
+  currentTest = t;
+  document.getElementById('tp-b').className = 'tp-btn' + (t === 'b' ? ' sel-b' : '');
+  document.getElementById('tp-c').className = 'tp-btn' + (t === 'c' ? ' sel-c' : '');
+  document.getElementById('qb').style.display = t === 'b' ? '' : 'none';
+  document.getElementById('qc').style.display = t === 'c' ? '' : 'none';
+  document.getElementById('hid-test').value = t === 'b' ? 'Βʹ Γυμνάσιο — Θερμότητα' : 'Γʹ Γυμνάσιο — Ηλεκτρισμός';
+  document.getElementById('btn-sub').className = 'btn-submit' + (t === 'c' ? ' c' : '');
+  updateBtn();
+}
+
+function updateBtn() {
+  const name = (document.getElementById('f-name').value || '').trim();
+  const ok   = currentTest !== null && name.length > 1;
+  document.getElementById('btn-sub').disabled = !ok;
+  document.getElementById('sub-note').textContent = ok
+    ? 'Απάντησε στις ερωτήσεις και πάτα Υποβολή.'
+    : 'Συμπλήρωσε το όνομά σου και επέλεξε δοκιμασία.';
+}
+
+// --- submit ---
+async function handleSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('btn-sub');
+  const err = document.getElementById('form-err');
+  err.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'Αποστολή…';
+
+  const form = document.getElementById('pretest-form');
+  if (form.action.includes('YOUR_FORMSPREE_ID')) {
+    err.textContent = '⚠️ Ο λογαριασμός Formspree δεν έχει ρυθμιστεί ακόμα. Επικοινώνησε με τον/την καθηγητή/τρια.';
+    err.style.display = '';
+    btn.disabled = false;
+    btn.textContent = 'Υποβολή Δοκιμασίας';
+    return false;
+  }
+
+  try {
+    const data = new FormData(form);
+    const res  = await fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { Accept: 'application/json' }
+    });
+    if (res.ok) {
+      try { localStorage.setItem(LS_KEY, Date.now().toString()); } catch(e) {}
+      const name = (document.getElementById('f-name').value || '').trim();
+      document.getElementById('done-msg').textContent =
+        `Ευχαριστούμε, ${name}! Οι απαντήσεις σου καταγράφηκαν επιτυχώς.`;
+      showScreen('screen-done');
+    } else {
+      const json = await res.json().catch(() => ({}));
+      throw new Error(json.error || 'Σφάλμα αποστολής (' + res.status + ')');
+    }
+  } catch (ex) {
+    err.textContent = '❌ ' + ex.message + '. Έλεγξε τη σύνδεσή σου και δοκίμασε ξανά.';
+    err.style.display = '';
+    btn.disabled = false;
+    btn.textContent = 'Υποβολή Δοκιμασίας';
+  }
+  return false;
+}
+</script>
+</body>
+</html>
