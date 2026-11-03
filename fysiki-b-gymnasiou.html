@@ -2258,7 +2258,6 @@ function drawElec(){
   ctx.fillText('('+V+'V, '+I.toFixed(2)+'A)',dotX,dotY-12);
 }
 
-buildQuizzes();
 calcDensity();
 drawMotion();
 drawSpring();
@@ -2266,6 +2265,10 @@ drawPressure();
 drawEnergy();
 drawHeat();
 drawElec();
+</script>
+<script>
+// buildQuizzes must run after ALL quiz divs (quiz5, quiz6) are in the DOM
+document.addEventListener('DOMContentLoaded', function(){ buildQuizzes(); });
 </script>
 
 <!-- ═══════════════════════════════════════════════════════════
