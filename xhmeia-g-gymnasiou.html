@@ -1,0 +1,1004 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="el" data-theme="">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Χημεία Γ΄ Γυμνασίου</title>
+<style>
+:root{
+  --bg:#f8fafc;--fg:#1e293b;--fg2:#64748b;--card:#fff;--border:#e2e8f0;
+  --acc:#0f766e;--acc2:#0d9488;--acc3:#ccfbf1;
+  --tab-act:#0f766e;--tab-bg:#f1f5f9;
+  --btn:#0f766e;--btn-fg:#fff;
+  --quiz-ok:#16a34a;--quiz-err:#dc2626;
+  color-scheme:light;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f172a;--fg:#f1f5f9;--fg2:#94a3b8;--card:#1e293b;--border:#334155;
+  --acc:#2dd4bf;--acc2:#14b8a6;--acc3:#134e4a;
+  --tab-act:#2dd4bf;--tab-bg:#1e293b;
+  --btn:#2dd4bf;--btn-fg:#0f172a;
+  --quiz-ok:#4ade80;--quiz-err:#f87171;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0f172a;--fg:#f1f5f9;--fg2:#94a3b8;--card:#1e293b;--border:#334155;
+  --acc:#2dd4bf;--acc2:#14b8a6;--acc3:#134e4a;
+  --tab-act:#2dd4bf;--tab-bg:#1e293b;
+  --btn:#2dd4bf;--btn-fg:#0f172a;
+  --quiz-ok:#4ade80;--quiz-err:#f87171;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font-family:system-ui,sans-serif;font-size:16px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:12px 32px;max-width:860px;margin:0 auto}
+
+/* HEADER */
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:40px;height:40px;background:linear-gradient(135deg,#0f766e,#0d9488);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:22px}
+h1{font-size:1.25rem;font-weight:700;line-height:1.2}
+h1 span{display:block;font-size:.8rem;font-weight:400;color:var(--fg2)}
+.theme-btn{background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:6px 12px;cursor:pointer;color:var(--fg);font-size:.85rem}
+.theme-btn:hover{background:var(--acc3)}
+
+/* CHAPTER TABS */
+.ch-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px}
+.ch-tab{padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:var(--tab-bg);
+  cursor:pointer;font-size:.82rem;font-weight:600;color:var(--fg2);transition:.2s}
+.ch-tab:hover{color:var(--fg)}
+.ch-tab.active{background:var(--acc);color:#fff;border-color:var(--acc)}
+
+/* SECTION TABS (Theory / Experiment / Quiz) */
+.sec-tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:16px}
+.sec-tab{padding:8px 18px;cursor:pointer;font-size:.9rem;font-weight:600;color:var(--fg2);
+  border-bottom:3px solid transparent;margin-bottom:-2px;transition:.2s}
+.sec-tab.active{color:var(--acc);border-bottom-color:var(--acc)}
+
+/* SECTIONS */
+.chapter{display:none}.chapter.active{display:block}
+.section{display:none}.section.active{display:block}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:18px;margin-bottom:14px}
+.card h3{font-size:1rem;font-weight:700;margin-bottom:10px;color:var(--acc)}
+.key{display:flex;align-items:flex-start;gap:10px;background:var(--acc3);
+  border-left:4px solid var(--acc);border-radius:6px;padding:10px 12px;margin-bottom:10px;flex-wrap:wrap}
+.key strong{color:var(--acc);font-size:.9rem;white-space:nowrap;min-width:130px}
+.key span{font-size:.9rem;line-height:1.5}
+.formula{text-align:center;font-size:1.15rem;font-weight:700;color:var(--acc);
+  background:var(--acc3);border-radius:8px;padding:10px;margin:10px 0;letter-spacing:.02em}
+p{font-size:.92rem;line-height:1.6;margin-top:6px;color:var(--fg2)}
+ul{margin:8px 0 0 18px;font-size:.9rem;line-height:1.7}
+table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:8px}
+th{background:var(--acc);color:#fff;padding:8px 10px;text-align:left}
+td{padding:7px 10px;border-bottom:1px solid var(--border)}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:var(--acc3)}
+
+/* DIAGRAM */
+.diagram{background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:14px;margin-bottom:14px;text-align:center}
+.diagram svg text{fill:var(--fg)}
+
+/* INTERACTIVE EXPERIMENT */
+.interactive{background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:18px;margin-bottom:14px}
+.interactive h4{font-size:1rem;font-weight:700;color:var(--acc);margin-bottom:14px}
+canvas{display:block;width:100%;border-radius:8px;background:var(--card)}
+.controls{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;align-items:center}
+.controls label{font-size:.85rem;color:var(--fg2);display:flex;flex-direction:column;gap:4px}
+input[type=range]{width:140px;accent-color:var(--acc)}
+.btn{background:var(--btn);color:var(--btn-fg);border:none;border-radius:8px;
+  padding:8px 18px;cursor:pointer;font-size:.9rem;font-weight:600;transition:.15s}
+.btn:hover{opacity:.85}
+.btn.secondary{background:var(--card);color:var(--acc);border:1px solid var(--acc)}
+.readout{background:var(--acc3);border-radius:8px;padding:8px 14px;font-size:.9rem;
+  font-weight:600;color:var(--acc);margin-top:10px}
+.readout span{color:var(--fg)}
+
+/* QUIZ */
+.quiz-wrap{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px}
+.quiz-q{margin-bottom:20px}
+.quiz-q p{font-weight:600;margin-bottom:10px;font-size:.95rem;color:var(--fg)}
+.quiz-opt{display:flex;flex-direction:column;gap:7px}
+.quiz-opt label{display:flex;align-items:center;gap:10px;cursor:pointer;
+  background:var(--tab-bg);border:1px solid var(--border);border-radius:8px;
+  padding:9px 14px;font-size:.9rem;transition:.15s}
+.quiz-opt label:hover{border-color:var(--acc)}
+.quiz-opt input{accent-color:var(--acc)}
+.quiz-result{display:none;margin-top:6px;padding:8px 12px;border-radius:6px;font-size:.88rem;font-weight:600}
+.quiz-result.ok{background:#dcfce7;color:var(--quiz-ok)}
+.quiz-result.err{background:#fee2e2;color:var(--quiz-err)}
+.quiz-score{background:var(--acc3);border-radius:10px;padding:14px;text-align:center;
+  margin-top:14px;font-size:1.1rem;font-weight:700;color:var(--acc);display:none}
+
+/* animated experiment SVGs */
+.exp-svg{width:100%;overflow:visible}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">⚗️</div>
+    <h1>Χημεία Γ΄ Γυμνασίου<span>Εικονικό Εργαστήριο</span></h1>
+  </div>
+  <button class="theme-btn" onclick="toggleTheme()">🌓 Θέμα</button>
+</header>
+
+<!-- CHAPTER TABS -->
+<div class="ch-tabs">
+  <button class="ch-tab active" onclick="showCh(0,this)">⚗️ Χημ. Αντιδράσεις</button>
+  <button class="ch-tab" onclick="showCh(1,this)">🍋 Οξέα &amp; Βάσεις</button>
+  <button class="ch-tab" onclick="showCh(2,this)">🧂 Άλατα &amp; Ουδ/ση</button>
+  <button class="ch-tab" onclick="showCh(3,this)">⚡ Οξειδοαναγωγή</button>
+  <button class="ch-tab" onclick="showCh(4,this)">💧 Διαλύματα</button>
+</div>
+
+<!-- ========== CHAPTER 0: ΧΗΜΙΚΕΣ ΑΝΤΙΔΡΑΣΕΙΣ ========== -->
+<div class="chapter active" id="ch0">
+  <div class="sec-tabs">
+    <div class="sec-tab active" onclick="showSec('ch0',0,this)">📖 Θεωρία</div>
+    <div class="sec-tab" onclick="showSec('ch0',1,this)">🔬 Πείραμα</div>
+    <div class="sec-tab" onclick="showSec('ch0',2,this)">❓ Quiz</div>
+  </div>
+
+  <!-- THEORY -->
+  <div class="section active" id="ch0-s0">
+    <div class="card">
+      <h3>1.1 Τι είναι Χημική Αντίδραση</h3>
+      <div class="key"><strong>Ορισμός</strong><span>Χημική αντίδραση είναι η διεργασία κατά την οποία οι αρχικές ουσίες (αντιδρώντα) μετατρέπονται σε νέες ουσίες (προϊόντα) με διαφορετικές ιδιότητες.</span></div>
+      <div class="formula">Αντιδρώντα → Προϊόντα</div>
+      <p>Κατά τη χημική αντίδραση: <strong>οι χημικοί δεσμοί σπάνε και σχηματίζονται νέοι</strong>. Τα άτομα δεν δημιουργούνται ούτε καταστρέφονται — απλώς ανακατανέμονται.</p>
+    </div>
+    <div class="card">
+      <h3>1.2 Νόμος Διατήρησης Μάζας</h3>
+      <div class="key"><strong>Lavoisier (1789)</strong><span>Η συνολική μάζα των αντιδρώντων ισούται με τη συνολική μάζα των προϊόντων.</span></div>
+      <div class="formula">m<sub>αντιδρώντων</sub> = m<sub>προϊόντων</sub></div>
+      <p>Παράδειγμα: 2H₂ + O₂ → 2H₂O &nbsp;|&nbsp; 4g + 32g = 36g</p>
+    </div>
+    <div class="card">
+      <h3>1.3 Είδη Χημικών Αντιδράσεων</h3>
+      <table>
+        <tr><th>Είδος</th><th>Σχήμα</th><th>Παράδειγμα</th></tr>
+        <tr><td>Σύνθεση</td><td>A + B → AB</td><td>2Na + Cl₂ → 2NaCl</td></tr>
+        <tr><td>Ανάλυση</td><td>AB → A + B</td><td>2H₂O → 2H₂ + O₂</td></tr>
+        <tr><td>Απλή αντικατάσταση</td><td>A + BC → AC + B</td><td>Zn + 2HCl → ZnCl₂ + H₂</td></tr>
+        <tr><td>Διπλή αντικατάσταση</td><td>AB + CD → AD + CB</td><td>NaCl + AgNO₃ → AgCl↓ + NaNO₃</td></tr>
+        <tr><td>Καύση</td><td>CₓHᵧ + O₂ → CO₂ + H₂O</td><td>CH₄ + 2O₂ → CO₂ + 2H₂O</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>1.4 Εξισορρόπηση Χημικών Εξισώσεων</h3>
+      <div class="key"><strong>Κανόνας</strong><span>Ο αριθμός ατόμων κάθε στοιχείου πρέπει να είναι ίσος στα αντιδρώντα και στα προϊόντα.</span></div>
+      <p>Βήματα: 1) Γράψε τα σωστά χημικά σύμβολα → 2) Μέτρησε άτομα κάθε στοιχείου → 3) Πρόσθεσε συντελεστές (όχι δείκτες!) → 4) Επαλήθευσε.</p>
+      <div class="formula">Fe₂O₃ + 3CO → 2Fe + 3CO₂</div>
+    </div>
+    <!-- Static concept diagram: energy diagram for reaction -->
+    <div class="diagram">
+      <svg viewBox="0 0 400 140" style="width:100%;max-height:140px" aria-label="Ενεργειακό διάγραμμα αντίδρασης">
+        <defs>
+          <marker id="mR" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/></marker>
+        </defs>
+        <!-- axes -->
+        <line x1="30" y1="120" x2="30" y2="15" stroke="#64748b" stroke-width="1.5" marker-end="url(#mR)"/>
+        <line x1="25" y1="115" x2="380" y2="115" stroke="#64748b" stroke-width="1.5" marker-end="url(#mR)"/>
+        <text x="15" y="12" font-size="9" fill="#64748b">Ε</text>
+        <text x="383" y="118" font-size="9" fill="#64748b">t</text>
+        <text x="100" y="138" text-anchor="middle" font-size="10" font-weight="700" fill="#0f766e">Εξώθερμη αντίδραση</text>
+        <text x="290" y="138" text-anchor="middle" font-size="10" font-weight="700" fill="#dc2626">Ενδόθερμη αντίδραση</text>
+        <!-- exothermic curve -->
+        <path d="M40,80 Q80,30 120,30 Q160,30 200,95" stroke="#0f766e" stroke-width="2.5" fill="none"/>
+        <!-- reactant / product levels -->
+        <line x1="30" y1="80" x2="60" y2="80" stroke="#0f766e" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="32" y="76" font-size="8" fill="#0f766e">Αντιδρ.</text>
+        <line x1="180" y1="95" x2="210" y2="95" stroke="#0f766e" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="182" y="91" font-size="8" fill="#0f766e">Προϊ.</text>
+        <!-- ΔΗ label -->
+        <line x1="215" y1="80" x2="215" y2="95" stroke="#0f766e" stroke-width="1.5" marker-end="url(#mR)"/>
+        <text x="218" y="90" font-size="8" fill="#0f766e">ΔΗ&lt;0</text>
+        <!-- endothermic curve -->
+        <path d="M230,95 Q270,35 310,35 Q350,35 375,80" stroke="#dc2626" stroke-width="2.5" fill="none"/>
+        <line x1="220" y1="95" x2="240" y2="95" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="222" y="108" font-size="8" fill="#dc2626">Αντιδρ.</text>
+        <line x1="362" y1="80" x2="380" y2="80" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="356" y="76" font-size="8" fill="#dc2626">Προϊ.</text>
+        <line x1="358" y1="95" x2="358" y2="80" stroke="#dc2626" stroke-width="1.5" marker-end="url(#mR)"/>
+        <text x="340" y="90" font-size="8" fill="#dc2626">ΔΗ&gt;0</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- EXPERIMENT -->
+  <div class="section" id="ch0-s1">
+    <div class="interactive">
+      <h4>⚗️ Εξισορρόπηση Αντίδρασης — Καύση Μεθανίου</h4>
+      <svg class="exp-svg" viewBox="0 0 500 200" id="reacSvg" aria-label="Animated χημική αντίδραση">
+        <!-- flame -->
+        <g id="flame">
+          <ellipse cx="80" cy="160" rx="18" ry="8" fill="#fbbf24" opacity=".6"/>
+          <path id="fl1" d="M72,160 Q75,130 80,115 Q85,130 88,160Z" fill="#f97316"/>
+          <path id="fl2" d="M75,160 Q78,140 80,125 Q82,140 85,160Z" fill="#fbbf24"/>
+          <text x="80" y="185" text-anchor="middle" font-size="11" fill="#92400e" font-weight="700">CH₄ + O₂</text>
+        </g>
+        <!-- arrow -->
+        <line x1="115" y1="145" x2="200" y2="145" stroke="#64748b" stroke-width="2" marker-end="url(#mReac)"/>
+        <defs><marker id="mReac" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7Z" fill="#64748b"/></marker></defs>
+        <text x="157" y="138" text-anchor="middle" font-size="9" fill="#64748b">καύση</text>
+        <!-- CO2 bubble -->
+        <g id="co2g">
+          <circle cx="260" cy="100" r="28" fill="#bfdbfe" opacity=".7"/>
+          <text x="260" y="97" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8">CO₂</text>
+          <text x="260" y="112" text-anchor="middle" font-size="9" fill="#1d4ed8">x 1</text>
+        </g>
+        <!-- H2O drop -->
+        <g id="h2og">
+          <ellipse cx="360" cy="105" rx="28" ry="22" fill="#a7f3d0" opacity=".8"/>
+          <text x="360" y="102" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">H₂O</text>
+          <text x="360" y="117" text-anchor="middle" font-size="9" fill="#065f46">x 2</text>
+        </g>
+        <!-- balanced equation -->
+        <rect x="60" y="20" width="390" height="38" rx="8" fill="#ccfbf1" opacity=".9"/>
+        <text x="255" y="36" text-anchor="middle" font-size="13" font-weight="700" fill="#0f766e">CH₄ + 2O₂ → CO₂ + 2H₂O</text>
+        <text x="255" y="52" text-anchor="middle" font-size="9" fill="#0f766e">Ισορροπημένη εξίσωση — C:1=1, H:4=4, O:4=4 ✓</text>
+      </svg>
+      <!-- animated SVG: oscillating flame -->
+      <style>
+        #fl1{animation:flick 1.1s ease-in-out infinite alternate}
+        #fl2{animation:flick 0.8s ease-in-out infinite alternate-reverse}
+        @keyframes flick{0%{transform-origin:80px 160px;transform:scaleY(1) skewX(-3deg)}100%{transform-origin:80px 160px;transform:scaleY(1.1) skewX(3deg)}}
+        #co2g{animation:bob 2s ease-in-out infinite alternate}
+        #h2og{animation:bob 2.3s ease-in-out infinite alternate-reverse}
+        @keyframes bob{0%{transform:translateY(0)}100%{transform:translateY(-8px)}}
+      </style>
+      <div class="controls">
+        <button class="btn" onclick="showBalancing()">🔢 Δες βήματα εξισορρόπησης</button>
+      </div>
+      <div id="balanceSteps" style="display:none;margin-top:12px">
+        <div class="readout">
+          <span>Βήμα 1:</span> CH₄ + O₂ → CO₂ + H₂O (μη ισορροπημένη)<br>
+          <span>Βήμα 2:</span> C: 1=1 ✓ &nbsp; H: 4 ≠ 2 → πρόσθεσε × 2 στο H₂O<br>
+          <span>Βήμα 3:</span> CH₄ + O₂ → CO₂ + 2H₂O &nbsp; O: 2 ≠ 4 → πρόσθεσε × 2 στο O₂<br>
+          <span>Βήμα 4:</span> <strong>CH₄ + 2O₂ → CO₂ + 2H₂O ✓</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="ch0-s2">
+    <div class="quiz-wrap">
+      <h4 style="color:var(--acc);margin-bottom:16px">❓ Quiz — Χημικές Αντιδράσεις</h4>
+      <div id="quiz0"></div>
+      <button class="btn" onclick="checkQuiz(0)" style="margin-top:12px">✔️ Έλεγχος</button>
+      <div class="quiz-score" id="score0"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== CHAPTER 1: ΟΞΕΑ & ΒΑΣΕΙΣ ========== -->
+<div class="chapter" id="ch1">
+  <div class="sec-tabs">
+    <div class="sec-tab active" onclick="showSec('ch1',0,this)">📖 Θεωρία</div>
+    <div class="sec-tab" onclick="showSec('ch1',1,this)">🔬 Πείραμα</div>
+    <div class="sec-tab" onclick="showSec('ch1',2,this)">❓ Quiz</div>
+  </div>
+
+  <div class="section active" id="ch1-s0">
+    <div class="card">
+      <h3>2.1 Οξέα — Ορισμός & Ιδιότητες</h3>
+      <div class="key"><strong>Ορισμός Arrhenius</strong><span>Οξύ είναι ουσία που διαλύεται στο νερό και αποδίδει ιόντα H⁺ (πρωτόνια).</span></div>
+      <div class="formula">HCl → H⁺ + Cl⁻</div>
+      <ul>
+        <li>Γεύση ξινή (π.χ. λεμόνι, ξίδι)</li>
+        <li>Αλλάζουν χρώμα δείκτη: λακμός → κόκκινος</li>
+        <li>Αντιδρούν με μέταλλα → H₂</li>
+        <li>pH &lt; 7</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>2.2 Βάσεις — Ορισμός & Ιδιότητες</h3>
+      <div class="key"><strong>Ορισμός Arrhenius</strong><span>Βάση είναι ουσία που διαλύεται στο νερό και αποδίδει ιόντα OH⁻ (υδροξυλίου).</span></div>
+      <div class="formula">NaOH → Na⁺ + OH⁻</div>
+      <ul>
+        <li>Γεύση στυφή, σαπωνώδης υφή</li>
+        <li>Αλλάζουν χρώμα δείκτη: λακμός → μπλε</li>
+        <li>pH &gt; 7</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>2.3 Κλίμακα pH</h3>
+      <table>
+        <tr><th>pH</th><th>Χαρακτήρας</th><th>Παράδειγμα</th></tr>
+        <tr><td>0–3</td><td>Ισχυρό οξύ</td><td>HCl, H₂SO₄</td></tr>
+        <tr><td>4–6</td><td>Ασθενές οξύ</td><td>Ξίδι (4), Καφές (5)</td></tr>
+        <tr><td>7</td><td>Ουδέτερο</td><td>Καθαρό νερό</td></tr>
+        <tr><td>8–10</td><td>Ασθενής βάση</td><td>Θαλασσινό νερό (8)</td></tr>
+        <tr><td>11–14</td><td>Ισχυρή βάση</td><td>NaOH, Ca(OH)₂</td></tr>
+      </table>
+    </div>
+    <!-- Static diagram: pH scale -->
+    <div class="diagram">
+      <svg viewBox="0 0 420 90" style="width:100%;max-height:90px" aria-label="Κλίμακα pH">
+        <defs>
+          <linearGradient id="phG" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="#dc2626"/>
+            <stop offset="50%" stop-color="#16a34a"/>
+            <stop offset="100%" stop-color="#2563eb"/>
+          </linearGradient>
+        </defs>
+        <rect x="20" y="30" width="380" height="22" rx="5" fill="url(#phG)"/>
+        <!-- ticks -->
+        <text x="20" y="26" text-anchor="middle" font-size="9" fill="#dc2626" font-weight="700">0</text>
+        <text x="54" y="26" text-anchor="middle" font-size="9" fill="#dc2626">2</text>
+        <text x="88" y="26" text-anchor="middle" font-size="9" fill="#ea580c">4</text>
+        <text x="122" y="26" text-anchor="middle" font-size="9" fill="#ca8a04">6</text>
+        <text x="210" y="26" text-anchor="middle" font-size="9" fill="#16a34a" font-weight="700">7</text>
+        <text x="245" y="26" text-anchor="middle" font-size="9" fill="#0d9488">8</text>
+        <text x="312" y="26" text-anchor="middle" font-size="9" fill="#2563eb">11</text>
+        <text x="400" y="26" text-anchor="middle" font-size="9" fill="#2563eb" font-weight="700">14</text>
+        <!-- labels below -->
+        <text x="60" y="68" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="700">Οξύ</text>
+        <text x="210" y="68" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="700">Ουδέτερο</text>
+        <text x="350" y="68" text-anchor="middle" font-size="10" fill="#2563eb" font-weight="700">Βάση</text>
+        <!-- center tick -->
+        <line x1="210" y1="30" x2="210" y2="52" stroke="#fff" stroke-width="1.5"/>
+        <text x="210" y="82" text-anchor="middle" font-size="8" fill="#16a34a">νερό</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- EXPERIMENT: pH indicator simulation -->
+  <div class="section" id="ch1-s1">
+    <div class="interactive">
+      <h4>🌡️ Δείκτης pH — Λακμός & Φαινολοφθαλεΐνη</h4>
+      <svg class="exp-svg" viewBox="0 0 500 190" id="phSvg" aria-label="Πείραμα pH">
+        <!-- beaker left -->
+        <rect x="30" y="60" width="80" height="100" rx="4" fill="none" stroke="#64748b" stroke-width="2"/>
+        <rect x="32" y="80" width="76" height="78" rx="2" id="liq1" fill="#dc2626" opacity=".5"/>
+        <text x="70" y="75" text-anchor="middle" font-size="10" fill="#64748b">HCl</text>
+        <text x="70" y="175" text-anchor="middle" font-size="9" fill="#dc2626" font-weight="700" id="lbl1">Λακμός: Κόκκινος</text>
+        <!-- beaker center -->
+        <rect x="210" y="60" width="80" height="100" rx="4" fill="none" stroke="#64748b" stroke-width="2"/>
+        <rect x="212" y="80" width="76" height="78" rx="2" id="liq2" fill="#94a3b8" opacity=".4"/>
+        <text x="250" y="75" text-anchor="middle" font-size="10" fill="#64748b">H₂O</text>
+        <text x="250" y="175" text-anchor="middle" font-size="9" fill="#64748b" font-weight="700" id="lbl2">Λακμός: Μοβ</text>
+        <!-- beaker right -->
+        <rect x="390" y="60" width="80" height="100" rx="4" fill="none" stroke="#64748b" stroke-width="2"/>
+        <rect x="392" y="80" width="76" height="78" rx="2" id="liq3" fill="#2563eb" opacity=".5"/>
+        <text x="430" y="75" text-anchor="middle" font-size="10" fill="#64748b">NaOH</text>
+        <text x="430" y="175" text-anchor="middle" font-size="9" fill="#2563eb" font-weight="700" id="lbl3">Λακμός: Μπλε</text>
+        <!-- pH labels above -->
+        <text x="70" y="50" text-anchor="middle" font-size="11" fill="#dc2626" font-weight="700">pH ≈ 1</text>
+        <text x="250" y="50" text-anchor="middle" font-size="11" fill="#16a34a" font-weight="700">pH = 7</text>
+        <text x="430" y="50" text-anchor="middle" font-size="11" fill="#2563eb" font-weight="700">pH ≈ 13</text>
+        <!-- indicator animation: drops -->
+        <circle id="drop1" cx="70" cy="55" r="5" fill="#dc2626" opacity="0">
+          <animate attributeName="cy" values="55;82" dur="1.5s" begin="0s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0;1;0" dur="1.5s" begin="0s" repeatCount="indefinite"/>
+        </circle>
+        <circle id="drop2" cx="250" cy="55" r="5" fill="#7c3aed" opacity="0">
+          <animate attributeName="cy" values="55;82" dur="1.5s" begin="0.5s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0;1;0" dur="1.5s" begin="0.5s" repeatCount="indefinite"/>
+        </circle>
+        <circle id="drop3" cx="430" cy="55" r="5" fill="#2563eb" opacity="0">
+          <animate attributeName="cy" values="55;82" dur="1.5s" begin="1s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0;1;0" dur="1.5s" begin="1s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+      <div class="controls">
+        <button class="btn" onclick="switchIndicator()">🔄 Αλλαγή δείκτη (Φαινολοφθαλεΐνη)</button>
+      </div>
+      <p style="font-size:.8rem;color:var(--fg2);margin-top:10px">* <strong>χαρτί Λάκμου</strong>: φυσική χρωστική ουσία από λειχήνες που χρησιμοποιείται ως δείκτης pH στο εργαστήριο, συχνά με τη μορφή ειδικού χαρτιού (χαρτί Λάκμου ή ηλιανθίνη). Αλλάζει χρώμα ανάλογα με τον χαρακτήρα του διαλύματος.</p>
+      <div class="readout" id="indReadout">
+        <span>Δείκτης:</span> Λακμός &nbsp;|&nbsp; <span>Οξύ:</span> Κόκκινος &nbsp;|&nbsp; <span>Ουδέτερο:</span> Μοβ &nbsp;|&nbsp; <span>Βάση:</span> Μπλε
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="ch1-s2">
+    <div class="quiz-wrap">
+      <h4 style="color:var(--acc);margin-bottom:16px">❓ Quiz — Οξέα &amp; Βάσεις</h4>
+      <div id="quiz1"></div>
+      <button class="btn" onclick="checkQuiz(1)" style="margin-top:12px">✔️ Έλεγχος</button>
+      <div class="quiz-score" id="score1"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== CHAPTER 2: ΑΛΑΤΑ & ΟΥΔΕΤΕΡΟΠΟΙΗΣΗ ========== -->
+<div class="chapter" id="ch2">
+  <div class="sec-tabs">
+    <div class="sec-tab active" onclick="showSec('ch2',0,this)">📖 Θεωρία</div>
+    <div class="sec-tab" onclick="showSec('ch2',1,this)">🔬 Πείραμα</div>
+    <div class="sec-tab" onclick="showSec('ch2',2,this)">❓ Quiz</div>
+  </div>
+
+  <div class="section active" id="ch2-s0">
+    <div class="card">
+      <h3>3.1 Αντίδραση Ουδετεροποίησης</h3>
+      <div class="key"><strong>Ορισμός</strong><span>Η αντίδραση μεταξύ οξέος και βάσης με παραγωγή άλατος και νερού.</span></div>
+      <div class="formula">Οξύ + Βάση → Άλας + Νερό</div>
+      <div class="formula" style="font-size:1rem">HCl + NaOH → NaCl + H₂O</div>
+      <p>Κατά την ουδετεροποίηση: τα H⁺ από το οξύ ενώνονται με τα OH⁻ από τη βάση: H⁺ + OH⁻ → H₂O</p>
+    </div>
+    <div class="card">
+      <h3>3.2 Άλατα</h3>
+      <div class="key"><strong>Ορισμός</strong><span>Άλας είναι ιοντική ένωση που αποτελείται από κατιόν μετάλλου (ή NH₄⁺) και ανιόν οξέος.</span></div>
+      <table>
+        <tr><th>Οξύ</th><th>Βάση</th><th>Άλας</th></tr>
+        <tr><td>HCl</td><td>NaOH</td><td>NaCl (χλωριούχο νάτριο)</td></tr>
+        <tr><td>H₂SO₄</td><td>Ca(OH)₂</td><td>CaSO₄ (θειικό ασβέστιο)</td></tr>
+        <tr><td>HNO₃</td><td>KOH</td><td>KNO₃ (νιτρικό κάλιο)</td></tr>
+        <tr><td>H₂CO₃</td><td>NaOH</td><td>Na₂CO₃ (ανθρακικό νάτριο)</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>3.3 Υδρόλυση Αλάτων</h3>
+      <ul>
+        <li><strong>Ισχυρό οξύ + Ισχυρή βάση</strong> → Ουδέτερο άλας (pH=7) &nbsp; π.χ. NaCl</li>
+        <li><strong>Ασθενές οξύ + Ισχυρή βάση</strong> → Βασικό άλας (pH&gt;7) &nbsp; π.χ. CH₃COONa</li>
+        <li><strong>Ισχυρό οξύ + Ασθενής βάση</strong> → Όξινο άλας (pH&lt;7) &nbsp; π.χ. NH₄Cl</li>
+      </ul>
+    </div>
+    <!-- Static diagram: neutralization -->
+    <div class="diagram">
+      <svg viewBox="0 0 420 100" style="width:100%;max-height:100px" aria-label="Ουδετεροποίηση">
+        <defs><marker id="mN" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/></marker></defs>
+        <!-- HCl beaker -->
+        <rect x="20" y="25" width="60" height="55" rx="4" fill="none" stroke="#dc2626" stroke-width="2"/>
+        <rect x="22" y="40" width="56" height="38" rx="2" fill="#fca5a5" opacity=".6"/>
+        <text x="50" y="38" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="700">HCl</text>
+        <text x="50" y="92" text-anchor="middle" font-size="9" fill="#dc2626">pH=1</text>
+        <!-- arrow mix -->
+        <line x1="84" y1="52" x2="120" y2="52" stroke="#64748b" stroke-width="2" marker-end="url(#mN)"/>
+        <text x="102" y="46" text-anchor="middle" font-size="8" fill="#64748b">+</text>
+        <!-- NaOH beaker -->
+        <rect x="120" y="25" width="60" height="55" rx="4" fill="none" stroke="#2563eb" stroke-width="2"/>
+        <rect x="122" y="40" width="56" height="38" rx="2" fill="#93c5fd" opacity=".6"/>
+        <text x="150" y="38" text-anchor="middle" font-size="10" fill="#2563eb" font-weight="700">NaOH</text>
+        <text x="150" y="92" text-anchor="middle" font-size="9" fill="#2563eb">pH=13</text>
+        <!-- arrow reaction -->
+        <line x1="184" y1="52" x2="230" y2="52" stroke="#64748b" stroke-width="2" marker-end="url(#mN)"/>
+        <text x="207" y="46" text-anchor="middle" font-size="9" fill="#0f766e" font-weight="700">→</text>
+        <!-- NaCl result -->
+        <rect x="230" y="25" width="70" height="55" rx="4" fill="none" stroke="#0f766e" stroke-width="2"/>
+        <rect x="232" y="40" width="66" height="38" rx="2" fill="#a7f3d0" opacity=".7"/>
+        <text x="265" y="36" text-anchor="middle" font-size="10" fill="#0f766e" font-weight="700">NaCl</text>
+        <text x="265" y="92" text-anchor="middle" font-size="9" fill="#0f766e">pH=7</text>
+        <!-- + H2O -->
+        <text x="308" y="55" font-size="13" fill="#64748b">+</text>
+        <ellipse cx="355" cy="52" rx="32" ry="22" fill="#bfdbfe" opacity=".7"/>
+        <text x="355" y="49" text-anchor="middle" font-size="11" font-weight="700" fill="#1d4ed8">H₂O</text>
+        <text x="355" y="63" text-anchor="middle" font-size="9" fill="#1d4ed8">pH=7</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="section" id="ch2-s1">
+    <div class="interactive">
+      <h4>🧪 Τιτλοδότηση — Ουδετεροποίηση HCl με NaOH</h4>
+      <canvas id="titCanvas" style="height:240px"></canvas>
+      <div class="controls">
+        <label>Όγκος NaOH που προστίθεται (mL)
+          <input type="range" id="naohSlider" min="0" max="50" value="0" oninput="drawTitration()" step="0.5">
+        </label>
+        <span id="titReadout" class="readout" style="margin-top:0"><span>V(NaOH):</span> 0 mL &nbsp; <span>pH:</span> 1.0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="ch2-s2">
+    <div class="quiz-wrap">
+      <h4 style="color:var(--acc);margin-bottom:16px">❓ Quiz — Άλατα &amp; Ουδετεροποίηση</h4>
+      <div id="quiz2"></div>
+      <button class="btn" onclick="checkQuiz(2)" style="margin-top:12px">✔️ Έλεγχος</button>
+      <div class="quiz-score" id="score2"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== CHAPTER 3: ΟΞΕΙΔΟΑΝΑΓΩΓΗ ========== -->
+<div class="chapter" id="ch3">
+  <div class="sec-tabs">
+    <div class="sec-tab active" onclick="showSec('ch3',0,this)">📖 Θεωρία</div>
+    <div class="sec-tab" onclick="showSec('ch3',1,this)">🔬 Πείραμα</div>
+    <div class="sec-tab" onclick="showSec('ch3',2,this)">❓ Quiz</div>
+  </div>
+
+  <div class="section active" id="ch3-s0">
+    <div class="card">
+      <h3>4.1 Οξείδωση &amp; Αναγωγή</h3>
+      <div class="key"><strong>Οξείδωση</strong><span>Απώλεια ηλεκτρονίων — αύξηση αριθμού οξείδωσης</span></div>
+      <div class="key"><strong>Αναγωγή</strong><span>Πρόσληψη ηλεκτρονίων — μείωση αριθμού οξείδωσης</span></div>
+      <div class="formula">Zn + CuSO₄ → ZnSO₄ + Cu</div>
+      <p>Ο Zn οξειδώνεται (0 → +2), το Cu²⁺ ανάγεται (+2 → 0). <strong>Πάντα συμβαίνουν μαζί!</strong></p>
+    </div>
+    <div class="card">
+      <h3>4.2 Αριθμός Οξείδωσης</h3>
+      <ul>
+        <li>Στοιχεία σε ελεύθερη κατάσταση: ΑΟ = 0 &nbsp; (Fe, O₂, H₂)</li>
+        <li>Μονοατομικά ιόντα: ΑΟ = φορτίο &nbsp; (Na⁺ → +1, Cl⁻ → −1)</li>
+        <li>Οξυγόνο σε ενώσεις: ΑΟ = −2 (εκτός H₂O₂)</li>
+        <li>Υδρογόνο σε ενώσεις: ΑΟ = +1 (εκτός μεταλλικών υδριδίων)</li>
+        <li>Άθροισμα ΑΟ σε ουδέτερη ένωση = 0</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>4.3 Σειρά Δραστικότητας Μετάλλων</h3>
+      <div class="formula" style="font-size:.9rem">K > Ca > Na > Mg > Al > Zn > Fe > Ni > Sn > Pb > H > Cu > Ag > Au</div>
+      <p>Μέταλλο αντικαθιστά ιόν μετάλλου που βρίσκεται <strong>δεξιότερά</strong> του στη σειρά δραστικότητας.</p>
+    </div>
+    <!-- Static diagram: electron transfer -->
+    <div class="diagram">
+      <svg viewBox="0 0 420 110" style="width:100%;max-height:110px" aria-label="Μεταφορά ηλεκτρονίων">
+        <defs><marker id="mEl" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7Z" fill="#7c3aed"/></marker></defs>
+        <!-- Zn atom -->
+        <circle cx="80" cy="55" r="30" fill="#fbbf24" opacity=".8"/>
+        <text x="80" y="51" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">Zn</text>
+        <text x="80" y="66" text-anchor="middle" font-size="9" fill="#92400e">ΑΟ: 0</text>
+        <text x="80" y="95" text-anchor="middle" font-size="9" fill="#0f766e" font-weight="700">Οξείδωση</text>
+        <text x="80" y="105" text-anchor="middle" font-size="9" fill="#0f766e">0 → +2</text>
+        <!-- electron arrows -->
+        <path d="M112,40 Q210,10 298,40" stroke="#7c3aed" stroke-width="2" fill="none" marker-end="url(#mEl)" stroke-dasharray="5,3"/>
+        <text x="210" y="22" text-anchor="middle" font-size="10" fill="#7c3aed" font-weight="700">2e⁻</text>
+        <!-- Cu2+ ion -->
+        <circle cx="330" cy="55" r="30" fill="#93c5fd" opacity=".8"/>
+        <text x="330" y="51" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8">Cu²⁺</text>
+        <text x="330" y="66" text-anchor="middle" font-size="9" fill="#1d4ed8">ΑΟ: +2</text>
+        <text x="330" y="95" text-anchor="middle" font-size="9" fill="#dc2626" font-weight="700">Αναγωγή</text>
+        <text x="330" y="105" text-anchor="middle" font-size="9" fill="#dc2626">+2 → 0</text>
+        <!-- Zn2+ label right -->
+        <text x="80" y="15" text-anchor="middle" font-size="9" fill="#92400e">→ Zn²⁺</text>
+        <text x="330" y="15" text-anchor="middle" font-size="9" fill="#1d4ed8">→ Cu</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="section" id="ch3-s1">
+    <div class="interactive">
+      <h4>⚡ Κηλίδα Χαλκού — Zn σε CuSO₄</h4>
+      <svg class="exp-svg" viewBox="0 0 500 210" id="redoxSvg" aria-label="Πείραμα οξειδοαναγωγής">
+        <!-- beaker -->
+        <rect x="150" y="60" width="200" height="130" rx="6" fill="none" stroke="#64748b" stroke-width="2.5"/>
+        <rect x="152" y="80" width="196" height="108" rx="4" fill="#93c5fd" opacity=".5" id="solColor"/>
+        <text x="195" y="73" text-anchor="middle" font-size="11" fill="#1d4ed8" font-weight="700">CuSO₄(aq)</text>
+        <!-- Zn strip -->
+        <rect x="235" y="55" width="30" height="120" rx="4" fill="#fbbf24" id="znStrip"/>
+        <text x="250" y="50" text-anchor="middle" font-size="10" fill="#92400e" font-weight="700">Zn</text>
+        <!-- Cu deposit (grows) -->
+        <rect x="235" y="130" width="30" height="5" rx="2" fill="#b45309" id="cuDeposit" opacity="0"/>
+        <text x="250" y="200" text-anchor="middle" font-size="10" fill="#b45309" id="cuLbl" opacity="0">Cu εναποτίθεται</text>
+        <!-- electrons animation -->
+        <circle r="4" fill="#7c3aed" opacity="0" id="el1">
+          <animate attributeName="cx" values="235;160;100" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="cy" values="100;80;60" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <!-- label -->
+        <text x="100" y="55" text-anchor="middle" font-size="9" fill="#7c3aed">e⁻</text>
+        <!-- info -->
+        <rect x="30" y="100" width="100" height="60" rx="6" fill="#fef3c7" opacity=".9"/>
+        <text x="80" y="118" text-anchor="middle" font-size="9" fill="#92400e" font-weight="700">Zn → Zn²⁺ + 2e⁻</text>
+        <text x="80" y="132" text-anchor="middle" font-size="9" fill="#1d4ed8">Cu²⁺ + 2e⁻ → Cu</text>
+        <text x="80" y="150" text-anchor="middle" font-size="8" fill="#64748b" id="timeLabel">Χρόνος: 0 λεπτά</text>
+      </svg>
+      <div class="controls">
+        <button class="btn" onclick="startRedox()">▶ Έναρξη αντίδρασης</button>
+        <button class="btn secondary" onclick="resetRedox()">↺ Επαναφορά</button>
+        <span id="redoxStatus" class="readout" style="margin-top:0;display:none"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="ch3-s2">
+    <div class="quiz-wrap">
+      <h4 style="color:var(--acc);margin-bottom:16px">❓ Quiz — Οξειδοαναγωγή</h4>
+      <div id="quiz3"></div>
+      <button class="btn" onclick="checkQuiz(3)" style="margin-top:12px">✔️ Έλεγχος</button>
+      <div class="quiz-score" id="score3"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== CHAPTER 4: ΔΙΑΛΥΜΑΤΑ ========== -->
+<div class="chapter" id="ch4">
+  <div class="sec-tabs">
+    <div class="sec-tab active" onclick="showSec('ch4',0,this)">📖 Θεωρία</div>
+    <div class="sec-tab" onclick="showSec('ch4',1,this)">🔬 Πείραμα</div>
+    <div class="sec-tab" onclick="showSec('ch4',2,this)">❓ Quiz</div>
+  </div>
+
+  <div class="section active" id="ch4-s0">
+    <div class="card">
+      <h3>5.1 Διαλύματα — Βασικές Έννοιες</h3>
+      <div class="key"><strong>Διάλυμα</strong><span>Ομογενές μίγμα διαλύτη (solvent) και διαλυμένης ουσίας (solute).</span></div>
+      <ul>
+        <li><strong>Διαλύτης:</strong> η ουσία που βρίσκεται σε μεγαλύτερη ποσότητα (π.χ. νερό)</li>
+        <li><strong>Διαλυμένη ουσία:</strong> η ουσία σε μικρότερη ποσότητα (π.χ. NaCl)</li>
+        <li><strong>Κεκορεσμένο:</strong> δεν μπορεί να διαλύσει άλλη ουσία σε δεδομένη θερμοκρασία</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>5.2 Συγκέντρωση Διαλύματος</h3>
+      <div class="key"><strong>% w/v</strong><span>Γραμμάρια διαλυμένης ουσίας ανά 100 mL διαλύματος</span></div>
+      <div class="formula">C% = (m<sub>ουσίας</sub> / V<sub>διαλύματος</sub>) × 100%</div>
+      <div class="key"><strong>Γραμμομοριακή (M)</strong><span>Moles διαλυμένης ουσίας ανά λίτρο διαλύματος</span></div>
+      <div class="formula">C<sub>M</sub> = n / V &nbsp; (mol/L)</div>
+      <p style="margin-top:8px">Σχέση: n = m / M<sub>r</sub> &nbsp;|&nbsp; C<sub>M</sub> = (10 × C% × ρ) / M<sub>r</sub></p>
+    </div>
+    <div class="card">
+      <h3>5.3 Αραίωση Διαλύματος</h3>
+      <div class="key"><strong>Νόμος αραίωσης</strong><span>Τα moles διαλυμένης ουσίας παραμένουν σταθερά κατά την αραίωση.</span></div>
+      <div class="formula">C₁ · V₁ = C₂ · V₂</div>
+      <p>Παράδειγμα: 50 mL 2M HCl + νερό → 100 mL 1M HCl</p>
+    </div>
+    <!-- Static diagram: dilution -->
+    <div class="diagram">
+      <svg viewBox="0 0 420 110" style="width:100%;max-height:110px" aria-label="Αραίωση διαλύματος">
+        <defs><marker id="mD" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/></marker></defs>
+        <!-- concentrated beaker -->
+        <rect x="30" y="20" width="80" height="80" rx="5" fill="none" stroke="#0f766e" stroke-width="2"/>
+        <rect x="32" y="35" width="76" height="63" rx="3" fill="#0f766e" opacity=".5"/>
+        <text x="70" y="35" text-anchor="middle" font-size="10" fill="#0f766e" font-weight="700">50 mL</text>
+        <text x="70" y="108" text-anchor="middle" font-size="9" fill="#0f766e">C = 2 M</text>
+        <!-- dots (concentrated) -->
+        <circle cx="50" cy="55" r="4" fill="#fff" opacity=".7"/>
+        <circle cx="65" cy="65" r="4" fill="#fff" opacity=".7"/>
+        <circle cx="80" cy="50" r="4" fill="#fff" opacity=".7"/>
+        <circle cx="90" cy="70" r="4" fill="#fff" opacity=".7"/>
+        <circle cx="55" cy="80" r="4" fill="#fff" opacity=".7"/>
+        <circle cx="75" cy="78" r="4" fill="#fff" opacity=".7"/>
+        <!-- water bottle -->
+        <ellipse cx="185" cy="55" rx="18" ry="28" fill="#bfdbfe" opacity=".8"/>
+        <text x="185" y="52" text-anchor="middle" font-size="9" fill="#1d4ed8" font-weight="700">H₂O</text>
+        <text x="185" y="65" text-anchor="middle" font-size="8" fill="#1d4ed8">+50mL</text>
+        <!-- arrow -->
+        <line x1="115" y1="60" x2="155" y2="60" stroke="#64748b" stroke-width="1.5" marker-end="url(#mD)"/>
+        <line x1="210" y1="60" x2="250" y2="60" stroke="#64748b" stroke-width="1.5" marker-end="url(#mD)"/>
+        <!-- diluted beaker -->
+        <rect x="250" y="20" width="130" height="80" rx="5" fill="none" stroke="#0f766e" stroke-width="2"/>
+        <rect x="252" y="35" width="126" height="63" rx="3" fill="#0f766e" opacity=".25"/>
+        <text x="315" y="35" text-anchor="middle" font-size="10" fill="#0f766e" font-weight="700">100 mL</text>
+        <text x="315" y="108" text-anchor="middle" font-size="9" fill="#0f766e">C = 1 M</text>
+        <!-- fewer dots (diluted) -->
+        <circle cx="270" cy="55" r="4" fill="#0f766e" opacity=".7"/>
+        <circle cx="295" cy="68" r="4" fill="#0f766e" opacity=".7"/>
+        <circle cx="320" cy="50" r="4" fill="#0f766e" opacity=".7"/>
+        <circle cx="345" cy="72" r="4" fill="#0f766e" opacity=".7"/>
+        <circle cx="370" cy="58" r="4" fill="#0f766e" opacity=".7"/>
+        <circle cx="280" cy="80" r="4" fill="#0f766e" opacity=".7"/>
+        <!-- formula center -->
+        <text x="410" y="58" text-anchor="middle" font-size="11" fill="#64748b">C₁V₁=C₂V₂</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="section" id="ch4-s1">
+    <div class="interactive">
+      <h4>💧 Υπολογισμός Συγκέντρωσης Διαλύματος</h4>
+      <canvas id="solCanvas" style="height:290px"></canvas>
+      <div class="controls">
+        <label>Μάζα ουσίας (g)
+          <input type="range" id="massSlider" min="1" max="50" value="10" oninput="drawSolution()">
+        </label>
+        <label>Όγκος διαλύματος (mL)
+          <input type="range" id="volSlider" min="50" max="500" value="100" oninput="drawSolution()">
+        </label>
+      </div>
+      <div class="readout" id="solReadout"><span>C%:</span> — &nbsp; <span>Cₘ (NaCl):</span> —</div>
+    </div>
+  </div>
+
+  <div class="section" id="ch4-s2">
+    <div class="quiz-wrap">
+      <h4 style="color:var(--acc);margin-bottom:16px">❓ Quiz — Διαλύματα</h4>
+      <div id="quiz4"></div>
+      <button class="btn" onclick="checkQuiz(4)" style="margin-top:12px">✔️ Έλεγχος</button>
+      <div class="quiz-score" id="score4"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===================== NAV ===================== */
+function showCh(n, btn){
+  document.querySelectorAll('.chapter').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.ch-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('ch'+n).classList.add('active');
+  btn.classList.add('active');
+}
+function showSec(ch, n, btn){
+  const chEl = document.getElementById(ch);
+  chEl.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  chEl.querySelectorAll('.sec-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(ch+'-s'+n).classList.add('active');
+  btn.classList.add('active');
+  if(ch==='ch2'&&n===1) setTimeout(drawTitration,50);
+  if(ch==='ch4'&&n===1) setTimeout(drawSolution,50);
+}
+
+/* ===================== THEME ===================== */
+function toggleTheme(){
+  const r=document.documentElement;
+  const cur=r.getAttribute('data-theme');
+  r.setAttribute('data-theme', cur==='dark'?'light':'dark');
+}
+
+/* ===================== QUIZ DATA ===================== */
+const quizData = [
+  // Ch0: Χημικές Αντιδράσεις
+  [{q:'Ποιο είναι το προϊόν της καύσης του μεθανίου;',opts:['CO₂ και H₂O','CO₂ και H₂','CH₄ και O₂','H₂ και O₂'],ans:0,exp:'CH₄ + 2O₂ → CO₂ + 2H₂O'},
+   {q:'Ο νόμος Lavoisier αναφέρεται στη διατήρηση:',opts:['Ενέργειας','Μάζας','Όγκου','Εντροπίας'],ans:1,exp:'Νόμος διατήρησης μάζας: m_αντιδρώντων = m_προϊόντων'},
+   {q:'Ποιο είναι παράδειγμα αντίδρασης ανάλυσης;',opts:['2Na+Cl₂→2NaCl','2H₂O→2H₂+O₂','Zn+2HCl→ZnCl₂+H₂','NaCl+AgNO₃→AgCl+NaNO₃'],ans:1,exp:'Ανάλυση: AB → A + B. Το νερό αναλύεται σε στοιχεία του.'},
+   {q:'Κατά την εξισορρόπηση χημικής εξίσωσης επιτρέπεται:',opts:['Αλλαγή χημικών τύπων','Πρόσθεση νέων ατόμων','Τροποποίηση συντελεστών','Διαγραφή στοιχείων'],ans:2,exp:'Μόνο οι συντελεστές αλλάζουν — οι χημικοί τύποι παραμένουν αμετάβλητοι.'}],
+  // Ch1: Οξέα & Βάσεις
+  [{q:'Ποιο pH αντιστοιχεί σε ισχυρό οξύ;',opts:['2','7','10','14'],ans:0,exp:'pH < 7 → όξινο. pH = 2 → ισχυρό οξύ.'},
+   {q:'Ποια από τις παρακάτω ουσίες είναι βάση;',opts:['HCl','H₂SO₄','NaOH','CH₃COOH'],ans:2,exp:'NaOH → Na⁺ + OH⁻. Τα OH⁻ δείχνουν βάση.'},
+   {q:'Ο λακμός σε βασικό διάλυμα γίνεται:',opts:['Κόκκινος','Μπλε','Κίτρινος','Άχρωμος'],ans:1,exp:'Λακμός: κόκκινος σε οξύ, μπλε σε βάση, μοβ σε ουδέτερο.'},
+   {q:'Ποια ιόντα αποδίδει ένα οξύ κατά Arrhenius;',opts:['OH⁻','Na⁺','H⁺','Cl⁻'],ans:2,exp:'Κατά Arrhenius, οξύ = ουσία που αποδίδει H⁺ στο νερό.'}],
+  // Ch2: Άλατα
+  [{q:'Το προϊόν αντίδρασης HNO₃ + KOH είναι:',opts:['KNO₂ + H₂O','KNO₃ + H₂O','K₂O + HNO₃','KOH + NO₂'],ans:1,exp:'Ουδετεροποίηση: HNO₃ + KOH → KNO₃ + H₂O'},
+   {q:'Κατά την ουδετεροποίηση τα H⁺ ενώνονται με:',opts:['Na⁺','Cl⁻','OH⁻','O²⁻'],ans:2,exp:'H⁺ + OH⁻ → H₂O — αυτή είναι η ουσία της ουδετεροποίησης.'},
+   {q:'Ποιο άλας προέρχεται από ισχυρό οξύ + ισχυρή βάση;',opts:['Όξινο (pH<7)','Βασικό (pH>7)','Ουδέτερο (pH=7)','Εξαρτάται'],ans:2,exp:'Ισχυρό οξύ + ισχυρή βάση → ουδέτερο άλας, pH = 7.'},
+   {q:'Ποια είναι η χημική ονομασία του NaCl;',opts:['Χλωριούχο νάτριο','Νιτρικό νάτριο','Θειικό νάτριο','Ανθρακικό νάτριο'],ans:0,exp:'NaCl = Na⁺ + Cl⁻ = χλωριούχο νάτριο (επιτραπέζιο αλάτι).'}],
+  // Ch3: Οξειδοαναγωγή
+  [{q:'Τι συμβαίνει κατά την οξείδωση;',opts:['Πρόσληψη e⁻','Απώλεια e⁻','Πρόσληψη Η⁺','Απώλεια O²⁻'],ans:1,exp:'Οξείδωση = απώλεια ηλεκτρονίων = αύξηση ΑΟ.'},
+   {q:'Στην αντίδραση Zn+CuSO₄→ZnSO₄+Cu, ποιο οξειδώνεται;',opts:['Cu','SO₄²⁻','Zn','O'],ans:2,exp:'Zn: 0 → +2 (χάνει e⁻) = οξείδωση. Cu: +2 → 0 (κερδίζει e⁻) = αναγωγή.'},
+   {q:'Ποιος ο αριθμός οξείδωσης του O σε H₂O;',opts:['+2','-2','0','+1'],ans:1,exp:'Στις ενώσεις το O έχει ΑΟ = −2 (εκτός H₂O₂).'},
+   {q:'Το πιο δραστικό μέταλλο στη σειρά δραστικότητας είναι:',opts:['Fe','Cu','Na','K'],ans:3,exp:'Σειρά: K > Ca > Na > Mg > Al... το K είναι το πιο δραστικό.'}],
+  // Ch4: Διαλύματα
+  [{q:'Η γραμμομοριακή συγκέντρωση εκφράζεται σε:',opts:['g/mL','mol/L','g/L','%'],ans:1,exp:'Cₘ = n/V (mol/L ή Μ — Molar).'},
+   {q:'Κατά την αραίωση διαλύματος, τι παραμένει σταθερό;',opts:['Όγκος','Συγκέντρωση','Moles διαλυμένης ουσίας','Πυκνότητα'],ans:2,exp:'C₁V₁ = C₂V₂ → n = CV = σταθερό.'},
+   {q:'Διάλυμα 10 g NaCl σε 100 mL έχει C% ίσο με:',opts:['1%','5%','10%','20%'],ans:2,exp:'C% = (10g/100mL)×100 = 10%.'},
+   {q:'Ποιος είναι ο διαλύτης στο θαλασσινό νερό;',opts:['NaCl','MgCl₂','H₂O','O₂'],ans:2,exp:'Το νερό (H₂O) είναι ο διαλύτης — βρίσκεται σε μεγαλύτερη ποσότητα.'}]
+];
+
+/* ===================== BUILD QUIZ ===================== */
+function buildQuiz(n){
+  const container=document.getElementById('quiz'+n);
+  if(container.innerHTML) return;
+  const qs=quizData[n];
+  container.innerHTML=qs.map((q,i)=>`
+    <div class="quiz-q">
+      <p>${i+1}. ${q.q}</p>
+      <div class="quiz-opt">
+        ${q.opts.map((o,j)=>`
+          <label><input type="radio" name="q${n}_${i}" value="${j}"> ${o}</label>
+        `).join('')}
+      </div>
+      <div class="quiz-result" id="qr${n}_${i}"></div>
+    </div>
+  `).join('');
+}
+[0,1,2,3,4].forEach(buildQuiz);
+
+function checkQuiz(n){
+  const qs=quizData[n]; let score=0;
+  qs.forEach((q,i)=>{
+    const sel=document.querySelector(`input[name="q${n}_${i}"]:checked`);
+    const res=document.getElementById(`qr${n}_${i}`);
+    res.style.display='block';
+    if(!sel){res.className='quiz-result err';res.textContent='❌ Δεν επιλέχθηκε απάντηση';return;}
+    if(+sel.value===q.ans){score++;res.className='quiz-result ok';res.textContent='✅ Σωστά! '+q.exp;}
+    else{res.className='quiz-result err';res.textContent='❌ Λάθος. '+q.exp;}
+  });
+  const sc=document.getElementById('score'+n);
+  sc.style.display='block';
+  sc.textContent=`Βαθμολογία: ${score}/${qs.length} — ${Math.round(score/qs.length*100)}%`;
+}
+
+/* ===================== TITRATION CANVAS ===================== */
+function drawTitration(){
+  const canvas=document.getElementById('titCanvas');
+  if(!canvas) return;
+  const dpr=window.devicePixelRatio||1;
+  const W=canvas.offsetWidth,H=canvas.offsetHeight||240;
+  canvas.width=W*dpr; canvas.height=H*dpr;
+  const ctx=canvas.getContext('2d'); ctx.scale(dpr,dpr);
+  const v=+document.getElementById('naohSlider').value;
+  // pH curve for 25 mL of 0.1M HCl titrated with 0.1M NaOH
+  const equiv=25; // equivalence at 25 mL NaOH
+  let pH;
+  if(v===0) pH=1.0;
+  else if(v<equiv-0.1){
+    const n_H=(equiv-v)*0.1/1000; const vol=(50+v)/1000;
+    pH=-Math.log10(n_H/vol);
+  } else if(v>=equiv-0.1&&v<=equiv+0.1) pH=7.0;
+  else {
+    const n_OH=(v-equiv)*0.1/1000; const vol=(50+v)/1000;
+    const pOH=-Math.log10(n_OH/vol); pH=14-pOH;
+  }
+  // draw
+  const bg=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()||'#f8fafc';
+  const fg=getComputedStyle(document.documentElement).getPropertyValue('--fg').trim()||'#1e293b';
+  const acc=getComputedStyle(document.documentElement).getPropertyValue('--acc').trim()||'#0f766e';
+  ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+  // margins
+  const ml=55,mr=20,mt=20,mb=40;
+  const gw=W-ml-mr,gh=H-mt-mb;
+  // axes
+  ctx.strokeStyle=fg; ctx.lineWidth=1.5;
+  ctx.beginPath(); ctx.moveTo(ml,mt); ctx.lineTo(ml,mt+gh); ctx.lineTo(ml+gw,mt+gh); ctx.stroke();
+  // labels
+  ctx.fillStyle=fg; ctx.font='11px system-ui'; ctx.textAlign='center';
+  ctx.fillText('V(NaOH) mL',ml+gw/2,H-5);
+  ctx.save(); ctx.translate(12,mt+gh/2); ctx.rotate(-Math.PI/2);
+  ctx.fillText('pH',0,0); ctx.restore();
+  // grid & ticks
+  ctx.strokeStyle='#94a3b8'; ctx.lineWidth=0.5;
+  for(let p=0;p<=14;p+=2){
+    const y=mt+gh-(p/14)*gh;
+    ctx.beginPath(); ctx.moveTo(ml,y); ctx.lineTo(ml+gw,y); ctx.stroke();
+    ctx.fillStyle=fg; ctx.textAlign='right'; ctx.font='10px system-ui';
+    ctx.fillText(p,ml-4,y+4);
+  }
+  for(let vol=0;vol<=50;vol+=10){
+    const x=ml+(vol/50)*gw;
+    ctx.beginPath(); ctx.moveTo(x,mt+gh); ctx.lineTo(x,mt+gh+4); ctx.stroke();
+    ctx.fillStyle=fg; ctx.textAlign='center'; ctx.font='10px system-ui';
+    ctx.fillText(vol,x,mt+gh+14);
+  }
+  // pH curve
+  ctx.strokeStyle=acc; ctx.lineWidth=2.5; ctx.beginPath();
+  for(let vi=0;vi<=50;vi+=0.2){
+    let pi;
+    if(vi===0) pi=1.0;
+    else if(vi<equiv-0.1){const nh=(equiv-vi)*0.1/1000;const vl=(50+vi)/1000;pi=-Math.log10(nh/vl);}
+    else if(vi>=equiv-0.1&&vi<=equiv+0.1) pi=7.0;
+    else{const noh=(vi-equiv)*0.1/1000;const vl=(50+vi)/1000;const poh=-Math.log10(noh/vl);pi=14-poh;}
+    pi=Math.max(0,Math.min(14,pi));
+    const cx=ml+(vi/50)*gw, cy=mt+gh-(pi/14)*gh;
+    vi===0?ctx.moveTo(cx,cy):ctx.lineTo(cx,cy);
+  }
+  ctx.stroke();
+  // equivalence point
+  const ex=ml+(equiv/50)*gw, ey=mt+gh-(7/14)*gh;
+  ctx.fillStyle='#dc2626'; ctx.beginPath(); ctx.arc(ex,ey,6,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='#dc2626'; ctx.font='bold 10px system-ui'; ctx.textAlign='left';
+  ctx.fillText('Ισοδύναμο σημείο',ex+8,ey-4);
+  // current point
+  const px_=ml+(v/50)*gw, py_=mt+gh-(Math.max(0,Math.min(14,pH))/14)*gh;
+  ctx.fillStyle=acc; ctx.beginPath(); ctx.arc(px_,py_,7,0,Math.PI*2); ctx.fill();
+  // pH 7 line
+  ctx.strokeStyle='#94a3b8'; ctx.lineWidth=1; ctx.setLineDash([4,4]);
+  ctx.beginPath(); ctx.moveTo(ml,mt+gh-(7/14)*gh); ctx.lineTo(ml+gw,mt+gh-(7/14)*gh); ctx.stroke();
+  ctx.setLineDash([]);
+  // update readout
+  const r=document.getElementById('titReadout');
+  r.innerHTML=`<span>V(NaOH):</span> ${v} mL &nbsp; <span>pH:</span> ${pH.toFixed(1)} &nbsp; <span>Χαρακτήρας:</span> ${pH<6.9?'Όξινο':pH>7.1?'Βασικό':'Ουδέτερο ≈'}`;
+}
+
+/* ===================== SOLUTION CANVAS ===================== */
+function drawSolution(){
+  const canvas=document.getElementById('solCanvas');
+  if(!canvas) return;
+  const dpr=window.devicePixelRatio||1;
+  const W=canvas.offsetWidth,H=canvas.offsetHeight||290;
+  canvas.width=W*dpr; canvas.height=H*dpr;
+  const ctx=canvas.getContext('2d'); ctx.scale(dpr,dpr);
+  const mass=+document.getElementById('massSlider').value;
+  const vol=+document.getElementById('volSlider').value;
+  const Cp=mass/vol*100;
+  const Cm=mass/58.44/(vol/1000); // NaCl Mr=58.44
+  const bg=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()||'#f8fafc';
+  const fg=getComputedStyle(document.documentElement).getPropertyValue('--fg').trim()||'#1e293b';
+  const acc=getComputedStyle(document.documentElement).getPropertyValue('--acc').trim()||'#0f766e';
+  ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+  // beaker
+  const bx=W/2-60,by=20,bw=120,bh=140;
+  ctx.strokeStyle=fg; ctx.lineWidth=2.5;
+  ctx.strokeRect(bx,by,bw,bh);
+  // liquid level based on vol (50-500 mL → 20%-100% of bh)
+  const lvl=(vol-50)/(500-50);
+  const liqH=bh*0.2+bh*0.75*lvl;
+  const liqY=by+bh-liqH;
+  // color intensity based on concentration
+  const alpha=Math.min(0.9,Cp/20);
+  ctx.fillStyle=`rgba(15,118,110,${alpha})`;
+  ctx.fillRect(bx+2,liqY,bw-4,liqH-2);
+  // dots = solute particles
+  ctx.fillStyle='rgba(255,255,255,0.7)';
+  const dots=Math.min(40,Math.round(mass/2));
+  for(let i=0;i<dots;i++){
+    const dx=bx+8+Math.random()*(bw-16);
+    const dy=liqY+5+Math.random()*(liqH-10);
+    ctx.beginPath(); ctx.arc(dx,dy,3,0,Math.PI*2); ctx.fill();
+  }
+  // labels
+  ctx.fillStyle=fg; ctx.font='bold 13px system-ui'; ctx.textAlign='center';
+  ctx.fillText(`${mass} g NaCl`,W/2,by-6);
+  ctx.font='11px system-ui';
+  ctx.fillText(`${vol} mL διαλύματος`,W/2,by+bh+14);
+  // result boxes
+  const boxY=by+bh+30;
+  ctx.fillStyle=acc; ctx.beginPath(); roundRect(ctx,20,boxY,W/2-30,48,8); ctx.fill();
+  ctx.fillStyle='#fff'; ctx.font='bold 14px system-ui'; ctx.textAlign='center';
+  ctx.fillText(`C% = ${Cp.toFixed(1)}%`,20+(W/2-30)/2,boxY+20);
+  ctx.font='11px system-ui';
+  ctx.fillText('(% w/v)',20+(W/2-30)/2,boxY+38);
+  ctx.fillStyle='#1d4ed8'; ctx.beginPath(); roundRect(ctx,W/2+10,boxY,W/2-30,48,8); ctx.fill();
+  ctx.fillStyle='#fff'; ctx.font='bold 14px system-ui';
+  ctx.fillText(`Cₘ = ${Cm.toFixed(2)} M`,W/2+10+(W/2-30)/2,boxY+20);
+  ctx.font='11px system-ui';
+  ctx.fillText('(NaCl, Mᵣ=58.44)',W/2+10+(W/2-30)/2,boxY+38);
+  // update readout
+  document.getElementById('solReadout').innerHTML=`<span>Μάζα:</span> ${mass} g &nbsp; <span>Όγκος:</span> ${vol} mL &nbsp; <span>C%:</span> ${Cp.toFixed(2)}% &nbsp; <span>Cₘ:</span> ${Cm.toFixed(3)} M`;
+}
+function roundRect(ctx,x,y,w,h,r){ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);}
+
+/* ===================== REDOX ANIMATION ===================== */
+let redoxTimer=null, redoxT=0;
+function startRedox(){
+  if(redoxTimer) return;
+  document.getElementById('redoxStatus').style.display='inline-block';
+  redoxTimer=setInterval(()=>{
+    redoxT=Math.min(redoxT+1,60);
+    const frac=redoxT/60;
+    document.getElementById('cuDeposit').setAttribute('height',String(5+frac*55));
+    document.getElementById('cuDeposit').setAttribute('y',String(130-frac*55));
+    document.getElementById('cuDeposit').style.opacity=String(frac);
+    document.getElementById('cuLbl').style.opacity=String(frac);
+    // fade solution from blue to colorless
+    document.getElementById('solColor').setAttribute('fill',`rgb(${Math.round(147+frac*108)},${Math.round(197+frac*58)},${Math.round(253)})`);
+    document.getElementById('solColor').style.opacity=String(0.5*(1-frac*0.8));
+    document.getElementById('timeLabel').textContent=`Χρόνος: ${redoxT} λεπτά`;
+    document.getElementById('redoxStatus').innerHTML=`<span>Προϊόντα:</span> ZnSO₄ (άχρωμο) + Cu (κόκκινο) &nbsp; <span>Χρόνος:</span> ${redoxT}λεπτά`;
+    if(redoxT>=60){clearInterval(redoxTimer);redoxTimer=null;}
+  },100);
+}
+function resetRedox(){
+  clearInterval(redoxTimer);redoxTimer=null;redoxT=0;
+  document.getElementById('cuDeposit').setAttribute('height','5');
+  document.getElementById('cuDeposit').setAttribute('y','130');
+  document.getElementById('cuDeposit').style.opacity='0';
+  document.getElementById('cuLbl').style.opacity='0';
+  document.getElementById('solColor').setAttribute('fill','#93c5fd');
+  document.getElementById('solColor').style.opacity='0.5';
+  document.getElementById('timeLabel').textContent='Χρόνος: 0 λεπτά';
+  document.getElementById('redoxStatus').style.display='none';
+}
+
+/* ===================== INDICATOR SWITCH ===================== */
+let indMode=0;
+function switchIndicator(){
+  indMode=1-indMode;
+  const colors=indMode?['#f9a8d4','#f0abfc','#6d28d9']:['#dc2626','#7c3aed','#2563eb'];
+  const labels=indMode?['Φαινολοφ.: Άχρωμη','Φαινολοφ.: Άχρωμη','Φαινολοφ.: Ρόζ']:['Λακμός: Κόκκινος','Λακμός: Μοβ','Λακμός: Μπλε'];
+  document.getElementById('liq1').setAttribute('fill',colors[0]);
+  document.getElementById('liq2').setAttribute('fill',colors[1]);
+  document.getElementById('liq3').setAttribute('fill',colors[2]);
+  document.getElementById('lbl1').textContent=labels[0];
+  document.getElementById('lbl2').textContent=labels[1];
+  document.getElementById('lbl3').textContent=labels[2];
+  document.getElementById('lbl1').setAttribute('fill',colors[0]);
+  document.getElementById('lbl2').setAttribute('fill',colors[1]);
+  document.getElementById('lbl3').setAttribute('fill',colors[2]);
+  document.getElementById('indReadout').innerHTML=indMode
+    ?'<span>Δείκτης:</span> Φαινολοφθαλεΐνη &nbsp;|&nbsp; <span>Οξύ:</span> Άχρωμη &nbsp;|&nbsp; <span>Ουδέτερο:</span> Άχρωμη &nbsp;|&nbsp; <span>Βάση:</span> Ρόζ'
+    :'<span>Δείκτης:</span> Λακμός &nbsp;|&nbsp; <span>Οξύ:</span> Κόκκινος &nbsp;|&nbsp; <span>Ουδέτερο:</span> Μοβ &nbsp;|&nbsp; <span>Βάση:</span> Μπλε';
+  document.querySelector('[onclick="switchIndicator()"]').textContent=indMode?'🔄 Αλλαγή δείκτη (Λακμός)':'🔄 Αλλαγή δείκτη (Φαινολοφθαλεΐνη)';
+}
+
+function showBalancing(){
+  const d=document.getElementById('balanceSteps');
+  d.style.display=d.style.display==='none'?'block':'none';
+}
+
+window.addEventListener('resize',()=>{
+  if(document.getElementById('ch2-s1').classList.contains('active')) drawTitration();
+  if(document.getElementById('ch4-s1').classList.contains('active')) drawSolution();
+});
+</script>
+</body>
+</html>
+
+</body></html>

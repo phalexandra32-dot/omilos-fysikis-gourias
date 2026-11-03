@@ -1,0 +1,2454 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Φυσική Β΄ Γυμνασίου</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+:root {
+  --bg:#f5f7fa; --surface:#fff; --border:#e2e8f0; --fg:#1a202c; --fg2:#4a5568;
+  --accent:#2563eb; --accent2:#1d4ed8; --green:#16a34a; --red:#dc2626;
+  --yellow:#ca8a04; --purple:#7c3aed; --teal:#0d9488;
+  --ch1:#2563eb; --ch2:#16a34a; --ch3:#dc2626; --ch4:#7c3aed; --ch5:#ca8a04;
+  --radius:12px; --shadow:0 2px 8px rgba(0,0,0,.08);
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f172a; --surface:#1e293b; --border:#334155; --fg:#f1f5f9; --fg2:#94a3b8;
+  --accent:#3b82f6; --accent2:#60a5fa; --green:#22c55e; --red:#f87171;
+  --yellow:#fbbf24; --purple:#a78bfa; --teal:#2dd4bf; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0f172a; --surface:#1e293b; --border:#334155; --fg:#f1f5f9; --fg2:#94a3b8;
+  --accent:#3b82f6; --accent2:#60a5fa; --green:#22c55e; --red:#f87171;
+  --yellow:#fbbf24; --purple:#a78bfa; --teal:#2dd4bf; color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--fg);
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-bottom:max(24px,env(safe-area-inset-bottom,0px));
+  line-height:1.6;
+}
+/* ── HEADER ── */
+header{
+  background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 50%,#0891b2 100%);
+  color:#fff;text-align:center;
+  padding:32px max(16px,env(safe-area-inset-left,0px));
+  margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)));
+  padding-top:max(32px,calc(env(safe-area-inset-top,0px)+24px));
+}
+header h1{font-size:clamp(1.4rem,5vw,2rem);font-weight:800;letter-spacing:-.02em}
+header p{opacity:.85;font-size:.95rem;margin-top:6px}
+/* ── NAV TABS ── */
+nav{
+  display:flex;overflow-x:auto;gap:4px;
+  padding:12px 0;border-bottom:2px solid var(--border);
+  scrollbar-width:none;
+}
+nav::-webkit-scrollbar{display:none}
+nav button{
+  flex-shrink:0;padding:8px 14px;border-radius:8px;border:none;
+  background:transparent;color:var(--fg2);font-size:.85rem;font-weight:500;
+  cursor:pointer;transition:.2s;white-space:nowrap;
+}
+nav button:hover{background:var(--border);color:var(--fg)}
+nav button.active{background:var(--accent);color:#fff}
+/* ── CHAPTER ── */
+.chapter{display:none}
+.chapter.active{display:block;padding-top:20px}
+/* ── SECTION TABS ── */
+.sec-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.sec-tab{
+  padding:7px 16px;border-radius:20px;border:2px solid var(--border);
+  background:transparent;color:var(--fg2);font-size:.85rem;font-weight:500;
+  cursor:pointer;transition:.2s;
+}
+.sec-tab.active{border-color:var(--accent);background:var(--accent);color:#fff}
+.section{display:none}.section.active{display:block}
+/* ── CARDS ── */
+.card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.card h3{font-size:1rem;font-weight:700;margin-bottom:10px;color:var(--accent)}
+.card p,.card li{font-size:.92rem;color:var(--fg2);margin-bottom:6px}
+.card ul,.card ol{padding-left:1.3em}
+/* ── FORMULA BOX ── */
+.formula{
+  background:linear-gradient(135deg,#eff6ff,#dbeafe);
+  border:2px solid #93c5fd;border-radius:10px;
+  padding:14px 18px;margin:12px 0;text-align:center;
+  font-size:1.1rem;font-weight:700;color:#1e3a8a;letter-spacing:.02em;
+}
+:root[data-theme="dark"] .formula,
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .formula}{
+  background:linear-gradient(135deg,#1e3a5f,#1e40af);
+  border-color:#3b82f6;color:#bfdbfe;
+}
+/* ── KEY CONCEPT ── */
+.key{
+  border-left:4px solid var(--accent);
+  background:var(--surface);padding:12px 16px;border-radius:0 8px 8px 0;
+  margin:10px 0;
+}
+.key strong{color:var(--accent);display:block;margin-bottom:4px;font-size:.9rem}
+.key span{font-size:.9rem;color:var(--fg2)}
+/* ── SVG WRAPPER ── */
+.diagram{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:16px;margin:16px 0;overflow-x:auto;text-align:center;
+}
+.diagram svg{max-width:100%;height:auto}
+/* ── INTERACTIVE ── */
+.interactive{
+  background:var(--surface);border:2px solid var(--accent);border-radius:var(--radius);
+  padding:20px;margin:16px 0;
+}
+.interactive h4{color:var(--accent);font-size:.95rem;font-weight:700;margin-bottom:12px}
+.slider-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.slider-row label{font-size:.85rem;color:var(--fg2);min-width:120px}
+input[type=range]{flex:1;min-width:100px;accent-color:var(--accent)}
+.val-badge{
+  background:var(--accent);color:#fff;border-radius:6px;
+  padding:2px 10px;font-size:.85rem;font-weight:700;min-width:60px;text-align:center;
+}
+canvas{display:block;width:100%;border-radius:8px;cursor:default}
+/* ── QUIZ ── */
+.quiz-q{margin-bottom:20px}
+.quiz-q p{font-weight:600;margin-bottom:10px;font-size:.95rem}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{
+  padding:10px 14px;border:2px solid var(--border);border-radius:8px;
+  cursor:pointer;font-size:.9rem;transition:.2s;background:var(--surface);color:var(--fg);
+  text-align:left;
+}
+.opt:hover{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--surface))}
+.opt.correct{border-color:var(--green);background:color-mix(in srgb,var(--green) 12%,var(--surface));color:var(--green)}
+.opt.wrong{border-color:var(--red);background:color-mix(in srgb,var(--red) 10%,var(--surface));color:var(--red)}
+.feedback{margin-top:8px;font-size:.88rem;padding:8px 12px;border-radius:8px}
+.feedback.ok{background:color-mix(in srgb,var(--green) 12%,var(--surface));color:var(--green)}
+.feedback.err{background:color-mix(in srgb,var(--red) 10%,var(--surface));color:var(--red)}
+.quiz-score{
+  text-align:center;padding:16px;border-radius:var(--radius);
+  background:var(--surface);border:2px solid var(--accent);
+  font-size:1.1rem;font-weight:700;margin-top:20px;
+}
+.btn{
+  padding:10px 22px;border-radius:8px;border:none;cursor:pointer;
+  background:var(--accent);color:#fff;font-size:.9rem;font-weight:600;
+  transition:.15s;display:inline-block;margin-top:10px;
+}
+.btn:hover{background:var(--accent2);transform:translateY(-1px)}
+/* ── TABLE ── */
+.tbl{width:100%;border-collapse:collapse;font-size:.88rem;margin:12px 0}
+.tbl th{background:var(--accent);color:#fff;padding:8px 12px;text-align:left}
+.tbl td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--fg2)}
+.tbl tr:nth-child(even) td{background:color-mix(in srgb,var(--accent) 4%,var(--bg))}
+/* DARK formula fix */
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .formula{background:linear-gradient(135deg,#1e3a5f,#1e40af);border-color:#3b82f6;color:#bfdbfe}
+}
+:root[data-theme="dark"] .formula{background:linear-gradient(135deg,#1e3a5f,#1e40af);border-color:#3b82f6;color:#bfdbfe}
+</style>
+
+<header>
+  <h1>🔬 Φυσική Β΄ Γυμνασίου</h1>
+  <p>Διαδραστικό Εκπαιδευτικό Εργαστήριο</p>
+</header>
+
+<nav id="chapNav">
+  <button class="active" onclick="showChap(0)">1. Εισαγωγή</button>
+  <button onclick="showChap(1)">2. Κίνηση</button>
+  <button onclick="showChap(2)">3. Δυνάμεις</button>
+  <button onclick="showChap(3)">4. Πίεση</button>
+  <button onclick="showChap(4)">5. Ενέργεια</button>
+  <button onclick="showChap(5)">6. Θερμότητα</button>
+  <button onclick="showChap(6)">7. Ηλεκτρισμός</button>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ΚΕΦΑΛΑΙΟ 1 — ΕΙΣΑΓΩΓΙΚΑ
+     ═══════════════════════════════════════════════════════════ -->
+<div class="chapter active" id="ch0">
+  <div class="sec-tabs">
+    <button class="sec-tab active" onclick="showSec(0,0)">📖 Θεωρία</button>
+    <button class="sec-tab" onclick="showSec(0,1)">🔭 Πείραμα</button>
+    <button class="sec-tab" onclick="showSec(0,2)">✏️ Quiz</button>
+  </div>
+
+  <!-- THEORY -->
+  <div class="section active" id="ch0-s0">
+    <div class="card">
+      <h3>1.1 Φυσικές Επιστήμες &amp; Επιστημονική Μέθοδος</h3>
+      <p>Η Φυσική μελετά τα φαινόμενα της φύσης, ανακαλύπτει νόμους και εξηγεί την υλική πραγματικότητα.</p>
+      <div class="key"><strong>Επιστημονική Μέθοδος</strong><span>Παρατήρηση → Υπόθεση → Πείραμα → Συμπέρασμα → Νόμος</span></div>
+      <ul>
+        <li><strong>Φυσικό μέγεθος:</strong> κάθε ιδιότητα που μπορούμε να μετρήσουμε (π.χ. μήκος, μάζα, χρόνος)</li>
+        <li><strong>Μονόμετρα (βαθμωτά):</strong> ορίζονται πλήρως από αριθμό + μονάδα (π.χ. μάζα 5 kg)</li>
+        <li><strong>Διανυσματικά:</strong> έχουν μέτρο, κατεύθυνση, φορά (π.χ. δύναμη, ταχύτητα)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>1.2 Διεθνές Σύστημα Μονάδων (SI)</h3>
+      <table class="tbl">
+        <tr><th>Μέγεθος</th><th>Σύμβολο</th><th>Μονάδα SI</th><th>Σύμβολο</th></tr>
+        <tr><td>Μήκος</td><td>x, L, d</td><td>μέτρο</td><td>m</td></tr>
+        <tr><td>Μάζα</td><td>m</td><td>χιλιόγραμμο</td><td>kg</td></tr>
+        <tr><td>Χρόνος</td><td>t</td><td>δευτερόλεπτο</td><td>s</td></tr>
+        <tr><td>Θερμοκρασία</td><td>T</td><td>Kelvin</td><td>K</td></tr>
+        <tr><td>Δύναμη</td><td>F</td><td>Newton</td><td>N = kg·m/s²</td></tr>
+        <tr><td>Πίεση</td><td>p</td><td>Pascal</td><td>Pa = N/m²</td></tr>
+        <tr><td>Ενέργεια/Έργο</td><td>E, W</td><td>Joule</td><td>J = N·m</td></tr>
+      </table>
+    </div>
+    <!-- Static concept diagram: density comparison -->
+    <div class="diagram">
+      <svg viewBox="0 0 400 140" style="width:100%;max-height:140px" aria-label="Σύγκριση πυκνότητας">
+        <defs>
+          <marker id="dA" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#6b7280"/></marker>
+        </defs>
+        <!-- Same volume, different density -->
+        <!-- Block 1: Al (light) -->
+        <rect x="30" y="40" width="70" height="70" rx="6" fill="#bfdbfe" stroke="#2563eb" stroke-width="2"/>
+        <text x="65" y="72" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">Al</text>
+        <text x="65" y="86" text-anchor="middle" font-size="9" fill="#1e40af">ρ=2700</text>
+        <text x="65" y="98" text-anchor="middle" font-size="9" fill="#1e40af">m=27 kg</text>
+        <text x="65" y="28" text-anchor="middle" font-size="9" fill="#64748b">V=10 L</text>
+        <!-- Block 2: Fe (heavy) -->
+        <rect x="130" y="40" width="70" height="70" rx="6" fill="#fca5a5" stroke="#dc2626" stroke-width="2"/>
+        <text x="165" y="72" text-anchor="middle" font-size="11" font-weight="700" fill="#991b1b">Fe</text>
+        <text x="165" y="86" text-anchor="middle" font-size="9" fill="#991b1b">ρ=7874</text>
+        <text x="165" y="98" text-anchor="middle" font-size="9" fill="#991b1b">m=79 kg</text>
+        <text x="165" y="28" text-anchor="middle" font-size="9" fill="#64748b">V=10 L</text>
+        <!-- same volume brace -->
+        <line x1="30" y1="22" x2="200" y2="22" stroke="#64748b" stroke-width="1.5"/>
+        <line x1="30" y1="18" x2="30" y2="26" stroke="#64748b" stroke-width="1.5"/>
+        <line x1="200" y1="18" x2="200" y2="26" stroke="#64748b" stroke-width="1.5"/>
+        <text x="115" y="17" text-anchor="middle" font-size="9" fill="#64748b">ίδιος όγκος V</text>
+        <!-- Formula -->
+        <text x="300" y="50" text-anchor="middle" font-size="20" font-weight="800" fill="#2563eb">ρ = m/V</text>
+        <text x="300" y="72" text-anchor="middle" font-size="10" fill="#64748b">ρ: πυκνότητα (kg/m³)</text>
+        <text x="300" y="86" text-anchor="middle" font-size="10" fill="#64748b">m: μάζα (kg)</text>
+        <text x="300" y="100" text-anchor="middle" font-size="10" fill="#64748b">V: όγκος (m³)</text>
+        <text x="300" y="118" text-anchor="middle" font-size="9" fill="#f59e0b" font-weight="700">Ίδιος όγκος → βαρύτερο = πυκνότερο</text>
+      </svg>
+    </div>
+    <div class="card">
+      <h3>1.3 Μάζα &amp; Βάρος</h3>
+      <div class="key"><strong>Μάζα (m)</strong><span>Ιδιότητα του σώματος — μονάδα: kg. Δεν αλλάζει από τόπο σε τόπο.</span></div>
+      <div class="key"><strong>Βάρος (W)</strong><span>Δύναμη με την οποία η Γη έλκει το σώμα — μονάδα: N. Εξαρτάται από τη θέση (g).</span></div>
+      <div class="formula">W = m · g</div>
+      <p style="text-align:center;font-size:.88rem;color:var(--fg2)">g = 9,8 m/s² ≈ 10 m/s² (επιτάχυνση βαρύτητας)</p>
+      <p>Ένα σώμα με μάζα 1 kg έχει βάρος ≈ 10 N στη Γη.</p>
+    </div>
+    <div class="card">
+      <h3>1.4 Πυκνότητα</h3>
+      <p>Η πυκνότητα εκφράζει πόση μάζα περιέχεται στη μονάδα όγκου.</p>
+      <div class="formula">ρ = m / V</div>
+      <p style="text-align:center;font-size:.88rem;color:var(--fg2)">ρ: πυκνότητα (kg/m³), m: μάζα (kg), V: όγκος (m³)</p>
+      <table class="tbl">
+        <tr><th>Υλικό</th><th>Πυκνότητα (kg/m³)</th></tr>
+        <tr><td>Νερό</td><td>1 000</td></tr>
+        <tr><td>Αλουμίνιο</td><td>2 700</td></tr>
+        <tr><td>Σίδηρος</td><td>7 874</td></tr>
+        <tr><td>Χρυσός</td><td>19 300</td></tr>
+        <tr><td>Αέρας (20°C)</td><td>1,2</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- EXPERIMENT -->
+  <div class="section" id="ch0-s1">
+    <div class="interactive">
+      <h4>🧪 Υπολογισμός Πυκνότητας — Εικονικό Πείραμα</h4>
+      <p style="font-size:.88rem;color:var(--fg2);margin-bottom:14px">Ρύθμισε μάζα και όγκο για να βρεις την πυκνότητα του υλικού.</p>
+      <div class="slider-row">
+        <label>Μάζα m (kg)</label>
+        <input type="range" id="massSlider" min="1" max="100" value="27" oninput="calcDensity()">
+        <span class="val-badge" id="massVal">27 kg</span>
+      </div>
+      <div class="slider-row">
+        <label>Όγκος V (L)</label>
+        <input type="range" id="volSlider" min="1" max="50" value="10" oninput="calcDensity()">
+        <span class="val-badge" id="volVal">10 L</span>
+      </div>
+      <div style="background:var(--bg);border-radius:10px;padding:14px;margin-top:12px;text-align:center">
+        <div style="font-size:1.3rem;font-weight:800;color:var(--accent)" id="densResult">ρ = 2700 kg/m³</div>
+        <div style="font-size:.9rem;color:var(--fg2);margin-top:4px" id="densComment">→ Αλουμίνιο!</div>
+      </div>
+      <!-- Animated SVG: density = m/V — two objects same volume, different density -->
+      <div class="diagram" style="margin-top:14px">
+        <svg viewBox="0 0 420 130" style="width:100%;max-height:130px;overflow:visible" aria-label="Διάγραμμα πυκνότητας">
+          <defs>
+            <marker id="darr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="#dc2626"/>
+            </marker>
+          </defs>
+          <!-- Scale balance beam -->
+          <line x1="210" y1="30" x2="210" y2="90" stroke="#64748b" stroke-width="3"/>
+          <line x1="100" y1="56" x2="320" y2="56" stroke="#64748b" stroke-width="3" stroke-linecap="round">
+            <animateTransform attributeName="transform" type="rotate" from="0 210 56" to="-8 210 56" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1" keyTimes="0;1" fill="freeze"/>
+          </line>
+          <!-- Left pan (heavy/dense) -->
+          <ellipse cx="108" cy="90" rx="36" ry="7" fill="#94a3b8" opacity=".7">
+            <animateTransform attributeName="transform" type="translate" values="0,0;0,-12;0,0" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1" keyTimes="0;0.5;1"/>
+          </ellipse>
+          <rect x="82" y="62" width="52" height="28" rx="6" fill="#7c3aed" opacity=".85">
+            <animateTransform attributeName="transform" type="translate" values="0,0;0,-12;0,0" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1" keyTimes="0;0.5;1"/>
+          </rect>
+          <text x="108" y="80" text-anchor="middle" font-size="10" fill="white" font-weight="700">Fe</text>
+          <text x="108" y="91" text-anchor="middle" font-size="8" fill="white">7874 kg/m³</text>
+          <!-- Right pan (light/less dense) -->
+          <ellipse cx="312" cy="72" rx="36" ry="7" fill="#94a3b8" opacity=".7">
+            <animateTransform attributeName="transform" type="translate" values="0,0;0,12;0,0" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1" keyTimes="0;0.5;1"/>
+          </ellipse>
+          <rect x="286" y="44" width="52" height="28" rx="6" fill="#f59e0b" opacity=".85">
+            <animateTransform attributeName="transform" type="translate" values="0,0;0,12;0,0" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1" keyTimes="0;0.5;1"/>
+          </rect>
+          <text x="312" y="62" text-anchor="middle" font-size="10" fill="white" font-weight="700">Al</text>
+          <text x="312" y="73" text-anchor="middle" font-size="8" fill="white">2700 kg/m³</text>
+          <!-- Fulcrum -->
+          <polygon points="210,92 200,108 220,108" fill="#475569"/>
+          <line x1="190" y1="108" x2="230" y2="108" stroke="#475569" stroke-width="3"/>
+          <!-- Formula -->
+          <text x="210" y="122" text-anchor="middle" font-size="11" fill="#2563eb" font-weight="700">ρ = m / V  (kg/m³)</text>
+          <!-- Ίδιος όγκος label -->
+          <text x="108" y="112" text-anchor="middle" font-size="8" fill="#64748b">ίδιος όγκος</text>
+          <text x="312" y="95" text-anchor="middle" font-size="8" fill="#64748b">ίδιος όγκος</text>
+        </svg>
+      </div>
+      <canvas id="densCanvas" style="height:180px"></canvas>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="ch0-s2">
+    <div id="quiz0"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ΚΕΦΑΛΑΙΟ 2 — ΚΙΝΗΣΗ
+     ═══════════════════════════════════════════════════════════ -->
+<div class="chapter" id="ch1">
+  <div class="sec-tabs">
+    <button class="sec-tab active" onclick="showSec(1,0)">📖 Θεωρία</button>
+    <button class="sec-tab" onclick="showSec(1,1)">🚗 Πείραμα</button>
+    <button class="sec-tab" onclick="showSec(1,2)">✏️ Quiz</button>
+  </div>
+
+  <!-- THEORY -->
+  <div class="section active" id="ch1-s0">
+    <div class="card">
+      <h3>2.1 Περιγραφή Κίνησης</h3>
+      <ul>
+        <li><strong>Κίνηση:</strong> μεταβολή θέσης ως προς σύστημα αναφοράς</li>
+        <li><strong>Τροχιά:</strong> η γραμμή που διαγράφει το κινητό</li>
+        <li><strong>Διάστημα (s):</strong> μήκος τροχιάς — πάντα θετικό</li>
+        <li><strong>Μετατόπιση (Δx):</strong> διανυσματικό μέγεθος, από αρχική σε τελική θέση</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>2.2 Ταχύτητα</h3>
+      <div class="key"><strong>Μέση ταχύτητα</strong><span>Ο λόγος μετατόπισης προς χρόνο.</span></div>
+      <div class="formula">υ = Δx / Δt</div>
+      <p style="text-align:center;font-size:.88rem;color:var(--fg2)">υ: ταχύτητα (m/s), Δx: μετατόπιση (m), Δt: χρόνος (s)</p>
+      <ul style="margin-top:10px">
+        <li>1 km/h = 1/3.6 m/s ≈ 0,278 m/s</li>
+        <li>Η ταχύτητα είναι <strong>διανυσματικό</strong> μέγεθος</li>
+        <li>Το μέτρο της ταχύτητας λέγεται <strong>ταχύτης</strong> (scalar)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>2.3 Ευθύγραμμη Ομαλή Κίνηση (ΕΟΚ)</h3>
+      <div class="key"><strong>ΕΟΚ:</strong><span>κίνηση με σταθερή ταχύτητα σε ευθεία γραμμή — ίσα Δx σε ίσα Δt.</span></div>
+      <div class="formula">x = υ · t</div>
+      <p style="margin-top:8px;font-size:.9rem;color:var(--fg2)">Γραφικές παραστάσεις ΕΟΚ:</p>
+      <ul style="font-size:.9rem;color:var(--fg2)">
+        <li><strong>x–t γράφημα:</strong> ευθεία γραμμή (κλίση = υ)</li>
+        <li><strong>υ–t γράφημα:</strong> οριζόντια ευθεία (υ = σταθ.)</li>
+        <li><strong>Εμβαδόν υ–t:</strong> = μετατόπιση Δx</li>
+      </ul>
+    </div>
+    <!-- Static concept diagram: x-t and v-t graphs for uniform motion -->
+    <div class="diagram">
+      <svg viewBox="0 0 400 130" style="width:100%;max-height:130px" aria-label="Γραφήματα ΕΟΚ">
+        <defs>
+          <marker id="mA" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/></marker>
+        </defs>
+        <!-- x-t graph -->
+        <text x="90" y="14" text-anchor="middle" font-size="10" font-weight="700" fill="#2563eb">x–t γράφημα</text>
+        <line x1="20" y1="110" x2="20" y2="18" stroke="#64748b" stroke-width="1.5" marker-end="url(#mA)"/>
+        <line x1="15" y1="105" x2="165" y2="105" stroke="#64748b" stroke-width="1.5" marker-end="url(#mA)"/>
+        <text x="168" y="108" font-size="9" fill="#64748b">t</text>
+        <text x="18" y="16" font-size="9" fill="#64748b" text-anchor="end">x</text>
+        <!-- straight line: x = vt -->
+        <line x1="20" y1="105" x2="155" y2="25" stroke="#2563eb" stroke-width="2.5"/>
+        <text x="100" y="55" font-size="9" fill="#2563eb" font-weight="700">x=υ·t (ευθεία)</text>
+        <!-- tick marks -->
+        <line x1="55" y1="102" x2="55" y2="108" stroke="#64748b" stroke-width="1"/>
+        <line x1="90" y1="102" x2="90" y2="108" stroke="#64748b" stroke-width="1"/>
+        <line x1="125" y1="102" x2="125" y2="108" stroke="#64748b" stroke-width="1"/>
+        <!-- v-t graph -->
+        <text x="300" y="14" text-anchor="middle" font-size="10" font-weight="700" fill="#16a34a">υ–t γράφημα</text>
+        <line x1="220" y1="110" x2="220" y2="18" stroke="#64748b" stroke-width="1.5" marker-end="url(#mA)"/>
+        <line x1="215" y1="105" x2="385" y2="105" stroke="#64748b" stroke-width="1.5" marker-end="url(#mA)"/>
+        <text x="388" y="108" font-size="9" fill="#64748b">t</text>
+        <text x="218" y="16" font-size="9" fill="#64748b" text-anchor="end">υ</text>
+        <!-- horizontal line: v = const -->
+        <line x1="220" y1="60" x2="375" y2="60" stroke="#16a34a" stroke-width="2.5"/>
+        <text x="295" y="50" text-anchor="middle" font-size="9" fill="#16a34a" font-weight="700">υ=σταθ. (οριζόντια)</text>
+        <!-- shaded area = displacement -->
+        <rect x="220" y="60" width="80" height="45" fill="#bbf7d0" opacity="0.5"/>
+        <text x="260" y="88" text-anchor="middle" font-size="8" fill="#15803d">εμβαδόν=Δx</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- EXPERIMENT -->
+  <div class="section" id="ch1-s1">
+    <div class="interactive">
+      <h4>🚗 Προσομοίωση ΕΟΚ — x–t &amp; υ–t Γραφήματα</h4>
+      <div class="slider-row">
+        <label>Ταχύτητα υ (m/s)</label>
+        <input type="range" id="velSlider" min="1" max="20" value="5" oninput="drawMotion()">
+        <span class="val-badge" id="velVal">5 m/s</span>
+      </div>
+      <div class="slider-row">
+        <label>Χρόνος t (s)</label>
+        <input type="range" id="tSlider" min="1" max="20" value="10" oninput="drawMotion()">
+        <span class="val-badge" id="tVal">10 s</span>
+      </div>
+      <div style="background:var(--bg);border-radius:10px;padding:12px;margin:10px 0;text-align:center">
+        <span id="motResult" style="font-size:1.1rem;font-weight:700;color:var(--accent)">x = 50 m</span>
+      </div>
+      <div style="display:flex;gap:8px;margin:10px 0;flex-wrap:wrap">
+        <button class="btn" id="motPlayBtn" onclick="toggleMotion()">▶ Εκκίνηση</button>
+        <button class="btn" onclick="resetMotion()" style="background:#64748b">↺ Επαναφορά</button>
+        <span style="align-self:center;font-size:.85rem;color:var(--fg2)">Θέση: <strong id="motPosLive">0 m</strong></span>
+      </div>
+      <!-- Animated SVG: uniform motion — car on road, x-t graph building up -->
+      <div class="diagram" style="margin-top:14px">
+        <svg viewBox="0 0 420 110" style="width:100%;max-height:110px" aria-label="Ομαλή κίνηση">
+          <defs>
+            <marker id="arr2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <path d="M0,0 L7,3.5 L0,7 Z" fill="#2563eb"/>
+            </marker>
+          </defs>
+          <!-- Road -->
+          <rect x="10" y="58" width="280" height="20" rx="3" fill="#e2e8f0"/>
+          <line x1="20" y1="68" x2="280" y2="68" stroke="#fbbf24" stroke-width="2" stroke-dasharray="18,10"/>
+          <!-- Car body -->
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0,0;230,0;0,0" dur="3.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" keyTimes="0;0.5;1"/>
+            <rect x="14" y="40" width="54" height="18" rx="5" fill="#2563eb"/>
+            <rect x="18" y="30" width="38" height="12" rx="4" fill="#3b82f6"/>
+            <circle cx="24" cy="59" r="6" fill="#1e293b"/>
+            <circle cx="24" cy="59" r="3" fill="#94a3b8"/>
+            <circle cx="58" cy="59" r="6" fill="#1e293b"/>
+            <circle cx="58" cy="59" r="3" fill="#94a3b8"/>
+            <!-- velocity arrow -->
+            <line x1="68" y1="49" x2="90" y2="49" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arr2)"/>
+            <text x="70" y="44" font-size="8" fill="#f59e0b" font-weight="700">υ=σταθ.</text>
+          </g>
+          <!-- x-t mini graph (right) -->
+          <line x1="305" y1="15" x2="305" y2="95" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="305" y1="90" x2="415" y2="90" stroke="#64748b" stroke-width="1.5"/>
+          <text x="360" y="105" text-anchor="middle" font-size="9" fill="#64748b">t (s)</text>
+          <text x="300" y="20" text-anchor="middle" font-size="9" fill="#64748b">x</text>
+          <!-- Animated line on graph -->
+          <line x1="305" y1="90" x2="305" y2="90" stroke="#2563eb" stroke-width="2.5">
+            <animate attributeName="x2" values="305;415;305" dur="3.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" keyTimes="0;0.5;1"/>
+            <animate attributeName="y2" values="90;20;90" dur="3.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" keyTimes="0;0.5;1"/>
+          </line>
+          <text x="360" y="55" text-anchor="middle" font-size="9" fill="#2563eb" font-weight="700">x = υ·t</text>
+        </svg>
+      </div>
+      <canvas id="motCanvas" style="height:220px"></canvas>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="ch1-s2">
+    <div id="quiz1"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ΚΕΦΑΛΑΙΟ 3 — ΔΥΝΑΜΕΙΣ
+     ═══════════════════════════════════════════════════════════ -->
+<div class="chapter" id="ch2">
+  <div class="sec-tabs">
+    <button class="sec-tab active" onclick="showSec(2,0)">📖 Θεωρία</button>
+    <button class="sec-tab" onclick="showSec(2,1)">⚙️ Πείραμα</button>
+    <button class="sec-tab" onclick="showSec(2,2)">✏️ Quiz</button>
+  </div>
+
+  <!-- THEORY -->
+  <div class="section active" id="ch2-s0">
+    <div class="card">
+      <h3>3.1 Έννοια της Δύναμης</h3>
+      <p>Η δύναμη είναι η αιτία που θέτει σε κίνηση ένα ακίνητο σώμα, μεταβάλλει την κίνηση ή παραμορφώνει ένα σώμα.</p>
+      <ul style="margin-top:8px">
+        <li><strong>Διανυσματικό</strong> μέγεθος: μέτρο + κατεύθυνση + φορά</li>
+        <li>Μονάδα: <strong>1 Newton (N)</strong> = 1 kg·m/s²</li>
+        <li>Δυνάμεις επαφής (τριβή, τάση) vs. δυνάμεις εξ αποστάσεως (βαρύτητα)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>3.2 Βάρος &amp; Δύναμη Βαρύτητας</h3>
+      <div class="formula">W = m · g</div>
+      <p style="text-align:center;font-size:.88rem;color:var(--fg2)">g ≈ 9,8 m/s² ≈ 10 m/s²</p>
+    </div>
+    <div class="card">
+      <h3>3.3 Νόμος του Hooke — Ελατήριο</h3>
+      <p>Η επιμήκυνση ενός ελατηρίου είναι ανάλογη με τη δύναμη που ασκείται σε αυτό.</p>
+      <div class="formula">F = k · x</div>
+      <p style="text-align:center;font-size:.88rem;color:var(--fg2)">k: σταθερά ελατηρίου (N/m), x: επιμήκυνση (m)</p>
+      <div class="key"><strong>Δυναμόμετρο</strong><span>Όργανο μέτρησης δυνάμεων που βασίζεται στο νόμο Hooke.</span></div>
+    </div>
+    <div class="card">
+      <h3>3.4 Τριβή</h3>
+      <ul>
+        <li><strong>Τριβή ηρεμίας:</strong> εμποδίζει την κίνηση — μέγιστη τιμή = F<sub>εφ</sub></li>
+        <li><strong>Τριβή ολίσθησης:</strong> κατά τη διάρκεια ολίσθησης — μικρότερη της max ηρεμίας</li>
+        <li>Κατεύθυνση: πάντα αντίθετη της κίνησης (ή τάσης κίνησης)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>3.5 Ισορροπία Σωμάτων</h3>
+      <div class="key"><strong>1ος Νόμος Newton</strong><span>Αν η συνισταμένη δύναμη = 0, το σώμα παραμένει σε ηρεμία ή κινείται ευθύγραμμα ομαλά.</span></div>
+      <div class="formula">ΣF = 0</div>
+      <p style="font-size:.9rem;color:var(--fg2)">Για ισορροπία: άθροισμα όλων των δυνάμεων = μηδέν.</p>
+    </div>
+    <!-- Static concept diagram: Hooke's Law F-x graph -->
+    <div class="diagram">
+      <svg viewBox="0 0 400 130" style="width:100%;max-height:130px" aria-label="Νόμος Hooke">
+        <defs>
+          <marker id="mH" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/></marker>
+        </defs>
+        <!-- Spring diagram left side -->
+        <text x="95" y="14" text-anchor="middle" font-size="10" font-weight="700" fill="#7c3aed">Ελατήριο & Επιμήκυνση</text>
+        <!-- ceiling -->
+        <rect x="20" y="20" width="60" height="6" fill="#94a3b8"/>
+        <!-- spring coils (at rest) -->
+        <path d="M50,26 Q45,32 55,38 Q45,44 55,50 Q45,56 55,62" stroke="#7c3aed" stroke-width="2" fill="none"/>
+        <!-- mass -->
+        <rect x="38" y="62" width="24" height="18" rx="3" fill="#7c3aed" opacity="0.8"/>
+        <text x="50" y="74" text-anchor="middle" font-size="9" fill="white" font-weight="700">m</text>
+        <!-- spring stretched -->
+        <text x="120" y="20" text-anchor="middle" font-size="9" fill="#64748b">+ Δx</text>
+        <rect x="90" y="20" width="60" height="6" fill="#94a3b8"/>
+        <path d="M120,26 Q115,35 125,44 Q115,53 125,62 Q115,71 125,80" stroke="#dc2626" stroke-width="2" fill="none"/>
+        <rect x="108" y="80" width="24" height="18" rx="3" fill="#dc2626" opacity="0.8"/>
+        <text x="120" y="92" text-anchor="middle" font-size="9" fill="white" font-weight="700">m</text>
+        <!-- arrow showing Δx -->
+        <line x1="148" y1="62" x2="148" y2="80" stroke="#dc2626" stroke-width="1.5" marker-end="url(#mH)"/>
+        <text x="152" y="74" font-size="8" fill="#dc2626">Δx</text>
+        <!-- arrow showing F -->
+        <line x1="132" y1="98" x2="132" y2="110" stroke="#0369a1" stroke-width="1.5" marker-end="url(#mH)"/>
+        <text x="135" y="108" font-size="8" fill="#0369a1">F</text>
+        <!-- F-x graph right side -->
+        <text x="300" y="14" text-anchor="middle" font-size="10" font-weight="700" fill="#7c3aed">F–Δx γράφημα</text>
+        <line x1="200" y1="110" x2="200" y2="18" stroke="#64748b" stroke-width="1.5" marker-end="url(#mH)"/>
+        <line x1="195" y1="105" x2="390" y2="105" stroke="#64748b" stroke-width="1.5" marker-end="url(#mH)"/>
+        <text x="393" y="108" font-size="9" fill="#64748b">Δx</text>
+        <text x="198" y="16" font-size="9" fill="#64748b" text-anchor="end">F</text>
+        <!-- linear line F = kΔx -->
+        <line x1="200" y1="105" x2="370" y2="25" stroke="#7c3aed" stroke-width="2.5"/>
+        <text x="305" y="55" font-size="9" fill="#7c3aed" font-weight="700">F = k·Δx</text>
+        <text x="305" y="68" font-size="8" fill="#94a3b8">(γραμμική σχέση)</text>
+        <!-- slope label -->
+        <text x="345" y="45" font-size="8" fill="#7c3aed">κλίση=k</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- EXPERIMENT -->
+  <div class="section" id="ch2-s1">
+    <div class="interactive">
+      <h4>🔧 Νόμος Hooke — Επιμήκυνση Ελατηρίου</h4>
+      <div class="slider-row">
+        <label>Σταθερά k (N/m)</label>
+        <input type="range" id="kSlider" min="10" max="200" value="50" step="10" oninput="drawSpring()">
+        <span class="val-badge" id="kVal">50 N/m</span>
+      </div>
+      <div class="slider-row">
+        <label>Δύναμη F (N)</label>
+        <input type="range" id="fSlider" min="1" max="40" value="10" oninput="drawSpring()">
+        <span class="val-badge" id="fVal">10 N</span>
+      </div>
+      <div style="background:var(--bg);border-radius:10px;padding:12px;margin:10px 0;text-align:center">
+        <span id="springResult" style="font-size:1.1rem;font-weight:700;color:var(--accent)">x = 20 cm</span>
+      </div>
+      <div style="display:flex;gap:8px;margin:10px 0;flex-wrap:wrap">
+        <button class="btn" id="sprPlayBtn" onclick="toggleSpring()">▶ Ταλάντωση</button>
+        <button class="btn" onclick="resetSpring()" style="background:#64748b">↺ Επαναφορά</button>
+        <span style="align-self:center;font-size:.85rem;color:var(--fg2)">Επιμήκυνση: <strong id="sprXLive">0 cm</strong></span>
+      </div>
+      <!-- Animated SVG: spring mass oscillation — Hooke's Law -->
+      <div class="diagram" style="margin-top:14px">
+        <svg viewBox="0 0 420 110" style="width:100%;max-height:110px" aria-label="Νόμος Hooke">
+          <defs>
+            <marker id="arrF" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <path d="M0,0 L7,3.5 L0,7 Z" fill="#ef4444"/>
+            </marker>
+          </defs>
+          <!-- Ceiling -->
+          <rect x="60" y="8" width="80" height="8" fill="#94a3b8" rx="2"/>
+          <!-- Spring coil (animated extension) -->
+          <g>
+            <!-- Spring SVG path animates between compressed and extended -->
+            <path stroke="#f59e0b" stroke-width="2.5" fill="none" stroke-linecap="round">
+              <animate attributeName="d"
+                values="M100,16 Q92,22 100,28 Q108,34 100,40 Q92,46 100,52 Q108,58 100,64 Q92,70 100,76;
+                        M100,16 Q88,26 100,36 Q112,46 100,56 Q88,66 100,76 Q112,86 100,96;
+                        M100,16 Q92,22 100,28 Q108,34 100,40 Q92,46 100,52 Q108,58 100,64 Q92,70 100,76"
+                dur="3s" repeatCount="indefinite" calcMode="spline"
+                keySplines="0.4 0 0.6 1;0.4 0 0.6 1" keyTimes="0;0.5;1"/>
+            </path>
+            <!-- Mass block -->
+            <rect x="84" y="76" width="32" height="22" rx="4" fill="#2563eb">
+              <animate attributeName="y" values="76;96;76" dur="3s" repeatCount="indefinite"
+                calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" keyTimes="0;0.5;1"/>
+            </rect>
+            <text x="100" y="91" text-anchor="middle" font-size="9" fill="white" font-weight="700">
+              <animate attributeName="y" values="91;111;91" dur="3s" repeatCount="indefinite"
+                calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" keyTimes="0;0.5;1"/>m
+            </text>
+            <!-- Force arrow F = kx -->
+            <line x1="100" y1="98" x2="100" y2="107" stroke="#ef4444" stroke-width="2.5" marker-end="url(#arrF)">
+              <animate attributeName="y1" values="98;118;98" dur="3s" repeatCount="indefinite"
+                calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" keyTimes="0;0.5;1"/>
+              <animate attributeName="y2" values="107;108;107" dur="3s" repeatCount="indefinite"
+                calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" keyTimes="0;0.5;1"/>
+            </line>
+          </g>
+          <!-- Equilibrium dashed line -->
+          <line x1="55" y1="87" x2="155" y2="87" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5,4"/>
+          <text x="158" y="91" font-size="9" fill="#94a3b8">ισορρ.</text>
+          <!-- F-x graph (right side) -->
+          <line x1="240" y1="15" x2="240" y2="100" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="235" y1="95" x2="410" y2="95" stroke="#64748b" stroke-width="1.5"/>
+          <text x="325" y="108" text-anchor="middle" font-size="9" fill="#64748b">x (επιμήκυνση)</text>
+          <text x="235" y="13" text-anchor="middle" font-size="9" fill="#ef4444">F</text>
+          <!-- F=kx line, animated drawing -->
+          <line x1="240" y1="95" x2="240" y2="95" stroke="#ef4444" stroke-width="2.5">
+            <animate attributeName="x2" values="240;400;240" dur="3s" repeatCount="indefinite"
+              calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" keyTimes="0;0.5;1"/>
+            <animate attributeName="y2" values="95;20;95" dur="3s" repeatCount="indefinite"
+              calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" keyTimes="0;0.5;1"/>
+          </line>
+          <text x="350" y="48" font-size="9" fill="#ef4444" font-weight="700">F = k·x</text>
+        </svg>
+      </div>
+      <canvas id="springCanvas" style="height:240px"></canvas>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="ch2-s2">
+    <div id="quiz2"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ΚΕΦΑΛΑΙΟ 4 — ΠΙΕΣΗ
+     ═══════════════════════════════════════════════════════════ -->
+<div class="chapter" id="ch3">
+  <div class="sec-tabs">
+    <button class="sec-tab active" onclick="showSec(3,0)">📖 Θεωρία</button>
+    <button class="sec-tab" onclick="showSec(3,1)">💧 Πείραμα</button>
+    <button class="sec-tab" onclick="showSec(3,2)">✏️ Quiz</button>
+  </div>
+
+  <!-- THEORY -->
+  <div class="section active" id="ch3-s0">
+    <div class="card">
+      <h3>4.1 Πίεση</h3>
+      <div class="key"><strong>Ορισμός</strong><span>Η κάθετη δύναμη ανά μονάδα επιφάνειας.</span></div>
+      <div class="formula">p = F / A</div>
+      <p style="text-align:center;font-size:.88rem;color:var(--fg2)">p: πίεση (Pa), F: κάθετη δύναμη (N), A: εμβαδόν (m²)</p>
+      <p style="margin-top:8px;font-size:.9rem;color:var(--fg2)">1 Pascal (Pa) = 1 N/m². Η πίεση είναι <strong>μονόμετρο</strong> μέγεθος (σε αντίθεση με τη δύναμη).</p>
+    </div>
+    <div class="card">
+      <h3>4.2 Υδροστατική Πίεση</h3>
+      <p>Η πίεση που ασκεί ένα υγρό σε ισορροπία εξαρτάται από το βάθος h.</p>
+      <div class="formula">p = ρ · g · h</div>
+      <p style="text-align:center;font-size:.88rem;color:var(--fg2)">ρ: πυκνότητα υγρού (kg/m³), g ≈ 10 m/s², h: βάθος (m)</p>
+      <ul style="margin-top:8px">
+        <li>Η πίεση είναι ίδια σε όλα τα σημεία <strong>ίδιου βάθους</strong></li>
+        <li>Δεν εξαρτάται από το σχήμα του δοχείου (υδροστατικό παράδοξο)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>4.3 Ατμοσφαιρική Πίεση</h3>
+      <p>Ο αέρας ασκεί πίεση σε κάθε επιφάνεια. Μετράται με βαρόμετρο.</p>
+      <div class="formula">p₀ = 101 325 Pa ≈ 1 atm</div>
+      <p style="font-size:.88rem;color:var(--fg2);margin-top:6px">Ισοδύναμο: ύψος στήλης υδραργύρου 760 mmHg.</p>
+    </div>
+    <div class="card">
+      <h3>4.4 Αρχή Pascal &amp; Υδραυλική Πρέσα</h3>
+      <div class="key"><strong>Αρχή Pascal</strong><span>Η πίεση που ασκείται σε ένα ρευστό μεταδίδεται αναλλοίωτη σε όλα τα σημεία του.</span></div>
+      <div class="formula">F₁/A₁ = F₂/A₂</div>
+    </div>
+    <div class="card">
+      <h3>4.5 Άνωση — Αρχή Αρχιμήδη</h3>
+      <div class="key"><strong>Αρχή Αρχιμήδη</strong><span>Σώμα μέσα σε υγρό δέχεται ανωστική δύναμη ίση με το βάρος του εκτοπισμένου υγρού.</span></div>
+      <div class="formula">F<sub>Α</sub> = ρ<sub>υγρού</sub> · g · V<sub>εκτοπ.</sub></div>
+      <ul style="margin-top:8px">
+        <li>Αν W &gt; F<sub>Α</sub> → βυθίζεται</li>
+        <li>Αν W = F<sub>Α</sub> → αιωρείται</li>
+        <li>Αν W &lt; F<sub>Α</sub> → ανεβαίνει / επιπλέει</li>
+      </ul>
+    </div>
+    <!-- Static concept diagram: hydrostatic pressure vs depth -->
+    <div class="diagram">
+      <svg viewBox="0 0 400 130" style="width:100%;max-height:130px" aria-label="Υδροστατική Πίεση">
+        <defs>
+          <marker id="mP" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/></marker>
+          <marker id="mPb" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#0369a1"/></marker>
+        </defs>
+        <!-- water container -->
+        <text x="80" y="13" text-anchor="middle" font-size="10" font-weight="700" fill="#0369a1">Πίεση σε Υγρό</text>
+        <rect x="20" y="18" width="120" height="100" rx="4" fill="#bfdbfe" stroke="#0369a1" stroke-width="2"/>
+        <!-- surface label -->
+        <line x1="20" y1="25" x2="140" y2="25" stroke="#0369a1" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="142" y="29" font-size="8" fill="#0369a1">επιφάνεια</text>
+        <!-- depth arrows at different depths -->
+        <!-- depth h1 -->
+        <line x1="80" y1="25" x2="80" y2="55" stroke="#64748b" stroke-width="1" stroke-dasharray="2,2"/>
+        <rect x="60" y="55" width="40" height="14" rx="2" fill="#3b82f6" opacity="0.7"/>
+        <text x="80" y="65" text-anchor="middle" font-size="8" fill="white">h₁</text>
+        <!-- pressure arrows at h1 (small) -->
+        <line x1="35" y1="62" x2="57" y2="62" stroke="#dc2626" stroke-width="1.5" marker-end="url(#mPb)"/>
+        <line x1="125" y1="62" x2="103" y2="62" stroke="#dc2626" stroke-width="1.5" marker-end="url(#mPb)"/>
+        <!-- depth h2 (deeper) -->
+        <line x1="80" y1="25" x2="80" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="2,2"/>
+        <rect x="60" y="95" width="40" height="14" rx="2" fill="#1d4ed8" opacity="0.8"/>
+        <text x="80" y="105" text-anchor="middle" font-size="8" fill="white">h₂&gt;h₁</text>
+        <!-- pressure arrows at h2 (larger) -->
+        <line x1="25" y1="102" x2="57" y2="102" stroke="#dc2626" stroke-width="2" marker-end="url(#mPb)"/>
+        <line x1="135" y1="102" x2="103" y2="102" stroke="#dc2626" stroke-width="2" marker-end="url(#mPb)"/>
+        <!-- P-h graph -->
+        <text x="300" y="13" text-anchor="middle" font-size="10" font-weight="700" fill="#0369a1">P–h γράφημα</text>
+        <line x1="200" y1="110" x2="200" y2="18" stroke="#64748b" stroke-width="1.5" marker-end="url(#mP)"/>
+        <line x1="195" y1="105" x2="385" y2="105" stroke="#64748b" stroke-width="1.5" marker-end="url(#mP)"/>
+        <text x="388" y="108" font-size="9" fill="#64748b">h</text>
+        <text x="198" y="16" font-size="9" fill="#64748b" text-anchor="end">P</text>
+        <!-- linear: P = P₀ + ρgh -->
+        <line x1="200" y1="95" x2="370" y2="25" stroke="#0369a1" stroke-width="2.5"/>
+        <text x="270" y="50" font-size="9" fill="#0369a1" font-weight="700">P = P₀ + ρ·g·h</text>
+        <text x="270" y="62" font-size="8" fill="#94a3b8">γραμμική αύξηση</text>
+        <!-- P0 intercept -->
+        <circle cx="200" cy="95" r="3" fill="#0369a1"/>
+        <text x="204" y="93" font-size="8" fill="#0369a1">P₀</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- EXPERIMENT -->
+  <div class="section" id="ch3-s1">
+    <div class="interactive">
+      <h4>💧 Υδροστατική Πίεση &amp; Άνωση</h4>
+      <div class="slider-row">
+        <label>Βάθος h (m)</label>
+        <input type="range" id="depthSlider" min="0.1" max="10" value="3" step="0.1" oninput="drawPressure()">
+        <span class="val-badge" id="depthVal">3.0 m</span>
+      </div>
+      <div class="slider-row">
+        <label>Ρευστό</label>
+        <select id="liquidSel" onchange="drawPressure()" style="padding:6px 10px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--fg);font-size:.88rem">
+          <option value="1000">Νερό (1000 kg/m³)</option>
+          <option value="1030">Θαλασσινό νερό (1030 kg/m³)</option>
+          <option value="800">Λάδι (800 kg/m³)</option>
+          <option value="13600">Υδράργυρος (13600 kg/m³)</option>
+        </select>
+      </div>
+      <div style="background:var(--bg);border-radius:10px;padding:12px;margin:10px 0;text-align:center">
+        <span id="pressResult" style="font-size:1.1rem;font-weight:700;color:var(--accent)">p = 30 000 Pa</span>
+      </div>
+      <!-- Animated SVG: pressure in liquid — deeper = more pressure -->
+      <div class="diagram" style="margin-top:14px">
+        <svg viewBox="0 0 420 115" style="width:100%;max-height:115px" aria-label="Πίεση υγρού">
+          <!-- Tank of water -->
+          <rect x="30" y="10" width="140" height="95" rx="4" fill="none" stroke="#64748b" stroke-width="2"/>
+          <!-- Water fill -->
+          <rect x="32" y="12" width="136" height="91" rx="3" fill="#bfdbfe" opacity="0.5"/>
+          <!-- Surface label -->
+          <text x="100" y="24" text-anchor="middle" font-size="8" fill="#1e40af">επιφάνεια</text>
+          <line x1="32" y1="26" x2="168" y2="26" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4,3"/>
+          <!-- Pressure arrows at 3 depths — deeper = longer arrow -->
+          <!-- Depth 1 (shallow) -->
+          <line x1="168" y1="45" x2="185" y2="45" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arr2)"/>
+          <text x="190" y="48" font-size="8" fill="#2563eb">P₁</text>
+          <!-- Depth 2 (medium) -->
+          <line x1="168" y1="70" x2="200" y2="70" stroke="#1d4ed8" stroke-width="3" marker-end="url(#arr2)"/>
+          <text x="205" y="73" font-size="8" fill="#1d4ed8">P₂</text>
+          <!-- Depth 3 (deep) -->
+          <line x1="168" y1="95" x2="218" y2="95" stroke="#1e3a8a" stroke-width="4" marker-end="url(#arr2)"/>
+          <text x="223" y="98" font-size="8" fill="#1e3a8a">P₃</text>
+          <!-- Depth bracket -->
+          <line x1="22" y1="26" x2="22" y2="95" stroke="#f59e0b" stroke-width="1.5"/>
+          <line x1="18" y1="26" x2="26" y2="26" stroke="#f59e0b" stroke-width="1.5"/>
+          <line x1="18" y1="95" x2="26" y2="95" stroke="#f59e0b" stroke-width="1.5"/>
+          <text x="15" y="64" text-anchor="middle" font-size="8" fill="#f59e0b" transform="rotate(-90,15,64)">βάθος h</text>
+          <!-- Animated bubble rising -->
+          <circle r="5" fill="#bfdbfe" opacity="0.8">
+            <animateMotion dur="2.5s" repeatCount="indefinite"
+              path="M100,95 C90,75 110,55 100,30"/>
+            <animate attributeName="r" values="5;3;5" dur="2.5s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.8;0.4;0" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Formula -->
+          <text x="310" y="55" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8">P = ρ·g·h</text>
+          <text x="310" y="75" text-anchor="middle" font-size="9" fill="#64748b">ρ: πυκνότητα υγρού</text>
+          <text x="310" y="88" text-anchor="middle" font-size="9" fill="#64748b">g = 10 m/s²</text>
+          <text x="310" y="101" text-anchor="middle" font-size="9" fill="#64748b">h: βάθος (m)</text>
+        </svg>
+      </div>
+      <canvas id="pressCanvas" style="height:260px"></canvas>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="ch3-s2">
+    <div id="quiz3"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ΚΕΦΑΛΑΙΟ 5 — ΕΝΕΡΓΕΙΑ
+     ═══════════════════════════════════════════════════════════ -->
+<div class="chapter" id="ch4">
+  <div class="sec-tabs">
+    <button class="sec-tab active" onclick="showSec(4,0)">📖 Θεωρία</button>
+    <button class="sec-tab" onclick="showSec(4,1)">⚡ Πείραμα</button>
+    <button class="sec-tab" onclick="showSec(4,2)">✏️ Quiz</button>
+  </div>
+
+  <!-- THEORY -->
+  <div class="section active" id="ch4-s0">
+    <div class="card">
+      <h3>5.1 Έργο Δύναμης</h3>
+      <p>Έργο παράγεται όταν μια δύναμη ασκείται σε σώμα που μετακινείται.</p>
+      <div class="formula">W = F · Δx</div>
+      <p style="text-align:center;font-size:.88rem;color:var(--fg2)">W: έργο (J), F: δύναμη (N), Δx: μετατόπιση (m)</p>
+      <ul style="margin-top:8px">
+        <li><strong>Θετικό έργο:</strong> F και Δx ίδια κατεύθυνση</li>
+        <li><strong>Αρνητικό έργο:</strong> F και Δx αντίθετη κατεύθυνση (π.χ. τριβή)</li>
+        <li><strong>Μηδενικό έργο:</strong> F ⊥ Δx (π.χ. κάθετη δύναμη)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>5.2 Κινητική Ενέργεια</h3>
+      <div class="key"><strong>Κινητική Ενέργεια (ΚΕ)</strong><span>Ενέργεια λόγω κίνησης.</span></div>
+      <div class="formula">ΚΕ = ½ · m · υ²</div>
+      <p style="text-align:center;font-size:.88rem;color:var(--fg2)">m: μάζα (kg), υ: ταχύτητα (m/s). Μονάδα: Joule (J)</p>
+    </div>
+    <div class="card">
+      <h3>5.3 Δυναμική Ενέργεια</h3>
+      <div class="key"><strong>Βαρυτική Δυναμική Ενέργεια (ΔΕ)</strong><span>Ενέργεια λόγω ύψους.</span></div>
+      <div class="formula">ΔΕ = m · g · h</div>
+      <p style="text-align:center;font-size:.88rem;color:var(--fg2)">h: ύψος από επίπεδο αναφοράς (m)</p>
+    </div>
+    <div class="card">
+      <h3>5.4 Διατήρηση Μηχανικής Ενέργειας</h3>
+      <div class="key"><strong>Νόμος Διατήρησης Ενέργειας</strong><span>Σε απουσία τριβών, η συνολική μηχανική ενέργεια διατηρείται σταθερή.</span></div>
+      <div class="formula">ΚΕ₁ + ΔΕ₁ = ΚΕ₂ + ΔΕ₂ = σταθ.</div>
+    </div>
+    <div class="card">
+      <h3>5.5 Ισχύς</h3>
+      <div class="key"><strong>Ισχύς (P)</strong><span>Ο ρυθμός με τον οποίο παράγεται ή καταναλώνεται ενέργεια.</span></div>
+      <div class="formula">P = W / t</div>
+      <p style="text-align:center;font-size:.88rem;color:var(--fg2)">P: ισχύς (Watt), W: έργο (J), t: χρόνος (s). 1W = 1 J/s</p>
+      <p style="font-size:.88rem;color:var(--fg2);margin-top:8px">1 hp (ίππος) ≈ 746 W</p>
+    </div>
+    <!-- Static concept diagram: energy conservation in free fall -->
+    <div class="diagram">
+      <svg viewBox="0 0 400 130" style="width:100%;max-height:130px" aria-label="Διατήρηση Ενέργειας">
+        <defs>
+          <marker id="mE" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/></marker>
+        </defs>
+        <!-- falling ball positions -->
+        <text x="80" y="13" text-anchor="middle" font-size="10" font-weight="700" fill="#ca8a04">Ελεύθερη Πτώση</text>
+        <!-- position A (top) -->
+        <circle cx="60" cy="30" r="10" fill="#16a34a" opacity="0.9"/>
+        <text x="60" y="34" text-anchor="middle" font-size="9" fill="white" font-weight="700">A</text>
+        <text x="76" y="25" font-size="8" fill="#16a34a">ΔΕ=max</text>
+        <text x="76" y="35" font-size="8" fill="#dc2626">ΚΕ=0</text>
+        <!-- arrow down -->
+        <line x1="60" y1="42" x2="60" y2="68" stroke="#64748b" stroke-width="1.5" marker-end="url(#mE)"/>
+        <!-- position B (mid) -->
+        <circle cx="60" cy="78" r="10" fill="#ca8a04" opacity="0.9"/>
+        <text x="60" y="82" text-anchor="middle" font-size="9" fill="white" font-weight="700">B</text>
+        <text x="76" y="73" font-size="8" fill="#16a34a">ΔΕ=½max</text>
+        <text x="76" y="83" font-size="8" fill="#dc2626">ΚΕ=½max</text>
+        <!-- arrow down -->
+        <line x1="60" y1="90" x2="60" y2="110" stroke="#64748b" stroke-width="1.5" marker-end="url(#mE)"/>
+        <!-- position C (bottom) -->
+        <circle cx="60" cy="118" r="8" fill="#dc2626" opacity="0.9"/>
+        <text x="60" y="122" text-anchor="middle" font-size="8" fill="white" font-weight="700">Γ</text>
+        <text x="74" y="113" font-size="8" fill="#16a34a">ΔΕ=0</text>
+        <text x="74" y="123" font-size="8" fill="#dc2626">ΚΕ=max</text>
+        <!-- ground line -->
+        <line x1="20" y1="127" x2="155" y2="127" stroke="#64748b" stroke-width="2"/>
+        <!-- energy bar chart -->
+        <text x="290" y="13" text-anchor="middle" font-size="10" font-weight="700" fill="#ca8a04">Ενέργεια — Διατήρηση</text>
+        <!-- Position A bars -->
+        <text x="210" y="25" font-size="8" fill="#64748b" text-anchor="middle">Θέση A</text>
+        <rect x="195" y="28" width="14" height="80" fill="#16a34a" rx="2"/>
+        <text x="202" y="26" font-size="7" fill="#16a34a" text-anchor="middle">ΔΕ</text>
+        <rect x="211" y="108" width="14" height="0" fill="#dc2626" rx="2"/>
+        <!-- Position B bars -->
+        <text x="255" y="25" font-size="8" fill="#64748b" text-anchor="middle">Θέση B</text>
+        <rect x="240" y="68" width="14" height="40" fill="#16a34a" rx="2"/>
+        <rect x="256" y="68" width="14" height="40" fill="#dc2626" rx="2"/>
+        <!-- Position C bars -->
+        <text x="310" y="25" font-size="8" fill="#64748b" text-anchor="middle">Θέση Γ</text>
+        <rect x="295" y="108" width="14" height="0" fill="#16a34a" rx="2"/>
+        <rect x="311" y="28" width="14" height="80" fill="#dc2626" rx="2"/>
+        <!-- total energy line -->
+        <line x1="190" y1="28" x2="390" y2="28" stroke="#ca8a04" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="345" y="24" font-size="8" fill="#ca8a04" font-weight="700">Ε<tspan font-size="6" dy="2">ολ</tspan><tspan dy="-2">=σταθ.</tspan></text>
+        <!-- legend -->
+        <rect x="340" y="60" width="10" height="10" fill="#16a34a" rx="1"/>
+        <text x="353" y="69" font-size="8" fill="#16a34a">ΔΕ</text>
+        <rect x="340" y="75" width="10" height="10" fill="#dc2626" rx="1"/>
+        <text x="353" y="84" font-size="8" fill="#dc2626">ΚΕ</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- EXPERIMENT -->
+  <div class="section" id="ch4-s1">
+    <div class="interactive">
+      <h4>⚡ Μετατροπές Ενέργειας — Ελεύθερη Πτώση</h4>
+      <div class="slider-row">
+        <label>Μάζα m (kg)</label>
+        <input type="range" id="emSlider" min="1" max="20" value="5" oninput="drawEnergy()">
+        <span class="val-badge" id="emVal">5 kg</span>
+      </div>
+      <div class="slider-row">
+        <label>Ύψος h (m)</label>
+        <input type="range" id="ehSlider" min="1" max="20" value="10" oninput="drawEnergy()">
+        <span class="val-badge" id="ehVal">10 m</span>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin:12px 0">
+        <div style="flex:1;min-width:140px;background:var(--bg);border-radius:10px;padding:12px;text-align:center">
+          <div style="font-size:.8rem;color:var(--fg2)">Δυναμική (αρχή)</div>
+          <div id="epe" style="font-size:1.1rem;font-weight:800;color:var(--purple)">500 J</div>
+        </div>
+        <div style="flex:1;min-width:140px;background:var(--bg);border-radius:10px;padding:12px;text-align:center">
+          <div style="font-size:.8rem;color:var(--fg2)">Κινητική (τέλος)</div>
+          <div id="eke" style="font-size:1.1rem;font-weight:800;color:var(--green)">500 J</div>
+        </div>
+        <div style="flex:1;min-width:140px;background:var(--bg);border-radius:10px;padding:12px;text-align:center">
+          <div style="font-size:.8rem;color:var(--fg2)">Ταχύτητα (κάτω)</div>
+          <div id="evf" style="font-size:1.1rem;font-weight:800;color:var(--accent)">14.1 m/s</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin:10px 0;flex-wrap:wrap">
+        <button class="btn" id="enPlayBtn" onclick="toggleEnergy()">▶ Ελεύθερη Πτώση</button>
+        <button class="btn" onclick="resetEnergy()" style="background:#64748b">↺ Επαναφορά</button>
+        <span style="align-self:center;font-size:.85rem;color:var(--fg2)">Ύψος: <strong id="enHLive">— m</strong></span>
+      </div>
+      <!-- Animated SVG: free-fall — PE→KE energy conversion -->
+      <div class="diagram" style="margin-top:14px">
+        <svg viewBox="0 0 420 115" style="width:100%;max-height:115px" aria-label="Ελεύθερη Πτώση">
+          <!-- Ground -->
+          <rect x="10" y="100" width="180" height="8" rx="2" fill="#94a3b8"/>
+          <!-- Height guide -->
+          <line x1="22" y1="12" x2="22" y2="100" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <line x1="18" y1="12" x2="26" y2="12" stroke="#f59e0b" stroke-width="1.5"/>
+          <line x1="18" y1="100" x2="26" y2="100" stroke="#f59e0b" stroke-width="1.5"/>
+          <text x="14" y="60" text-anchor="middle" font-size="9" fill="#f59e0b" transform="rotate(-90,14,60)">h</text>
+          <!-- Falling ball -->
+          <circle r="10" fill="#ef4444">
+            <animate attributeName="cy" values="18;94;18" dur="2s" repeatCount="indefinite"
+              calcMode="spline" keySplines="0.2 0 1 1;0.2 0 1 1" keyTimes="0;0.5;1"/>
+            <animate attributeName="cx" values="100;100;100" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <!-- velocity arrow (grows as ball falls) -->
+          <line stroke="#2563eb" stroke-width="2.5" stroke-linecap="round">
+            <animate attributeName="x1" values="100;100;100" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="y1" values="28;84;28" dur="2s" repeatCount="indefinite"
+              calcMode="spline" keySplines="0.2 0 1 1;0.2 0 1 1" keyTimes="0;0.5;1"/>
+            <animate attributeName="x2" values="100;100;100" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="y2" values="28;104;28" dur="2s" repeatCount="indefinite"
+              calcMode="spline" keySplines="0.2 0 1 1;0.2 0 1 1" keyTimes="0;0.5;1"/>
+          </line>
+          <!-- Energy bars (right side) -->
+          <!-- PE bar (shrinks) -->
+          <rect x="200" y="10" width="18" height="90" rx="3" fill="#e2e8f0"/>
+          <rect x="200" y="10" width="18" height="90" rx="3" fill="#f59e0b">
+            <animate attributeName="height" values="90;0;90" dur="2s" repeatCount="indefinite"
+              calcMode="spline" keySplines="0.2 0 1 1;0.2 0 1 1" keyTimes="0;0.5;1"/>
+            <animate attributeName="y" values="10;100;10" dur="2s" repeatCount="indefinite"
+              calcMode="spline" keySplines="0.2 0 1 1;0.2 0 1 1" keyTimes="0;0.5;1"/>
+          </rect>
+          <text x="209" y="108" text-anchor="middle" font-size="8" fill="#f59e0b" font-weight="700">ΔΕ</text>
+          <!-- KE bar (grows) -->
+          <rect x="225" y="10" width="18" height="90" rx="3" fill="#e2e8f0"/>
+          <rect x="225" y="100" width="18" height="0" rx="3" fill="#2563eb">
+            <animate attributeName="height" values="0;90;0" dur="2s" repeatCount="indefinite"
+              calcMode="spline" keySplines="0.2 0 1 1;0.2 0 1 1" keyTimes="0;0.5;1"/>
+            <animate attributeName="y" values="100;10;100" dur="2s" repeatCount="indefinite"
+              calcMode="spline" keySplines="0.2 0 1 1;0.2 0 1 1" keyTimes="0;0.5;1"/>
+          </rect>
+          <text x="234" y="108" text-anchor="middle" font-size="8" fill="#2563eb" font-weight="700">ΚΕ</text>
+          <!-- Total bar (constant) -->
+          <rect x="250" y="10" width="18" height="90" rx="3" fill="#22c55e"/>
+          <text x="259" y="108" text-anchor="middle" font-size="8" fill="#22c55e" font-weight="700">Σ</text>
+          <!-- Formula -->
+          <text x="355" y="45" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b">ΔΕ + ΚΕ = σταθ.</text>
+          <text x="355" y="62" text-anchor="middle" font-size="9" fill="#f59e0b">ΔΕ = mgh</text>
+          <text x="355" y="76" text-anchor="middle" font-size="9" fill="#2563eb">ΚΕ = ½mv²</text>
+          <text x="355" y="92" text-anchor="middle" font-size="9" fill="#64748b">v = √(2gh)</text>
+        </svg>
+      </div>
+      <canvas id="energyCanvas" style="height:240px"></canvas>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="ch4-s2">
+    <div id="quiz4"></div>
+  </div>
+</div>
+
+<script>
+// ── NAV ──
+function showChap(i){
+  document.querySelectorAll('.chapter').forEach((c,j)=>c.classList.toggle('active',i===j));
+  document.querySelectorAll('#chapNav button').forEach((b,j)=>b.classList.toggle('active',i===j));
+}
+function showSec(ch,sec){
+  const chapter=document.getElementById('ch'+ch);
+  chapter.querySelectorAll('.section').forEach((s,j)=>s.classList.toggle('active',j===sec));
+  chapter.querySelectorAll('.sec-tab').forEach((b,j)=>b.classList.toggle('active',j===sec));
+  // Redraw canvas when experiment tab (index 1) becomes visible
+  if(sec===1){
+    const drawFns=[calcDensity,drawMotion,drawSpring,drawPressure,drawEnergy,drawHeat,drawElec];
+    if(drawFns[ch]) requestAnimationFrame(()=>drawFns[ch]());
+  }
+}
+
+// ── QUIZ ENGINE ──
+const QUIZZES=[
+  // Ch1 — Εισαγωγικά (15 ερωτήσεις)
+  [
+    {q:"Ποια είναι η μονάδα μέτρησης της πίεσης στο SI;",opts:["Newton","Joule","Pascal","Watt"],ans:2,
+     fb:["❌ Λάθος. Το Newton (N) μετρά δύναμη.","❌ Λάθος. Το Joule (J) μετρά ενέργεια.","✅ Σωστό! 1 Pa = 1 N/m² (Pascal).","❌ Λάθος. Το Watt (W) μετρά ισχύ."]},
+    {q:"Ένα σώμα μάζας 5 kg έχει βάρος (g=10 m/s²):",opts:["5 N","10 N","50 N","500 N"],ans:2,
+     fb:["❌ Λάθος. 5 kg είναι η μάζα, όχι το βάρος.","❌ Λάθος.","✅ Σωστό! W = m·g = 5×10 = 50 N.","❌ Λάθος."]},
+    {q:"Η πυκνότητα ορίζεται ως:",opts:["ρ = V/m","ρ = m·V","ρ = m/V","ρ = m·g"],ans:2,
+     fb:["❌ Λάθος. Αυτός είναι ο αντίστροφος (ειδικός όγκος).","❌ Λάθος.","✅ Σωστό! ρ = m/V, μονάδα: kg/m³.","❌ Λάθος. Αυτό είναι το βάρος W."]},
+    {q:"Η μάζα είναι μέγεθος:",opts:["Διανυσματικό","Μονόμετρο (βαθμωτό)","Πάντα ίσο με το βάρος","Εξαρτημένο από τη θέση"],ans:1,
+     fb:["❌ Λάθος. Τα διανυσματικά έχουν κατεύθυνση (π.χ. δύναμη).","✅ Σωστό! Μονόμετρο = αριθμός + μονάδα, χωρίς κατεύθυνση.","❌ Λάθος. Βάρος = mg (εξαρτάται από g).","❌ Λάθος. Η μάζα είναι παντού ίδια."]},
+    {q:"Ποιο από τα παρακάτω είναι διανυσματικό μέγεθος;",opts:["Μάζα","Θερμοκρασία","Δύναμη","Πυκνότητα"],ans:2,
+     fb:["❌ Λάθος. Η μάζα είναι βαθμωτό.","❌ Λάθος. Η θερμοκρασία είναι βαθμωτό.","✅ Σωστό! Η δύναμη έχει μέτρο, κατεύθυνση και φορά.","❌ Λάθος. Η πυκνότητα είναι βαθμωτό."]},
+    {q:"Σώμα όγκου 2 m³ και μάζας 5 000 kg. Πυκνότητα;",opts:["1 000 kg/m³","2 500 kg/m³","10 000 kg/m³","500 kg/m³"],ans:1,
+     fb:["❌ Λάθος. Αυτή είναι η πυκνότητα νερού.","✅ Σωστό! ρ = 5000/2 = 2500 kg/m³ (περίπου αλουμίνιο).","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Η επιτάχυνση της βαρύτητας g στη Γη είναι περίπου:",opts:["1 m/s²","5 m/s²","10 m/s²","100 m/s²"],ans:2,
+     fb:["❌ Λάθος.","❌ Λάθος.","✅ Σωστό! g ≈ 9,81 m/s² ≈ 10 m/s² (προσέγγιση).","❌ Λάθος."]},
+    {q:"Ποια είναι η βασική μονάδα μήκους στο SI;",opts:["Εκατοστό","Μέτρο","Χιλιόμετρο","Μιλιάριο"],ans:1,
+     fb:["❌ Λάθος. Το cm = 0,01 m (υποπολλαπλάσιο).","✅ Σωστό! Η βασική μονάδα μήκους είναι το μέτρο (m).","❌ Λάθος. Το km = 1000 m (πολλαπλάσιο).","❌ Λάθος."]},
+    {q:"1 km ισούται με:",opts:["10 m","100 m","1 000 m","10 000 m"],ans:2,
+     fb:["❌ Λάθος.","❌ Λάθος. Αυτό είναι 1 hm.","✅ Σωστό! 1 km = 1 000 m (kilo = ×1000).","❌ Λάθος."]},
+    {q:"Ποια η σωστή σειρά της επιστημονικής μεθόδου;",opts:["Συμπέρασμα → Πείραμα → Υπόθεση","Υπόθεση → Παρατήρηση → Νόμος","Παρατήρηση → Υπόθεση → Πείραμα → Συμπέρασμα","Νόμος → Πείραμα → Παρατήρηση"],ans:2,
+     fb:["❌ Λάθος. Το συμπέρασμα είναι τελευταίο.","❌ Λάθος. Η παρατήρηση προηγείται.","✅ Σωστό! Παρατήρηση→Υπόθεση→Πείραμα→Συμπέρασμα→Νόμος.","❌ Λάθος."]},
+    {q:"Η πυκνότητα του νερού είναι:",opts:["1 kg/m³","10 kg/m³","100 kg/m³","1 000 kg/m³"],ans:3,
+     fb:["❌ Λάθος. Αυτή είναι περίπου η πυκνότητα του αέρα.","❌ Λάθος.","❌ Λάθος.","✅ Σωστό! Νερό: ρ = 1 000 kg/m³ = 1 g/cm³."]},
+    {q:"Ποιο υλικό έχει μεγαλύτερη πυκνότητα από το νερό;",opts:["Ξύλο (ρ≈700)","Αέρας (ρ≈1,2)","Λάδι (ρ≈800)","Σίδηρος (ρ≈7874)"],ans:3,
+     fb:["❌ Λάθος. Ξύλο 700 < 1000.","❌ Λάθος. Αέρας ≈ 1,2 << 1000.","❌ Λάθος. Λάδι ≈ 800 < 1000.","✅ Σωστό! Σίδηρος ≈ 7874 >> 1000 kg/m³."]},
+    {q:"Σε ποια μονάδα μετράμε τη μάζα στο SI;",opts:["Newton","Kilogram","Gram","Pound"],ans:1,
+     fb:["❌ Λάθος. Newton = μονάδα δύναμης.","✅ Σωστό! Η βασική μονάδα μάζας είναι το χιλιόγραμμο (kg).","❌ Λάθος. Gram = 0,001 kg (υποπολλαπλάσιο).","❌ Λάθος. Pound δεν ανήκει στο SI."]},
+    {q:"Σώμα μάζας 4 kg σε πλανήτη με g=5 m/s². Βάρος;",opts:["0,8 N","20 N","40 N","4 N"],ans:1,
+     fb:["❌ Λάθος.","✅ Σωστό! W = m·g = 4×5 = 20 N. Η μάζα παραμένει 4 kg!","❌ Λάθος. Αυτό θα ίσχυε στη Γη (g=10).","❌ Λάθος."]},
+    {q:"Ποια ιδιότητα του σώματος δεν αλλάζει με τη θέση;",opts:["Βάρος","Μάζα","Πίεση","Ύψος"],ans:1,
+     fb:["❌ Λάθος. Το βάρος εξαρτάται από g (αλλάζει στη Σελήνη).","✅ Σωστό! Η μάζα είναι ιδιότητα του σώματος — παντού ίδια.","❌ Λάθος.","❌ Λάθος."]}
+  ],
+  // Ch2 — Κίνηση (15 ερωτήσεις)
+  [
+    {q:"Αυτοκίνητο διανύει 120 km σε 2 h. Μέση ταχύτητα;",opts:["60 km/h","240 km/h","30 km/h","120 km/h"],ans:0,
+     fb:["✅ Σωστό! υ = Δx/Δt = 120/2 = 60 km/h.","❌ Λάθος. 120×2 είναι λάθος τύπος.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Στην ΕΟΚ, το x–t γράφημα είναι:",opts:["Παραβολή","Ευθεία γραμμή","Ημιτονοειδής","Σταθερή τιμή"],ans:1,
+     fb:["❌ Λάθος. Η παραβολή αφορά ΕΟΑ (επιταχυνόμενη κίνηση).","✅ Σωστό! x = υ·t → ευθεία με κλίση υ.","❌ Λάθος.","❌ Λάθος. Σταθερή τιμή → ακινησία."]},
+    {q:"Σε ΕΟΚ με υ=4 m/s, πόσο διανύει σε 5 s;",opts:["0,8 m","9 m","20 m","1,25 m"],ans:2,
+     fb:["❌ Λάθος. 4/5 ≠ απόσταση.","❌ Λάθος.","✅ Σωστό! x = υ·t = 4×5 = 20 m.","❌ Λάθος."]},
+    {q:"Μετατόπιση vs διάστημα: ποια διαφορά;",opts:["Δεν υπάρχει διαφορά","Η μετατόπιση είναι διανυσματική, το διάστημα βαθμωτό","Το διάστημα είναι πάντα μικρότερο","Και τα δύο σε kg"],ans:1,
+     fb:["❌ Λάθος. Είναι διαφορετικά μεγέθη.","✅ Σωστό! Μετατόπιση = αρχή→τέλος (διανυσματική). Διάστημα = μήκος τροχιάς (βαθμωτό).","❌ Λάθος. Σε κυκλική πορεία μπορεί η μετατόπιση να είναι 0!","❌ Λάθος. Μετριούνται σε m."]},
+    {q:"Το εμβαδόν κάτω από το υ–t γράφημα αντιστοιχεί σε:",opts:["Επιτάχυνση","Ισχύ","Μετατόπιση","Δύναμη"],ans:2,
+     fb:["❌ Λάθος. Η επιτάχυνση = κλίση του υ-t.","❌ Λάθος.","✅ Σωστό! Εμβαδόν υ–t = Δx = μετατόπιση.","❌ Λάθος."]},
+    {q:"Κινητό σε ΕΟΚ: το υ–t γράφημα είναι;",opts:["Ευθεία με θετική κλίση","Οριζόντια ευθεία (σταθερή υ)","Παραβολή","Κατακόρυφη ευθεία"],ans:1,
+     fb:["❌ Λάθος. Κλίση > 0 σημαίνει επιτάχυνση.","✅ Σωστό! υ = σταθ. → οριζόντια ευθεία.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"1 km/h ισούται με:",opts:["1 m/s","3,6 m/s","1/3,6 m/s","0,01 m/s"],ans:2,
+     fb:["❌ Λάθος.","❌ Λάθος. Αντίστροφο: 1 m/s = 3,6 km/h.","✅ Σωστό! 1 km/h = 1000/3600 = 1/3,6 ≈ 0,278 m/s.","❌ Λάθος."]},
+    {q:"Σε ΕΟΚ, αν διπλασιαστεί ο χρόνος, η μετατόπιση:",opts:["Παραμένει ίδια","Διπλασιάζεται","Τετραπλασιάζεται","Μηδενίζεται"],ans:1,
+     fb:["❌ Λάθος.","✅ Σωστό! x = υ·t, άρα x∝t (γραμμική σχέση).","❌ Λάθος. Τετραπλάσιο → ΕΟΑ κίνηση.","❌ Λάθος."]},
+    {q:"Ποιο από τα παρακάτω ΔΕΝ είναι μονάδα ταχύτητας;",opts:["m/s","km/h","cm/s","kg/s"],ans:3,
+     fb:["❌ Λάθος. Είναι κύρια μονάδα.","❌ Λάθος. Χρησιμοποιείται συχνά.","❌ Λάθος. Έγκυρη μονάδα.","✅ Σωστό! kg/s είναι μονάδα παροχής μάζας, όχι ταχύτητας."]},
+    {q:"Τρένο ταξιδεύει 300 km σε 3 h. Σε m/s, η μέση ταχύτητα;",opts:["100 m/s","27,8 m/s","1 m/s","0,278 m/s"],ans:1,
+     fb:["❌ Λάθος. 100 km/h ÷ 3,6 = 27,8 m/s.","✅ Σωστό! υ = 300 km/3 h = 100 km/h = 100/3,6 ≈ 27,8 m/s.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Αν x–t γράφημα είναι οριζόντια γραμμή (x=σταθ.), τότε:",opts:["Το σώμα κινείται με σταθερή ταχύτητα","Το σώμα ηρεμεί (υ=0)","Το σώμα επιταχύνει","Το σώμα επιβραδύνει"],ans:1,
+     fb:["❌ Λάθος. Αυτό θα έδειχνε κεκλιμένη ευθεία.","✅ Σωστό! Σταθερή θέση → μηδενική ταχύτητα (ηρεμία).","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Ταχύμετρο αυτοκινήτου δείχνει:",opts:["Μέση ταχύτητα","Μετατόπιση","Στιγμιαία ταχύτητα","Επιτάχυνση"],ans:2,
+     fb:["❌ Λάθος. Η μέση υπολογίζεται (Δx/Δt).","❌ Λάθος.","✅ Σωστό! Το ταχύμετρο δείχνει την ταχύτητα ΤΗ ΣΤΙΓΜΗ της μέτρησης.","❌ Λάθος."]},
+    {q:"Κινητό ξεκινά από x₀=0 με υ=5 m/s. Σε ποιο σημείο θα είναι μετά από 6 s;",opts:["x = 1,2 m","x = 11 m","x = 30 m","x = 5 m"],ans:2,
+     fb:["❌ Λάθος.","❌ Λάθος.","✅ Σωστό! x = υ·t = 5×6 = 30 m.","❌ Λάθος."]},
+    {q:"Δύο κινητά Α (υ=60 km/h) και Β (υ=90 km/h) εκκινούν μαζί. Σε 2h, πόσο απέχουν;",opts:["30 km","60 km","150 km","180 km"],ans:1,
+     fb:["❌ Λάθος.","✅ Σωστό! ΔΔx = (90-60)×2 = 30×2 = 60 km.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Η κλίση (slope) του x–t γραφήματος αντιστοιχεί σε:",opts:["Επιτάχυνση","Μετατόπιση","Ταχύτητα","Δύναμη"],ans:2,
+     fb:["❌ Λάθος. Η επιτάχυνση = κλίση υ-t.","❌ Λάθος. Η μετατόπιση = Δx (κάθετη απόσταση).","✅ Σωστό! Κλίση x-t = Δx/Δt = υ.","❌ Λάθος."]}
+  ],
+  // Ch3 — Δυνάμεις (15 ερωτήσεις)
+  [
+    {q:"Σε ελατήριο k=100 N/m ασκείται F=20 N. Επιμήκυνση;",opts:["5 m","0,2 m","2 000 m","0,05 m"],ans:1,
+     fb:["❌ Λάθος.","✅ Σωστό! x = F/k = 20/100 = 0,2 m = 20 cm.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Η τριβή ολίσθησης κατά τη διάρκεια κίνησης:",opts:["Έχει ίδια κατεύθυνση με κίνηση","Είναι αντίθετη της κίνησης","Είναι κάθετη στην κίνηση","Είναι μηδέν"],ans:1,
+     fb:["❌ Λάθος.","✅ Σωστό! Τριβή = εμπόδιο κίνησης, πάντα αντίθετη.","❌ Λάθος.","❌ Λάθος. Μηδέν → τέλεια λεία επιφάνεια."]},
+    {q:"1ος Νόμος Newton: σώμα σε ισορροπία σημαίνει ΣF=?",opts:["Μέγιστο","Ίσο με βάρος","Μηδέν","Ίσο με τριβή"],ans:2,
+     fb:["❌ Λάθος.","❌ Λάθος. Βάρος = mg, αλλά ΣF μπορεί να είναι ≠ 0.","✅ Σωστό! ΣF = 0 → αρχή αδράνειας (ισορροπία ή ΕΟΚ).","❌ Λάθος."]},
+    {q:"Η δύναμη βαρύτητας (βάρος) έχει κατεύθυνση:",opts:["Προς τα πάνω","Οριζόντια","Προς το κέντρο Γης (κάτω)","Τυχαία"],ans:2,
+     fb:["❌ Λάθος. Άνω → δύναμη Αρχιμήδη ή κάθετη αντίδραση.","❌ Λάθος.","✅ Σωστό! Βάρος W = m·g, κατακόρυφα προς τα κάτω.","❌ Λάθος."]},
+    {q:"Δυναμόμετρο βασίζεται στον νόμο:",opts:["Pascal","Αρχιμήδη","Hooke","Newton (2ος)"],ans:2,
+     fb:["❌ Λάθος.","❌ Λάθος.","✅ Σωστό! F = k·x. Μετράει τη δύναμη από την επιμήκυνση ελατηρίου.","❌ Λάθος."]},
+    {q:"Σώμα m=10 kg ηρεμεί σε τραπέζι. Κάθετη αντίδραση N=?",opts:["0 N","50 N","100 N","10 N"],ans:2,
+     fb:["❌ Λάθος.","❌ Λάθος.","✅ Σωστό! Ισορροπία: N = W = mg = 10×10 = 100 N.","❌ Λάθος."]},
+    {q:"Αν διπλασιαστεί η δύναμη σε ελατήριο, η επιμήκυνση:",opts:["Παραμένει ίδια","Υποδιπλασιάζεται","Διπλασιάζεται","Τετραπλασιάζεται"],ans:2,
+     fb:["❌ Λάθος.","❌ Λάθος.","✅ Σωστό! x = F/k, γραμμική σχέση (νόμος Hooke).","❌ Λάθος. Τετραπλάσιο → δεν ισχύει για ελατήριο."]},
+    {q:"Ποιο είναι παράδειγμα δύναμης εξ αποστάσεως;",opts:["Τριβή","Κάθετη αντίδραση","Βαρύτητα","Τάση σχοινιού"],ans:2,
+     fb:["❌ Λάθος. Τριβή = δύναμη επαφής.","❌ Λάθος. Κάθετη αντίδραση = επαφή.","✅ Σωστό! Βαρύτητα, ηλεκτρική, μαγνητική = δυνάμεις εξ αποστάσεως.","❌ Λάθος. Τάση σχοινιού = επαφή."]},
+    {q:"Ελατήριο k=50 N/m επιμηκύνεται 10 cm. Δύναμη;",opts:["0,5 N","5 N","500 N","50 N"],ans:1,
+     fb:["❌ Λάθος.","✅ Σωστό! F = k·x = 50×0,10 = 5 N (10 cm = 0,10 m).","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Αντίδραση κάθετης (N) σε οριζόντιο επίπεδο σε σώμα m=5 kg;",opts:["50 N","5 N","0 N","100 N"],ans:0,
+     fb:["✅ Σωστό! N = W = mg = 5×10 = 50 N (κάθετα στην επιφάνεια).","❌ Λάθος.","❌ Λάθος. Μηδέν → ελεύθερη πτώση!","❌ Λάθος."]},
+    {q:"Ποιο είναι ΔΕΝ είναι χαρακτηριστικό της δύναμης;",opts:["Μέτρο","Κατεύθυνση","Φορά","Χρώμα"],ans:3,
+     fb:["❌ Λάθος. Το μέτρο είναι χαρακτηριστικό.","❌ Λάθος. Η κατεύθυνση είναι χαρακτηριστικό.","❌ Λάθος. Η φορά (→ ή ←) είναι χαρακτηριστικό.","✅ Σωστό! Το χρώμα ΔΕΝ είναι φυσικό χαρακτηριστικό δύναμης."]},
+    {q:"Σε ισορροπία, η σχέση βάρους W και κάθετης αντίδρασης N είναι:",opts:["W > N","W < N","W = N","W + N = 0"],ans:2,
+     fb:["❌ Λάθος.","❌ Λάθος.","✅ Σωστό! Ισορροπία σε οριζόντιο: W ↓ = N ↑ (αντίθετες, ίσες).","❌ Λάθος. ΣF=0, αλλά W+N=0 διανυσματικά."]},
+    {q:"Η τριβή ηρεμίας σε σχέση με τριβή ολίσθησης:",opts:["Είναι μικρότερη","Είναι ίση","Είναι μεγαλύτερη","Είναι πάντα 0"],ans:2,
+     fb:["❌ Λάθος.","❌ Λάθος.","✅ Σωστό! Τριβή ηρεμίας ≥ τριβή ολίσθησης (γι'αυτό δυσκολευόμαστε να ξεκινήσουμε!).","❌ Λάθος."]},
+    {q:"Βάρος αστροναύτη 80 kg στη Σελήνη (g=1,6 m/s²);",opts:["80 N","128 N","800 N","8 N"],ans:1,
+     fb:["❌ Λάθος. 80 kg = μάζα (παντού ίδια).","✅ Σωστό! W = 80×1,6 = 128 N (λιγότερο από Γη!).","❌ Λάθος. Αυτό για Γη (g=10).","❌ Λάθος."]},
+    {q:"Σταθερά ελατηρίου k μετριέται σε:",opts:["m","N","N/m","kg"],ans:2,
+     fb:["❌ Λάθος. m = μέτρα (μήκος).","❌ Λάθος. N = Newton (δύναμη).","✅ Σωστό! k = F/x → N/m (Newton ανά μέτρο).","❌ Λάθος."]}
+  ],
+  // Ch4 — Πίεση (15 ερωτήσεις)
+  [
+    {q:"Επιφάνεια 2 m² δέχεται κάθετη δύναμη 400 N. Πίεση;",opts:["800 Pa","200 Pa","0,005 Pa","400 Pa"],ans:1,
+     fb:["❌ Λάθος. 400×2 = λάθος πράξη.","✅ Σωστό! p = F/A = 400/2 = 200 Pa.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Η υδροστατική πίεση εξαρτάται από:",opts:["Σχήμα δοχείου","Βάθος h και πυκνότητα υγρού ρ","Μόνο το βάρος νερού","Θερμοκρασία"],ans:1,
+     fb:["❌ Λάθος. Το σχήμα δεν επηρεάζει (παράδοξο υδροστατικής!).","✅ Σωστό! p = ρ·g·h.","❌ Λάθος.","❌ Λάθος (σε απλές συνθήκες)."]},
+    {q:"Σε βάθος 5 m σε νερό (ρ=1000 kg/m³, g=10): p=?",opts:["5 Pa","500 Pa","5 000 Pa","50 000 Pa"],ans:3,
+     fb:["❌ Λάθος.","❌ Λάθος.","❌ Λάθος.","✅ Σωστό! p = ρ·g·h = 1000×10×5 = 50 000 Pa = 50 kPa."]},
+    {q:"Αρχή Αρχιμήδη: η άνωση ισούται με:",opts:["Βάρος σώματος","Βάρος εκτοπισμένου υγρού","Πίεση στον πυθμένα","Όγκο σώματος"],ans:1,
+     fb:["❌ Λάθος. Αυτό ισχύει μόνο αν το σώμα αιωρείται.","✅ Σωστό! F_A = ρ_υγρού·g·V_εκτ.","❌ Λάθος.","❌ Λάθος. Όγκος μετριέται σε m³."]},
+    {q:"Αρχή Pascal: αύξηση πίεσης σε ρευστό μεταδίδεται:",opts:["Μόνο στον πυθμένα","Αναλλοίωτη σε όλα τα σημεία","Μόνο στο σημείο εφαρμογής","Μειώνεται με βάθος"],ans:1,
+     fb:["❌ Λάθος.","✅ Σωστό! Pascal: εξωτερική πίεση → ίση μετάδοση παντού στο ρευστό.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Σώμα επιπλέει όταν:",opts:["W > F_A","W = F_A","W < F_A","ρ_σώμα > ρ_υγρού"],ans:2,
+     fb:["❌ Λάθος. Τότε βυθίζεται.","❌ Λάθος. Τότε αιωρείται (ουδέτερη πλευστότητα).","✅ Σωστό! W < F_A → ανεβαίνει και επιπλέει.","❌ Λάθος. Αυτό σημαίνει ότι βυθίζεται."]},
+    {q:"Η ατμοσφαιρική πίεση είναι περίπου:",opts:["100 Pa","1 000 Pa","100 000 Pa","10 Pa"],ans:2,
+     fb:["❌ Λάθος.","❌ Λάθος.","✅ Σωστό! p₀ ≈ 101 325 Pa ≈ 10⁵ Pa = 1 atm.","❌ Λάθος."]},
+    {q:"Βαρόμετρο μετρά:",opts:["Υδροστατική πίεση","Ατμοσφαιρική πίεση","Άνωση","Πυκνότητα"],ans:1,
+     fb:["❌ Λάθος.","✅ Σωστό! Το βαρόμετρο μετρά την πίεση της ατμόσφαιρας.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Γιατί ο παγόβουνο επιπλέει στο νερό;",opts:["ρ_πάγος > ρ_νερό","ρ_πάγος = ρ_νερό","ρ_πάγος < ρ_νερό","Επειδή είναι μεγάλο"],ans:2,
+     fb:["❌ Λάθος. Τότε θα βυθιζόταν.","❌ Λάθος. Τότε θα αιωρούταν.","✅ Σωστό! ρ_πάγος ≈ 917 < ρ_νερό = 1000 kg/m³, γι'αυτό επιπλέει.","❌ Λάθος."]},
+    {q:"Υδραυλικός εξυψωτής (γρύλος): πιέζεις με 10 N, σηκώνει 1000 N. Γιατί;",opts:["Παραβιάζει τη διατήρηση ενέργειας","Αρχή Pascal: μικρή επιφάνεια → μεγάλη","Η άνωση βοηθά","Η τριβή μεγεθύνει"],ans:1,
+     fb:["❌ Λάθος. Η ενέργεια τηρείται (μεγάλη δύναμη, μικρή μετατόπιση).","✅ Σωστό! F₂/F₁ = A₂/A₁. Μεγαλύτερη επιφάνεια → μεγαλύτερη δύναμη.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Η πίεση του υγρού σε δοχείο σε συγκεκριμένο βάθος:",opts:["Ασκείται μόνο κάτω","Ασκείται μόνο άνω","Ασκείται προς όλες τις κατευθύνσεις","Ασκείται μόνο πλευρικά"],ans:2,
+     fb:["❌ Λάθος.","❌ Λάθος.","✅ Σωστό! Η πίεση υγρού είναι ισόκλινη — προς όλες τις κατευθύνσεις σε ένα σημείο.","❌ Λάθος."]},
+    {q:"Αγόρι μάζας 60 kg στέκεται σε πέδιλα χιονιού (επιφ. 0,5 m²). Πίεση;",opts:["30 Pa","1 200 Pa","120 Pa","600 Pa"],ans:1,
+     fb:["❌ Λάθος.","✅ Σωστό! W=60×10=600 N, p=F/A=600/0,5=1200 Pa.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Δύτης σε βάθος 10 m νερού. Πίεση νερού (ρ=1000, g=10);",opts:["1 000 Pa","10 000 Pa","100 000 Pa","1 000 000 Pa"],ans:2,
+     fb:["❌ Λάθος.","❌ Λάθος.","✅ Σωστό! p = 1000×10×10 = 100 000 Pa = 1 atm (πλέον της ατμοσφαιρικής!).","❌ Λάθος."]},
+    {q:"Ποιο σώμα βυθίζεται σε νερό (ρ_νερό=1000 kg/m³);",opts:["Ξύλο (700 kg/m³)","Παγόβουνο (917 kg/m³)","Σίδηρος (7874 kg/m³)","Λάδι (800 kg/m³)"],ans:2,
+     fb:["❌ Λάθος. Επιπλέει (700<1000).","❌ Λάθος. Επιπλέει (917<1000) — στο 90% βυθισμένο!","✅ Σωστό! Σίδηρος 7874 >> 1000, βυθίζεται.","❌ Λάθος. Επιπλέει (800<1000)."]},
+    {q:"Η μονάδα πίεσης Pascal ισοδυναμεί με:",opts:["N·m","N/m²","kg/m","J·m"],ans:1,
+     fb:["❌ Λάθος. N·m = Joule (ενέργεια).","✅ Σωστό! 1 Pa = 1 N/m² (Newton ανά τετρ. μέτρο).","❌ Λάθος.","❌ Λάθος."]}
+  ],
+  // Ch5 — Ενέργεια (15 ερωτήσεις)
+  [
+    {q:"Δύναμη 10 N μετακινεί σώμα 4 m στη διεύθυνσή της. Έργο;",opts:["2,5 J","14 J","40 J","0,4 J"],ans:2,
+     fb:["❌ Λάθος.","❌ Λάθος.","✅ Σωστό! W = F·Δx = 10×4 = 40 J.","❌ Λάθος."]},
+    {q:"Κινητική ενέργεια σώματος m=2 kg, υ=6 m/s:",opts:["12 J","36 J","6 J","72 J"],ans:1,
+     fb:["❌ Λάθος.","✅ Σωστό! ΚΕ = ½·m·υ² = ½×2×36 = 36 J.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Δυναμική ενέργεια m=3 kg, h=5 m (g=10):",opts:["15 J","150 J","50 J","1,5 J"],ans:1,
+     fb:["❌ Λάθος.","✅ Σωστό! ΔΕ = m·g·h = 3×10×5 = 150 J.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Νόμος διατήρησης μηχανικής ενέργειας ισχύει:",opts:["Πάντα","Μόνο με τριβές","Σε απουσία τριβών (και αντίστασης αέρα)","Μόνο σε ελεύθερη πτώση"],ans:2,
+     fb:["❌ Λάθος. Με τριβές η ΜΕ μειώνεται.","❌ Λάθος.","✅ Σωστό! Χωρίς τριβές: ΜΕ = ΚΕ + ΔΕ = σταθ.","❌ Λάθος (ισχύει γενικότερα)."]},
+    {q:"1 Watt ισούται με:",opts:["1 N·m","1 J/s","1 kg·m","1 N/s"],ans:1,
+     fb:["❌ Λάθος. 1 N·m = 1 J (ενέργεια).","✅ Σωστό! 1 W = 1 J/s (ρυθμός μεταφοράς ενέργειας).","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Μηχανή παράγει W=6000 J σε t=2 min. Ισχύς;",opts:["3 000 W","50 W","12 000 W","300 W"],ans:1,
+     fb:["❌ Λάθος.","✅ Σωστό! t = 120 s, P = 6000/120 = 50 W.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Σώμα πέφτει ελεύθερα από h=20m (g=10). Ταχύτητα πρόσκρουσης;",opts:["10 m/s","20 m/s","200 m/s","14,1 m/s"],ans:1,
+     fb:["❌ Λάθος.","✅ Σωστό! mgh=½mv² → v=√(2gh)=√(400)=20 m/s.","❌ Λάθος.","❌ Λάθος (αυτό ισχύει για h=10m)."]},
+    {q:"Η κινητική ενέργεια εξαρτάται από:",opts:["Μόνο τη μάζα","Μόνο την ταχύτητα","Μάζα και ταχύτητα","Ύψος"],ans:2,
+     fb:["❌ Λάθος.","❌ Λάθος.","✅ Σωστό! ΚΕ = ½mv².","❌ Λάθος. Ύψος → ΔΕ = mgh."]},
+    {q:"Σε ποια περίπτωση το έργο είναι μηδέν;",opts:["F παράλληλη στη μετατόπιση","F αντίθετη της μετατόπισης","F κάθετη στη μετατόπιση","F ίση με βάρος"],ans:2,
+     fb:["❌ Λάθος. Τότε W = F·Δx (θετικό).","❌ Λάθος. Τότε W = -F·Δx (αρνητικό).","✅ Σωστό! W = F·Δx·cos90° = 0. Π.χ. βάρος σε οριζόντια μετατόπιση.","❌ Λάθος."]},
+    {q:"Αν διπλασιαστεί η ταχύτητα, η κινητική ενέργεια:",opts:["Διπλασιάζεται","Τριπλασιάζεται","Τετραπλασιάζεται","Παραμένει ίδια"],ans:2,
+     fb:["❌ Λάθος.","❌ Λάθος.","✅ Σωστό! ΚΕ = ½mv², άρα ΚΕ∝υ². Διπλάσια υ → 4× ΚΕ.","❌ Λάθος."]},
+    {q:"Σε ελεύθερη πτώση, στο μέσο της διαδρομής (h/2) ισχύει:",opts:["ΔΕ=0, ΚΕ=max","ΔΕ=ΚΕ=½ΜΕ","ΚΕ=0, ΔΕ=max","ΜΕ=0"],ans:1,
+     fb:["❌ Λάθος. Αυτό στο τέλος.","✅ Σωστό! Στη μέση h→h/2, ΔΕ = mgh/2 = ΚΕ = ΜΕ/2.","❌ Λάθος. Αυτό στην αρχή.","❌ Λάθος. ΜΕ = σταθ."]},
+    {q:"1 kWh (kilowatt-hour) ισούται με:",opts:["1 000 J","3 600 J","3 600 000 J","1 000 000 J"],ans:2,
+     fb:["❌ Λάθος.","❌ Λάθος.","✅ Σωστό! 1 kWh = 1000 W × 3600 s = 3 600 000 J = 3,6 MJ.","❌ Λάθος."]},
+    {q:"Μηχανή ισχύος 500 W λειτουργεί 10 s. Ενέργεια;",opts:["50 J","500 J","5 000 J","50 000 J"],ans:2,
+     fb:["❌ Λάθος.","❌ Λάθος.","✅ Σωστό! E = P·t = 500×10 = 5 000 J.","❌ Λάθος."]},
+    {q:"Ποια ενέργεια έχει σώμα m=5 kg σε ύψος h=8 m (g=10);",opts:["40 J","400 J","4 000 J","80 J"],ans:1,
+     fb:["❌ Λάθος.","✅ Σωστό! ΔΕ = mgh = 5×10×8 = 400 J.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Σε ποια κατάσταση η ΜΕ μειώνεται;",opts:["Ελεύθερη πτώση χωρίς αντίσταση αέρα","Κίνηση με τριβή","Ταλάντωση ελατηρίου χωρίς τριβές","ΕΟΚ σε λείο επίπεδο"],ans:1,
+     fb:["❌ Λάθος. ΔΕ+ΚΕ = σταθ.","✅ Σωστό! Η τριβή μετατρέπει ΜΕ σε θερμότητα → μείωση ΜΕ.","❌ Λάθος. ΔΕ↔ΚΕ χωρίς απώλεια.","❌ Λάθος."]}
+  ]
+  ,
+  // Ch6 — Θερμότητα (15 ερωτήσεις)
+  [
+    {q:"Μάζα 2 kg νερού (c=4186 J/kg·°C) θερμαίνεται κατά ΔΤ=5°C. Πόση θερμότητα απορροφά;",opts:["4186 J","20 930 J","41 860 J","8 372 J"],ans:3,
+     fb:["❌ Λάθος. Q = m·c·ΔΤ = 2×4186×5 = 41860 J... αλλά αυτό είναι για ΔΤ=5, m=1.","❌ Λάθος. Πρόσεξε τους αριθμούς.","❌ Λάθος. Q = 2×4186×5 = 41 860 J.","✅ Σωστό! Q = m·c·ΔΤ = 2×4186×5 = 41 860 J."]},
+    {q:"Σε ποια μονάδα μετριέται η θερμότητα στο SI;",opts:["°C","Joule (J)","Watt (W)","Kelvin (K)"],ans:1,
+     fb:["❌ Λάθος. Οι βαθμοί Κελσίου μετρούν θερμοκρασία.","✅ Σωστό! Η θερμότητα Q μετράται σε Joule (J).","❌ Λάθος. Watt = μονάδα ισχύος.","❌ Λάθος. Kelvin = μονάδα θερμοκρασίας."]},
+    {q:"Τι εκφράζει η ειδική θερμοχωρητικότητα c ενός υλικού;",opts:["Τη μάζα του υλικού","Τη θερμότητα που χρειάζεται 1 kg υλικού για να αυξηθεί η θερμοκρασία του κατά 1°C","Τη θερμοκρασία τήξης","Την ικανότητα αγωγής θερμότητας"],ans:1,
+     fb:["❌ Λάθος.","✅ Σωστό! c = Q/(m·ΔΤ) — μονάδα: J/(kg·°C).","❌ Λάθος.","❌ Λάθος. Αυτό ονομάζεται θερμική αγωγιμότητα."]},
+    {q:"Ποιο υλικό έχει τη μεγαλύτερη ειδική θερμοχωρητικότητα;",opts:["Σίδηρος (450 J/kg·°C)","Χαλκός (385 J/kg·°C)","Αλουμίνιο (900 J/kg·°C)","Νερό (4186 J/kg·°C)"],ans:3,
+     fb:["❌ Λάθος.","❌ Λάθος.","❌ Λάθος.","✅ Σωστό! Το νερό έχει τη μεγαλύτερη ειδική θερμοχωρητικότητα — γι'αυτό χρησιμοποιείται για ψύξη."]},
+    {q:"Μετατροπή: 27°C σε Kelvin;",opts:["27 K","300 K","254 K","327 K"],ans:1,
+     fb:["❌ Λάθος. T(K) = T(°C) + 273 = 27+273 = 300 K.","✅ Σωστό! T = 27+273 = 300 K.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Ποιος τρόπος μεταφοράς θερμότητας ΔΕΝ χρειάζεται υλικό μέσο;",opts:["Αγωγή","Μεταφορά (Convection)","Ακτινοβολία","Και οι τρεις χρειάζονται"],ans:2,
+     fb:["❌ Λάθος. Η αγωγή γίνεται μέσω υλικού.","❌ Λάθος. Η μεταφορά γίνεται μέσω ρευστών.","✅ Σωστό! Η ακτινοβολία (υπέρυθρη) διαδίδεται και στο κενό — έτσι έρχεται η ηλιακή θέρμη.","❌ Λάθος."]},
+    {q:"Σε ποιους 4°C έχει το νερό τη μέγιστη πυκνότητα;",opts:["0°C","4°C","100°C","−4°C"],ans:1,
+     fb:["❌ Λάθος. Στους 0°C το νερό παγώνει — η πυκνότητα μειώνεται!","✅ Σωστό! Στους 4°C ρ_νερό = 1000 kg/m³ (μέγιστο). Αυτό επιτρέπει στα ψάρια να ζουν κάτω από τον πάγο.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Γιατί τα ρελς του σιδηρόδρομου έχουν διάκενα;",opts:["Για να σταματούν τα τρένα","Για να αντισταθμίζουν τη θερμική διαστολή","Για εξοικονόμηση υλικού","Για μείωση του θορύβου"],ans:1,
+     fb:["❌ Λάθος.","✅ Σωστό! Χωρίς διάκενα, τα ρελς θα παραμορφώνονταν το καλοκαίρι λόγω θερμικής διαστολής.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Αντικείμενο m=0.5 kg, c=900 J/kg·°C θερμαίνεται από 20°C σε 80°C. Q=;",opts:["27 000 J","45 000 J","900 J","13 500 J"],ans:0,
+     fb:["✅ Σωστό! Q = 0.5×900×(80−20) = 0.5×900×60 = 27 000 J.","❌ Λάθος.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Θερμότητα ρέει πάντα:",opts:["Από κρύο σε θερμό","Από θερμό σε κρύο","Και προς τις δύο κατευθύνσεις ίσα","Μόνο κατακόρυφα"],ans:1,
+     fb:["❌ Λάθος. Αυτό παραβιάζει τον 2ο Νόμο Θερμοδυναμικής!","✅ Σωστό! Θερμότητα ρέει πάντα από σώμα υψηλότερης σε σώμα χαμηλότερης θερμοκρασίας.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Ποιο από τα παρακάτω είναι καλός αγωγός θερμότητας;",opts:["Ξύλο","Πλαστικό","Αέρας","Χαλκός"],ans:3,
+     fb:["❌ Λάθος. Το ξύλο είναι μονωτής.","❌ Λάθος.","❌ Λάθος. Ο αέρας είναι κακός αγωγός.","✅ Σωστό! Τα μέταλλα, και ειδικά ο χαλκός, είναι εξαιρετικοί αγωγοί θερμότητας."]},
+    {q:"Ρεύματα μεταφοράς σε υγρά δημιουργούνται γιατί:",opts:["Τα κρύα υγρά ανεβαίνουν","Τα θερμά υγρά έχουν μικρότερη πυκνότητα και ανεβαίνουν","Τα υγρά δεν αγωγούν θερμότητα","Η βαρύτητα σπρώχνει το θερμό υγρό κάτω"],ans:1,
+     fb:["❌ Λάθος.","✅ Σωστό! Θερμό υγρό → μικρότερη πυκνότητα → ανεβαίνει. Κρύο → μεγαλύτερη πυκνότητα → κατεβαίνει. Δημιουργούνται ρεύματα.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"0 K (μηδέν Kelvin) ισούται με:",opts:["0°C","−100°C","−273°C","100°C"],ans:2,
+     fb:["❌ Λάθος.","❌ Λάθος.","✅ Σωστό! 0 K = −273°C — το απόλυτο μηδέν (θεωρητικά αδύνατη κατάσταση).","❌ Λάθος."]},
+    {q:"Γιατί η θέρμη του Ήλιου φτάνει στη Γη;",opts:["Με αγωγή μέσω του διαστήματος","Με μεταφορά μέσω αέρα","Με ακτινοβολία — δεν χρειάζεται μέσο","Μέσω ηλεκτρικών αγωγών"],ans:2,
+     fb:["❌ Λάθος. Το διάστημα είναι κενό.","❌ Λάθος. Στο διάστημα δεν υπάρχει αέρας.","✅ Σωστό! Η ηλιακή ακτινοβολία (ηλεκτρομαγνητικά κύματα) διαδίδεται στο κενό.","❌ Λάθος."]},
+    {q:"Σε ποια περίπτωση το σώμα Α έχει μεγαλύτερη θερμοκρασία από το Β;",opts:["Το Α έχει μεγαλύτερη μάζα","Τα μόρια του Α κινούνται με μεγαλύτερη μέση ταχύτητα","Το Α έχει μεγαλύτερη ειδική θερμοχωρητικότητα","Το Α ζυγίζει περισσότερο"],ans:1,
+     fb:["❌ Λάθος. Η μάζα δεν καθορίζει τη θερμοκρασία.","✅ Σωστό! Η θερμοκρασία εκφράζει τη μέση κινητική ενέργεια των μορίων — μεγαλύτερη ταχύτητα → υψηλότερη θερμοκρασία.","❌ Λάθος.","❌ Λάθος."]}
+  ],
+  // Ch7 — Ηλεκτρισμός Β' (15 ερωτήσεις)
+  [
+    {q:"Κύκλωμα με V=9V και R=3Ω. Ποια η ένταση ρεύματος;",opts:["27 A","3 A","0.33 A","6 A"],ans:1,
+     fb:["❌ Λάθος. I = V/R = 9/3 = 3 A (όχι V×R).","✅ Σωστό! I = V/R = 9/3 = 3 A.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Ποιο από τα παρακάτω ΔΕΝ είναι αγωγός ηλεκτρισμού;",opts:["Χαλκός","Αλουμίνιο","Γυαλί","Γραφίτης"],ans:2,
+     fb:["❌ Λάθος. Ο χαλκός είναι εξαιρετικός αγωγός.","❌ Λάθος. Το αλουμίνιο είναι αγωγός.","✅ Σωστό! Το γυαλί είναι μονωτής — χρησιμοποιείται σε ηλεκτρικές διατάξεις.","❌ Λάθος. Ο γραφίτης είναι αγωγός."]},
+    {q:"Τι μετράει το αμπερόμετρο και πώς συνδέεται;",opts:["Τάση — παράλληλα","Αντίσταση — παράλληλα","Ένταση ρεύματος — σε σειρά","Ισχύς — παράλληλα"],ans:2,
+     fb:["❌ Λάθος. Αυτό κάνει το βολτόμετρο.","❌ Λάθος.","✅ Σωστό! Το αμπερόμετρο μετράει ένταση I και συνδέεται σε σειρά.","❌ Λάθος."]},
+    {q:"Ομώνυμα ηλεκτρικά φορτία:",opts:["Έλκονται","Απωθούνται","Εξουδετερώνονται","Δεν αλληλεπιδρούν"],ans:1,
+     fb:["❌ Λάθος. Έλξη → ετερώνυμα φορτία.","✅ Σωστό! Ομώνυμα (++ ή −−) απωθούνται.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Σε ποια μονάδα μετράμε την ηλεκτρική αντίσταση;",opts:["Volt","Ampere","Ohm (Ω)","Watt"],ans:2,
+     fb:["❌ Λάθος. Volt = μονάδα τάσης.","❌ Λάθος. Ampere = μονάδα έντασης.","✅ Σωστό! Η αντίσταση R μετράται σε Ohm (Ω).","❌ Λάθος. Watt = μονάδα ισχύος."]},
+    {q:"Για να ρέει ηλεκτρικό ρεύμα σε κύκλωμα, αυτό πρέπει να είναι:",opts:["Ανοιχτό","Κλειστό","Παράλληλο","Με υψηλή αντίσταση"],ans:1,
+     fb:["❌ Λάθος. Σε ανοιχτό κύκλωμα δεν ρέει ρεύμα.","✅ Σωστό! Το κύκλωμα πρέπει να είναι κλειστό (συνεχής αγώγιμη διαδρομή).","❌ Λάθος. Το παράλληλο ή σειριακό αφορά τη σύνδεση.","❌ Λάθος."]},
+    {q:"Τι γίνεται αν διπλασιαστεί η τάση σε κύκλωμα με σταθερή αντίσταση (Νόμος Ohm);",opts:["Το ρεύμα μισεύεται","Το ρεύμα διπλασιάζεται","Το ρεύμα παραμένει σταθερό","Η αντίσταση αλλάζει"],ans:1,
+     fb:["❌ Λάθος.","✅ Σωστό! I = V/R. Αν V×2 και R=σταθ., τότε I×2.","❌ Λάθος. I = V/R — άρα αλλάζει.","❌ Λάθος."]},
+    {q:"Τι είναι η ηλεκτρική τάση;",opts:["Ο ρυθμός ροής φορτίου","Η ηλεκτρεγερτική δύναμη που ωθεί τα ηλεκτρόνια","Το πλήθος των ελεύθερων ηλεκτρονίων","Η αντίσταση του κυκλώματος"],ans:1,
+     fb:["❌ Λάθος. Αυτός είναι ο ορισμός της έντασης.","✅ Σωστό! Τάση V = ενέργεια ανά μονάδα φορτίου (J/C = V).","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Μπαταρία 12V συνδέεται σε αντίσταση 6Ω. Ισχύς;",opts:["2 W","72 W","18 W","24 W"],ans:3,
+     fb:["❌ Λάθος.","❌ Λάθος. Αυτό για I=6 A.","❌ Λάθος.","✅ Σωστό! I = 12/6 = 2 A, P = V·I = 12×2 = 24 W."]},
+    {q:"Τριβοηλεκτρισμός: τι μεταφέρεται μεταξύ των σωμάτων;",opts:["Πρωτόνια","Νετρόνια","Ηλεκτρόνια","Άτομα"],ans:2,
+     fb:["❌ Λάθος. Τα πρωτόνια βρίσκονται σφιχτά στον πυρήνα.","❌ Λάθος. Νετρόνια = ουδέτερα σωματίδια στον πυρήνα.","✅ Σωστό! Κατά την τριβή μεταφέρονται ηλεκτρόνια από ένα σώμα στο άλλο.","❌ Λάθος."]},
+    {q:"Αντίσταση R=50Ω διαρρέεται από I=0.4A. Τάση;",opts:["125 V","20 V","0.008 V","50.4 V"],ans:1,
+     fb:["❌ Λάθος.","✅ Σωστό! V = I·R = 0.4×50 = 20 V.","❌ Λάθος.","❌ Λάθος."]},
+    {q:"Ποιο όργανο μετράει την ηλεκτρική τάση;",opts:["Αμπερόμετρο","Ωμόμετρο","Βολτόμετρο","Δυναμόμετρο"],ans:2,
+     fb:["❌ Λάθος. Αμπερόμετρο = μετράει ένταση.","❌ Λάθος. Ωμόμετρο = μετράει αντίσταση.","✅ Σωστό! Το βολτόμετρο μετράει τάση — συνδέεται παράλληλα.","❌ Λάθος. Δυναμόμετρο = μετράει δύναμη."]},
+    {q:"Ποιο από τα παρακάτω είναι μονωτής;",opts:["Αλουμίνιο","Σίδηρος","Χαλκός","Καουτσούκ"],ans:3,
+     fb:["❌ Λάθος. Αλουμίνιο = αγωγός.","❌ Λάθος. Σίδηρος = αγωγός.","❌ Λάθος. Χαλκός = εξαιρετικός αγωγός.","✅ Σωστό! Το καουτσούκ (λάστιχο) είναι μονωτής — γι'αυτό μονώνουν τα σύρματα."]},
+    {q:"Τι σημαίνει «ανοιχτό κύκλωμα»;",opts:["Το ρεύμα ρέει ελεύθερα","Η αντίσταση είναι μηδέν","Υπάρχει διακοπή — δεν ρέει ρεύμα","Η τάση είναι πολύ υψηλή"],ans:2,
+     fb:["❌ Λάθος.","❌ Λάθος. R=0 σημαίνει βραχυκύκλωμα.","✅ Σωστό! Ανοιχτό κύκλωμα = διακοπή αγωγού → I = 0.","❌ Λάθος."]},
+    {q:"Γιατί επικίνδυνο να αγγίζεις ηλεκτρικές εγκαταστάσεις με βρεγμένα χέρια;",opts:["Γιατί το νερό απορροφά ρεύμα","Γιατί το νερό είναι καλός αγωγός ηλεκτρισμού","Γιατί τα νερό είναι μονωτής","Δεν είναι επικίνδυνο"],ans:1,
+     fb:["❌ Λάθος.","✅ Σωστό! Το νερό (ειδικά αλμυρό ή με ανόργανα άλατα) είναι αγωγός. Επιτρέπει τη ροή ρεύματος μέσω του σώματος.","❌ Λάθος.","❌ Λάθος. Είναι εξαιρετικά επικίνδυνο!"]}
+  ]
+];
+
+function buildQuizzes(){
+  QUIZZES.forEach((qs,ci)=>{
+    const el=document.getElementById('quiz'+ci);
+    let html='';
+    qs.forEach((q,qi)=>{
+      html+=`<div class="quiz-q" id="qq${ci}_${qi}">
+        <p>${qi+1}. ${q.q}</p>
+        <div class="opts">`;
+      q.opts.forEach((o,oi)=>{
+        html+=`<button class="opt" onclick="answer(${ci},${qi},${oi})">${o}</button>`;
+      });
+      html+=`</div><div class="feedback" id="fb${ci}_${qi}" hidden></div></div>`;
+    });
+    html+=`<button class="btn" onclick="scoreQuiz(${ci})">📊 Αποτελέσματα</button>
+           <div class="quiz-score" id="score${ci}" hidden></div>`;
+    el.innerHTML=html;
+  });
+}
+
+function answer(ci,qi,oi){
+  const q=QUIZZES[ci][qi];
+  const opts=document.querySelectorAll(`#qq${ci}_${qi} .opt`);
+  opts.forEach(b=>b.disabled=true);
+  opts[oi].classList.add(oi===q.ans?'correct':'wrong');
+  if(oi!==q.ans) opts[q.ans].classList.add('correct');
+  const fb=document.getElementById(`fb${ci}_${qi}`);
+  fb.textContent=q.fb[oi];
+  fb.className='feedback '+(oi===q.ans?'ok':'err');
+  fb.hidden=false;
+}
+
+function scoreQuiz(ci){
+  const qs=QUIZZES[ci];
+  let correct=0;
+  qs.forEach((q,qi)=>{
+    const opts=document.querySelectorAll(`#qq${ci}_${qi} .opt`);
+    if([...opts].some((b,oi)=>oi===q.ans&&b.classList.contains('correct'))) correct++;
+  });
+  const sc=document.getElementById('score'+ci);
+  const pct=Math.round(correct/qs.length*100);
+  const emoji=pct>=80?'🏆':pct>=60?'👍':'📚';
+  sc.innerHTML=`${emoji} Σκορ: ${correct}/${qs.length} (${pct}%)<br><small>${pct>=80?'Εξαιρετικά!':pct>=60?'Καλά! Επανέλαβε τα λάθη.':'Μελέτησε ξανά το κεφάλαιο.'}</small>`;
+  sc.hidden=false;
+}
+
+// ── CHAPTER 1 INTERACTIVE — Density (LOG SCALE) ──
+// ── CANVAS HELPER: resize to actual display size ──
+function setupCV(id){
+  const cv=document.getElementById(id);
+  if(!cv)return null;
+  const dpr=window.devicePixelRatio||1;
+  const W=cv.clientWidth||400;
+  const H=cv.clientHeight||200;
+  cv.width=Math.round(W*dpr);
+  cv.height=Math.round(H*dpr);
+  const ctx=cv.getContext('2d');
+  ctx.scale(dpr,dpr);
+  const dark=document.documentElement.dataset.theme==='dark'||
+    (!document.documentElement.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);
+  return{ctx,W,H,dark,fg:dark?'#f1f5f9':'#1a202c',grid:dark?'#334155':'#e2e8f0'};
+}
+
+// ── ANIMATION STATE ──
+const A={
+  mot:{raf:null,t:0,on:false},
+  spr:{raf:null,t:0,on:false},
+  en:{raf:null,t:0,on:false}
+};
+function stopA(k){if(A[k].raf)cancelAnimationFrame(A[k].raf);A[k].raf=null;A[k].on=false;}
+
+// ═══ CH0 DENSITY ═══
+function calcDensity(){
+  const m=+document.getElementById('massSlider').value;
+  const vL=+document.getElementById('volSlider').value;
+  const vM3=vL/1000;
+  const rho=m/vM3;
+  document.getElementById('massVal').textContent=m+' kg';
+  document.getElementById('volVal').textContent=vL+' L';
+  document.getElementById('densResult').textContent='ρ = '+rho.toFixed(1)+' kg/m³';
+  const materials=[
+    {name:'Αέρας',rho:1.2},{name:'Ξύλο',rho:700},{name:'Νερό',rho:1000},
+    {name:'Αλουμίνιο',rho:2700},{name:'Σίδηρος',rho:7874},{name:'Χρυσός',rho:19300}
+  ];
+  let best=materials[0],bestDiff=Infinity;
+  materials.forEach(mat=>{const d=Math.abs(Math.log10(mat.rho)-Math.log10(rho));if(d<bestDiff){bestDiff=d;best=mat;}});
+  document.getElementById('densComment').textContent='≈ '+best.name;
+  drawDensityBar(m,vL,rho);
+}
+
+function drawDensityBar(m,vL,rho){
+  const s=setupCV('densCanvas'); if(!s)return;
+  const {ctx,W,H,fg,grid}=s;
+  const bars=[
+    {label:'Αέρας',v:1.2,color:'#94a3b8'},
+    {label:'Ξύλο',v:700,color:'#a16207'},
+    {label:'Νερό',v:1000,color:'#3b82f6'},
+    {label:'Αλουμ.',v:2700,color:'#6366f1'},
+    {label:'Σίδηρος',v:7874,color:'#dc2626'},
+    {label:'Σου',v:rho,color:'#16a34a'}
+  ];
+  const ml=46,mr=12,mt=18,mb=44;
+  const cw=W-ml-mr, ch=H-mt-mb;
+  const baseY=mt+ch;
+  const bw=Math.max(Math.floor(cw/bars.length)-6,8);
+  const logMin=0,logMax=5;
+
+  // Grid + Y ticks
+  ctx.strokeStyle=grid;ctx.lineWidth=1;
+  ctx.fillStyle=fg;ctx.font='10px system-ui';ctx.textAlign='right';
+  ['1','10','100','1k','10k'].forEach((lbl,p)=>{
+    const y=baseY-((p-logMin)/(logMax-logMin))*ch;
+    ctx.beginPath();ctx.moveTo(ml,y);ctx.lineTo(ml+cw,y);ctx.stroke();
+    ctx.fillText(lbl,ml-4,y+4);
+  });
+  // Axes
+  ctx.strokeStyle=fg;ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(ml,mt);ctx.lineTo(ml,baseY);ctx.lineTo(ml+cw,baseY);ctx.stroke();
+  // Y label
+  ctx.save();ctx.translate(11,mt+ch/2);ctx.rotate(-Math.PI/2);
+  ctx.fillStyle=fg;ctx.font='10px system-ui';ctx.textAlign='center';
+  ctx.fillText('ρ (kg/m³) — λογ.',0,0);ctx.restore();
+
+  // Bars
+  ctx.textAlign='center';
+  bars.forEach((b,i)=>{
+    const logV=Math.log10(Math.max(b.v,0.1));
+    const bh=Math.max(((logV-logMin)/(logMax-logMin))*ch,2);
+    const x=ml+4+i*(bw+6);
+    ctx.fillStyle=b.color+'bb';
+    ctx.fillRect(x,baseY-bh,bw,bh);
+    ctx.strokeStyle=b.color;ctx.lineWidth=2;
+    ctx.strokeRect(x,baseY-bh,bw,bh);
+    // value label
+    ctx.fillStyle=fg;ctx.font='9px system-ui';
+    const vLabel=b.v>=1000?(b.v/1000).toFixed(1)+'k':b.v.toFixed(b.v<10?1:0);
+    ctx.fillText(vLabel,x+bw/2,Math.max(baseY-bh-3,mt+10));
+    // name below
+    ctx.fillStyle=b.label==='Σου'?'#16a34a':fg;
+    ctx.font=b.label==='Σου'?'bold 10px system-ui':'9px system-ui';
+    ctx.fillText(b.label,x+bw/2,baseY+13);
+    if(b.label==='Σου'){
+      ctx.strokeStyle='#16a34a';ctx.lineWidth=2.5;ctx.setLineDash([4,3]);
+      ctx.strokeRect(x-1,baseY-bh-1,bw+2,bh+2);ctx.setLineDash([]);
+    }
+  });
+}
+
+// ═══ CH1 MOTION — Animated car + live x-t graph ═══
+function toggleMotion(){
+  if(A.mot.on){stopA('mot');document.getElementById('motPlayBtn').textContent='▶ Εκκίνηση';}
+  else{
+    const tMax=+document.getElementById('tSlider').value;
+    if(A.mot.t>=tMax)A.mot.t=0;
+    A.mot.on=true;
+    document.getElementById('motPlayBtn').textContent='⏸ Παύση';
+    loopMotion();
+  }
+}
+function resetMotion(){stopA('mot');A.mot.t=0;document.getElementById('motPlayBtn').textContent='▶ Εκκίνηση';drawMotion();}
+function loopMotion(){
+  if(!A.mot.on)return;
+  const tMax=+document.getElementById('tSlider').value;
+  A.mot.t=Math.min(A.mot.t+0.05,tMax);
+  drawMotion();
+  if(A.mot.t<tMax)A.mot.raf=requestAnimationFrame(loopMotion);
+  else{A.mot.on=false;document.getElementById('motPlayBtn').textContent='▶ Εκκίνηση';}
+}
+
+function drawMotion(){
+  const v=+document.getElementById('velSlider').value;
+  const tMax=+document.getElementById('tSlider').value;
+  const tCur=Math.min(A.mot.on||A.mot.t>0?A.mot.t:tMax, tMax);
+  const xCur=v*tCur;
+  document.getElementById('velVal').textContent=v+' m/s';
+  document.getElementById('tVal').textContent=tMax+' s';
+  document.getElementById('motResult').textContent='x = υ·t = '+v+'×'+tMax.toFixed(0)+' = '+(v*tMax).toFixed(0)+' m';
+  document.getElementById('motPosLive').textContent=xCur.toFixed(1)+' m';
+
+  const s=setupCV('motCanvas'); if(!s)return;
+  const {ctx,W,H,fg,grid,dark}=s;
+  ctx.save(); ctx.beginPath(); ctx.rect(0,0,W,H); ctx.clip();
+
+  // Split canvas: top 1/3 = track animation, bottom 2/3 = graphs
+  const trackH=Math.floor(H*0.32);
+  const graphY=trackH+8;
+  const graphH=H-graphY-4;
+
+  // ── TRACK ANIMATION ──
+  const xMax=v*tMax;
+  const trackL=40, trackR=W-20;
+  const trackW=trackR-trackL;
+  const carFrac=xMax>0?xCur/xMax:0;
+
+  // Road
+  ctx.fillStyle=dark?'#334155':'#e2e8f0';
+  ctx.fillRect(trackL-10,trackH/2-8,trackW+20,16);
+  // Dashed center line
+  ctx.strokeStyle=dark?'#fbbf24':'#ca8a04';ctx.lineWidth=1.5;ctx.setLineDash([10,8]);
+  ctx.beginPath();ctx.moveTo(trackL,trackH/2);ctx.lineTo(trackR,trackH/2);ctx.stroke();
+  ctx.setLineDash([]);
+  // Start / end markers
+  ctx.fillStyle='#16a34a';ctx.font='bold 10px system-ui';ctx.textAlign='center';
+  ctx.fillText('x=0',trackL,trackH/2-14);
+  ctx.fillStyle='#dc2626';
+  ctx.fillText('x='+(xMax).toFixed(0)+'m',trackR,trackH/2-14);
+
+  // Car (simple rect + wheels)
+  const carX=trackL+carFrac*trackW;
+  const carW=38,carBH=12,carTH=9;
+  ctx.fillStyle='#2563eb';
+  ctx.beginPath();
+  ctx.roundRect(carX-carW/2,trackH/2-carBH-carTH,carW,carTH+2,4);
+  ctx.fill();
+  ctx.fillStyle='#3b82f6';
+  ctx.fillRect(carX-carW/2,trackH/2-carBH,carW,carBH);
+  // wheels
+  [[carX-carW/2+7,trackH/2+1],[carX+carW/2-7,trackH/2+1]].forEach(([wx,wy])=>{
+    ctx.fillStyle='#1e293b';ctx.beginPath();ctx.arc(wx,wy,5,0,2*Math.PI);ctx.fill();
+    ctx.fillStyle='#94a3b8';ctx.beginPath();ctx.arc(wx,wy,2.5,0,2*Math.PI);ctx.fill();
+  });
+  // Velocity arrow
+  if(v>0&&carFrac<0.95){
+    ctx.strokeStyle='#f59e0b';ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(carX+carW/2,trackH/2-carBH/2);ctx.lineTo(carX+carW/2+18,trackH/2-carBH/2);ctx.stroke();
+    ctx.fillStyle='#f59e0b';
+    ctx.beginPath();ctx.moveTo(carX+carW/2+22,trackH/2-carBH/2);ctx.lineTo(carX+carW/2+14,trackH/2-carBH/2-4);ctx.lineTo(carX+carW/2+14,trackH/2-carBH/2+4);ctx.closePath();ctx.fill();
+    ctx.fillStyle='#f59e0b';ctx.font='9px system-ui';ctx.textAlign='left';
+    ctx.fillText('υ='+v,carX+carW/2+24,trackH/2-carBH/2+4);
+  }
+  // Time display
+  ctx.fillStyle=fg;ctx.font='10px system-ui';ctx.textAlign='right';
+  ctx.fillText('t = '+tCur.toFixed(1)+' s',W-8,16);
+
+  // ── GRAPHS: x-t (left half) and v-t (right half) ──
+  const midX=W/2;
+  const ml=36,mr=12,mt2=graphY+12,mb=28;
+  const gw=(midX-ml-mr-8);
+  const gh=H-mt2-mb;
+
+  function drawGraph(ox,label,maxY,lineColor,fillFn){
+    // Grid
+    ctx.strokeStyle=grid;ctx.lineWidth=0.8;
+    for(let i=1;i<=4;i++){
+      ctx.beginPath();ctx.moveTo(ox,mt2+gh-i*gh/4);ctx.lineTo(ox+gw,mt2+gh-i*gh/4);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(ox+i*gw/4,mt2);ctx.lineTo(ox+i*gw/4,mt2+gh);ctx.stroke();
+    }
+    // Axes
+    ctx.strokeStyle=fg;ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(ox,mt2);ctx.lineTo(ox,mt2+gh+4);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(ox-4,mt2+gh);ctx.lineTo(ox+gw+4,mt2+gh);ctx.stroke();
+    // Labels
+    ctx.fillStyle=fg;ctx.font='9px system-ui';ctx.textAlign='center';
+    ctx.fillText('t (s)',ox+gw/2,mt2+gh+22);
+    ctx.save();ctx.translate(ox-26,mt2+gh/2);ctx.rotate(-Math.PI/2);
+    ctx.fillText(label,0,0);ctx.restore();
+    // Tick values
+    const yDec=maxY<10?1:0, tDec=tMax<4?1:0;
+    ctx.font='8px system-ui';ctx.textAlign='right';
+    for(let i=1;i<=4;i++){
+      ctx.fillText((i/4*maxY).toFixed(yDec),ox-3,mt2+gh-i*gh/4+3);
+    }
+    ctx.textAlign='center';
+    for(let i=1;i<=4;i++){
+      ctx.fillText((i/4*tMax).toFixed(tDec),ox+i*gw/4,mt2+gh+11);
+    }
+    // Curve
+    fillFn(ox,gw,gh,mt2,maxY);
+  }
+
+  // x-t graph (left)
+  drawGraph(ml,'x (m)',v*tMax,'#2563eb',(ox,gw,gh,mt2,maxY)=>{
+    // Shaded area up to tCur
+    ctx.fillStyle='#2563eb22';
+    ctx.beginPath();ctx.moveTo(ox,mt2+gh);
+    ctx.lineTo(ox+tCur/tMax*gw,mt2+gh-tCur*v/maxY*gh);
+    ctx.lineTo(ox+tCur/tMax*gw,mt2+gh);ctx.closePath();ctx.fill();
+    // Full line (dashed)
+    ctx.strokeStyle='#2563eb44';ctx.lineWidth=1.5;ctx.setLineDash([4,4]);
+    ctx.beginPath();ctx.moveTo(ox,mt2+gh);ctx.lineTo(ox+gw,mt2);ctx.stroke();ctx.setLineDash([]);
+    // Animated portion
+    ctx.strokeStyle='#2563eb';ctx.lineWidth=2.5;
+    ctx.beginPath();ctx.moveTo(ox,mt2+gh);ctx.lineTo(ox+tCur/tMax*gw,mt2+gh-tCur*v/maxY*gh);ctx.stroke();
+    // Moving dot
+    ctx.fillStyle='#2563eb';ctx.beginPath();ctx.arc(ox+tCur/tMax*gw,mt2+gh-tCur*v/maxY*gh,5,0,2*Math.PI);ctx.fill();
+    ctx.fillStyle=fg;ctx.font='bold 9px system-ui';ctx.textAlign='left';
+    ctx.fillText('x=υ·t',ox+4,mt2+10);
+  });
+
+  // v-t graph (right)
+  const ox2=midX+ml;
+  drawGraph(ox2,'υ (m/s)',v*1.2,'#16a34a',(ox,gw,gh,mt2,maxY)=>{
+    // Horizontal line at v
+    const lineY=mt2+gh-v/maxY*gh;
+    ctx.fillStyle='#16a34a22';
+    ctx.fillRect(ox,lineY,tCur/tMax*gw,mt2+gh-lineY);
+    ctx.strokeStyle='#16a34a44';ctx.lineWidth=1.5;ctx.setLineDash([4,4]);
+    ctx.beginPath();ctx.moveTo(ox,lineY);ctx.lineTo(ox+gw,lineY);ctx.stroke();ctx.setLineDash([]);
+    ctx.strokeStyle='#16a34a';ctx.lineWidth=2.5;
+    ctx.beginPath();ctx.moveTo(ox,lineY);ctx.lineTo(ox+tCur/tMax*gw,lineY);ctx.stroke();
+    ctx.fillStyle='#16a34a';ctx.beginPath();ctx.arc(ox+tCur/tMax*gw,lineY,5,0,2*Math.PI);ctx.fill();
+    ctx.fillStyle=fg;ctx.font='bold 9px system-ui';ctx.textAlign='left';
+    ctx.fillText('υ='+v+' m/s',ox+4,mt2+10);
+    // Area label
+    ctx.fillStyle='#16a34a99';ctx.font='8px system-ui';ctx.textAlign='center';
+    if(tCur>tMax*0.15) ctx.fillText('εμβαδόν=x='+xCur.toFixed(0)+'m',ox+tCur/tMax*gw/2,lineY+(mt2+gh-lineY)/2+4);
+  });
+  ctx.restore();
+}
+
+// ═══ CH2 SPRING — SHM Animation ═══
+function toggleSpring(){
+  if(A.spr.on){stopA('spr');document.getElementById('sprPlayBtn').textContent='▶ Ταλάντωση';}
+  else{
+    if(A.spr.t>20)A.spr.t=0;
+    A.spr.on=true;
+    document.getElementById('sprPlayBtn').textContent='⏸ Παύση';
+    loopSpring();
+  }
+}
+function resetSpring(){stopA('spr');A.spr.t=0;document.getElementById('sprPlayBtn').textContent='▶ Ταλάντωση';drawSpring();}
+function loopSpring(){
+  if(!A.spr.on)return;
+  A.spr.t+=0.008;
+  drawSpring();
+  A.spr.raf=requestAnimationFrame(loopSpring);
+}
+
+// ═══ CH4 ENERGY — Free-fall Animation ═══
+function toggleEnergy(){
+  if(A.en.on){stopA('en');document.getElementById('enPlayBtn').textContent='▶ Ελεύθερη Πτώση';}
+  else{
+    const h=+document.getElementById('ehSlider').value;
+    const tFall=Math.sqrt(2*h/10);
+    if(A.en.t>=tFall)A.en.t=0;
+    A.en.on=true;
+    document.getElementById('enPlayBtn').textContent='⏸ Παύση';
+    loopEnergy();
+  }
+}
+function resetEnergy(){stopA('en');A.en.t=0;document.getElementById('enPlayBtn').textContent='▶ Ελεύθερη Πτώση';drawEnergy();}
+function loopEnergy(){
+  if(!A.en.on)return;
+  const h=+document.getElementById('ehSlider').value;
+  const tFall=Math.sqrt(2*h/10);
+  A.en.t=Math.min(A.en.t+0.007,tFall);
+  drawEnergy();
+  if(A.en.t<tFall)A.en.raf=requestAnimationFrame(loopEnergy);
+  else{A.en.on=false;document.getElementById('enPlayBtn').textContent='▶ Ελεύθερη Πτώση';}
+}
+
+function drawGraphFull(ctx,ox,oy,w,h,fg,grid,yL,xL,fn,tMax,yMax,color,shadeArea){
+  const nGrid=4;
+  // Grid lines
+  ctx.strokeStyle=grid;ctx.lineWidth=1;
+  for(let i=1;i<=nGrid;i++){
+    const gx=ox+i*w/nGrid;
+    ctx.beginPath();ctx.moveTo(gx,oy);ctx.lineTo(gx,oy+h);ctx.stroke();
+    const gy=oy+h-i*h/nGrid;
+    ctx.beginPath();ctx.moveTo(ox,gy);ctx.lineTo(ox+w,gy);ctx.stroke();
+  }
+  // Axes with arrow tips
+  ctx.strokeStyle=fg;ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(ox,oy);ctx.lineTo(ox,oy+h+4);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(ox-4,oy+h);ctx.lineTo(ox+w+4,oy+h);ctx.stroke();
+  // Arrow heads
+  ctx.fillStyle=fg;
+  ctx.beginPath();ctx.moveTo(ox,oy-2);ctx.lineTo(ox-4,oy+8);ctx.lineTo(ox+4,oy+8);ctx.closePath();ctx.fill();
+  ctx.beginPath();ctx.moveTo(ox+w+4,oy+h);ctx.lineTo(ox+w-6,oy+h-4);ctx.lineTo(ox+w-6,oy+h+4);ctx.closePath();ctx.fill();
+
+  // Axis labels (name)
+  ctx.fillStyle=fg;ctx.font='11px system-ui';ctx.textAlign='center';
+  ctx.fillText(xL,ox+w/2,oy+h+32);
+  ctx.save();ctx.translate(ox-36,oy+h/2);ctx.rotate(-Math.PI/2);
+  ctx.fillText(yL,0,0);ctx.restore();
+
+  // Tick VALUE labels on X axis
+  ctx.font='10px system-ui';ctx.textAlign='center';
+  for(let i=1;i<=nGrid;i++){
+    const gx=ox+i*w/nGrid;
+    const val=(i/nGrid*tMax);
+    ctx.fillStyle=fg;
+    ctx.fillText(val%1===0?val.toFixed(0):val.toFixed(1),gx,oy+h+14);
+  }
+  // Tick VALUE labels on Y axis
+  ctx.textAlign='right';
+  for(let i=1;i<=nGrid;i++){
+    const gy=oy+h-i*h/nGrid;
+    const val=(i/nGrid*yMax);
+    ctx.fillStyle=fg;
+    ctx.fillText(val%1===0?val.toFixed(0):val.toFixed(1),ox-4,gy+4);
+  }
+
+  // Plot line
+  ctx.strokeStyle=color;ctx.lineWidth=2.5;
+  ctx.beginPath();
+  const N=120;
+  for(let i=0;i<=N;i++){
+    const t=i/N*tMax;
+    const y=fn(t);
+    const px=ox+t/tMax*w;
+    const py=oy+h-Math.min(y/yMax,1)*h;
+    i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);
+  }
+  ctx.stroke();
+
+  // Shading for v-t: shade area = displacement
+  if(shadeArea){
+    ctx.fillStyle=color+'22';
+    ctx.beginPath();
+    ctx.moveTo(ox,oy+h-fn(0)/yMax*h);
+    for(let i=0;i<=N;i++){
+      const t=i/N*tMax;
+      const y=fn(t);
+      ctx.lineTo(ox+t/tMax*w,oy+h-Math.min(y/yMax,1)*h);
+    }
+    ctx.lineTo(ox+w,oy+h);ctx.lineTo(ox,oy+h);ctx.closePath();ctx.fill();
+    ctx.fillStyle=color;ctx.font='10px system-ui';ctx.textAlign='center';
+    ctx.fillText('εμβαδόν = Δx = '+Math.round(fn(tMax))+'m',ox+w/2,oy+h-14);
+  }
+}
+
+// ── CHAPTER 3 INTERACTIVE — Spring (sinusoidal coils, correct F-x graph) ──
+function drawSpring(){
+  const k=+document.getElementById('kSlider').value;
+  const f=+document.getElementById('fSlider').value;
+  const xStatic=f/k; // static extension (m)
+  const masKg=(f/10).toFixed(1);
+  document.getElementById('kVal').textContent=k+' N/m';
+  document.getElementById('fVal').textContent=f+' N';
+
+  // SHM animation: x(t)= xStatic·cos(ωt), ω=√(k/m)
+  const m=Math.max(f/10,0.1);
+  const omega=Math.sqrt(k/m);
+  const xAnim=A.spr.on||A.spr.t>0 ? xStatic*Math.cos(omega*A.spr.t) : xStatic;
+  const xCm=(xAnim*100).toFixed(1);
+  document.getElementById('springResult').textContent=
+    A.spr.on ? 'x(t) = '+xCm+' cm  (SHM, ω='+omega.toFixed(1)+' rad/s)' :
+               'x = F/k = '+f+'/'+k+' = '+(xStatic*100).toFixed(1)+' cm  |  m ≈ '+masKg+' kg';
+  document.getElementById('sprXLive').textContent=xCm+' cm';
+
+  const s=setupCV('springCanvas'); if(!s)return;
+  const {ctx,W,H,fg,dark}=s;
+  ctx.save(); ctx.beginPath(); ctx.rect(0,0,W,H); ctx.clip();
+  const wallC=dark?'#475569':'#94a3b8';
+
+  // --- Left side: spring diagram ---
+  const cx=Math.floor(W*0.06),sy=28,springW=Math.floor(W*0.09);
+  const L0=Math.floor(H*0.3);
+  const maxExt=Math.floor(H*0.42);
+  const ext=Math.min(Math.abs(xAnim)*300,maxExt); // animated extension (absolute value for drawing)
+  const extSign=xAnim>=0?1:-1; // direction: +1 below, -1 above (compressed)
+  const totalL=L0+ext*extSign;
+  const coils=8;
+  const springMidX=cx+springW/2;
+
+  // Ceiling (hatch)
+  ctx.fillStyle=wallC;
+  ctx.fillRect(cx-12,sy-14,springW+24,12);
+  ctx.strokeStyle=wallC;ctx.lineWidth=1;
+  for(let i=0;i<7;i++){
+    ctx.beginPath();ctx.moveTo(cx-12+i*9,sy-14);ctx.lineTo(cx-12+i*9-7,sy-28);ctx.stroke();
+  }
+  // Vertical line from ceiling to top of spring
+  ctx.strokeStyle=fg;ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(springMidX,sy-2);ctx.lineTo(springMidX,sy+4);ctx.stroke();
+
+  // Spring coils — sinusoidal lineTo loop
+  ctx.strokeStyle='#2563eb';ctx.lineWidth=2;
+  ctx.beginPath();
+  const pts=400;
+  for(let i=0;i<=pts;i++){
+    const t=i/pts;
+    const py=sy+4+t*totalL;
+    const amp=(i<5||i>pts-5)?0:springW/2; // flat ends
+    const px=springMidX+Math.sin(t*coils*2*Math.PI)*amp;
+    i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);
+  }
+  ctx.stroke();
+
+  // Mass block (clamp to canvas)
+  const blockY=Math.min(sy+4+totalL, H-60);
+  const mbw=springW+14;
+  ctx.fillStyle='#7c3aed88';
+  ctx.strokeStyle='#7c3aed';ctx.lineWidth=2;
+  ctx.fillRect(cx-7,blockY,mbw,36);
+  ctx.strokeRect(cx-7,blockY,mbw,36);
+  ctx.fillStyle=fg;ctx.font='bold 10px system-ui';ctx.textAlign='center';
+  ctx.fillText('m≈'+masKg+'kg',springMidX,blockY+13);
+  ctx.font='9px system-ui';
+  ctx.fillText('W='+f+'N',springMidX,blockY+27);
+
+  // Weight arrow (below block, only when not compressed)
+  if(xAnim>=0&&blockY+48<H-4){
+    ctx.strokeStyle='#dc2626';ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(springMidX,blockY+36);ctx.lineTo(springMidX,blockY+50);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(springMidX-4,blockY+44);ctx.lineTo(springMidX,blockY+51);ctx.lineTo(springMidX+4,blockY+44);ctx.stroke();
+    ctx.fillStyle='#dc2626';ctx.font='9px system-ui';ctx.textAlign='left';
+    ctx.fillText('W=mg',springMidX+5,blockY+50);
+  }
+
+  // Natural length bracket (right side)
+  const bracketX=cx+springW+16;
+  ctx.strokeStyle='#64748b';ctx.lineWidth=1;ctx.setLineDash([4,3]);
+  ctx.beginPath();ctx.moveTo(bracketX,sy+4);ctx.lineTo(bracketX,sy+4+L0);ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='#64748b';ctx.font='9px system-ui';ctx.textAlign='left';
+  ctx.fillText('L₀',bracketX+3,sy+4+L0/2+4);
+
+  // Extension/compression bracket
+  if(ext>4){
+    const extColor=xAnim>=0?'#dc2626':'#f59e0b';
+    ctx.strokeStyle=extColor;ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(cx-20,sy+4+L0);ctx.lineTo(cx-20,sy+4+totalL);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(cx-25,sy+4+L0);ctx.lineTo(cx-15,sy+4+L0);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(cx-25,sy+4+totalL);ctx.lineTo(cx-15,sy+4+totalL);ctx.stroke();
+    ctx.fillStyle=extColor;ctx.font='bold 9px system-ui';ctx.textAlign='right';
+    ctx.fillText('x='+xCm+'cm',cx-22,sy+4+L0+ext*extSign/2+4);
+  }
+
+  // Force arrow (spring tension — upward when extended)
+  const arrowDir=xAnim>=0?-1:1;
+  ctx.strokeStyle='#16a34a';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(springMidX,blockY);ctx.lineTo(springMidX,blockY+arrowDir*18);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(springMidX-4,blockY+arrowDir*12);ctx.lineTo(springMidX,blockY+arrowDir*19);ctx.lineTo(springMidX+4,blockY+arrowDir*12);ctx.stroke();
+  ctx.fillStyle='#16a34a';ctx.font='9px system-ui';ctx.textAlign='right';
+  ctx.fillText('F=k·x',springMidX-2,blockY+arrowDir*9+3);
+
+  // --- Right side: F-x graph ---
+  const gx=cx+springW+Math.floor(W*0.22), gy=22, gw=W-gx-14, gh=H-gy-44;
+  const maxF=Math.max(f*1.5,40);
+  const maxX2=maxF/k;
+  const gridC=dark?'#334155':'#e2e8f0';
+
+  // Grid
+  ctx.strokeStyle=gridC;ctx.lineWidth=1;
+  const nG=4;
+  for(let i=1;i<=nG;i++){
+    ctx.beginPath();ctx.moveTo(gx+i*gw/nG,gy);ctx.lineTo(gx+i*gw/nG,gy+gh);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(gx,gy+i*gh/nG);ctx.lineTo(gx+gw,gy+i*gh/nG);ctx.stroke();
+  }
+  // Axes
+  ctx.strokeStyle=fg;ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(gx,gy);ctx.lineTo(gx,gy+gh+4);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(gx-4,gy+gh);ctx.lineTo(gx+gw+4,gy+gh);ctx.stroke();
+  ctx.fillStyle=fg;
+  ctx.beginPath();ctx.moveTo(gx,gy-2);ctx.lineTo(gx-4,gy+8);ctx.lineTo(gx+4,gy+8);ctx.closePath();ctx.fill();
+  ctx.beginPath();ctx.moveTo(gx+gw+4,gy+gh);ctx.lineTo(gx+gw-6,gy+gh-4);ctx.lineTo(gx+gw-6,gy+gh+4);ctx.closePath();ctx.fill();
+
+  // Axis labels
+  ctx.fillStyle=fg;ctx.font='10px system-ui';ctx.textAlign='center';
+  ctx.fillText('x (m)',gx+gw/2,gy+gh+28);
+  ctx.save();ctx.translate(gx-30,gy+gh/2);ctx.rotate(-Math.PI/2);
+  ctx.fillText('F (N)',0,0);ctx.restore();
+
+  // Tick values
+  ctx.font='8px system-ui';ctx.textAlign='center';
+  for(let i=1;i<=nG;i++){
+    ctx.fillStyle=fg;
+    ctx.fillText((i/nG*maxX2).toFixed(2),gx+i*gw/nG,gy+gh+13);
+  }
+  ctx.textAlign='right';
+  for(let i=1;i<=nG;i++){
+    ctx.fillStyle=fg;
+    ctx.fillText((i/nG*maxF).toFixed(0),gx-3,gy+gh-i*gh/nG+4);
+  }
+
+  // F=k·x line
+  ctx.strokeStyle='#2563eb';ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.moveTo(gx,gy+gh);ctx.lineTo(gx+gw,gy);ctx.stroke();
+  ctx.fillStyle='#2563eb';ctx.font='bold 9px system-ui';ctx.textAlign='left';
+  ctx.fillText('F = k·x  (k='+k+'N/m)',gx+4,gy+11);
+
+  // Shaded triangle area = elastic PE
+  ctx.fillStyle='#2563eb18';
+  ctx.beginPath();ctx.moveTo(gx,gy+gh);ctx.lineTo(gx+gw,gy);ctx.lineTo(gx+gw,gy+gh);ctx.closePath();ctx.fill();
+  ctx.fillStyle='#2563eb88';ctx.font='9px system-ui';ctx.textAlign='center';
+  ctx.fillText('Ε_ελ = ½kx²',gx+gw*0.72,gy+gh*0.58);
+
+  // Animated dot on F-x graph (shows current x during SHM)
+  const dotXv=Math.abs(xAnim); // extension absolute value
+  const dotFv=k*dotXv; // F = k|x|
+  const dotX=gx+(dotXv/maxX2)*gw;
+  const dotY=gy+gh-(dotFv/maxF)*gh;
+  // Dashed guide lines
+  ctx.strokeStyle='#dc262688';ctx.lineWidth=1;ctx.setLineDash([3,3]);
+  ctx.beginPath();ctx.moveTo(dotX,gy+gh);ctx.lineTo(dotX,dotY);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(gx,dotY);ctx.lineTo(dotX,dotY);ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='#dc2626';
+  ctx.beginPath();ctx.arc(dotX,dotY,6,0,2*Math.PI);ctx.fill();
+  ctx.fillStyle=fg;ctx.font='9px system-ui';ctx.textAlign='center';
+  ctx.fillText('('+dotXv.toFixed(2)+'m, '+dotFv.toFixed(0)+'N)',dotX,dotY-10);
+  ctx.restore();
+}
+
+// ── CHAPTER 4 INTERACTIVE — Pressure (omnidirectional arrows, tick values) ──
+function drawPressure(){
+  const h=+document.getElementById('depthSlider').value;
+  const rho=+document.getElementById('liquidSel').value;
+  const p=rho*10*h;
+  document.getElementById('depthVal').textContent=h.toFixed(1)+' m';
+  document.getElementById('pressResult').textContent=
+    'p = ρ·g·h = '+rho+'×10×'+h.toFixed(1)+' = '+p.toLocaleString()+' Pa';
+
+  const s=setupCV('pressCanvas'); if(!s)return;
+  const {ctx,W,H,fg,dark}=s;
+  ctx.save(); ctx.beginPath(); ctx.rect(0,0,W,H); ctx.clip();
+  const gridC=dark?'#334155':'#e2e8f0';
+
+  // Container dimensions (responsive)
+  const cx=Math.floor(W*0.1), cy=22, cw=Math.floor(W*0.36), ch=H-56;
+  const maxH=10;
+
+  // Liquid fill
+  const colors={1000:'#3b82f6',1030:'#0e7490',800:'#ca8a04',13600:'#6b7280'};
+  const liqColor=colors[rho]||'#3b82f6';
+  ctx.fillStyle=liqColor+'33';
+  ctx.fillRect(cx,cy,cw,ch);
+  ctx.strokeStyle=liqColor;ctx.lineWidth=2.5;
+  ctx.strokeRect(cx,cy,cw,ch);
+
+  // Diver figure at selected depth
+  const hFrac=Math.min(h/maxH,1);
+  const hPx=hFrac*ch;
+  const diverY=cy+hPx;
+  // Diver circle (head)
+  ctx.fillStyle='#f59e0b';
+  ctx.beginPath();ctx.arc(cx+cw/2,diverY,9,0,2*Math.PI);ctx.fill();
+  ctx.strokeStyle='#92400e';ctx.lineWidth=1;ctx.stroke();
+
+  // Pressure arrows at diver depth — all 4 directions (omnidirectional)
+  const arrowBase=16+hFrac*26; // longer at greater depth
+  const arrowColor='#7c3aed';
+  function drawArrow(x1,y1,x2,y2){
+    const ang=Math.atan2(y2-y1,x2-x1);
+    ctx.strokeStyle=arrowColor;ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x2-8*Math.cos(ang-0.4),y2-8*Math.sin(ang-0.4));
+    ctx.lineTo(x2,y2);
+    ctx.lineTo(x2-8*Math.cos(ang+0.4),y2-8*Math.sin(ang+0.4));
+    ctx.stroke();
+  }
+  // From each direction TOWARD the diver (pressure acts inward)
+  const ax=cx+cw/2, ay=diverY;
+  const r=12; // offset from diver center
+  drawArrow(ax,ay-arrowBase-r,ax,ay-r);   // top → down
+  drawArrow(ax,ay+arrowBase+r,ax,ay+r);   // bottom → up
+  drawArrow(ax-arrowBase-r,ay,ax-r,ay);   // left → right
+  drawArrow(ax+arrowBase+r,ay,ax+r,ay);   // right → left
+
+  // Pressure label at diver
+  ctx.fillStyle=arrowColor;ctx.font='bold 10px system-ui';ctx.textAlign='center';
+  ctx.fillText('p='+p.toLocaleString()+'Pa',ax,ay+arrowBase+r+16);
+
+  // Depth arrows at 3 reference depths (show increasing arrows)
+  [0.25,0.5,0.75].forEach(frac=>{
+    if(Math.abs(frac-hFrac)>0.12){
+      const ry=cy+frac*ch;
+      const aLen=10+frac*18;
+      // small downward arrows along center to show p increases with depth
+      ctx.strokeStyle=liqColor+'99';ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(ax,ry-aLen/2);ctx.lineTo(ax,ry+aLen/2);ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(ax-3,ry+aLen/2-5);ctx.lineTo(ax,ry+aLen/2);ctx.lineTo(ax+3,ry+aLen/2-5);ctx.stroke();
+    }
+  });
+
+  // Depth ruler on right
+  ctx.strokeStyle='#dc2626';ctx.lineWidth=1.5;ctx.setLineDash([5,4]);
+  ctx.beginPath();ctx.moveTo(cx+cw+8,cy);ctx.lineTo(cx+cw+8,cy+hPx);ctx.stroke();
+  ctx.setLineDash([]);
+  // tick marks
+  ctx.beginPath();ctx.moveTo(cx+cw+4,cy);ctx.lineTo(cx+cw+12,cy);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(cx+cw+4,cy+hPx);ctx.lineTo(cx+cw+12,cy+hPx);ctx.stroke();
+  ctx.fillStyle='#dc2626';ctx.font='bold 11px system-ui';ctx.textAlign='left';
+  ctx.fillText('h='+h.toFixed(1)+'m',cx+cw+14,cy+hPx/2+4);
+
+  // Water surface label
+  ctx.fillStyle=fg;ctx.font='10px system-ui';ctx.textAlign='center';
+  ctx.fillText('▽ Επιφάνεια',cx+cw/2,cy-6);
+
+  // ── p vs h graph ──
+  const gx=cx+cw+Math.floor(W*0.1), gy=22, gw=W-gx-10, gh=ch;
+  const maxP=rho*10*maxH;
+  const nG=4;
+
+  // Grid
+  ctx.strokeStyle=gridC;ctx.lineWidth=1;
+  for(let i=1;i<=nG;i++){
+    ctx.beginPath();ctx.moveTo(gx+i*gw/nG,gy);ctx.lineTo(gx+i*gw/nG,gy+gh);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(gx,gy+i*gh/nG);ctx.lineTo(gx+gw,gy+i*gh/nG);ctx.stroke();
+  }
+  // Axes + arrows
+  ctx.strokeStyle=fg;ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(gx,gy-2);ctx.lineTo(gx,gy+gh+4);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(gx-4,gy+gh);ctx.lineTo(gx+gw+4,gy+gh);ctx.stroke();
+  ctx.fillStyle=fg;
+  ctx.beginPath();ctx.moveTo(gx,gy-2);ctx.lineTo(gx-4,gy+8);ctx.lineTo(gx+4,gy+8);ctx.closePath();ctx.fill();
+  ctx.beginPath();ctx.moveTo(gx+gw+4,gy+gh);ctx.lineTo(gx+gw-6,gy+gh-4);ctx.lineTo(gx+gw-6,gy+gh+4);ctx.closePath();ctx.fill();
+
+  // Labels
+  ctx.fillStyle=fg;ctx.font='11px system-ui';ctx.textAlign='center';
+  ctx.fillText('h (m)',gx+gw/2,gy+gh+30);
+  ctx.save();ctx.translate(gx-38,gy+gh/2);ctx.rotate(-Math.PI/2);
+  ctx.fillText('p (Pa)',0,0);ctx.restore();
+
+  // Tick values X (h axis)
+  ctx.font='9px system-ui';ctx.textAlign='center';
+  for(let i=1;i<=nG;i++){
+    const tv=i/nG*maxH;
+    ctx.fillStyle=fg;
+    ctx.fillText(tv.toFixed(1),gx+i*gw/nG,gy+gh+14);
+  }
+  // Tick values Y (p axis) — display in kPa if large
+  ctx.textAlign='right';
+  for(let i=1;i<=nG;i++){
+    const tv=i/nG*maxP;
+    ctx.fillStyle=fg;
+    const label=tv>=1000?(tv/1000).toFixed(0)+'k':tv.toFixed(0);
+    ctx.fillText(label,gx-4,gy+gh-i*gh/nG+4);
+  }
+
+  // p = ρgh line
+  ctx.strokeStyle=liqColor;ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.moveTo(gx,gy+gh);ctx.lineTo(gx+gw,gy);ctx.stroke();
+  ctx.fillStyle=liqColor;ctx.font='bold 10px system-ui';ctx.textAlign='left';
+  ctx.fillText('p = ρgh',gx+4,gy+12);
+
+  // Shaded area under line
+  ctx.fillStyle=liqColor+'18';
+  ctx.beginPath();ctx.moveTo(gx,gy+gh);ctx.lineTo(gx+gw,gy);ctx.lineTo(gx+gw,gy+gh);ctx.closePath();ctx.fill();
+
+  // Current point with guide lines
+  const px2=gx+(h/maxH)*gw;
+  const py2=gy+gh-(p/maxP)*gh;
+  ctx.strokeStyle='#dc262666';ctx.lineWidth=1;ctx.setLineDash([3,3]);
+  ctx.beginPath();ctx.moveTo(px2,gy+gh);ctx.lineTo(px2,py2);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(gx,py2);ctx.lineTo(px2,py2);ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='#dc2626';
+  ctx.beginPath();ctx.arc(px2,py2,7,0,2*Math.PI);ctx.fill();
+  ctx.fillStyle='#fff';ctx.font='bold 10px system-ui';ctx.textAlign='center';
+  ctx.fillText('●',px2,py2+1);
+  // Annotation
+  const pKpa=(p/1000).toFixed(1);
+  ctx.fillStyle=fg;ctx.font='10px system-ui';
+  ctx.fillText(p>=1000?pKpa+'kPa':p+'Pa',px2,py2-12);
+  ctx.restore();
+}
+
+// ── CHAPTER 5 INTERACTIVE — Energy (free-fall animation + live energy bars) ──
+function drawEnergy(){
+  const m=+document.getElementById('emSlider').value;
+  const h0=+document.getElementById('ehSlider').value;
+  const g=10;
+  const me=m*g*h0;
+  const vf=Math.sqrt(2*g*h0);
+  const tFall=Math.sqrt(2*h0/g);
+
+  // Animated state
+  const tCur=A.en.on||A.en.t>0 ? A.en.t : 0;
+  const hCur=Math.max(h0-0.5*g*tCur*tCur, 0);
+  const vCur=Math.min(g*tCur, vf);
+  const peFrac=hCur/h0;
+  const keFrac=1-peFrac;
+  const peCur=m*g*hCur;
+  const keCur=me-peCur;
+
+  document.getElementById('emVal').textContent=m+' kg';
+  document.getElementById('ehVal').textContent=h0+' m';
+  document.getElementById('epe').textContent=peCur.toFixed(0)+' J';
+  document.getElementById('eke').textContent=keCur.toFixed(0)+' J';
+  document.getElementById('evf').textContent=vCur.toFixed(1)+' m/s';
+  document.getElementById('enHLive').textContent=hCur.toFixed(1)+' m';
+
+  const s=setupCV('energyCanvas'); if(!s)return;
+  const {ctx,W,H,fg,dark}=s;
+  ctx.save(); ctx.beginPath(); ctx.rect(0,0,W,H); ctx.clip();
+
+  // ── LEFT HALF: Falling ball diagram ──
+  const lw=W/2-8;
+  const baseY=H-30;
+  const topY=32;
+  const diagramH=baseY-topY;
+  const midX=lw/2;
+
+  // Ground line
+  ctx.strokeStyle='#94a3b8';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(16,baseY);ctx.lineTo(lw-6,baseY);ctx.stroke();
+  ctx.fillStyle='#94a3b8';ctx.font='9px system-ui';ctx.textAlign='center';
+  ctx.fillText('h = 0 (αναφορά)',midX,baseY+14);
+
+  // Trajectory line (dashed)
+  ctx.strokeStyle='#94a3b866';ctx.lineWidth=1.5;ctx.setLineDash([4,4]);
+  ctx.beginPath();ctx.moveTo(midX,topY);ctx.lineTo(midX,baseY);ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Three ghost balls (static reference positions)
+  [[0,'#7c3aed','① αρχή'],[0.5,'#f59e0b','② μέση'],[1,'#16a34a','③ τέλος']].forEach(([fy,col,lbl])=>{
+    const by=topY+fy*diagramH;
+    ctx.beginPath();ctx.arc(midX,by,7,0,2*Math.PI);
+    ctx.fillStyle=col+'44';ctx.fill();
+    ctx.strokeStyle=col+'88';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle=col+'88';ctx.font='8px system-ui';ctx.textAlign='left';
+    ctx.fillText(lbl,midX+10,by+3);
+  });
+
+  // Animated ball — topY = high (h=h₀), baseY = ground (h=0)
+  const ballY=topY+(1-peFrac)*diagramH;
+  const ballR=11;
+  const ballColor=peFrac>0.6?'#7c3aed':peFrac>0.2?'#f59e0b':'#16a34a';
+  ctx.beginPath();ctx.arc(midX,ballY,ballR,0,2*Math.PI);
+  ctx.fillStyle=ballColor+'dd';ctx.fill();
+  ctx.strokeStyle=ballColor;ctx.lineWidth=2.5;ctx.stroke();
+  // velocity arrow
+  if(vCur>0.1){
+    const arLen=Math.min(vCur/vf*40,38);
+    ctx.strokeStyle='#f59e0b';ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(midX,ballY+ballR);ctx.lineTo(midX,ballY+ballR+arLen);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(midX-4,ballY+ballR+arLen-6);ctx.lineTo(midX,ballY+ballR+arLen);ctx.lineTo(midX+4,ballY+ballR+arLen-6);ctx.stroke();
+    ctx.fillStyle='#f59e0b';ctx.font='8px system-ui';ctx.textAlign='left';
+    ctx.fillText('v='+vCur.toFixed(1),midX+6,ballY+ballR+arLen/2+4);
+  }
+
+  // Height bracket
+  const bracketX=midX+ballR+22;
+  ctx.strokeStyle='#dc2626';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(bracketX,topY);ctx.lineTo(bracketX,baseY);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(bracketX-4,topY);ctx.lineTo(bracketX+4,topY);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(bracketX-4,baseY);ctx.lineTo(bracketX+4,baseY);ctx.stroke();
+  ctx.fillStyle='#dc2626';ctx.font='bold 9px system-ui';ctx.textAlign='left';
+  ctx.fillText('h₀='+h0+'m',bracketX+5,(topY+baseY)/2+4);
+  // Current height marker
+  if(tCur>0&&hCur>0.05){
+    ctx.strokeStyle='#dc262666';ctx.lineWidth=1;ctx.setLineDash([3,3]);
+    ctx.beginPath();ctx.moveTo(bracketX,ballY);ctx.lineTo(bracketX+30,ballY);ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle='#dc2626';ctx.font='8px system-ui';
+    ctx.fillText('h='+hCur.toFixed(1)+'m',bracketX+5,ballY-3);
+  }
+
+  // ME label
+  ctx.fillStyle='#dc2626';ctx.font='bold 9px system-ui';ctx.textAlign='center';
+  ctx.fillText('ΜΕ = '+me+' J (σταθερή)',midX,topY-14);
+
+  // Divider
+  ctx.strokeStyle=dark?'#334155':'#e2e8f0';ctx.lineWidth=1;ctx.setLineDash([4,4]);
+  ctx.beginPath();ctx.moveTo(W/2,8);ctx.lineTo(W/2,H-8);ctx.stroke();
+  ctx.setLineDash([]);
+
+  // ── RIGHT HALF: Live stacked energy bar ──
+  const rx=W/2+12;
+  const rw=W-rx-12;
+  const maxBarH=H-60;
+  const barBaseY=H-28;
+  const bw=Math.floor(rw*0.45);
+  const bx=rx+(rw-bw)/2;
+
+  // ME reference line
+  ctx.strokeStyle='#dc262666';ctx.lineWidth=1.5;ctx.setLineDash([4,3]);
+  ctx.beginPath();ctx.moveTo(rx,barBaseY-maxBarH);ctx.lineTo(W-10,barBaseY-maxBarH);ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='#dc2626';ctx.font='8px system-ui';ctx.textAlign='right';
+  ctx.fillText('ΜΕ='+me+'J',W-12,barBaseY-maxBarH-4);
+
+  // PE bar
+  const peH=Math.round(peFrac*maxBarH);
+  const keH=Math.round(keFrac*maxBarH);
+  if(peH>0){
+    ctx.fillStyle='#7c3aed33';ctx.strokeStyle='#7c3aed';ctx.lineWidth=2;
+    ctx.fillRect(bx,barBaseY-peH,bw,peH);
+    ctx.strokeRect(bx,barBaseY-peH,bw,peH);
+    ctx.fillStyle='#7c3aed';ctx.font='bold 9px system-ui';ctx.textAlign='center';
+    if(peH>20)ctx.fillText('ΔΕ='+peCur.toFixed(0)+'J',bx+bw/2,barBaseY-peH/2+4);
+  }
+  // KE bar (above PE)
+  if(keH>0){
+    const keBarY=barBaseY-peH-keH;
+    ctx.fillStyle='#16a34a33';ctx.strokeStyle='#16a34a';ctx.lineWidth=2;
+    ctx.fillRect(bx,keBarY,bw,keH);
+    ctx.strokeRect(bx,keBarY,bw,keH);
+    ctx.fillStyle='#16a34a';ctx.font='bold 9px system-ui';ctx.textAlign='center';
+    if(keH>20)ctx.fillText('ΚΕ='+keCur.toFixed(0)+'J',bx+bw/2,keBarY+keH/2+4);
+  }
+
+  // Bar base label
+  ctx.fillStyle=fg;ctx.font='9px system-ui';ctx.textAlign='center';
+  ctx.fillText(tCur>0?'t='+tCur.toFixed(1)+'s':'αρχή → τέλος',bx+bw/2,barBaseY+14);
+
+  // Legend
+  const ly=H-14;
+  ctx.fillStyle='#7c3aed';ctx.fillRect(rx,ly-9,10,9);
+  ctx.fillStyle=fg;ctx.font='8px system-ui';ctx.textAlign='left';
+  ctx.fillText('Δυν.Ε.',rx+13,ly);
+  ctx.fillStyle='#16a34a';ctx.fillRect(rx+55,ly-9,10,9);
+  ctx.fillStyle=fg;ctx.fillText('Κιν.Ε.',rx+68,ly);
+  ctx.fillStyle='#dc2626';ctx.fillRect(rx+110,ly-5,10,3);
+  ctx.fillStyle=fg;ctx.fillText('ΜΕ',rx+123,ly);
+  ctx.restore();
+}
+
+// ── INIT ──
+// ═══ CH5 HEAT ═══
+function drawHeat(){
+  const m=+document.getElementById('heatMassSlider').value;
+  const c=+document.getElementById('heatCSlider').value;
+  const dt=+document.getElementById('heatDtSlider').value;
+  const Q=m*c*dt;
+  document.getElementById('heatMassVal').textContent=m+' kg';
+  document.getElementById('heatCVal').textContent=c+' J/(kg·°C)';
+  document.getElementById('heatDtVal').textContent=dt+' °C';
+  document.getElementById('heatResult').textContent='Q = m·c·ΔΤ = '+m+'×'+c+'×'+dt+' = '+Q.toLocaleString('el')+' J';
+  const s=setupCV('heatCanvas');if(!s)return;
+  const {ctx,W,H,fg,dark}=s;
+  const materials=[
+    {name:'Νερό',c:4186,color:'#3b82f6'},
+    {name:'Σίδηρος',c:450,color:'#dc2626'},
+    {name:'Αλουμίν.',c:900,color:'#7c3aed'},
+    {name:'Χαλκός',c:385,color:'#f59e0b'},
+    {name:'Επιλογή',c,color:'#16a34a'},
+  ];
+  const ml=48,mr=12,mt=18,mb=44,bw2=Math.max(Math.floor((W-ml-mr)/materials.length)-6,12);
+  const cw=W-ml-mr,ch=H-mt-mb,baseY=mt+ch;
+  const maxC=5000;
+  ctx.strokeStyle=dark?'#334155':'#e2e8f0';ctx.lineWidth=1;
+  for(let i=1;i<=4;i++){const y=baseY-i*ch/4;ctx.beginPath();ctx.moveTo(ml,y);ctx.lineTo(ml+cw,y);ctx.stroke();}
+  ctx.strokeStyle=fg;ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(ml,mt);ctx.lineTo(ml,baseY);ctx.lineTo(ml+cw,baseY);ctx.stroke();
+  ctx.fillStyle=fg;ctx.font='9px system-ui';ctx.textAlign='right';
+  for(let i=1;i<=4;i++){ctx.fillText(i/4*maxC,ml-3,baseY-i*ch/4+3);}
+  ctx.save();ctx.translate(12,mt+ch/2);ctx.rotate(-Math.PI/2);
+  ctx.fillStyle=fg;ctx.font='9px system-ui';ctx.textAlign='center';ctx.fillText('c (J/kg·°C)',0,0);ctx.restore();
+  materials.forEach((mat,i)=>{
+    const bh=Math.max(mat.c/maxC*ch,2);
+    const x=ml+4+i*(bw2+6);
+    ctx.fillStyle=mat.color+'bb';ctx.fillRect(x,baseY-bh,bw2,bh);
+    ctx.strokeStyle=mat.color;ctx.lineWidth=2;ctx.strokeRect(x,baseY-bh,bw2,bh);
+    ctx.fillStyle=fg;ctx.font='9px system-ui';ctx.textAlign='center';
+    ctx.fillText(mat.c,x+bw2/2,baseY-bh-3);
+    ctx.fillStyle=mat.name==='Επιλογή'?'#16a34a':fg;
+    ctx.font=mat.name==='Επιλογή'?'bold 9px system-ui':'8px system-ui';
+    ctx.fillText(mat.name,x+bw2/2,baseY+13);
+  });
+}
+
+// ═══ CH6 ELECTRICITY ═══
+function drawElec(){
+  const V=+document.getElementById('elecVSlider').value;
+  const R=+document.getElementById('elecRSlider').value;
+  const I=V/R;
+  const P=V*I;
+  document.getElementById('elecVVal').textContent=V+' V';
+  document.getElementById('elecRVal').textContent=R+' Ω';
+  document.getElementById('elecResult').textContent='I = V/R = '+V+'/'+R+' = '+I.toFixed(2)+' A  |  P = V·I = '+P.toFixed(1)+' W';
+  const s=setupCV('elecCanvas');if(!s)return;
+  const {ctx,W,H,fg,dark}=s;
+  const ml=40,mr=12,mt=14,mb=44;
+  const cw=W-ml-mr,ch=H-mt-mb,baseY=mt+ch;
+  const maxV=12,maxI=3,maxR=100;
+  const Rvals=[5,10,20,50,100];
+  const colors=['#3b82f6','#16a34a','#f59e0b','#dc2626','#7c3aed'];
+  const gridC=dark?'#334155':'#e2e8f0';
+  ctx.strokeStyle=gridC;ctx.lineWidth=1;
+  for(let i=1;i<=4;i++){const y=baseY-i*ch/4;ctx.beginPath();ctx.moveTo(ml,y);ctx.lineTo(ml+cw,y);ctx.stroke();}
+  ctx.strokeStyle=fg;ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(ml,mt);ctx.lineTo(ml,baseY);ctx.lineTo(ml+cw,baseY);ctx.stroke();
+  ctx.fillStyle=fg;ctx.font='9px system-ui';ctx.textAlign='center';
+  ctx.fillText('Τάση V (V)',ml+cw/2,baseY+28);
+  ctx.save();ctx.translate(14,mt+ch/2);ctx.rotate(-Math.PI/2);
+  ctx.fillStyle=fg;ctx.font='9px system-ui';ctx.textAlign='center';ctx.fillText('I (A)',0,0);ctx.restore();
+  ctx.font='8px system-ui';
+  for(let i=1;i<=4;i++){ctx.fillText(i/4*maxV,ml+i*cw/4,baseY+12);ctx.textAlign='right';ctx.fillText((i/4*maxI).toFixed(1),ml-3,baseY-i*ch/4+3);ctx.textAlign='center';}
+  Rvals.forEach((rv,ri)=>{
+    ctx.strokeStyle=colors[ri];ctx.lineWidth=rv===R?3:1.5;
+    ctx.beginPath();
+    for(let vi=0;vi<=maxV;vi+=0.5){
+      const Iv=vi/rv,px2=ml+vi/maxV*cw,py2=baseY-Math.min(Iv,maxI)/maxI*ch;
+      vi===0?ctx.moveTo(px2,py2):ctx.lineTo(px2,py2);
+    }
+    ctx.stroke();
+    ctx.fillStyle=colors[ri];ctx.font='8px system-ui';ctx.textAlign='left';
+    ctx.fillText('R='+rv+'Ω',ml+cw+2,baseY-(maxV/rv)/maxI*ch+4);
+  });
+  const dotX=ml+V/maxV*cw,dotY=baseY-Math.min(I,maxI)/maxI*ch;
+  ctx.fillStyle='#dc2626';ctx.beginPath();ctx.arc(dotX,dotY,7,0,2*Math.PI);ctx.fill();
+  ctx.fillStyle=fg;ctx.font='9px system-ui';ctx.textAlign='center';
+  ctx.fillText('('+V+'V, '+I.toFixed(2)+'A)',dotX,dotY-12);
+}
+
+buildQuizzes();
+calcDensity();
+drawMotion();
+drawSpring();
+drawPressure();
+drawEnergy();
+drawHeat();
+drawElec();
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ΚΕΦΑΛΑΙΟ 6 — ΘΕΡΜΟΤΗΤΑ
+     ═══════════════════════════════════════════════════════════ -->
+<div class="chapter" id="ch5">
+  <div class="sec-tabs">
+    <button class="sec-tab active" onclick="showSec(5,0)">📖 Θεωρία</button>
+    <button class="sec-tab" onclick="showSec(5,1)">🌡️ Πείραμα</button>
+    <button class="sec-tab" onclick="showSec(5,2)">✏️ Quiz</button>
+  </div>
+  <!-- THEORY -->
+  <div class="section active" id="ch5-s0">
+    <div class="card">
+      <h3>6.1 Θερμοκρασία & Θερμότητα</h3>
+      <p>Η <strong>θερμοκρασία</strong> είναι μέτρο της μέσης κινητικής ενέργειας των μορίων. Μετράται σε <strong>βαθμούς Κελσίου (°C)</strong> ή <strong>Kelvin (K)</strong>.</p>
+      <div class="key"><strong>Σχέση Κελσίου – Kelvin</strong><span>T(K) = T(°C) + 273</span></div>
+      <div class="formula">T(K) = θ(°C) + 273</div>
+      <p>Η <strong>θερμότητα (Q)</strong> είναι η ενέργεια που μεταφέρεται λόγω διαφοράς θερμοκρασίας — μετράται σε <strong>Joule (J)</strong>.</p>
+      <div class="key"><strong>Διαφορά!</strong><span>Θερμοκρασία ≠ Θερμότητα. Ένα μικρό σώμα σε ψηλή θερμοκρασία μπορεί να έχει λιγότερη θερμότητα από μεγάλο σώμα σε χαμηλή θερμοκρασία.</span></div>
+    </div>
+    <div class="card">
+      <h3>6.2 Ειδική Θερμοχωρητικότητα</h3>
+      <p>Διαφορετικά υλικά χρειάζονται διαφορετικά ποσά θερμότητας για να ζεσταθούν κατά 1°C.</p>
+      <div class="formula">Q = m · c · ΔΤ</div>
+      <p style="text-align:center;font-size:.88rem;color:var(--fg2)">Q: θερμότητα (J), m: μάζα (kg), c: ειδική θερμοχωρητικότητα (J/kg·°C), ΔΤ: μεταβολή θερμοκρασίας (°C)</p>
+      <table class="tbl">
+        <tr><th>Υλικό</th><th>c (J/kg·°C)</th></tr>
+        <tr><td>Νερό</td><td>4 186</td></tr>
+        <tr><td>Αλουμίνιο</td><td>900</td></tr>
+        <tr><td>Σίδηρος</td><td>450</td></tr>
+        <tr><td>Χαλκός</td><td>385</td></tr>
+        <tr><td>Χρυσός</td><td>130</td></tr>
+      </table>
+      <div class="key"><strong>Γιατί το νερό είναι ιδανικό για ψύξη;</strong><span>Έχει πολύ μεγάλη ειδική θερμοχωρητικότητα (4186 J/kg·°C) — απορροφά πολλή θερμότητα χωρίς μεγάλη αύξηση θερμοκρασίας.</span></div>
+    </div>
+    <div class="card">
+      <h3>6.3 Θερμική Διαστολή</h3>
+      <p>Τα σώματα <strong>διαστέλλονται</strong> όταν θερμαίνονται και <strong>συστέλλονται</strong> όταν ψύχονται (εξαίρεση: νερό 0–4°C).</p>
+      <ul>
+        <li><strong>Γραμμική διαστολή:</strong> Δl = l₀ · α · ΔΤ</li>
+        <li><strong>Εφαρμογές:</strong> Ρελς σιδηρόδρομου (διάκενα), γέφυρες, θερμόμετρα</li>
+        <li><strong>Ανωμαλία νερού:</strong> Μέγιστη πυκνότητα στους 4°C — γι'αυτό τα ψάρια επιζούν κάτω από τον πάγο</li>
+      </ul>
+      <div class="diagram">
+        <svg viewBox="0 0 400 120" style="width:100%;max-height:120px" aria-label="Θερμική Διαστολή">
+          <defs>
+            <marker id="tArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#dc2626"/></marker>
+            <marker id="tArrowL" markerWidth="6" markerHeight="6" refX="1" refY="3" orient="auto"><path d="M6,0 L0,3 L6,6 Z" fill="#dc2626"/></marker>
+          </defs>
+          <!-- Cold bar -->
+          <rect x="20" y="40" width="120" height="30" rx="4" fill="#bfdbfe" stroke="#2563eb" stroke-width="2"/>
+          <text x="80" y="59" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="700">l₀ (ψυχρό)</text>
+          <text x="80" y="30" text-anchor="middle" font-size="9" fill="#64748b">T = 20°C</text>
+          <!-- Hot bar (wider) -->
+          <rect x="15" y="80" width="135" height="30" rx="4" fill="#fca5a5" stroke="#dc2626" stroke-width="2"/>
+          <text x="83" y="99" text-anchor="middle" font-size="11" fill="#991b1b" font-weight="700">l₀ + Δl (θερμό)</text>
+          <text x="83" y="78" text-anchor="middle" font-size="9" fill="#64748b">T = 100°C</text>
+          <!-- Expansion arrows -->
+          <line x1="15" y1="115" x2="3" y2="115" stroke="#dc2626" stroke-width="2" marker-end="url(#tArrowL)"/>
+          <line x1="150" y1="115" x2="162" y2="115" stroke="#dc2626" stroke-width="2" marker-end="url(#tArrow)"/>
+          <text x="83" y="118" text-anchor="middle" font-size="8" fill="#dc2626">← Δl →</text>
+          <!-- Formula -->
+          <text x="290" y="55" text-anchor="middle" font-size="16" font-weight="800" fill="#dc2626">Δl = l₀·α·ΔΤ</text>
+          <text x="290" y="72" text-anchor="middle" font-size="9" fill="#64748b">α: συντελεστής γραμμικής διαστολής</text>
+          <text x="290" y="85" text-anchor="middle" font-size="9" fill="#64748b">ΔΤ: μεταβολή θερμοκρασίας (°C)</text>
+          <text x="290" y="102" text-anchor="middle" font-size="10" fill="#f59e0b" font-weight="700">Σίδηρος: α = 12×10⁻⁶ /°C</text>
+        </svg>
+      </div>
+    </div>
+    <div class="card">
+      <h3>6.4 Μέθοδοι Μεταφοράς Θερμότητας</h3>
+      <div class="key"><strong>Αγωγή (Conduction)</strong><span>Μεταφορά θερμότητας μέσω υλικού σώματος (συγκρούσεις μορίων). Καλύτεροι αγωγοί: μέταλλα. Κακοί αγωγοί (μονωτές): ξύλο, πλαστικό, αέρας.</span></div>
+      <div class="key"><strong>Μεταφορά (Convection)</strong><span>Μεταφορά θερμότητας μέσω κίνησης ρευστών (υγρών ή αερίων). Θερμό ρευστό ανεβαίνει, κρύο κατεβαίνει — δημιουργεί ρεύματα μεταφοράς.</span></div>
+      <div class="key"><strong>Ακτινοβολία (Radiation)</strong><span>Μεταφορά θερμότητας με ηλεκτρομαγνητική ακτινοβολία (υπέρυθρη). Δεν χρειάζεται υλικό μέσο — έτσι φτάνει η θέρμη του Ήλιου στη Γη.</span></div>
+    </div>
+  </div>
+  <!-- EXPERIMENT -->
+  <div class="section" id="ch5-s1">
+    <div class="interactive">
+      <h4>🌡️ Υπολογισμός Θερμότητας Q = m·c·ΔΤ</h4>
+      <p style="font-size:.88rem;color:var(--fg2);margin-bottom:14px">Ρύθμισε μάζα, ειδική θερμοχωρητικότητα και ΔΤ για να υπολογίσεις τη θερμότητα.</p>
+      <div class="slider-row">
+        <label>Μάζα m (kg)</label>
+        <input type="range" id="heatMassSlider" min="0.1" max="10" value="1" step="0.1" oninput="drawHeat()">
+        <span class="val-badge" id="heatMassVal">1 kg</span>
+      </div>
+      <div class="slider-row">
+        <label>c (J/kg·°C)</label>
+        <input type="range" id="heatCSlider" min="100" max="5000" value="4186" step="100" oninput="drawHeat()">
+        <span class="val-badge" id="heatCVal">4186 J/(kg·°C)</span>
+      </div>
+      <div class="slider-row">
+        <label>ΔΤ (°C)</label>
+        <input type="range" id="heatDtSlider" min="1" max="100" value="10" oninput="drawHeat()">
+        <span class="val-badge" id="heatDtVal">10 °C</span>
+      </div>
+      <div style="background:var(--bg);border-radius:10px;padding:14px;margin-top:12px;text-align:center">
+        <div style="font-size:1.2rem;font-weight:800;color:var(--accent)" id="heatResult">Q = 41 860 J</div>
+      </div>
+      <canvas id="heatCanvas" style="height:200px;margin-top:12px"></canvas>
+    </div>
+  </div>
+  <!-- QUIZ -->
+  <div class="section" id="ch5-s2">
+    <div id="quiz5"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ΚΕΦΑΛΑΙΟ 7 — ΗΛΕΚΤΡΙΣΜΟΣ (Β' Γυμνασίου)
+     ═══════════════════════════════════════════════════════════ -->
+<div class="chapter" id="ch6">
+  <div class="sec-tabs">
+    <button class="sec-tab active" onclick="showSec(6,0)">📖 Θεωρία</button>
+    <button class="sec-tab" onclick="showSec(6,1)">⚡ Πείραμα</button>
+    <button class="sec-tab" onclick="showSec(6,2)">✏️ Quiz</button>
+  </div>
+  <!-- THEORY -->
+  <div class="section active" id="ch6-s0">
+    <div class="card">
+      <h3>7.1 Ηλεκτρικό Φορτίο & Ηλεκτρισμός</h3>
+      <p>Τα σώματα αποτελούνται από άτομα που περιέχουν <strong>θετικά φορτισμένα πρωτόνια</strong> και <strong>αρνητικά φορτισμένα ηλεκτρόνια</strong>. Ένα ουδέτερο σώμα έχει ίσα θετικά και αρνητικά φορτία.</p>
+      <div class="key"><strong>Τριβοηλεκτρισμός</strong><span>Όταν τρίβουμε δύο σώματα, ηλεκτρόνια μεταφέρονται από το ένα στο άλλο. Αυτό δημιουργεί στατικό ηλεκτρισμό.</span></div>
+      <ul>
+        <li><strong>Ομώνυμα φορτία:</strong> (+)(+) ή (−)(−) → <strong>Απωθούνται</strong></li>
+        <li><strong>Ετερώνυμα φορτία:</strong> (+)(−) → <strong>Έλκονται</strong></li>
+        <li>Μονάδα φορτίου: <strong>Coulomb (C)</strong></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>7.2 Ηλεκτρικό Ρεύμα & Κύκλωμα</h3>
+      <p>Το <strong>ηλεκτρικό ρεύμα</strong> είναι η κατευθυνόμενη κίνηση ηλεκτρονίων σε έναν αγωγό.</p>
+      <div class="formula">I = q / t</div>
+      <p style="text-align:center;font-size:.88rem;color:var(--fg2)">I: ένταση ρεύματος (Ampere, A), q: φορτίο (C), t: χρόνος (s)</p>
+      <div class="key"><strong>Ηλεκτρικό κύκλωμα</strong><span>Πρέπει να είναι <em>κλειστό</em> για να ρέει ρεύμα. Αποτελείται από: πηγή τάσης (μπαταρία), αγωγούς (σύρματα), καταναλωτές (λάμπες, αντιστάτες), διακόπτη.</span></div>
+    </div>
+    <div class="card">
+      <h3>7.3 Τάση & Νόμος Ohm</h3>
+      <p>Η <strong>ηλεκτρική τάση (V)</strong> είναι η "ηλεκτρική πίεση" που ωθεί τα ηλεκτρόνια — μετράται σε <strong>Volt (V)</strong>.</p>
+      <div class="formula">V = I · R &nbsp;&nbsp; (Νόμος Ohm)</div>
+      <p style="text-align:center;font-size:.88rem;color:var(--fg2)">V: τάση (V), I: ένταση (A), R: αντίσταση (Ω)</p>
+      <table class="tbl">
+        <tr><th>Μέγεθος</th><th>Σύμβολο</th><th>Μονάδα</th><th>Όργανο μέτρησης</th></tr>
+        <tr><td>Ένταση ρεύματος</td><td>I</td><td>Ampere (A)</td><td>Αμπερόμετρο (σε σειρά)</td></tr>
+        <tr><td>Τάση</td><td>V</td><td>Volt (V)</td><td>Βολτόμετρο (παράλληλα)</td></tr>
+        <tr><td>Αντίσταση</td><td>R</td><td>Ohm (Ω)</td><td>Ωμόμετρο</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>7.4 Αγωγοί & Μονωτές</h3>
+      <ul>
+        <li><strong>Αγωγοί:</strong> Υλικά που επιτρέπουν τη ροή ρεύματος — μέταλλα (χαλκός, αλουμίνιο), γραφίτης</li>
+        <li><strong>Μονωτές:</strong> Υλικά που δεν επιτρέπουν τη ροή ρεύματος — πλαστικό, γυαλί, ξύλο, καουτσούκ</li>
+        <li><strong>Ημιαγωγοί:</strong> Σιλίκιο, γερμάνιο — χρησιμοποιούνται σε ηλεκτρονικές συσκευές</li>
+      </ul>
+      <div class="key"><strong>Ηλεκτρική Ασφάλεια</strong><span>⚠️ Ποτέ μην αγγίζεις ηλεκτρικές εγκαταστάσεις με βρεγμένα χέρια! Το νερό είναι αγωγός. Η τάση 220V AC της ΔΕΗ είναι επικίνδυνη.</span></div>
+    </div>
+  </div>
+  <!-- EXPERIMENT -->
+  <div class="section" id="ch6-s1">
+    <div class="interactive">
+      <h4>⚡ Νόμος Ohm — I–V Χαρακτηριστική</h4>
+      <p style="font-size:.88rem;color:var(--fg2);margin-bottom:14px">Ρύθμισε τάση και αντίσταση. Δες πώς αλλάζει η ένταση και ποια γραμμή αντιστοιχεί στην αντίστασή σου.</p>
+      <div class="slider-row">
+        <label>Τάση V (V)</label>
+        <input type="range" id="elecVSlider" min="1" max="12" value="6" oninput="drawElec()">
+        <span class="val-badge" id="elecVVal">6 V</span>
+      </div>
+      <div class="slider-row">
+        <label>Αντίσταση R (Ω)</label>
+        <input type="range" id="elecRSlider" min="5" max="100" value="30" step="5" oninput="drawElec()">
+        <span class="val-badge" id="elecRVal">30 Ω</span>
+      </div>
+      <div style="background:var(--bg);border-radius:10px;padding:14px;margin-top:12px;text-align:center">
+        <div style="font-size:1.1rem;font-weight:800;color:var(--accent)" id="elecResult">I = 0.20 A | P = 1.2 W</div>
+      </div>
+      <canvas id="elecCanvas" style="height:220px;margin-top:12px"></canvas>
+    </div>
+  </div>
+  <!-- QUIZ -->
+  <div class="section" id="ch6-s2">
+    <div id="quiz6"></div>
+  </div>
+</div>
+</body></html>

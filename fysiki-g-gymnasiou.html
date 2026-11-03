@@ -1,0 +1,2974 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Φυσική Γ' Γυμνασίου</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap">
+<style>
+:root {
+  --bg: #f5f7fa; --card: #fff; --fg: #1a1a2e; --fg2: #555;
+  --accent: #2563eb; --accent2: #7c3aed; --green: #16a34a;
+  --red: #dc2626; --yellow: #d97706; --border: #e2e8f0;
+  --shadow: 0 2px 12px rgba(0,0,0,.08);
+  font-family: 'Nunito', sans-serif;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f172a;--card:#1e293b;--fg:#f1f5f9;--fg2:#94a3b8;
+  --border:#334155;--shadow:0 2px 12px rgba(0,0,0,.4);color-scheme:dark
+}}
+:root[data-theme="dark"]{--bg:#0f172a;--card:#1e293b;--fg:#f1f5f9;--fg2:#94a3b8;--border:#334155;--shadow:0 2px 12px rgba(0,0,0,.4);color-scheme:dark}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);min-height:100vh;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:16px}
+h1,h2,h3{text-wrap:balance}
+
+/* NAV */
+.topbar{background:var(--accent);color:#fff;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;border-radius:14px;margin-bottom:20px;gap:12px;flex-wrap:wrap}
+.topbar h1{font-size:1.2rem;font-weight:900}
+.theme-btn{background:rgba(255,255,255,.2);border:none;color:#fff;padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.85rem}
+
+/* CHAPTER TABS */
+.chapter-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.ch-tab{padding:8px 16px;border-radius:10px;border:2px solid var(--border);background:var(--card);color:var(--fg);cursor:pointer;font-weight:700;font-size:.85rem;transition:.2s}
+.ch-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* SECTION TABS */
+.sec-tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.sec-tab{padding:6px 14px;border-radius:8px;border:1.5px solid var(--border);background:var(--card);color:var(--fg2);cursor:pointer;font-size:.82rem;font-weight:600;transition:.2s}
+.sec-tab.active{background:var(--accent2);color:#fff;border-color:var(--accent2)}
+
+/* CARDS */
+.card{background:var(--card);border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.card h2{font-size:1.15rem;color:var(--accent);margin-bottom:12px}
+.card h3{font-size:1rem;margin:12px 0 6px;color:var(--accent2)}
+p{line-height:1.7;margin-bottom:10px;color:var(--fg)}
+.formula{background:linear-gradient(135deg,#eff6ff,#f5f3ff);border-left:4px solid var(--accent);padding:10px 16px;border-radius:8px;font-family:monospace;font-size:1.05rem;margin:10px 0;color:var(--fg)}
+:root[data-theme="dark"] .formula,.formula-d{background:linear-gradient(135deg,#1e3a5f,#2d1b69)!important}
+.info-box{background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:12px 16px;margin:10px 0;color:#166534}
+:root[data-theme="dark"] .info-box{background:#052e16;color:#86efac;border-color:#166534}
+.warn-box{background:#fefce8;border:1px solid #fde047;border-radius:10px;padding:12px 16px;margin:10px 0;color:#713f12}
+:root[data-theme="dark"] .warn-box{background:#1c1100;color:#fde047;border-color:#713f12}
+
+/* SVG DIAGRAMS */
+.diagram{display:flex;justify-content:center;margin:16px 0}
+svg{max-width:100%;height:auto}
+
+/* CANVAS */
+canvas{display:block;margin:0 auto;border-radius:10px;border:1px solid var(--border)}
+.sim-controls{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;align-items:center}
+.sim-controls label{font-size:.85rem;color:var(--fg2);font-weight:600}
+.sim-controls input[type=range]{flex:1;min-width:80px}
+.btn{padding:8px 18px;border-radius:8px;border:none;cursor:pointer;font-weight:700;font-size:.85rem;transition:.2s}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-green{background:var(--green);color:#fff}
+.btn-red{background:var(--red);color:#fff}
+.btn:hover{opacity:.88}
+
+/* QUIZ */
+.quiz-q{margin-bottom:20px;padding:16px;background:var(--card);border-radius:12px;border:1px solid var(--border)}
+.quiz-q p{font-weight:700;margin-bottom:10px;color:var(--fg)}
+.quiz-opt{display:block;width:100%;text-align:left;padding:10px 14px;margin:5px 0;border-radius:8px;border:1.5px solid var(--border);background:var(--bg);color:var(--fg);cursor:pointer;font-size:.9rem;transition:.2s}
+.quiz-opt:hover{border-color:var(--accent);background:var(--card)}
+.quiz-opt.correct{background:#dcfce7;border-color:var(--green);color:#166534}
+.quiz-opt.wrong{background:#fee2e2;border-color:var(--red);color:#991b1b}
+:root[data-theme="dark"] .quiz-opt.correct{background:#052e16;color:#86efac}
+:root[data-theme="dark"] .quiz-opt.wrong{background:#1f0000;color:#fca5a5}
+.feedback{margin-top:8px;padding:10px 14px;border-radius:8px;font-size:.88rem;line-height:1.6;display:none}
+.feedback.show{display:block}
+.feedback.ok{background:#f0fdf4;color:#166534;border:1px solid #86efac}
+.feedback.err{background:#fef2f2;color:#991b1b;border:1px solid #fca5a5}
+:root[data-theme="dark"] .feedback.ok{background:#052e16;color:#86efac}
+:root[data-theme="dark"] .feedback.err{background:#1f0000;color:#fca5a5}
+.score-box{text-align:center;padding:20px;font-size:1.2rem;font-weight:900;color:var(--accent)}
+[hidden]{display:none!important}
+</style>
+
+<div class="topbar">
+  <h1>⚗️ Εργαστήριο Φυσικής Γ' Γυμνασίου</h1>
+  <button class="theme-btn" onclick="toggleTheme()">🌙 Θέμα</button>
+</div>
+
+<div class="chapter-tabs">
+  <button class="ch-tab active" onclick="showChapter(0)">⚡ Κεφ.1 Ηλεκτρική Δύναμη</button>
+  <button class="ch-tab" onclick="showChapter(1)">🔌 Κεφ.2 Ηλεκτρικό Ρεύμα</button>
+  <button class="ch-tab" onclick="showChapter(2)">💡 Κεφ.3 Ηλεκτρική Ενέργεια</button>
+  <button class="ch-tab" onclick="showChapter(3)">🔔 Κεφ.4 Ταλαντώσεις</button>
+  <button class="ch-tab" onclick="showChapter(4)">🌊 Κεφ.5 Κύματα</button>
+  <button class="ch-tab" onclick="showChapter(5)">🌡️ Κεφ.6 Θερμότητα</button>
+  <button class="ch-tab" onclick="showChapter(6)">🔋 Κεφ.7 Ηλεκτρισμός</button>
+</div>
+
+<div id="chapters"></div>
+
+<script>
+// ===== DATA =====
+const chapters = [
+  { title:"Ηλεκτρική Δύναμη & Φορτίο",
+    theory: `<div class="card">
+<h2>1.1 Ηλεκτρισμένα Σώματα</h2>
+<p>Όταν τρίβουμε ένα γυάλινο ράβδο με μετάξι ή μια πλαστική ράβδο με μαλλί, τα σώματα αποκτούν <strong>ηλεκτρικό φορτίο</strong> και μπορούν να έλκουν ή να απωθούν άλλα ηλεκτρισμένα σώματα.</p>
+<div class="diagram">
+<svg width="340" height="160" viewBox="0 0 340 160">
+  <rect x="10" y="20" width="140" height="40" rx="8" fill="#bfdbfe" stroke="#2563eb" stroke-width="2"/>
+  <text x="80" y="45" text-anchor="middle" font-size="13" fill="#1e40af" font-weight="bold">Γυάλινη ράβδος (+)</text>
+  <text x="80" y="58" text-anchor="middle" font-size="11" fill="#1e40af">τριμμένη με μετάξι</text>
+  <rect x="190" y="20" width="140" height="40" rx="8" fill="#fde68a" stroke="#d97706" stroke-width="2"/>
+  <text x="260" y="45" text-anchor="middle" font-size="13" fill="#92400e" font-weight="bold">Πλαστική ράβδος (−)</text>
+  <text x="260" y="58" text-anchor="middle" font-size="11" fill="#92400e">τριμμένη με μαλλί</text>
+  <!-- ΕΛΞΗ: αριστερή ράβδος → βέλος ΔΕΞΙΑ (προς δεξιά ράβδο) -->
+  <line x1="135" y1="55" x2="168" y2="55" stroke="#16a34a" stroke-width="3" marker-end="url(#arr)"/>
+  <!-- ΕΛΞΗ: δεξιά ράβδος → βέλος ΑΡΙΣΤΕΡΑ (προς αριστερή ράβδο) -->
+  <line x1="205" y1="55" x2="172" y2="55" stroke="#16a34a" stroke-width="3" marker-end="url(#arr)"/>
+  <text x="170" y="85" text-anchor="middle" font-size="12" fill="#16a34a" font-weight="bold">ΕΛΞΗ ✓</text>
+  <!-- same charge repulsion -->
+  <rect x="10" y="105" width="60" height="30" rx="6" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <rect x="90" y="105" width="60" height="30" rx="6" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <!-- ΑΠΩΣΗ: αριστερή ράβδος — βελάκι ΑΡΙΣΤΕΡΑ -->
+  <line x1="40" y1="119" x2="3" y2="119" stroke="#dc2626" stroke-width="3" marker-end="url(#arrR)"/>
+  <!-- ΑΠΩΣΗ: δεξιά ράβδος — βελάκι ΔΕΞΙΑ -->
+  <line x1="120" y1="119" x2="157" y2="119" stroke="#dc2626" stroke-width="3" marker-end="url(#arrR)"/>
+  <text x="80" y="148" text-anchor="middle" font-size="11" fill="#dc2626" font-weight="bold">ΑΠΩΣΗ (ίδια)</text>
+  <defs>
+    <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#16a34a"/></marker>
+    <marker id="arr2" markerWidth="6" markerHeight="6" refX="1" refY="3" orient="auto"><path d="M6,0 L0,3 L6,6 Z" fill="#16a34a"/></marker>
+    <marker id="arrR" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#dc2626"/></marker>
+    <marker id="arrR2" markerWidth="6" markerHeight="6" refX="1" refY="3" orient="auto"><path d="M6,0 L0,3 L6,6 Z" fill="#dc2626"/></marker>
+  </defs>
+</svg>
+</div>
+<div class="info-box">📌 Κανόνας: <strong>Ομώνυμα φορτία απωθούνται</strong> — <strong>Ετερώνυμα φορτία έλκονται</strong></div>
+
+<h3>1.2 Ηλεκτρικό Φορτίο</h3>
+<p>Το ηλεκτρικό φορτίο μετράται σε <strong>Coulomb (C)</strong>. Υποπολλαπλάσια:</p>
+<div class="formula">1 mC = 10⁻³ C &nbsp;|&nbsp; 1 μC = 10⁻⁶ C &nbsp;|&nbsp; 1 nC = 10⁻⁹ C</div>
+<p>Το φορτίο <strong>διατηρείται</strong>: q<sub>ολ</sub> = q₁ + q₂</p>
+
+<h3>1.3 Δομή Ατόμου</h3>
+<p>Κάθε άτομο αποτελείται από τον <strong>πυρήνα</strong> (πρωτόνια + νετρόνια) και τα <strong>ηλεκτρόνια</strong> που κινούνται σε στοιβάδες γύρω του.</p>
+<div class="diagram">
+<!-- Bohr model: Νάτριο (Na) Z=11 — 2e K-shell, 8e L-shell, 1e M-shell -->
+<svg width="340" height="220" viewBox="0 0 340 220">
+  <defs>
+    <radialGradient id="nucGrad" cx="50%" cy="35%">
+      <stop offset="0%" stop-color="#fef9c3"/>
+      <stop offset="100%" stop-color="#fde68a"/>
+    </radialGradient>
+  </defs>
+  <!-- M shell (outermost) -->
+  <circle cx="170" cy="110" r="95" fill="none" stroke="#c4b5fd" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <!-- L shell -->
+  <circle cx="170" cy="110" r="62" fill="none" stroke="#93c5fd" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <!-- K shell (innermost) -->
+  <circle cx="170" cy="110" r="32" fill="none" stroke="#6ee7b7" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- NUCLEUS: protons (red) + neutrons (gray) packed together -->
+  <circle cx="170" cy="110" r="18" fill="url(#nucGrad)" stroke="#d97706" stroke-width="2"/>
+  <!-- protons (red) -->
+  <circle cx="163" cy="105" r="5" fill="#ef4444" stroke="#b91c1c" stroke-width="1"/>
+  <text x="163" y="108" text-anchor="middle" font-size="6" fill="#fff">p⁺</text>
+  <circle cx="175" cy="103" r="5" fill="#ef4444" stroke="#b91c1c" stroke-width="1"/>
+  <text x="175" y="106" text-anchor="middle" font-size="6" fill="#fff">p⁺</text>
+  <circle cx="165" cy="115" r="5" fill="#ef4444" stroke="#b91c1c" stroke-width="1"/>
+  <text x="165" y="118" text-anchor="middle" font-size="6" fill="#fff">p⁺</text>
+  <!-- neutrons (gray) -->
+  <circle cx="176" cy="114" r="5" fill="#9ca3af" stroke="#6b7280" stroke-width="1"/>
+  <text x="176" y="117" text-anchor="middle" font-size="6" fill="#fff">n°</text>
+  <circle cx="170" cy="108" r="4" fill="#9ca3af" stroke="#6b7280" stroke-width="1"/>
+
+  <!-- K shell electrons (max 2) -->
+  <circle cx="202" cy="110" r="8" fill="#10b981" stroke="#059669" stroke-width="1.5"/>
+  <text x="202" y="114" text-anchor="middle" font-size="8" fill="#fff">e⁻</text>
+  <circle cx="138" cy="110" r="8" fill="#10b981" stroke="#059669" stroke-width="1.5"/>
+  <text x="138" y="114" text-anchor="middle" font-size="8" fill="#fff">e⁻</text>
+
+  <!-- L shell electrons (max 8, here show 8) -->
+  <circle cx="232" cy="110" r="8" fill="#3b82f6" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="232" y="114" text-anchor="middle" font-size="8" fill="#fff">e⁻</text>
+  <circle cx="108" cy="110" r="8" fill="#3b82f6" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="108" y="114" text-anchor="middle" font-size="8" fill="#fff">e⁻</text>
+  <circle cx="214" cy="72" r="8" fill="#3b82f6" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="214" y="76" text-anchor="middle" font-size="8" fill="#fff">e⁻</text>
+  <circle cx="126" cy="148" r="8" fill="#3b82f6" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="126" y="152" text-anchor="middle" font-size="8" fill="#fff">e⁻</text>
+  <circle cx="214" cy="148" r="8" fill="#3b82f6" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="214" y="152" text-anchor="middle" font-size="8" fill="#fff">e⁻</text>
+  <circle cx="126" cy="72" r="8" fill="#3b82f6" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="126" y="76" text-anchor="middle" font-size="8" fill="#fff">e⁻</text>
+  <circle cx="170" cy="48" r="8" fill="#3b82f6" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="170" y="52" text-anchor="middle" font-size="8" fill="#fff">e⁻</text>
+  <circle cx="170" cy="172" r="8" fill="#3b82f6" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="170" y="176" text-anchor="middle" font-size="8" fill="#fff">e⁻</text>
+
+  <!-- M shell electron (1 valence electron) -->
+  <circle cx="265" cy="110" r="8" fill="#8b5cf6" stroke="#6d28d9" stroke-width="1.5"/>
+  <text x="265" y="114" text-anchor="middle" font-size="8" fill="#fff">e⁻</text>
+
+  <!-- Shell labels -->
+  <text x="210" y="83" font-size="10" fill="#059669" font-weight="bold">K (2e)</text>
+  <text x="243" y="98" font-size="10" fill="#1d4ed8" font-weight="bold">L (8e)</text>
+  <text x="274" y="125" font-size="10" fill="#6d28d9" font-weight="bold">M (1e)</text>
+
+  <!-- Legend bottom -->
+  <circle cx="15" cy="207" r="6" fill="#ef4444"/>
+  <text x="25" y="211" font-size="10" fill="#ef4444">Πρωτόνιο p⁺ (+1.6×10⁻¹⁹C)</text>
+  <circle cx="195" cy="207" r="6" fill="#9ca3af"/>
+  <text x="205" y="211" font-size="10" fill="#6b7280">Νετρόνιο n° (ουδέτερο)</text>
+</svg>
+</div>
+<div class="info-box">
+  🔵 <strong>Ηλεκτρόνιο e⁻</strong>: q = −1.6×10⁻¹⁹ C (αρνητικό)<br>
+  🔴 <strong>Πρωτόνιο p⁺</strong>: q = +1.6×10⁻¹⁹ C (θετικό)<br>
+  ⚪ <strong>Νετρόνιο n°</strong>: q = 0 (ουδέτερο)<br>
+  Στοιβάδες: K (max 2e), L (max 8e), M (max 18e)
+</div>
+<div class="formula">q = N · e &nbsp;(N = αριθμός φορτίων, e = 1.6×10⁻¹⁹ C)</div>
+
+<h3>1.4 Νόμος Coulomb</h3>
+<p>Η δύναμη μεταξύ δύο σημειακών φορτίων εξαρτάται από το μέγεθός τους και την απόστασή τους. Οι δυνάμεις είναι ίσες και αντίρροπες (Γ΄ Νόμος Newton):</p>
+<div class="diagram">
+<!-- ΑΠΩΣΗ: ομώνυμα φορτία — δυνάμεις φεύγουν η μία από την άλλη -->
+<svg width="340" height="110" viewBox="0 0 340 110">
+  <defs>
+    <marker id="rRepL" markerWidth="8" markerHeight="8" refX="0" refY="3" orient="auto"><path d="M8,0 L0,3 L8,6 Z" fill="#dc2626"/></marker>
+    <marker id="rRepR" markerWidth="8" markerHeight="8" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#dc2626"/></marker>
+    <marker id="rDash" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#6b7280"/></marker>
+  </defs>
+  <!-- charges -->
+  <circle cx="70" cy="52" r="24" fill="#bfdbfe" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="70" y="49" text-anchor="middle" font-size="12" fill="#1e40af" font-weight="bold">q₁</text>
+  <text x="70" y="63" text-anchor="middle" font-size="11" fill="#1e40af">(+)</text>
+  <circle cx="270" cy="52" r="24" fill="#bfdbfe" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="270" y="49" text-anchor="middle" font-size="12" fill="#1e40af" font-weight="bold">q₂</text>
+  <text x="270" y="63" text-anchor="middle" font-size="11" fill="#1e40af">(+)</text>
+  <!-- r distance -->
+  <line x1="95" y1="52" x2="245" y2="52" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#rDash)"/>
+  <text x="170" y="45" text-anchor="middle" font-size="11" fill="#6b7280" font-style="italic">r</text>
+  <!-- REPULSION: q1 pushed LEFT, q2 pushed RIGHT -->
+  <line x1="45" y1="36" x2="5" y2="36" stroke="#dc2626" stroke-width="3" marker-end="url(#rRepR)"/>
+  <text x="25" y="28" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">F₂₁</text>
+  <line x1="295" y1="36" x2="335" y2="36" stroke="#dc2626" stroke-width="3" marker-end="url(#rRepR)"/>
+  <text x="315" y="28" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">F₁₂</text>
+  <!-- label -->
+  <text x="170" y="92" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="bold">⟵ ΑΠΩΣΗ — ομώνυμα (+)(+) ⟶</text>
+</svg>
+</div>
+<div class="diagram">
+<!-- ΕΛΞΗ: ετερώνυμα φορτία — δυνάμεις έλκονται προς αλλήλας -->
+<svg width="340" height="110" viewBox="0 0 340 110">
+  <defs>
+    <marker id="rAttrR" markerWidth="8" markerHeight="8" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#16a34a"/></marker>
+    <marker id="rAttrL" markerWidth="8" markerHeight="8" refX="0" refY="3" orient="auto"><path d="M8,0 L0,3 L8,6 Z" fill="#16a34a"/></marker>
+    <marker id="rDash2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#6b7280"/></marker>
+  </defs>
+  <!-- charges: + and - -->
+  <circle cx="70" cy="52" r="24" fill="#bfdbfe" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="70" y="49" text-anchor="middle" font-size="12" fill="#1e40af" font-weight="bold">q₁</text>
+  <text x="70" y="63" text-anchor="middle" font-size="11" fill="#1e40af">(+)</text>
+  <circle cx="270" cy="52" r="24" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5"/>
+  <text x="270" y="49" text-anchor="middle" font-size="12" fill="#991b1b" font-weight="bold">q₂</text>
+  <text x="270" y="63" text-anchor="middle" font-size="11" fill="#991b1b">(−)</text>
+  <!-- r distance -->
+  <line x1="95" y1="52" x2="245" y2="52" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#rDash2)"/>
+  <text x="170" y="45" text-anchor="middle" font-size="11" fill="#6b7280" font-style="italic">r</text>
+  <!-- ATTRACTION: q1 pulled RIGHT (toward q2), q2 pulled LEFT (toward q1) -->
+  <line x1="45" y1="36" x2="93" y2="36" stroke="#16a34a" stroke-width="3" marker-end="url(#rAttrR)"/>
+  <text x="25" y="28" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="bold">F₂₁</text>
+  <line x1="295" y1="36" x2="247" y2="36" stroke="#16a34a" stroke-width="3" marker-end="url(#rAttrR)"/>
+  <text x="315" y="28" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="bold">F₁₂</text>
+  <!-- label -->
+  <text x="170" y="92" text-anchor="middle" font-size="12" fill="#16a34a" font-weight="bold">⟶ ΕΛΞΗ — ετερώνυμα (+)(−) ⟵</text>
+</svg>
+</div>
+<div class="formula">F = K · (q₁ · q₂) / r² &nbsp;&nbsp; K = 9×10⁹ N·m²/C²</div>
+<div class="warn-box">⚠️ Αν η απόσταση <strong>διπλασιαστεί</strong>, η δύναμη γίνεται <strong>4 φορές μικρότερη</strong> (αντιστρόφως ανάλογη του r²)</div>
+</div>`,
+
+    experiment: `<div class="card">
+<h2>🔬 Πείραμα: Νόμος Coulomb — Δύναμη & Απόσταση</h2>
+<p>Παρατήρησε πώς αλλάζει η ηλεκτρική δύναμη όταν αλλάζεις τα φορτία και την απόσταση.</p>
+<canvas id="cvCoulomb" width="500" height="280"></canvas>
+<div class="sim-controls">
+  <label>q₁ (μC): <span id="q1val">2</span></label>
+  <input type="range" min="1" max="10" value="2" oninput="updateCoulomb()" id="slQ1">
+  <label>q₂ (μC): <span id="q2val">3</span></label>
+  <input type="range" min="1" max="10" value="3" oninput="updateCoulomb()" id="slQ2">
+  <label>r (m): <span id="rval">0.3</span></label>
+  <input type="range" min="1" max="10" value="3" oninput="updateCoulomb()" id="slR">
+</div>
+<div id="coulombResult" class="formula" style="text-align:center;font-size:1.1rem"></div>
+</div>
+
+<div class="card">
+<h2>🔬 Πείραμα: Ηλεκτρισμένα Σώματα — Έλξη & Απώση</h2>
+<p>Κάνε κλικ στα σώματα για να αλλάξεις το φορτίο τους (+/-) και παρατήρησε τη δύναμη.</p>
+<canvas id="cvCharges" width="500" height="200"></canvas>
+<div class="sim-controls">
+  <button class="btn btn-primary" onclick="toggleCharge(0)">Αλλαγή φορτίου Α</button>
+  <button class="btn btn-primary" onclick="toggleCharge(1)">Αλλαγή φορτίου Β</button>
+  <button class="btn btn-green" onclick="resetCharges()">Επαναφορά</button>
+</div>
+<div id="chargeStatus" class="info-box"></div>
+</div>
+
+<div class="card">
+<h2>🔬 Πείραμα 2: Φόρτιση από Επαφή</h2>
+<p>Άγγιξε την αγώγιμη σφαίρα με το φορτισμένο ράβδο. Το φορτίο <strong>μεταφέρεται</strong> στη σφαίρα.</p>
+<canvas id="cvContact" width="500" height="200" style="cursor:pointer" onclick="stepContact()"></canvas>
+<div class="sim-controls">
+  <button class="btn btn-primary" onclick="stepContact()">▶ Επόμενο βήμα</button>
+  <button class="btn btn-green" onclick="resetContact()">↺ Επαναφορά</button>
+</div>
+<div id="contactStatus" class="info-box"></div>
+</div>
+
+<div class="card">
+<h2>🔬 Πείραμα 3: Φόρτιση από Επαγωγή</h2>
+<p>Πλησίασε το φορτισμένο ράβδο — χωρίς επαφή! Παρατήρησε πώς <strong>αναδιατάσσονται</strong> τα φορτία.</p>
+<canvas id="cvInduction" width="500" height="200" style="cursor:pointer"></canvas>
+<div class="sim-controls">
+  <button class="btn btn-primary" onclick="stepInduction()">▶ Επόμενο βήμα</button>
+  <button class="btn btn-green" onclick="resetInduction()">↺ Επαναφορά</button>
+</div>
+<div id="inductionStatus" class="info-box"></div>
+</div>
+
+<div class="card">
+<h2>🔬 Πείραμα 4: Ηλεκτροσκόπιο</h2>
+<p>Πλησίασε ή άγγιξε το ηλεκτροσκόπιο με φορτισμένο σώμα. Παρατήρησε τα <strong>φύλλα</strong> να ανοίγουν!</p>
+<canvas id="cvElectroscope" width="500" height="220" style="cursor:pointer"></canvas>
+<div class="sim-controls">
+  <button class="btn btn-primary" onclick="approachElectroscope()">🔋 Πλησίασε φορτισμένο σώμα</button>
+  <button class="btn btn-secondary" onclick="touchElectroscope()">👆 Άγγιξε (επαφή)</button>
+  <button class="btn btn-green" onclick="resetElectroscope()">↺ Επαναφορά</button>
+</div>
+<div id="electroscopeStatus" class="info-box"></div>
+</div>
+
+<div class="card">
+<h2>🔬 Πείραμα 5: Αγωγοί και Μονωτές</h2>
+<p>Επίλεξε υλικό — αναβοσβήνει η λάμπα;</p>
+<canvas id="cvConductor" width="500" height="170"></canvas>
+<div class="sim-controls" style="flex-wrap:wrap;gap:8px">
+  <button class="btn btn-primary" onclick="testMaterial('copper')">Χαλκός</button>
+  <button class="btn btn-primary" onclick="testMaterial('aluminum')">Αλουμίνιο</button>
+  <button class="btn btn-primary" onclick="testMaterial('graphite')">Γραφίτης</button>
+  <button class="btn btn-secondary" onclick="testMaterial('plastic')">Πλαστικό</button>
+  <button class="btn btn-secondary" onclick="testMaterial('wood')">Ξύλο</button>
+  <button class="btn btn-secondary" onclick="testMaterial('glass')">Γυαλί</button>
+  <button class="btn btn-green" onclick="resetConductor()">↺ Επαναφορά</button>
+</div>
+<div id="conductorStatus" class="info-box"></div>
+</div>
+
+<div class="card">
+<h2>🎮 Πείραμα 6: Ρινίσματα Σιδήρου</h2>
+<p>Κούνα το φορτισμένο ράβδο πάνω από τα ρινίσματα και δες τι γίνεται!</p>
+<canvas id="cvFilings" width="500" height="240" style="cursor:none;border-radius:8px;background:#0f172a"></canvas>
+<div class="sim-controls">
+  <button class="btn btn-green" onclick="resetFilings()">↺ Νέα ρινίσματα</button>
+</div>
+</div>`,
+
+    quiz: [
+      {q:"Δύο φορτία q₁=4μC και q₂=2μC απέχουν r=0.2m. Ποια είναι η δύναμη Coulomb;",
+       opts:["F = 1.8 N","F = 3.6 N","F = 0.9 N","F = 7.2 N"],
+       ans:0,fb:["✅ Σωστά! F = 9×10⁹ × 4×10⁻⁶ × 2×10⁻⁶ / (0.2)² = 9×10⁹ × 8×10⁻¹² / 0.04 = 1.8 N",
+                  "❌ Λάθος. Θυμήσου: F = K·q₁·q₂/r². Εδώ r² = 0.04, οπότε F = 9×10⁹ × 8×10⁻¹² / 0.04 = 1.8 N",
+                  "❌ Λάθος. Μήπως ξέχασες να διαιρέσεις με r²=0.04 και όχι r=0.2;",
+                  "❌ Λάθος. Πρόσεξε τις μονάδες — τα μC = 10⁻⁶ C"]},
+      {q:"Τι φορτίο έχει ένα σώμα με 5×10¹² επιπλέον ηλεκτρόνια;",
+       opts:["q = −0.8 μC","q = +0.8 μC","q = −8×10⁻⁷ C","Και τα Α και Γ είναι σωστά"],
+       ans:3,fb:["❌ Μερικώς σωστό, αλλά δεν είναι η μοναδική σωστή απάντηση.",
+                  "❌ Λάθος. Τα ηλεκτρόνια φέρουν αρνητικό φορτίο, άρα το σώμα φορτίζεται αρνητικά.",
+                  "❌ Μερικώς σωστό, αλλά δεν είναι η μοναδική σωστή απάντηση.",
+                  "✅ Σωστά! q = N·e = 5×10¹² × 1.6×10⁻¹⁹ = 8×10⁻⁷ C = 0.8 μC, και επειδή είναι ηλεκτρόνια: q = −0.8 μC = −8×10⁻⁷ C"]},
+      {q:"Αν η απόσταση μεταξύ δύο φορτίων τριπλασιαστεί, η δύναμη Coulomb:",
+       opts:["Τριπλασιάζεται","Εννιαπλασιάζεται","Μειώνεται 9 φορές","Μειώνεται 3 φορές"],
+       ans:2,fb:["❌ Λάθος. Η δύναμη είναι ανάλογη 1/r², όχι 1/r.",
+                  "❌ Λάθος. Αν r→3r, τότε r²→9r², άρα F μειώνεται, δεν αυξάνεται.",
+                  "✅ Σωστά! F ∝ 1/r². Αν r τριπλασιαστεί, r² εννιαπλασιάζεται, οπότε F μειώνεται 9 φορές.",
+                  "❌ Λάθος. Η ισχύς στον νόμο Coulomb είναι r², όχι r."]},
+      {q:"Ένα ουδέτερο άτομο αποκτά 3 ηλεκτρόνια. Πώς ονομάζεται;",
+       opts:["Θετικό ιόν","Αρνητικό ιόν","Νετρόνιο","Πρωτόνιο"],
+       ans:1,fb:["❌ Λάθος. Τα θετικά ιόντα χάνουν ηλεκτρόνια (κατιόντα).",
+                  "✅ Σωστά! Όταν ένα άτομο προσλαμβάνει ηλεκτρόνια γίνεται αρνητικό ιόν (ανιόν).",
+                  "❌ Λάθος. Νετρόνια είναι ουδέτερα σωματίδια στον πυρήνα.",
+                  "❌ Λάθος. Τα πρωτόνια είναι θετικά φορτισμένα σωματίδια στον πυρήνα."]},
+      {q:"Ποιος είναι ο νόμος Coulomb;",
+       opts:["F = K·q₁·q₂·r²","F = K·q₁·q₂/r","F = K·q₁·q₂/r²","F = K·(q₁+q₂)/r²"],
+       ans:2,fb:["❌ Λάθος. Η δύναμη μειώνεται με την απόσταση, δεν αυξάνεται.",
+                  "❌ Λάθος. Ο νόμος Coulomb έχει r² στον παρονομαστή.",
+                  "✅ Σωστά! F = K·q₁·q₂/r² με K = 9×10⁹ N·m²/C²",
+                  "❌ Λάθος. Τα φορτία πολλαπλασιάζονται, δεν αθροίζονται."]},
+      {q:"Ποιος είναι ο αγωγός ηλεκτρισμού από τους παρακάτω;",
+       opts:["Γυαλί","Ξύλο","Πλαστικό","Γραφίτης (μολύβι)"],
+       ans:3,fb:["❌ Λάθος. Το γυαλί είναι μονωτής.",
+                  "❌ Λάθος. Το ξερό ξύλο είναι μονωτής.",
+                  "❌ Λάθος. Το πλαστικό είναι μονωτής.",
+                  "✅ Σωστά! Ο γραφίτης είναι αγωγός — χρησιμοποιείται σε ηλεκτρικές βούρτσες μοτέρ."]},
+      {q:"Φόρτιση από επαγωγή: η σφαίρα πλησιάζεται από θετικό ράβδο. Ποια πλευρά της αποκτά αρνητικό φορτίο;",
+       opts:["Η απομακρυσμένη πλευρά","Η πλευρά που βλέπει τον ράβδο","Και οι δύο ομοιόμορφα","Καμία — παραμένει ουδέτερη"],
+       ans:1,fb:["❌ Λάθος. Αυτή η πλευρά αποκτά θετικό φορτίο (ελλείμματα e⁻).",
+                  "✅ Σωστά! Ο θετικός ράβδος έλκει τα e⁻ της σφαίρας — η πλευρά κοντά στον ράβδο γίνεται αρνητική.",
+                  "❌ Λάθος. Τα φορτία αναδιατάσσονται — ανομοιόμορφα.",
+                  "❌ Λάθος. Τα φορτία αναδιατάσσονται μέσω επαγωγής."]},
+      {q:"Δύο ομώνυμα φορτία:",
+       opts:["Έλκονται","Απωθούνται","Δεν αλληλεπιδρούν","Αλληλοεξουδετερώνονται"],
+       ans:1,fb:["❌ Λάθος. Έλξη υπάρχει μεταξύ ετερώνυμων φορτίων.",
+                  "✅ Σωστά! Ομώνυμα φορτία (++ ή −−) απωθούνται.",
+                  "❌ Λάθος. Όλα τα φορτία αλληλεπιδρούν μέσω ηλεκτρικής δύναμης.",
+                  "❌ Λάθος. Αλληλοεξουδετερώνονται μόνο ετερώνυμα φορτία ίσου μέτρου."]}
+    ]
+  },
+
+  { title:"Ηλεκτρικό Ρεύμα",
+    theory:`<div class="card">
+<h2>2.1 Ηλεκτρικό Ρεύμα — Αγωγοί & Μονωτές</h2>
+<p>Το <strong>ηλεκτρικό ρεύμα</strong> είναι η κατευθυνόμενη κίνηση ελεύθερων ηλεκτρονίων σε έναν αγωγό.</p>
+<div class="diagram">
+<svg width="380" height="120" viewBox="0 0 380 120">
+  <!-- wire -->
+  <rect x="20" y="52" width="340" height="16" rx="4" fill="#fde68a" stroke="#d97706" stroke-width="1.5"/>
+  <text x="190" y="85" text-anchor="middle" font-size="12" fill="#92400e">Αγωγός (π.χ. χαλκός)</text>
+  <!-- electrons moving -->
+  <circle cx="60" cy="60" r="9" fill="#3b82f6"/>
+  <text x="60" y="63" text-anchor="middle" font-size="9" fill="#fff">e⁻</text>
+  <circle cx="130" cy="60" r="9" fill="#3b82f6"/>
+  <text x="130" y="63" text-anchor="middle" font-size="9" fill="#fff">e⁻</text>
+  <circle cx="200" cy="60" r="9" fill="#3b82f6"/>
+  <text x="200" y="63" text-anchor="middle" font-size="9" fill="#fff">e⁻</text>
+  <circle cx="270" cy="60" r="9" fill="#3b82f6"/>
+  <text x="270" y="63" text-anchor="middle" font-size="9" fill="#fff">e⁻</text>
+  <!-- arrows -->
+  <line x1="80" y1="40" x2="110" y2="40" stroke="#dc2626" stroke-width="2" marker-end="url(#ae)"/>
+  <line x1="150" y1="40" x2="180" y2="40" stroke="#dc2626" stroke-width="2" marker-end="url(#ae)"/>
+  <line x1="220" y1="40" x2="250" y2="40" stroke="#dc2626" stroke-width="2" marker-end="url(#ae)"/>
+  <text x="190" y="28" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="bold">Κίνηση e⁻ →</text>
+  <text x="10" y="60" font-size="18" fill="#dc2626">⊖</text>
+  <text x="355" y="60" font-size="18" fill="#16a34a">⊕</text>
+  <defs><marker id="ae" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#dc2626"/></marker></defs>
+</svg>
+</div>
+<div class="formula">I = q / t &nbsp;&nbsp; (Ampere = Coulomb/second)</div>
+<div class="info-box">⚡ Συμβατική φορά ρεύματος: από + προς − (αντίθετη της κίνησης e⁻)</div>
+
+<h3>2.2 Τάση & Κύκλωμα</h3>
+<div class="diagram">
+<!-- IEC circuit diagram: battery (long/short lines), rectangle resistor, circle ammeter, circle voltmeter -->
+<svg width="380" height="215" viewBox="0 0 380 215">
+  <!-- Main circuit loop: top wire y=50, bottom wire y=160, left x=30, right x=310 -->
+
+  <!-- BATTERY (IEC): vertical, left side. Long line = + (top), short line = − (bottom) -->
+  <!-- Battery at x=30, between y=50 (top) and y=160 (bottom), centered at y=105 -->
+  <line x1="30" y1="50" x2="30" y2="85" stroke="#374151" stroke-width="2.5"/>
+  <!-- cell 1: long line (+) at y=90, short line (−) at y=100 -->
+  <line x1="18" y1="88" x2="42" y2="88" stroke="#374151" stroke-width="3"/>
+  <line x1="23" y1="96" x2="37" y2="96" stroke="#374151" stroke-width="1.5"/>
+  <!-- cell 2: long line (+) at y=108, short line (−) at y=118 -->
+  <line x1="18" y1="108" x2="42" y2="108" stroke="#374151" stroke-width="3"/>
+  <line x1="23" y1="116" x2="37" y2="116" stroke="#374151" stroke-width="1.5"/>
+  <line x1="30" y1="118" x2="30" y2="160" stroke="#374151" stroke-width="2.5"/>
+  <!-- + and − labels -->
+  <text x="46" y="93" font-size="13" fill="#dc2626" font-weight="bold">+</text>
+  <text x="46" y="120" font-size="13" fill="#2563eb" font-weight="bold">−</text>
+  <text x="8" y="108" font-size="10" fill="#166534">E</text>
+
+  <!-- WIRES -->
+  <!-- top wire: from battery top (30,50) right to junction at (310,50) -->
+  <line x1="30" y1="50" x2="310" y2="50" stroke="#374151" stroke-width="2.5"/>
+  <!-- bottom wire: from battery bottom (30,160) right to (310,160) -->
+  <line x1="30" y1="160" x2="310" y2="160" stroke="#374151" stroke-width="2.5"/>
+  <!-- right wire: from (310,50) to (310,160) continuous -->
+  <line x1="310" y1="50" x2="310" y2="160" stroke="#374151" stroke-width="2.5"/>
+
+  <!-- RESISTOR (IEC: rectangle) on top wire, centered at (190,50) -->
+  <line x1="120" y1="50" x2="145" y2="50" stroke="#374151" stroke-width="2.5"/>
+  <rect x="145" y="37" width="80" height="26" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="185" y="54" text-anchor="middle" font-size="13" fill="#92400e" font-weight="bold">R</text>
+  <line x1="225" y1="50" x2="270" y2="50" stroke="#374151" stroke-width="2.5"/>
+
+  <!-- AMMETER (circle with A) in series on top right, at (290,50) -->
+  <circle cx="290" cy="50" r="18" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="290" y="55" text-anchor="middle" font-size="14" fill="#1d4ed8" font-weight="bold">A</text>
+  <line x1="270" y1="50" x2="272" y2="50" stroke="#374151" stroke-width="2.5"/>
+  <line x1="308" y1="50" x2="310" y2="50" stroke="#374151" stroke-width="2.5"/>
+  <text x="290" y="30" text-anchor="middle" font-size="9" fill="#1d4ed8">(σε σειρά)</text>
+
+  <!-- VOLTMETER (circle with V) in parallel across resistor, dashed wires -->
+  <circle cx="185" cy="158" r="18" fill="#fdf4ff" stroke="#7c3aed" stroke-width="2"/>
+  <text x="185" y="163" text-anchor="middle" font-size="14" fill="#6d28d9" font-weight="bold">V</text>
+  <!-- dashed connection from resistor left terminal down to voltmeter -->
+  <line x1="145" y1="50" x2="145" y2="140" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="145" y1="140" x2="167" y2="140" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="167" y1="140" x2="167" y2="158" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- dashed connection from resistor right terminal down to voltmeter -->
+  <line x1="225" y1="50" x2="225" y2="140" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="225" y1="140" x2="203" y2="140" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="203" y1="140" x2="203" y2="158" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="185" y="185" text-anchor="middle" font-size="9" fill="#6d28d9">(παράλληλα)</text>
+
+  <!-- Current direction arrow -->
+  <defs><marker id="cArr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#16a34a"/></marker></defs>
+  <line x1="60" y1="38" x2="110" y2="38" stroke="#16a34a" stroke-width="2" marker-end="url(#cArr)"/>
+  <text x="85" y="30" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="bold">I (ρεύμα)</text>
+
+  <!-- Legend -->
+  <text x="10" y="207" font-size="10" fill="#374151">— Μακριά γραμμή = + πόλος &nbsp; — Κοντή γραμμή = − πόλος &nbsp; □ = αντίσταση (IEC)</text>
+</svg>
+</div>
+<div class="formula">V = E / q &nbsp;(Volt = Joule/Coulomb)</div>
+
+<h3>2.3 Νόμος Ohm</h3>
+<p>Για έναν αγωγό σε σταθερή θερμοκρασία, η τάση είναι ανάλογη της έντασης:</p>
+<div class="formula">V = I · R &nbsp;&nbsp;|&nbsp;&nbsp; R = V/I &nbsp;&nbsp;|&nbsp;&nbsp; I = V/R</div>
+
+<h3>2.4–2.5 Συνδεσμολογίες</h3>
+<div class="diagram">
+<svg width="380" height="170" viewBox="0 0 380 170">
+  <!-- Series -->
+  <text x="95" y="15" text-anchor="middle" font-size="13" fill="#2563eb" font-weight="bold">ΣΕΙΡΑ</text>
+  <rect x="10" y="25" width="40" height="20" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="30" y="39" text-anchor="middle" font-size="11" fill="#92400e">R₁</text>
+  <rect x="70" y="25" width="40" height="20" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="90" y="39" text-anchor="middle" font-size="11" fill="#92400e">R₂</text>
+  <rect x="130" y="25" width="40" height="20" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="150" y="39" text-anchor="middle" font-size="11" fill="#92400e">R₃</text>
+  <line x1="50" y1="35" x2="70" y2="35" stroke="#374151" stroke-width="2"/>
+  <line x1="110" y1="35" x2="130" y2="35" stroke="#374151" stroke-width="2"/>
+  <text x="95" y="65" text-anchor="middle" font-size="11" fill="#374151">R<tspan baseline-shift="sub" font-size="9">ολ</tspan> = R₁+R₂+R₃</text>
+  <text x="95" y="78" text-anchor="middle" font-size="11" fill="#dc2626">I ίδιο παντού</text>
+  <!-- Parallel -->
+  <text x="285" y="15" text-anchor="middle" font-size="13" fill="#7c3aed" font-weight="bold">ΠΑΡΑΛΛΗΛΗ</text>
+  <line x1="200" y1="35" x2="225" y2="35" stroke="#374151" stroke-width="2"/>
+  <line x1="225" y1="20" x2="225" y2="50" stroke="#374151" stroke-width="1.5"/>
+  <rect x="230" y="12" width="40" height="16" rx="3" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="250" y="24" text-anchor="middle" font-size="10" fill="#92400e">R₁</text>
+  <rect x="230" y="32" width="40" height="16" rx="3" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="250" y="44" text-anchor="middle" font-size="10" fill="#92400e">R₂</text>
+  <line x1="270" y1="20" x2="270" y2="50" stroke="#374151" stroke-width="1.5"/>
+  <line x1="270" y1="35" x2="295" y2="35" stroke="#374151" stroke-width="2"/>
+  <text x="250" y="70" text-anchor="middle" font-size="10" fill="#374151">1/R<tspan baseline-shift="sub" font-size="8">ολ</tspan>=1/R₁+1/R₂+1/R₃</text>
+  <text x="250" y="83" text-anchor="middle" font-size="10" fill="#dc2626">V ίδιο παντού</text>
+  <!-- Comparison table -->
+  <rect x="0" y="95" width="380" height="70" rx="8" fill="none" stroke="var(--border)" stroke-width="1"/>
+  <text x="10" y="112" font-size="11" fill="var(--fg2)" font-weight="bold">Σύγκριση:</text>
+  <text x="10" y="128" font-size="10" fill="var(--fg)">Σειρά: R<tspan baseline-shift="sub" font-size="8">ολ</tspan>&gt;R<tspan baseline-shift="sub" font-size="8">max</tspan>, I παντού ίσο, V=V₁+V₂</text>
+  <text x="10" y="144" font-size="10" fill="var(--fg)">Παράλληλη: R<tspan baseline-shift="sub" font-size="8">ολ</tspan>&lt;R<tspan baseline-shift="sub" font-size="8">min</tspan>, V παντού ίσο, I=I₁+I₂</text>
+  <text x="10" y="160" font-size="10" fill="#16a34a">💡 Τα σπίτια: παράλληλη (ανεξάρτητα κυκλώματα)</text>
+</svg>
+</div>
+</div>`,
+
+    experiment:`<div class="card">
+<h2>🔬 Πείραμα: Νόμος Ohm — Διαδραστικό Κύκλωμα</h2>
+<p>Ρύθμισε τάση και αντίσταση και δες πώς αλλάζει η ένταση ρεύματος.</p>
+<canvas id="cvOhm" width="500" height="260"></canvas>
+<div class="sim-controls">
+  <label>Τάση V: <span id="vval">6</span> V</label>
+  <input type="range" min="1" max="12" value="6" id="slV" oninput="updateOhm()">
+  <label>R: <span id="roval">30</span> Ω</label>
+  <input type="range" min="5" max="100" value="30" id="slRo" oninput="updateOhm()">
+</div>
+<div id="ohmResult" class="formula" style="text-align:center"></div>
+</div>
+
+<div class="card">
+<h2>🔬 Πείραμα: Σειρά vs Παράλληλη Σύνδεση</h2>
+<p>Σύγκρινε τις δύο συνδεσμολογίες με τους ίδιους αντιστάτες.</p>
+<canvas id="cvCircuit" width="500" height="220"></canvas>
+<div class="sim-controls">
+  <label>R₁: <span id="r1v">20</span> Ω</label>
+  <input type="range" min="5" max="50" value="20" id="slR1" oninput="updateCircuit()">
+  <label>R₂: <span id="r2v">30</span> Ω</label>
+  <input type="range" min="5" max="50" value="30" id="slR2" oninput="updateCircuit()">
+</div>
+<div id="circuitResult" class="formula" style="font-size:.9rem;line-height:1.8"></div>
+</div>`,
+
+    quiz:[
+      {q:"Κύκλωμα με V=12V και R=4Ω. Ποια η ένταση ρεύματος;",
+       opts:["I = 48 A","I = 3 A","I = 0.33 A","I = 8 A"],
+       ans:1,fb:["❌ Λάθος. I = V/R = 12/4 = 3 A, όχι V×R.",
+                  "✅ Σωστά! I = V/R = 12/4 = 3 A",
+                  "❌ Λάθος. I = V/R = 12/4 = 3 A (όχι R/V).",
+                  "❌ Λάθος. Πρόσεξε: I = V/R = 12/4 = 3 A"]},
+      {q:"Δύο αντιστάτες R₁=10Ω και R₂=15Ω συνδέονται σε σειρά. Ολική αντίσταση;",
+       opts:["6 Ω","25 Ω","150 Ω","12.5 Ω"],
+       ans:1,fb:["❌ Λάθος. Αυτή είναι η παράλληλη σύνδεση.",
+                  "✅ Σωστά! Σε σειρά: R_ολ = R₁+R₂ = 10+15 = 25 Ω",
+                  "❌ Λάθος. Δεν πολλαπλασιάζουμε.",
+                  "❌ Λάθος. 25/2=12.5 είναι λάθος τρόπος."]},
+      {q:"Σε παράλληλη σύνδεση R₁=6Ω και R₂=12Ω. Ποια η ολική αντίσταση;",
+       opts:["18 Ω","4 Ω","9 Ω","72 Ω"],
+       ans:1,fb:["❌ Λάθος. Στην παράλληλη σύνδεση η R_ολ είναι ΜΙΚΡΟΤΕΡΗ από τη μικρότερη.",
+                  "✅ Σωστά! 1/R = 1/6+1/12 = 2/12+1/12 = 3/12 → R = 4 Ω",
+                  "❌ Λάθος. Αυτό είναι ο μέσος όρος, όχι η παράλληλη.",
+                  "❌ Λάθος. Δεν πολλαπλασιάζουμε τις αντιστάσεις."]},
+      {q:"Το αμπερόμετρο συνδέεται:",
+       opts:["Παράλληλα με τον καταναλωτή","Σε σειρά με τον καταναλωτή","Παράλληλα με την πηγή","Απευθείας στα άκρα της πηγής"],
+       ans:1,fb:["❌ Λάθος. Το βολτόμετρο συνδέεται παράλληλα.",
+                  "✅ Σωστά! Το αμπερόμετρο συνδέεται σε σειρά για να μετρά το ρεύμα που διαρρέει τον καταναλωτή.",
+                  "❌ Λάθος. Το βολτόμετρο συνδέεται παράλληλα με την πηγή ή τον καταναλωτή.",
+                  "❌ Λάθος. Αυτό θα δημιουργούσε βραχυκύκλωμα."]},
+      {q:"Σε κύκλωμα σε σειρά με δύο λαμπτήρες, αν κάψει ο ένας:",
+       opts:["Ο άλλος συνεχίζει να ανάβει","Ο άλλος σβήνει επίσης","Ο άλλος ανάβει πιο δυνατά","Δεν αλλάζει τίποτα"],
+       ans:1,fb:["❌ Λάθος. Σε σειρά υπάρχει μόνο ένα μονοπάτι ρεύματος.",
+                  "✅ Σωστά! Σε σειρά, αν κοπεί ο κύκλος σε οποιοδήποτε σημείο, σβήνουν όλα.",
+                  "❌ Λάθος. Αν κοπεί το κύκλωμα, δεν υπάρχει ρεύμα πουθενά.",
+                  "❌ Λάθος. Η διακοπή του κυκλώματος σταματά το ρεύμα."]},
+      {q:"Η αντίσταση ενός αγωγού εξαρτάται από:",
+       opts:["Μόνο το υλικό του","Μόνο το μήκος του","Υλικό, μήκος και διατομή","Μόνο τη θερμοκρασία"],
+       ans:2,fb:["❌ Λάθος. Το υλικό (ειδική αντίσταση) είναι μόνο ένας παράγοντας.",
+                  "❌ Λάθος. Και το μήκος, αλλά και άλλοι παράγοντες παίζουν ρόλο.",
+                  "✅ Σωστά! R = ρ·L/A — εξαρτάται από ειδική αντίσταση ρ, μήκος L και διατομή A.",
+                  "❌ Λάθος. Η θερμοκρασία επηρεάζει ελαφρά, αλλά δεν είναι οι κύριοι παράγοντες."]},
+      {q:"Ποιο από τα παρακάτω ισχύει για παράλληλο κύκλωμα;",
+       opts:["Το ρεύμα είναι ίδιο παντού","Η τάση είναι ίδια σε κάθε κλάδο","Η συνολική αντίσταση είναι μεγαλύτερη από κάθε μέρος","Αν κάψει ένας λαμπτήρας, σβήνουν όλοι"],
+       ans:1,fb:["❌ Λάθος. Ίδιο ρεύμα παντού ισχύει στο σειριακό κύκλωμα.",
+                  "✅ Σωστά! Σε παράλληλο κύκλωμα η τάση είναι ίδια σε κάθε κλάδο (V₁=V₂=V).",
+                  "❌ Λάθος. Η παράλληλη σύνδεση μειώνει τη συνολική αντίσταση.",
+                  "❌ Λάθος. Αν κάψει ένας, οι υπόλοιποι συνεχίζουν — αυτό είναι το πλεονέκτημα της παράλληλης σύνδεσης."]},
+      {q:"Αμπερόμετρο και βολτόμετρο: ποια σύνδεση είναι σωστή;",
+       opts:["Αμπερόμετρο παράλληλα, βολτόμετρο σε σειρά","Αμπερόμετρο σε σειρά, βολτόμετρο παράλληλα","Και τα δύο σε σειρά","Και τα δύο παράλληλα"],
+       ans:1,fb:["❌ Λάθος. Αυτό θα καταστρέψει τα όργανα — αντίθετα!",
+                  "✅ Σωστά! Το Α μετράει ρεύμα (σε σειρά) και το V μετράει τάση (παράλληλα με τον ακροδέκτη).",
+                  "❌ Λάθος. Το βολτόμετρο σε σειρά θα εμπόδιζε το ρεύμα.",
+                  "❌ Λάθος. Αμπερόμετρο παράλληλα θα δημιουργούσε βραχυκύκλωμα."]}
+    ]
+  },
+
+  { title:"Ηλεκτρική Ενέργεια",
+    theory:`<div class="card">
+<h2>3.1 Θερμικά Αποτελέσματα — Φαινόμενο Joule</h2>
+<p>Όταν ηλεκτρικό ρεύμα διαρρέει έναν αγωγό, <strong>παράγεται θερμότητα</strong>. Αυτό ονομάζεται φαινόμενο Joule.</p>
+<div class="diagram">
+<svg width="360" height="145" viewBox="0 0 360 145">
+  <defs>
+    <marker id="jArr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#16a34a"/></marker>
+  </defs>
+  <!-- closed circuit: top wire left, heating resistor, top wire right, battery, bottom return -->
+  <!-- IEC battery (vertical, left side): top terminal at (30,20), bottom at (30,110) -->
+  <!-- top segment: from top terminal to first cell -->
+  <line x1="30" y1="20" x2="30" y2="50" stroke="#374151" stroke-width="2.5"/>
+  <!-- cell 1: long line (+) -->
+  <line x1="18" y1="53" x2="42" y2="53" stroke="#374151" stroke-width="3"/>
+  <!-- cell 1: short line (−) -->
+  <line x1="23" y1="61" x2="37" y2="61" stroke="#374151" stroke-width="1.5"/>
+  <!-- cell 2: long line (+) -->
+  <line x1="18" y1="69" x2="42" y2="69" stroke="#374151" stroke-width="3"/>
+  <!-- cell 2: short line (−) -->
+  <line x1="23" y1="77" x2="37" y2="77" stroke="#374151" stroke-width="1.5"/>
+  <!-- bottom segment: from last cell to bottom terminal -->
+  <line x1="30" y1="79" x2="30" y2="110" stroke="#374151" stroke-width="2.5"/>
+  <text x="8" y="57" font-size="10" fill="#dc2626" font-weight="bold">+</text>
+  <text x="8" y="79" font-size="10" fill="#2563eb" font-weight="bold">−</text>
+  <!-- top left wire: from top terminal (30,20) to resistor -->
+  <line x1="30" y1="20" x2="55" y2="20" stroke="#374151" stroke-width="2.5"/>
+  <!-- bottom return wire -->
+  <line x1="30" y1="110" x2="330" y2="110" stroke="#374151" stroke-width="2.5"/>
+  <line x1="330" y1="110" x2="330" y2="30" stroke="#374151" stroke-width="2.5"/>
+  <!-- top right wire -->
+  <line x1="330" y1="30" x2="255" y2="30" stroke="#374151" stroke-width="2.5"/>
+  <!-- heating element: zigzag resistor (IEC: rectangle) -->
+  <rect x="55" y="18" width="200" height="24" rx="4" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+  <path d="M70,30 Q85,18 100,30 Q115,42 130,30 Q145,18 160,30 Q175,42 190,30 Q205,18 220,30 Q235,42 240,30" fill="none" stroke="#ef4444" stroke-width="2.5"/>
+  <text x="155" y="56" text-anchor="middle" font-size="11" fill="#dc2626" font-weight="bold">Αντίσταση — Φαινόμενο Joule</text>
+  <!-- heat waves above -->
+  <text x="110" y="14" font-size="16">🔥</text>
+  <text x="155" y="12" font-size="16">🔥</text>
+  <text x="200" y="14" font-size="16">🔥</text>
+  <!-- current arrow -->
+  <line x1="150" y1="110" x2="200" y2="110" stroke="#16a34a" stroke-width="2" marker-end="url(#jArr)"/>
+  <text x="175" y="126" text-anchor="middle" font-size="10" fill="#16a34a">I (ρεύμα)</text>
+</svg>
+</div>
+<div class="formula">Q = I² · R · t &nbsp;&nbsp; (Joule)</div>
+
+<h3>3.2 Ηλεκτρική Ισχύς & Ενέργεια</h3>
+<p>Η <strong>ηλεκτρική ισχύς</strong> μετράει πόση ενέργεια καταναλώνεται ανά δευτερόλεπτο:</p>
+<div class="formula">P = V · I = I² · R = V²/R &nbsp;&nbsp; (Watt)</div>
+<div class="formula">E = P · t = V · I · t &nbsp;&nbsp; (Joule)</div>
+<div class="info-box">💡 1 kWh = 1000 W × 3600 s = 3.600.000 J<br>Αυτό μετράει ο μετρητής ΔΕΗ!</div>
+
+<h3>Βραχυκύκλωμα & Ασφάλειες</h3>
+<div class="diagram">
+<svg width="390" height="175" viewBox="0 0 390 175">
+  <!-- Κύκλωμα: πηγή + ασφάλεια σε σειρά, αντίσταση R || βραχυκύκλωμα παράλληλα -->
+  <!-- Βρόχος: αριστερά x=45, πάνω y=25, κάτω y=140 -->
+
+  <!-- ΠΗΓΗ ΤΑΣΗΣ (IEC κατακόρυφη) στο αριστερό σύρμα -->
+  <line x1="45" y1="25" x2="45" y2="58" stroke="#374151" stroke-width="2.5"/>
+  <line x1="32" y1="61" x2="58" y2="61" stroke="#374151" stroke-width="3"/>
+  <line x1="37" y1="69" x2="53" y2="69" stroke="#374151" stroke-width="1.5"/>
+  <line x1="32" y1="77" x2="58" y2="77" stroke="#374151" stroke-width="3"/>
+  <line x1="37" y1="85" x2="53" y2="85" stroke="#374151" stroke-width="1.5"/>
+  <line x1="45" y1="87" x2="45" y2="140" stroke="#374151" stroke-width="2.5"/>
+  <text x="62" y="65" font-size="12" fill="#dc2626" font-weight="bold">+</text>
+  <text x="62" y="88" font-size="12" fill="#2563eb" font-weight="bold">−</text>
+  <text x="45" y="160" text-anchor="middle" font-size="11" fill="#374151" font-weight="bold">12V</text>
+
+  <!-- ΠΑΝΩ σύρμα: πηγή → ασφάλεια → κόμβος A (x=245) → R κλάδος & βρ.κυκ. κλάδος -->
+  <line x1="45" y1="25" x2="100" y2="25" stroke="#374151" stroke-width="2.5"/>
+  <!-- Ασφάλεια (IEC ορθογώνιο) -->
+  <rect x="100" y="14" width="65" height="22" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="133" y="29" text-anchor="middle" font-size="14" fill="#92400e" font-weight="bold">~</text>
+  <text x="133" y="52" text-anchor="middle" font-size="10" fill="#d97706" font-weight="bold">Ασφάλεια</text>
+  <!-- σύρμα από ασφάλεια στον κόμβο A -->
+  <line x1="165" y1="25" x2="245" y2="25" stroke="#374151" stroke-width="2.5"/>
+  <!-- κόμβος A -->
+  <circle cx="245" cy="25" r="4" fill="#374151"/>
+  <!-- πάνω σύρμα από κόμβο A → δεξί άκρο (x=330) -->
+  <line x1="245" y1="25" x2="330" y2="25" stroke="#374151" stroke-width="2"/>
+
+  <!-- ΚΑΤΩ σύρμα: πηγή → κόμβος B (x=245) → δεξί άκρο (x=330) -->
+  <line x1="45" y1="140" x2="245" y2="140" stroke="#374151" stroke-width="2.5"/>
+  <!-- κόμβος B -->
+  <circle cx="245" cy="140" r="4" fill="#374151"/>
+  <line x1="245" y1="140" x2="330" y2="140" stroke="#374151" stroke-width="2"/>
+
+  <!-- ΑΝΤΙΣΤΑΣΗ R (IEC κατακόρυφη): κλάδος A→B στο x=245 -->
+  <line x1="245" y1="25" x2="245" y2="55" stroke="#374151" stroke-width="2"/>
+  <rect x="233" y="55" width="24" height="50" rx="3" fill="#fef9c3" stroke="#d97706" stroke-width="2"/>
+  <text x="245" y="84" text-anchor="middle" font-size="14" fill="#92400e" font-weight="bold">R</text>
+  <line x1="245" y1="105" x2="245" y2="140" stroke="#374151" stroke-width="2"/>
+  <text x="245" y="160" text-anchor="middle" font-size="10" fill="#92400e">αντίσταση</text>
+
+  <!-- ΒΡΑΧΥΚΥΚΛΩΜΑ: παράλληλος κλάδος A→B στο x=330 με διακόπτη Δ -->
+  <!-- σύρμα από κόμβο A (330,25) ως επαφή 1 διακόπτη -->
+  <line x1="330" y1="25" x2="330" y2="58" stroke="#ef4444" stroke-width="3"/>
+  <!-- Διακόπτης Δ (κλειστός): επαφή 1 -->
+  <circle cx="330" cy="61" r="3.5" fill="#ef4444"/>
+  <!-- μοχλός διακόπτη (ελαφρώς κεκλιμένος = κλειστός) -->
+  <line x1="330" y1="61" x2="318" y2="82" stroke="#ef4444" stroke-width="2.5"/>
+  <!-- επαφή 2 -->
+  <circle cx="330" cy="88" r="3.5" fill="#ef4444"/>
+  <!-- ετικέτα Δ -->
+  <text x="348" y="78" font-size="12" fill="#dc2626" font-weight="bold">Δ</text>
+  <!-- σύρμα από επαφή 2 ως κόμβο B (330,140) -->
+  <line x1="330" y1="88" x2="330" y2="140" stroke="#ef4444" stroke-width="3"/>
+  <!-- βέλος ρεύματος I→∞ -->
+  <defs>
+    <marker id="scArr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#ef4444"/>
+    </marker>
+  </defs>
+  <line x1="330" y1="100" x2="330" y2="128" stroke="#ef4444" stroke-width="2" stroke-dasharray="5,2" marker-end="url(#scArr)"/>
+  <text x="348" y="118" font-size="10" fill="#dc2626" font-weight="bold">I→∞</text>
+  <!-- σπινθήρας -->
+  <text x="340" y="145" font-size="16">⚡</text>
+  <text x="332" y="163" text-anchor="middle" font-size="9" fill="#dc2626" font-weight="bold">Βραχυκύκλωμα</text>
+
+  <!-- βέλος ρεύματος στον κύριο βρόχο (πάνω σύρμα) -->
+  <defs>
+    <marker id="iArr2" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#16a34a"/>
+    </marker>
+  </defs>
+  <line x1="60" y1="13" x2="95" y2="13" stroke="#16a34a" stroke-width="1.5" marker-end="url(#iArr2)"/>
+  <text x="77" y="8" text-anchor="middle" font-size="8" fill="#16a34a">I</text>
+</svg>
+</div>
+<div class="warn-box">⚠️ Στο βραχυκύκλωμα: R→0, I→∞, κίνδυνος πυρκαγιάς!<br>Οι ηλεκτρικές ασφάλειες διακόπτουν το κύκλωμα αν I υπερβεί το όριο.</div>
+</div>`,
+
+    experiment:`<div class="card">
+<h2>🔬 Πείραμα: Ισχύς & Κατανάλωση</h2>
+<p>Υπολόγισε πόση ενέργεια και χρήμα καταναλώνει κάθε ηλεκτρική συσκευή.</p>
+<canvas id="cvPower" width="500" height="200"></canvas>
+<div class="sim-controls">
+  <label>Ισχύς (W): <span id="pwval">100</span></label>
+  <input type="range" min="5" max="3000" value="100" id="slPW" oninput="updatePower()">
+  <label>Ώρες/μέρα: <span id="hrval">4</span></label>
+  <input type="range" min="1" max="24" value="4" id="slHR" oninput="updatePower()">
+</div>
+<div id="powerResult" class="formula" style="font-size:.9rem;line-height:2"></div>
+</div>`,
+
+    quiz:[
+      {q:"Λαμπτήρας 60W λειτουργεί 5 ώρες. Πόσες kWh καταναλώνει;",
+       opts:["0.3 kWh","300 kWh","12 kWh","0.012 kWh"],
+       ans:0,fb:["✅ Σωστά! E = P×t = 60W × 5h = 300Wh = 0.3 kWh",
+                  "❌ Λάθος. Μη μπερδεύεις Wh με kWh.",
+                  "❌ Λάθος. E = 60W × 5h = 300Wh = 0.3 kWh",
+                  "❌ Λάθος. Δεν χρειάζεται μετατροπή σε J εδώ. E = 0.3 kWh"]},
+      {q:"Αντίστης 10Ω διαρρέεται από I=3A. Ποια η ισχύς;",
+       opts:["30 W","90 W","900 W","0.3 W"],
+       ans:1,fb:["❌ Λάθος. P = I²·R = 9×10 = 90 W, όχι I×R.",
+                  "✅ Σωστά! P = I²·R = (3)²×10 = 9×10 = 90 W",
+                  "❌ Λάθος. Δεν είναι I³·R.",
+                  "❌ Λάθος. P = I²·R = 90 W"]},
+      {q:"1 kWh ισούται με πόσα Joule;",
+       opts:["1.000 J","3.600 J","1.000.000 J","3.600.000 J"],
+       ans:3,fb:["❌ Λάθος.",
+                  "❌ Λάθος. Μη μπερδεύεις kWh με kJ.",
+                  "❌ Λάθος.",
+                  "✅ Σωστά! 1 kWh = 1000W × 3600s = 3.600.000 J = 3.6×10⁶ J"]},
+      {q:"Γιατί είναι επικίνδυνο το βραχυκύκλωμα;",
+       opts:["Γιατί διακόπτει το ρεύμα","Γιατί η αντίσταση μηδενίζεται και το ρεύμα γίνεται πολύ μεγάλο","Γιατί η τάση μηδενίζεται","Γιατί η ισχύς γίνεται μηδέν"],
+       ans:1,fb:["❌ Λάθος. Αυτό κάνει η ασφάλεια, όχι το βραχυκύκλωμα.",
+                  "✅ Σωστά! Όταν R→0, από V=IR προκύπτει I→∞, με κίνδυνο υπερθέρμανσης και πυρκαγιάς.",
+                  "❌ Λάθος. Η τάση παραμένει ίδια.",
+                  "❌ Λάθος. Αντίθετα, P = V²/R → ∞ όταν R→0."]},
+      {q:"Ένας λαμπτήρας 60W συνδέεται για 2 ώρες. Πόση ενέργεια καταναλώνει;",
+       opts:["30 Wh","60 Wh","120 Wh","240 Wh"],
+       ans:2,fb:["❌ Λάθος. E = P × t = 60W × 2h = 120Wh.",
+                  "❌ Λάθος. 60Wh θα ήταν για 1 ώρα.",
+                  "✅ Σωστά! E = P·t = 60W × 2h = 120Wh = 0,12kWh",
+                  "❌ Λάθος. 240Wh θα ήταν για 4 ώρες."]},
+      {q:"Ποια σχέση δείχνει πώς η ισχύς εξαρτάται από την τάση και την αντίσταση;",
+       opts:["P = I·R","P = V·R","P = V²/R","P = I²/R"],
+       ans:2,fb:["❌ Λάθος. P = I·R δεν έχει σωστές μονάδες.",
+                  "❌ Λάθος. V·R δεν είναι ισχύς.",
+                  "✅ Σωστά! P = V²/R. Αν η τάση διπλασιαστεί, η ισχύς τετραπλασιάζεται!",
+                  "❌ Λάθος. Η σωστή με ρεύμα είναι P = I²·R, με τάση είναι P = V²/R."]},
+      {q:"Ποια συσκευή μετατρέπει ηλεκτρική ενέργεια σε κινητική;",
+       opts:["Λαμπτήρας πυρακτώσεως","Ηλεκτρικός κινητήρας","Ηλεκτρολύτης","Φωτοβολταϊκό"],
+       ans:1,fb:["❌ Λάθος. Ο λαμπτήρας μετατρέπει ηλεκτρική σε θερμική και φωτεινή.",
+                  "✅ Σωστά! Ο ηλεκτρικός κινητήρας μετατρέπει ηλεκτρική ενέργεια σε κινητική (μηχανική).",
+                  "❌ Λάθος. Ο ηλεκτρολύτης μετατρέπει ηλεκτρική σε χημική.",
+                  "❌ Λάθος. Το φωτοβολταϊκό κάνει το αντίθετο: φωτεινή → ηλεκτρική."]},
+      {q:"Το κόστος κατανάλωσης υπολογίζεται με βάση:",
+       opts:["Watt (W)","Kilowatt (kW)","Kilowatt-ώρα (kWh)","Joule (J)"],
+       ans:2,fb:["❌ Λάθος. Το Watt είναι μονάδα ισχύος, όχι ενέργειας.",
+                  "❌ Λάθος. Το kW είναι μονάδα ισχύος.",
+                  "✅ Σωστά! Η ΔΕΗ χρεώνει σε kWh — ένα kWh = 3.600.000 J.",
+                  "❌ Λάθος. Το Joule είναι η βασική μονάδα ενέργειας αλλά πολύ μικρή για οικιακή χρήση."]}
+    ]
+  },
+
+  { title:"Ταλαντώσεις",
+    theory:`<div class="card">
+<h2>4.1 Περιοδικές Κινήσεις & Ταλαντώσεις</h2>
+<p>Μια <strong>ταλάντωση</strong> είναι κίνηση που επαναλαμβάνεται γύρω από μια <strong>θέση ισορροπίας</strong>.</p>
+<div class="diagram" style="overflow-x:auto">
+<!-- Enhanced pendulum + spring diagrams -->
+<svg width="680" height="310" viewBox="0 0 680 310" style="max-width:100%;font-family:inherit">
+  <defs>
+    <!-- Arrow heads -->
+    <marker id="arT"  markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#2563eb"/></marker>
+    <marker id="arMg" markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#dc2626"/></marker>
+    <marker id="arSin" markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#d97706"/></marker>
+    <marker id="arCos" markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#7c3aed"/></marker>
+    <marker id="arGr"  markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#059669"/></marker>
+    <marker id="arGrR" markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#059669"/></marker>
+    <!-- Hatch pattern for ceiling -->
+    <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#9ca3af" stroke-width="2"/>
+    </pattern>
+  </defs>
+
+  <!-- ═══════════════ LEFT: PENDULUM ═══════════════ -->
+
+  <!-- Title -->
+  <text x="155" y="20" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e40af">Απλό Εκκρεμές</text>
+
+  <!-- Ceiling hatch + bar -->
+  <rect x="60" y="22" width="100" height="12" fill="url(#hatch)" rx="2"/>
+  <rect x="60" y="22" width="100" height="5" fill="#6b7280" rx="1"/>
+  <!-- Pivot pin -->
+  <circle cx="110" cy="34" r="4" fill="#374151" stroke="#fff" stroke-width="1.5"/>
+
+  <!-- Vertical equilibrium dashed line -->
+  <line x1="110" y1="34" x2="110" y2="290" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="6,5"/>
+  <text x="113" y="288" font-size="9" fill="#9ca3af">ισορροπία</text>
+
+  <!-- Ghost bob at equilibrium (transparent) -->
+  <circle cx="110" cy="220" r="20" fill="none" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- String at θ=30° — pivot(110,34), L=170px → bob at (110+170·sin30, 34+170·cos30)=(195, 181) -->
+  <line x1="110" y1="34" x2="195" y2="181" stroke="#374151" stroke-width="2.5"/>
+
+  <!-- Length label L on string -->
+  <text x="145" y="112" text-anchor="middle" font-size="12" fill="#374151" font-style="italic" font-weight="bold">L</text>
+
+  <!-- Arc for angle θ -->
+  <path d="M110,70 A36,36 0 0,1 128,51" fill="none" stroke="#374151" stroke-width="1.8"/>
+  <text x="128" y="74" font-size="13" fill="#1f2937" font-style="italic" font-weight="bold">θ</text>
+
+  <!-- Bob -->
+  <circle cx="195" cy="196" r="22" fill="#3b82f6" stroke="#1d4ed8" stroke-width="3"/>
+  <text x="195" y="201" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">m</text>
+
+  <!-- FORCE 1: Tension T (blue) — up along string, length 65px
+       Direction toward pivot: (110-195, 34-196)/|...| = (-85,-162)/182 ≈ (-0.467,-0.890)
+       End: (195-0.467×65, 196-0.890×65) = (165, 138) -->
+  <line x1="195" y1="196" x2="165" y2="138" stroke="#2563eb" stroke-width="3.5" marker-end="url(#arT)"/>
+  <text x="149" y="148" text-anchor="end" font-size="13" fill="#2563eb" font-weight="bold">T</text>
+  <text x="148" y="160" text-anchor="end" font-size="10" fill="#2563eb">(τάση νήματος)</text>
+
+  <!-- FORCE 2: Weight mg (red) — down, length 70px -->
+  <line x1="195" y1="196" x2="195" y2="272" stroke="#dc2626" stroke-width="3.5" marker-end="url(#arMg)"/>
+  <text x="210" y="238" font-size="13" fill="#dc2626" font-weight="bold">mg</text>
+  <text x="210" y="252" font-size="10" fill="#dc2626">(βάρος)</text>
+
+  <!-- Dashed construction lines for parallelogram decomposition -->
+  <!-- mg·cosθ (along string, up) = |mg|·cos30 ≈ 60px; same dir as T: (-0.467,-0.890)×60 → (167, 143) -->
+  <line x1="195" y1="272" x2="167" y2="218" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <!-- mg·sinθ (perp to string, toward eq) perp to (-0.467,-0.890) is (-0.890,0.467), length 35px → (164,212) -->
+  <line x1="167" y1="218" x2="195" y2="272" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- FORCE 3: mg·sinθ (orange) — restoring force, perpendicular to string, toward equilibrium
+       Perp direction toward eq: (-0.890, 0.467), length 38px → (195-33.8, 196+17.7) = (161, 214) -->
+  <line x1="195" y1="196" x2="161" y2="214" stroke="#d97706" stroke-width="3" marker-end="url(#arSin)"/>
+  <text x="130" y="210" text-anchor="middle" font-size="11" fill="#d97706" font-weight="bold">mg·sinθ</text>
+  <text x="128" y="222" text-anchor="middle" font-size="9" fill="#d97706">(επαναφορική δύναμη)</text>
+
+  <!-- FORCE 4: mg·cosθ (purple dashed) — along string up, length 60px
+       End: (195-0.467×60, 196-0.890×60) = (167, 143) -->
+  <line x1="195" y1="196" x2="167" y2="143" stroke="#7c3aed" stroke-width="2.5" stroke-dasharray="6,4" marker-end="url(#arCos)"/>
+  <text x="174" y="128" text-anchor="middle" font-size="11" fill="#7c3aed" font-weight="bold">mg·cosθ</text>
+  <text x="174" y="140" text-anchor="middle" font-size="9" fill="#7c3aed">(≈ T, ακυρώνονται)</text>
+
+  <!-- Divider -->
+  <line x1="345" y1="22" x2="345" y2="300" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="6,4"/>
+
+  <!-- ═══════════════ RIGHT: SPRING ═══════════════ -->
+
+  <!-- Title -->
+  <text x="515" y="20" text-anchor="middle" font-size="14" font-weight="bold" fill="#065f46">Ελατήριο (Νόμος Hooke)</text>
+
+  <!-- Ceiling hatch + bar -->
+  <rect x="455" y="22" width="120" height="12" fill="url(#hatch)" rx="2"/>
+  <rect x="455" y="22" width="120" height="5" fill="#6b7280" rx="1"/>
+  <!-- Pivot -->
+  <rect x="506" y="27" width="18" height="7" rx="2" fill="#4b5563"/>
+
+  <!-- Equilibrium dashed line -->
+  <line x1="515" y1="34" x2="515" y2="290" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="6,5"/>
+
+  <!-- Spring coils — from y=34 to y=175 (141px, 8 coils) -->
+  <!-- Natural length marker -->
+  <line x1="540" y1="34" x2="548" y2="34" stroke="#6b7280" stroke-width="1.5"/>
+  <line x1="540" y1="175" x2="548" y2="175" stroke="#6b7280" stroke-width="1.5"/>
+  <line x1="544" y1="34" x2="544" y2="175" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="550" y="108" font-size="10" fill="#6b7280" font-style="italic">L₀</text>
+  <text x="550" y="119" font-size="9" fill="#6b7280">(φυσικό μήκος)</text>
+
+  <!-- Spring path (8 zigzag coils) -->
+  <polyline points="515,34 527,48 503,62 527,76 503,90 527,104 503,118 527,132 503,146 527,160 515,175"
+    fill="none" stroke="#d97706" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <!-- Equilibrium position line -->
+  <line x1="480" y1="175" x2="540" y2="175" stroke="#059669" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <text x="478" y="173" text-anchor="end" font-size="10" fill="#059669">θέση ισορροπίας</text>
+
+  <!-- Displacement x arrow (green double-sided feel) -->
+  <line x1="480" y1="175" x2="480" y2="215" stroke="#059669" stroke-width="2" marker-end="url(#arGr)"/>
+  <text x="466" y="198" text-anchor="middle" font-size="13" fill="#059669" font-weight="bold" font-style="italic">x</text>
+
+  <!-- Spring extension line (from 175 to 215) -->
+  <line x1="515" y1="175" x2="515" y2="215" stroke="#d97706" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- Mass block at displaced position -->
+  <rect x="490" y="215" width="50" height="44" rx="6" fill="#fde68a" stroke="#d97706" stroke-width="2.5"/>
+  <text x="515" y="241" text-anchor="middle" font-size="14" fill="#92400e" font-weight="bold">m</text>
+
+  <!-- Restoring force F = -kx (green, pointing UP) -->
+  <line x1="515" y1="215" x2="515" y2="160" stroke="#059669" stroke-width="3.5" marker-end="url(#arGrR)"/>
+  <text x="520" y="176" font-size="12" fill="#059669" font-weight="bold">F = −kx</text>
+  <text x="520" y="189" font-size="9" fill="#059669">(επαναφορική)</text>
+
+  <!-- Weight arrow down (red) -->
+  <line x1="515" y1="259" x2="515" y2="290" stroke="#dc2626" stroke-width="3" marker-end="url(#arMg)"/>
+  <text x="520" y="278" font-size="11" fill="#dc2626" font-weight="bold">mg</text>
+
+  <!-- Spring constant label -->
+  <text x="495" y="305" font-size="11" fill="#374151">σταθερά ελατηρίου:</text>
+  <text x="600" y="305" font-size="11" fill="#d97706" font-weight="bold">k (N/m)</text>
+</svg>
+</div>
+<div class="info-box">⚡ Ανάλυση δυνάμεων εκκρεμούς σε γωνία θ:<br>
+• <strong style="color:#2563eb">T</strong> (μπλε): τάση νήματος — κατά μήκος νήματος προς ανάρτηση<br>
+• <strong style="color:#d97706">mg·sinθ</strong> (πορτοκαλί): εφαπτομενική επαναφορική δύναμη → θέση ισορροπίας<br>
+• <strong style="color:#7c3aed">mg·cosθ</strong> (μωβ, διακεκομμένο): κατά μήκος νήματος, εξισορροπείται από T<br>
+• Για μικρές γωνίες (θ &lt; 10°): sinθ ≈ θ → <strong>απλή αρμονική ταλάντωση</strong></div>
+
+<h3>4.2 Περίοδος & Συχνότητα</h3>
+<div class="formula">T = χρόνος 1 ταλάντωσης (s) &nbsp;|&nbsp; f = N/Δt (Hz) &nbsp;|&nbsp; f = 1/T</div>
+<div class="info-box">🔔 Απλό εκκρεμές: η περίοδος <strong>ΔΕΝ</strong> εξαρτάται από τη μάζα!<br>T = 2π√(L/g) — εξαρτάται μόνο από το μήκος L</div>
+
+<h3>4.3 Ενέργεια Ταλάντωσης</h3>
+<div class="diagram">
+<svg width="380" height="100" viewBox="0 0 380 100">
+  <!-- energy bar chart -->
+  <text x="60" y="15" text-anchor="middle" font-size="11" fill="#2563eb" font-weight="bold">Θέση ισορροπίας</text>
+  <rect x="20" y="20" width="80" height="40" rx="4" fill="#bfdbfe" opacity=".8"/>
+  <text x="60" y="44" text-anchor="middle" font-size="11" fill="#1d4ed8">Ek = MAX</text>
+  <rect x="20" y="60" width="80" height="10" rx="3" fill="#fde68a" opacity=".8"/>
+  <text x="60" y="90" text-anchor="middle" font-size="11" fill="#d97706">Εδυν = 0</text>
+  <text x="190" y="15" text-anchor="middle" font-size="11" fill="#dc2626" font-weight="bold">Άκρα ταλάντωσης</text>
+  <rect x="150" y="20" width="80" height="5" rx="3" fill="#bfdbfe" opacity=".8"/>
+  <text x="190" y="15" text-anchor="middle" font-size="9" fill="#1d4ed8"></text>
+  <text x="190" y="44" text-anchor="middle" font-size="11" fill="#1d4ed8">Ek = 0</text>
+  <rect x="150" y="50" width="80" height="40" rx="4" fill="#fde68a" opacity=".8"/>
+  <text x="190" y="76" text-anchor="middle" font-size="11" fill="#d97706">Εδυν = MAX</text>
+  <text x="330" y="44" text-anchor="middle" font-size="11" fill="#16a34a" font-weight="bold">Eμηχ = Εκ + Εδυν</text>
+  <text x="330" y="58" text-anchor="middle" font-size="10" fill="#16a34a">μηχανική ενέργεια</text>
+  <text x="330" y="72" text-anchor="middle" font-size="10" fill="#16a34a">= σταθερή</text>
+</svg>
+</div>
+<div class="formula">Eμηχ = Εκ + Εδυν = σταθερή &nbsp;&mdash;&nbsp; Διατήρηση Μηχανικής Ενέργειας</div>
+</div>`,
+
+    experiment:`<div class="card">
+<h2>🔬 Πείραμα: Απλό Εκκρεμές</h2>
+<p>Παρατήρησε πώς το μήκος L επηρεάζει την περίοδο. Ρύθμισε και πάτα Εκκίνηση!</p>
+<canvas id="cvPendulum" width="500" height="300"></canvas>
+<div class="sim-controls">
+  <label>Μήκος L: <span id="lenval">1.0</span> m</label>
+  <input type="range" min="2" max="20" value="10" id="slLen" oninput="updatePendulum()">
+  <label>Πλάτος: <span id="ampval">20</span>°</label>
+  <input type="range" min="5" max="40" value="20" id="slAmp" oninput="updatePendulum()">
+  <button class="btn btn-green" onclick="togglePendulum()" id="pendBtn">▶ Εκκίνηση</button>
+</div>
+<div id="pendResult" class="formula" style="text-align:center"></div>
+</div>`,
+
+    quiz:[
+      {q:"Εκκρεμές κάνει 30 ταλαντώσεις σε 60 s. Ποια η συχνότητα;",
+       opts:["2 Hz","0.5 Hz","30 Hz","60 Hz"],
+       ans:1,fb:["❌ Λάθος. f = N/Δt = 30/60 = 0.5 Hz",
+                  "✅ Σωστά! f = N/Δt = 30/60 = 0.5 Hz και T = 1/f = 2 s",
+                  "❌ Λάθος. Δεν διαιρείς τον αριθμό ταλαντώσεων με 1.",
+                  "❌ Λάθος. f = 30/60 = 0.5 Hz"]},
+      {q:"Τι συμβαίνει στην περίοδο εκκρεμούς αν τετραπλασιαστεί το μήκος;",
+       opts:["Τετραπλασιάζεται","Διπλασιάζεται","Παραμένει ίδια","Μισεύεται"],
+       ans:1,fb:["❌ Λάθος. T ∝ √L, οπότε αν L×4, τότε T×√4=×2.",
+                  "✅ Σωστά! Αφού T ∝ √L, αν L×4, τότε T×√4 = T×2. Διπλασιάζεται!",
+                  "❌ Λάθος. Η περίοδος εξαρτάται από το μήκος.",
+                  "❌ Λάθος. T ∝ √L, άρα T διπλασιάζεται."]},
+      {q:"Σε ποια θέση του εκκρεμούς η κινητική ενέργεια είναι μέγιστη;",
+       opts:["Στα άκρα","Στη θέση ισορροπίας","Στο μισό της διαδρομής","Παντού ίδια"],
+       ans:1,fb:["❌ Λάθος. Στα άκρα το εκκρεμές στιγμιαία ακινητοποιείται, Ek=0.",
+                  "✅ Σωστά! Στη θέση ισορροπίας η ταχύτητα είναι μέγιστη, άρα Ek = ½mv² = μέγιστη.",
+                  "❌ Λάθος.",
+                  "❌ Λάθος. Η ενέργεια μεταβάλλεται."]},
+      {q:"Από τι εξαρτάται η περίοδος του απλού εκκρεμούς;",
+       opts:["Από τη μάζα του βαριδιού","Από το πλάτος ταλάντωσης","Από το μήκος του νήματος","Από όλα τα παραπάνω"],
+       ans:2,fb:["❌ Λάθος. Η μάζα ΔΕΝ επηρεάζει την περίοδο!",
+                  "❌ Λάθος. Για μικρά πλάτη (<30°) η περίοδος είναι ανεξάρτητη πλάτους.",
+                  "✅ Σωστά! T = 2π√(L/g) — μόνο το μήκος L και η επιτάχυνση g (σταθερή).",
+                  "❌ Λάθος. Μόνο το μήκος L επηρεάζει την περίοδο."]},
+      {q:"Ένα εκκρεμές έχει περίοδο T = 2s. Ποια η συχνότητά του;",
+       opts:["2 Hz","4 Hz","0,5 Hz","1 Hz"],
+       ans:2,fb:["❌ Λάθος. f = 1/T = 1/2 = 0,5 Hz — όχι 2 Hz.",
+                  "❌ Λάθος. Το 4 Hz αντιστοιχεί σε T = 0,25s.",
+                  "✅ Σωστά! f = 1/T = 1/2s = 0,5 Hz",
+                  "❌ Λάθος. f = 1 Hz αντιστοιχεί σε T = 1s."]},
+      {q:"Τι ονομάζουμε εύρος (πλάτος) ταλάντωσης;",
+       opts:["Η μέγιστη απόσταση από τη θέση ισορροπίας","Ο χρόνος μιας πλήρους ταλάντωσης","Ο αριθμός ταλαντώσεων ανά δευτερόλεπτο","Η ελάχιστη απόσταση από τη θέση ισορροπίας"],
+       ans:0,fb:["✅ Σωστά! Το πλάτος A είναι η μέγιστη απόσταση (μετατόπιση) από τη θέση ισορροπίας.",
+                  "❌ Λάθος. Αυτός είναι ο ορισμός της περιόδου T.",
+                  "❌ Λάθος. Αυτός είναι ο ορισμός της συχνότητας f.",
+                  "❌ Λάθος. Η ελάχιστη απόσταση είναι 0 (στη θέση ισορροπίας)."]},
+      {q:"Αν διπλασιαστεί το μήκος ενός εκκρεμούς, πώς αλλάζει η περίοδός του;",
+       opts:["Διπλασιάζεται","Τετραπλασιάζεται","Πολλαπλασιάζεται επί √2","Δεν αλλάζει"],
+       ans:2,fb:["❌ Λάθος. T = 2π√(L/g) — η περίοδος είναι ανάλογη με √L, όχι με L.",
+                  "❌ Λάθος. Τετραπλασιασμός θα χρειαζόταν L × 4.",
+                  "✅ Σωστά! T ∝ √L, άρα αν L × 2 → T × √2 ≈ 1,41 φορές.",
+                  "❌ Λάθος. Η περίοδος εξαρτάται από το μήκος — T = 2π√(L/g)."]},
+      {q:"Τι ονομάζουμε συντονισμό;",
+       opts:["Όταν σταματά μια ταλάντωση","Όταν η συχνότητα οδήγησης ισούται με τη φυσική συχνότητα","Όταν το πλάτος μηδενιστεί","Όταν δύο εκκρεμή έχουν διαφορετικές συχνότητες"],
+       ans:1,fb:["❌ Λάθος. Αυτό περιγράφει απόσβεση (damping).",
+                  "✅ Σωστά! Συντονισμός: f_οδήγησης = f_φυσική → μέγιστο πλάτος. Πχ. γέφυρα Tacoma!",
+                  "❌ Λάθος. Μηδενισμό πλάτους ονομάζουμε απόσβεση.",
+                  "❌ Λάθος. Ο συντονισμός απαιτεί ακριβώς ίδιες συχνότητες."]}
+    ]
+  },
+
+  { title:"Κύματα",
+    theory:`<div class="card">
+<h2>5.1 Μηχανικά Κύματα</h2>
+<p>Τα κύματα μεταφέρουν <strong>ενέργεια</strong> χωρίς να μεταφέρουν ύλη. Χρειάζονται υλικό μέσο.</p>
+<div class="diagram" style="overflow-x:auto">
+<svg width="660" height="240" viewBox="0 0 660 240" style="max-width:100%">
+  <defs>
+    <marker id="wRed" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#dc2626"/></marker>
+    <marker id="wGrn" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#16a34a"/></marker>
+    <marker id="wGrnU" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#16a34a"/></marker>
+    <marker id="wGrnD" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#16a34a"/></marker>
+    <pattern id="hatchW" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#9ca3af" stroke-width="2"/>
+    </pattern>
+  </defs>
+
+  <!-- ═══ TRANSVERSE WAVE (top) ═══ -->
+  <text x="10" y="18" font-size="13" fill="#1d4ed8" font-weight="bold">Εγκάρσιο Κύμα</text>
+  <text x="10" y="33" font-size="10" fill="#6b7280">(π.χ. κύμα σε σχοινί, ηλεκτρομαγνητικά)</text>
+
+  <!-- Rope -->
+  <path d="M30,75 Q68,35 106,75 Q144,115 182,75 Q220,35 258,75 Q296,115 334,75 Q372,35 410,75 Q448,115 470,75"
+    fill="none" stroke="#2563eb" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Equilibrium line -->
+  <line x1="25" y1="75" x2="485" y2="75" stroke="#9ca3af" stroke-width="1.2" stroke-dasharray="7,5"/>
+  <text x="490" y="78" font-size="10" fill="#9ca3af">ισορρ.</text>
+
+  <!-- Wave direction arrow (horizontal, red) -->
+  <line x1="380" y1="28" x2="460" y2="28" stroke="#dc2626" stroke-width="2.5" marker-end="url(#wRed)"/>
+  <text x="418" y="22" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="bold">v →</text>
+
+  <!-- Particle motion arrows (green, vertical) at two points -->
+  <!-- At crest x=106: particle moves down (toward trough) -->
+  <line x1="106" y1="53" x2="106" y2="95" stroke="#16a34a" stroke-width="2.5" marker-end="url(#wGrn)"/>
+  <text x="115" y="60" font-size="10" fill="#16a34a">κίνηση</text>
+  <text x="115" y="71" font-size="10" fill="#16a34a">σωματιδίου</text>
+  <text x="115" y="82" font-size="10" fill="#16a34a">(⊥ στο v)</text>
+
+  <!-- ═══ LONGITUDINAL WAVE (bottom) ═══ -->
+  <text x="10" y="138" font-size="13" fill="#b45309" font-weight="bold">Διαμήκες Κύμα</text>
+  <text x="10" y="153" font-size="10" fill="#6b7280">(π.χ. ήχος στον αέρα — συμπίεση & αραίωση)</text>
+
+  <!-- Compression bars — 5 groups of dense bars, 4 sparse gaps -->
+  <!-- Dense group width ~22px, sparse gap ~30px, repeat pattern -->
+  <!-- Group centers at: 35, 120, 210, 300, 390 -->
+  <g fill="#d97706" opacity="0.85">
+    <!-- Dense group 1: x=28..52 -->
+    <rect x="28" y="168" width="4" height="35" rx="1"/>
+    <rect x="34" y="168" width="4" height="35" rx="1"/>
+    <rect x="40" y="168" width="4" height="35" rx="1"/>
+    <rect x="46" y="168" width="4" height="35" rx="1"/>
+    <!-- Sparse gap 1: x=52..90 -->
+    <rect x="55" y="168" width="4" height="35" rx="1"/>
+    <rect x="68" y="168" width="4" height="35" rx="1"/>
+    <rect x="81" y="168" width="4" height="35" rx="1"/>
+    <!-- Dense group 2: x=90..114 -->
+    <rect x="90" y="168" width="4" height="35" rx="1"/>
+    <rect x="96" y="168" width="4" height="35" rx="1"/>
+    <rect x="102" y="168" width="4" height="35" rx="1"/>
+    <rect x="108" y="168" width="4" height="35" rx="1"/>
+    <!-- Sparse: 114..152 -->
+    <rect x="117" y="168" width="4" height="35" rx="1"/>
+    <rect x="130" y="168" width="4" height="35" rx="1"/>
+    <rect x="143" y="168" width="4" height="35" rx="1"/>
+    <!-- Dense 3 -->
+    <rect x="152" y="168" width="4" height="35" rx="1"/>
+    <rect x="158" y="168" width="4" height="35" rx="1"/>
+    <rect x="164" y="168" width="4" height="35" rx="1"/>
+    <rect x="170" y="168" width="4" height="35" rx="1"/>
+    <!-- Sparse -->
+    <rect x="179" y="168" width="4" height="35" rx="1"/>
+    <rect x="192" y="168" width="4" height="35" rx="1"/>
+    <rect x="205" y="168" width="4" height="35" rx="1"/>
+    <!-- Dense 4 -->
+    <rect x="214" y="168" width="4" height="35" rx="1"/>
+    <rect x="220" y="168" width="4" height="35" rx="1"/>
+    <rect x="226" y="168" width="4" height="35" rx="1"/>
+    <rect x="232" y="168" width="4" height="35" rx="1"/>
+    <!-- Sparse -->
+    <rect x="241" y="168" width="4" height="35" rx="1"/>
+    <rect x="254" y="168" width="4" height="35" rx="1"/>
+    <rect x="267" y="168" width="4" height="35" rx="1"/>
+    <!-- Dense 5 -->
+    <rect x="276" y="168" width="4" height="35" rx="1"/>
+    <rect x="282" y="168" width="4" height="35" rx="1"/>
+    <rect x="288" y="168" width="4" height="35" rx="1"/>
+    <rect x="294" y="168" width="4" height="35" rx="1"/>
+  </g>
+
+  <!-- Labels: Συμπίεση / Αραίωση -->
+  <text x="39" y="162" text-anchor="middle" font-size="10" fill="#b45309" font-weight="bold">Συμπ.</text>
+  <text x="72" y="162" text-anchor="middle" font-size="10" fill="#6b7280">Αραίωση</text>
+  <text x="101" y="162" text-anchor="middle" font-size="10" fill="#b45309" font-weight="bold">Συμπ.</text>
+
+  <!-- Wave direction arrow -->
+  <line x1="320" y1="185" x2="400" y2="185" stroke="#dc2626" stroke-width="2.5" marker-end="url(#wRed)"/>
+  <text x="358" y="178" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="bold">v ∥</text>
+  <text x="358" y="200" text-anchor="middle" font-size="9" fill="#dc2626">(παράλληλα στη διάδοση)</text>
+
+  <!-- Particle motion (horizontal double arrow) -->
+  <line x1="40" y1="215" x2="80" y2="215" stroke="#16a34a" stroke-width="2" marker-end="url(#wGrn)"/>
+  <line x1="80" y1="215" x2="40" y2="215" stroke="#16a34a" stroke-width="2" marker-end="url(#wGrn)"/>
+  <text x="60" y="228" text-anchor="middle" font-size="9" fill="#16a34a">κίνηση ∥ v</text>
+
+  <!-- Divider -->
+  <line x1="530" y1="5" x2="530" y2="235" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="5,4"/>
+
+  <!-- ═══ COMPARISON TABLE (right side) ═══ -->
+  <text x="545" y="20" font-size="12" font-weight="bold" fill="#374151">Σύγκριση</text>
+  <!-- Headers -->
+  <rect x="535" y="25" width="120" height="20" rx="3" fill="#dbeafe"/>
+  <text x="545" y="39" font-size="10" fill="#1d4ed8" font-weight="bold">Εγκάρσιο</text>
+  <rect x="535" y="45" width="120" height="20" rx="3" fill="#fef3c7"/>
+  <text x="545" y="59" font-size="10" fill="#b45309" font-weight="bold">Διαμήκες</text>
+  <!-- Rows -->
+  <text x="540" y="82" font-size="9" fill="#374151">Κίνηση σωματ.:</text>
+  <text x="540" y="94" fill="#1d4ed8" font-size="9">⊥ ως διάδοση</text>
+  <text x="540" y="106" fill="#b45309" font-size="9">∥ ως διάδοση</text>
+  <text x="540" y="124" font-size="9" fill="#374151">Παραδείγματα:</text>
+  <text x="540" y="136" fill="#1d4ed8" font-size="9">σχοινί, φως, σεισμ. S</text>
+  <text x="540" y="148" fill="#b45309" font-size="9">ήχος, σεισμ. P</text>
+  <text x="540" y="166" font-size="9" fill="#374151">Διάδοση στο κενό:</text>
+  <text x="540" y="178" fill="#1d4ed8" font-size="9">✅ (ηλεκτρομ.)</text>
+  <text x="540" y="190" fill="#b45309" font-size="9">❌ (χρειάζ. μέσο)</text>
+</svg>
+</div>
+
+<h3>5.2 Χαρακτηριστικά Κύματος</h3>
+<div class="diagram" style="overflow-x:auto">
+<svg width="620" height="200" viewBox="0 0 620 200" style="max-width:100%">
+  <defs>
+    <marker id="wa2R" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#dc2626"/></marker>
+    <marker id="wa2L" markerWidth="9" markerHeight="9" refX="0" refY="4" orient="auto"><path d="M9,0 L0,4 L9,8 Z" fill="#dc2626"/></marker>
+    <marker id="wa3U" markerWidth="9" markerHeight="9" refX="4" refY="0" orient="auto"><path d="M0,9 L4,0 L8,9 Z" fill="#16a34a"/></marker>
+    <marker id="wa3D" markerWidth="9" markerHeight="9" refX="4" refY="9" orient="auto"><path d="M0,0 L4,9 L8,0 Z" fill="#16a34a"/></marker>
+    <marker id="waBlu" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#7c3aed"/></marker>
+    <marker id="waBluL" markerWidth="9" markerHeight="9" refX="0" refY="4" orient="auto"><path d="M9,0 L0,4 L9,8 Z" fill="#7c3aed"/></marker>
+  </defs>
+
+  <!-- Wave: equilibrium y=100, amplitude=60px, λ=170px
+       Crests at x=55,225,395; Troughs at x=140,310 -->
+  <path d="M15,100 Q55,40 95,100 Q140,160 180,100 Q225,40 265,100 Q310,160 350,100 Q395,40 435,100 Q470,160 490,100"
+    fill="none" stroke="#7c3aed" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Equilibrium line -->
+  <line x1="10" y1="100" x2="500" y2="100" stroke="#9ca3af" stroke-width="1.2" stroke-dasharray="7,5"/>
+  <text x="505" y="103" font-size="10" fill="#9ca3af">ισορρ.</text>
+
+  <!-- Amplitude A: left side, crest at x=55, y=40 -->
+  <line x1="28" y1="100" x2="28" y2="40" stroke="#16a34a" stroke-width="2.8" marker-end="url(#wa3U)" marker-start="url(#wa3D)"/>
+  <line x1="22" y1="100" x2="34" y2="100" stroke="#16a34a" stroke-width="1.8"/>
+  <line x1="22" y1="40" x2="34" y2="40" stroke="#16a34a" stroke-width="1.8"/>
+  <text x="20" y="73" text-anchor="middle" font-size="15" fill="#16a34a" font-weight="bold">A</text>
+
+  <!-- Also show A down to trough -->
+  <line x1="28" y1="100" x2="28" y2="160" stroke="#16a34a" stroke-width="2.8" marker-end="url(#wa3D)" marker-start="url(#wa3U)"/>
+  <line x1="22" y1="160" x2="34" y2="160" stroke="#16a34a" stroke-width="1.8"/>
+  <text x="20" y="133" text-anchor="middle" font-size="15" fill="#16a34a" font-weight="bold">A</text>
+
+  <!-- λ: crest to crest (x=55 to x=225) -->
+  <line x1="55" y1="175" x2="225" y2="175" stroke="#dc2626" stroke-width="2.5" marker-end="url(#wa2R)" marker-start="url(#wa2L)"/>
+  <line x1="55" y1="160" x2="55" y2="180" stroke="#dc2626" stroke-width="1.8"/>
+  <line x1="225" y1="160" x2="225" y2="180" stroke="#dc2626" stroke-width="1.8"/>
+  <text x="140" y="195" text-anchor="middle" font-size="14" fill="#dc2626" font-weight="bold">λ  (μήκος κύματος)</text>
+
+  <!-- Half-wavelength label -->
+  <line x1="55" y1="14" x2="140" y2="14" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="97" y="11" text-anchor="middle" font-size="10" fill="#dc2626">λ/2</text>
+
+  <!-- Labels for crest / trough -->
+  <text x="55" y="32" text-anchor="middle" font-size="11" fill="#7c3aed" font-weight="bold">κορυφή</text>
+  <text x="140" y="178" text-anchor="middle" font-size="11" fill="#7c3aed" font-weight="bold">κοιλία</text>
+
+  <!-- Wave speed direction -->
+  <line x1="390" y1="55" x2="470" y2="55" stroke="#dc2626" stroke-width="2.5" marker-end="url(#wa2R)"/>
+  <text x="428" y="48" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="bold">v →</text>
+
+  <!-- Formula box -->
+  <rect x="510" y="30" width="105" height="130" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="562" y="52" text-anchor="middle" font-size="11" fill="#7c3aed" font-weight="bold">Τύποι</text>
+  <line x1="518" y1="57" x2="607" y2="57" stroke="#7c3aed" stroke-width="1"/>
+  <text x="562" y="73" text-anchor="middle" font-size="11" fill="#374151">v = λ · f</text>
+  <text x="562" y="90" text-anchor="middle" font-size="11" fill="#374151">v = λ / T</text>
+  <text x="562" y="107" text-anchor="middle" font-size="11" fill="#374151">f = 1 / T</text>
+  <text x="562" y="126" text-anchor="middle" font-size="10" fill="#6b7280">λ: μήκος κύματος (m)</text>
+  <text x="562" y="140" text-anchor="middle" font-size="10" fill="#6b7280">f: συχνότητα (Hz)</text>
+  <text x="562" y="154" text-anchor="middle" font-size="10" fill="#6b7280">T: περίοδος (s)</text>
+</svg>
+</div>
+<div class="formula">v = λ · f = λ / T</div>
+
+<h3>5.3 Ήχος</h3>
+<p>Ο ήχος είναι <strong>διαμήκες μηχανικό κύμα</strong>. Ακουστό εύρος: <strong>20 Hz – 20.000 Hz</strong></p>
+<div class="formula">Υπόηχος &lt; 20Hz &nbsp;|&nbsp; Ακουστός: 20–20000 Hz &nbsp;|&nbsp; Υπέρηχος &gt; 20kHz</div>
+<div class="info-box">🎵 Υποκειμενικά χαρακτηριστικά ήχου:<br>
+• <strong>Ύψος</strong> = συχνότητα (μεγάλο f → οξύς ήχος)<br>
+• <strong>Ακουστότητα</strong> = πλάτος (μεγάλο A → δυνατός ήχος)<br>
+• <strong>Χροιά</strong> = κυματομορφή (διακρίνουμε όργανα)<br>
+• Μετράται σε <strong>dB (ντεσιμπέλ)</strong></div>
+</div>`,
+
+    experiment:`<div class="card">
+<h2>🔬 Πείραμα: Κυματισμός — Ταχύτητα & Μήκος Κύματος</h2>
+<p>Ρύθμισε συχνότητα και μήκος κύματος και παρατήρησε τη διάδοση.</p>
+<canvas id="cvWave" width="500" height="200"></canvas>
+<div class="sim-controls">
+  <label>Συχνότητα f: <span id="fwval">2</span> Hz</label>
+  <input type="range" min="1" max="8" value="2" id="slFW" oninput="updateWave()">
+  <label>Πλάτος A: <span id="awval">40</span></label>
+  <input type="range" min="10" max="70" value="40" id="slAW" oninput="updateWave()">
+  <button class="btn btn-green" onclick="toggleWave()" id="waveBtn">▶ Εκκίνηση</button>
+</div>
+<div id="waveResult" class="formula" style="text-align:center"></div>
+</div>
+
+<div class="card">
+<h2>🔬 Πείραμα: Ήχος — Συχνότητα & Ύψος</h2>
+<p>Δες πώς αλλάζει το κυματόγραμμα με τη συχνότητα και το πλάτος.</p>
+<canvas id="cvSound" width="500" height="150"></canvas>
+<div class="sim-controls">
+  <label>Συχνότητα: <span id="fsval">440</span> Hz</label>
+  <input type="range" min="100" max="2000" value="440" id="slFS" oninput="updateSound()">
+  <label>Ένταση: <span id="asval">50</span>%</label>
+  <input type="range" min="10" max="100" value="50" id="slAS" oninput="updateSound()">
+</div>
+<div class="sim-controls" style="margin-top:8px">
+  <button class="btn btn-green" id="soundPlayBtn" onclick="toggleSoundPlay()">▶ Ακούσε τον Ηχο</button>
+</div>
+<div id="soundResult" class="info-box"></div>
+</div>`,
+
+    quiz:[
+      {q:"Κύμα με f=5Hz και λ=4m. Ποια η ταχύτητα;",
+       opts:["0.8 m/s","20 m/s","9 m/s","1.25 m/s"],
+       ans:1,fb:["❌ Λάθος. v = λ·f = 4×5 = 20 m/s",
+                  "✅ Σωστά! v = λ·f = 4 m × 5 Hz = 20 m/s",
+                  "❌ Λάθος. v = λ×f, όχι λ+f.",
+                  "❌ Λάθος. v = λ·f = 20 m/s"]},
+      {q:"Ο ήχος διαδίδεται:",
+       opts:["Μόνο στον αέρα","Στο κενό","Σε υλικά μέσα (στερεά, υγρά, αέρια)","Μόνο σε υγρά"],
+       ans:2,fb:["❌ Λάθος. Ο ήχος διαδίδεται σε κάθε υλικό μέσο.",
+                  "❌ Λάθος! Στο κενό δεν υπάρχει ήχος.",
+                  "✅ Σωστά! Ο ήχος είναι μηχανικό κύμα και χρειάζεται υλικό μέσο.",
+                  "❌ Λάθος. Ο ήχος διαδίδεται και σε στερεά."]},
+      {q:"Ποιο χαρακτηριστικό του ήχου σχετίζεται με τη συχνότητα;",
+       opts:["Ακουστότητα","Χροιά","Ύψος","Ένταση"],
+       ans:2,fb:["❌ Λάθος. Η ακουστότητα σχετίζεται με το πλάτος.",
+                  "❌ Λάθος. Η χροιά σχετίζεται με την κυματομορφή.",
+                  "✅ Σωστά! Το ύψος (οξύτητα) ήχου εξαρτάται από τη συχνότητα. Μεγάλη f → οξύς ήχος.",
+                  "❌ Λάθος. Η ένταση σχετίζεται με το πλάτος."]},
+      {q:"Κύμα με T=0.25s. Ποια η συχνότητα;",
+       opts:["0.25 Hz","25 Hz","4 Hz","2.5 Hz"],
+       ans:2,fb:["❌ Λάθος. f = 1/T = 1/0.25 = 4 Hz",
+                  "❌ Λάθος. f = 1/T = 1/0.25 = 4 Hz",
+                  "✅ Σωστά! f = 1/T = 1/0.25 s = 4 Hz",
+                  "❌ Λάθος. f = 1/0.25 = 4 Hz"]},
+      {q:"Ποια από τα παρακάτω κύματα είναι εγκάρσια;",
+       opts:["Ηχητικά κύματα στον αέρα","Κύματα νερού στη θάλασσα","Κύματα σε ελατήριο (διαμήκη)","Κύματα συμπίεσης σε στερεό"],
+       ans:1,fb:["❌ Λάθος. Ο ήχος στον αέρα είναι διαμήκες κύμα — συμπίεση και αραίωση.",
+                  "✅ Σωστά! Τα κύματα νερού είναι εγκάρσια — η επιφάνεια κινείται κάθετα στη διεύθυνση διάδοσης.",
+                  "❌ Λάθος. Κύμα σε ελατήριο (εμπρός-πίσω) είναι διαμήκες.",
+                  "❌ Λάθος. Κύματα συμπίεσης είναι πάντα διαμήκη."]},
+      {q:"Ένα κύμα έχει μήκος κύματος λ = 2m και συχνότητα f = 3Hz. Ποια η ταχύτητά του;",
+       opts:["1,5 m/s","5 m/s","6 m/s","0,67 m/s"],
+       ans:2,fb:["❌ Λάθος. υ = λ·f = 2 × 3 = 6 m/s — όχι 1,5.",
+                  "❌ Λάθος. υ = λ·f — δεν αθροίζουμε.",
+                  "✅ Σωστά! υ = λ·f = 2m × 3Hz = 6 m/s",
+                  "❌ Λάθος. υ = λ·f, όχι λ/f."]},
+      {q:"Τι συμβαίνει στο μήκος κύματος όταν αυξάνεται η συχνότητα (ταχύτητα σταθερή);",
+       opts:["Αυξάνεται","Μειώνεται","Παραμένει σταθερό","Γίνεται μηδέν"],
+       ans:1,fb:["❌ Λάθος. υ = λ·f → αν f↑ και υ=σταθερό, τότε λ↓.",
+                  "✅ Σωστά! λ = υ/f — αν η συχνότητα διπλασιαστεί, το μήκος κύματος μειώνεται στο μισό.",
+                  "❌ Λάθος. Παραμένει σταθερό μόνο αν αλλάξει και η ταχύτητα αναλογικά.",
+                  "❌ Λάθος. Το μήκος κύματος μειώνεται, δεν μηδενίζεται."]},
+      {q:"Ο ήχος διαδίδεται ταχύτερα:",
+       opts:["Στο κενό","Στον αέρα","Στο νερό","Σε μεταλλικό στερεό"],
+       ans:3,fb:["❌ Λάθος. Ο ήχος δεν διαδίδεται καθόλου στο κενό — χρειάζεται υλικό μέσο.",
+                  "❌ Λάθος. Στον αέρα: ~340 m/s — σχετικά αργά.",
+                  "❌ Λάθος. Στο νερό: ~1500 m/s — ταχύτερα από τον αέρα αλλά όχι το ταχύτερο.",
+                  "✅ Σωστά! Σε μεταλλικό στερεό (π.χ. σίδηρος): ~5000 m/s — τα μόρια είναι πολύ κοντά."]},
+      {q:"Τι είναι η ηχητική απήχηση (echo);",
+       opts:["Απορρόφηση ήχου από μια επιφάνεια","Αντανάκλαση ήχου από εμπόδιο","Μείωση της έντασης του ήχου","Αλλαγή συχνότητας λόγω κίνησης πηγής"],
+       ans:1,fb:["❌ Λάθος. Η απορρόφηση μειώνει την ένταση — δεν δημιουργεί ηχώ.",
+                  "✅ Σωστά! Η ηχώ (echo) είναι αντανάκλαση ήχου από εμπόδιο. Χρειάζεται ελάχιστη απόσταση ~17m.",
+                  "❌ Λάθος. Η μείωση έντασης ονομάζεται εξασθένιση (attenuation).",
+                  "❌ Λάθος. Αυτό περιγράφει το φαινόμενο Doppler."]}
+    ]
+  }
+,
+
+  { title:"Θερμότητα (Γ' — Προχωρημένο)",
+    theory:`<div class="card">
+<h2>6.1 Εσωτερική Ενέργεια & Θερμότητα</h2>
+<p>Η <strong>εσωτερική ενέργεια</strong> (U) ενός σώματος είναι το άθροισμα της κινητικής και δυναμικής ενέργειας όλων των μορίων του.</p>
+<div class="formula">ΔU = Q − W &nbsp;&nbsp; (1ος Νόμος Θερμοδυναμικής)</div>
+<div class="info-box">📌 Σύμβαση:<br>
+• Q &gt; 0 → το σύστημα <strong>απορροφά</strong> θερμότητα<br>
+• W &gt; 0 → το σύστημα <strong>παράγει έργο</strong> (διαστέλλεται)<br>
+• ΔU &gt; 0 → η εσωτερική ενέργεια <strong>αυξάνεται</strong></div>
+<h3>6.2 Θερμιδομετρία — Q = mcΔT</h3>
+<p>Η θερμότητα που απορροφά ή αποδίδει ένα σώμα:</p>
+<div class="formula">Q = m · c · ΔΤ</div>
+<p>όπου <strong>m</strong> = μάζα (kg), <strong>c</strong> = ειδική θερμοχωρητικότητα (J/kg·K), <strong>ΔΤ</strong> = μεταβολή θερμοκρασίας (K ή °C)</p>
+<div class="diagram">
+<svg width="400" height="160" viewBox="0 0 400 160">
+  <defs>
+    <marker id="thArr" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#dc2626"/></marker>
+  </defs>
+  <rect x="130" y="30" width="140" height="80" rx="10" fill="#fde68a" stroke="#d97706" stroke-width="2"/>
+  <text x="200" y="65" text-anchor="middle" font-size="13" fill="#92400e" font-weight="bold">Σώμα (m, c)</text>
+  <text x="200" y="82" text-anchor="middle" font-size="11" fill="#92400e">Τ₁ → Τ₂</text>
+  <line x1="30" y1="70" x2="125" y2="70" stroke="#dc2626" stroke-width="3" marker-end="url(#thArr)"/>
+  <text x="77" y="58" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="bold">Q</text>
+  <text x="77" y="90" text-anchor="middle" font-size="10" fill="#dc2626">θερμότητα</text>
+  <text x="200" y="130" text-anchor="middle" font-size="12" fill="#374151">Q = m·c·(Τ₂−Τ₁)</text>
+  <text x="200" y="148" text-anchor="middle" font-size="11" fill="#6b7280">ΔΤ = Τ₂ − Τ₁ (θετικό = θέρμανση)</text>
+</svg>
+</div>
+<div class="warn-box">⚠️ Ειδικές θερμοχωρητικότητες (J/kg·K):<br>
+Νερό: <strong>4186</strong> | Αλουμίνιο: <strong>900</strong> | Σίδηρος: <strong>450</strong> | Χαλκός: <strong>385</strong> | Μόλυβδος: <strong>128</strong></div>
+
+<h3>6.3 Θερμοδυναμικές Διεργασίες</h3>
+<div class="diagram">
+<svg width="400" height="200" viewBox="0 0 400 200">
+  <defs>
+    <marker id="pArr" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#374151"/></marker>
+  </defs>
+  <!-- axes -->
+  <line x1="40" y1="170" x2="380" y2="170" stroke="#374151" stroke-width="2" marker-end="url(#pArr)"/>
+  <line x1="40" y1="170" x2="40" y2="20" stroke="#374151" stroke-width="2" marker-end="url(#pArr)"/>
+  <text x="390" y="174" font-size="11" fill="#374151">V</text>
+  <text x="26" y="16" font-size="11" fill="#374151">P</text>
+  <!-- Isothermal (hyperbola): blue -->
+  <path d="M60,40 Q100,80 180,120 Q250,150 340,165" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="345" y="160" font-size="10" fill="#2563eb" font-weight="bold">Ισόθερμη</text>
+  <text x="345" y="171" font-size="9" fill="#2563eb">T=σταθ., PV=σταθ.</text>
+  <!-- Isobaric (horizontal): green -->
+  <line x1="60" y1="90" x2="300" y2="90" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="305" y="93" font-size="10" fill="#16a34a" font-weight="bold">Ισοβαρής</text>
+  <text x="305" y="104" font-size="9" fill="#16a34a">P=σταθ.</text>
+  <!-- Isochoric (vertical): orange -->
+  <line x1="180" y1="40" x2="180" y2="170" stroke="#d97706" stroke-width="2.5"/>
+  <text x="184" y="38" font-size="10" fill="#d97706" font-weight="bold">Ισόχωρη</text>
+  <text x="184" y="49" font-size="9" fill="#d97706">V=σταθ.</text>
+</svg>
+</div>
+<div class="info-box">🔁 Τύποι θερμοδυναμικών διεργασιών:<br>
+• <strong>Ισόθερμη</strong>: T=σταθερό → ΔU=0, Q=W<br>
+• <strong>Ισοβαρής</strong>: P=σταθερό → W=PΔV<br>
+• <strong>Ισόχωρη</strong>: V=σταθερό → W=0, Q=ΔU<br>
+• <strong>Αδιαβατική</strong>: Q=0 → ΔU=−W</div>
+
+<h3>6.4 Θερμικές Μηχανές & 2ος Νόμος</h3>
+<p>Κανένα σύστημα δεν μπορεί να μετατρέψει <strong>πλήρως</strong> θερμότητα σε έργο.</p>
+<div class="formula">η = W/Q₁ = (Q₁−Q₂)/Q₁ = 1 − Q₂/Q₁ &nbsp;(&lt; 1 πάντα)</div>
+<div class="formula">η_Carnot = 1 − T₂/T₁ &nbsp; (θερμοκρασίες σε Kelvin!)</div>
+
+<h3>6.5 Φαινόμενο Θερμοκηπίου</h3>
+<p>Η ατμόσφαιρα (CO₂, H₂O, CH₄) απορροφά υπέρυθρη ακτινοβολία και κρατά τη Γη ζεστή. Η <strong>ενίσχυση</strong> του φαινομένου από ανθρώπινες δραστηριότητες προκαλεί κλιματική αλλαγή.</p>
+<div class="warn-box">⚠️ Τ_Γη ≈ 15°C (με ατμόσφαιρα) vs −18°C (χωρίς ατμόσφαιρα)<br>
+Αύξηση CO₂: 280ppm (προβιομηχανική) → 420ppm (σήμερα)</div>
+</div>`,
+
+    experiment:`<div class="card">
+<h2>🔬 Πείραμα: Υπολογισμός Q = mcΔT</h2>
+<p>Ρύθμισε μάζα, υλικό και μεταβολή θερμοκρασίας. Δες πόση θερμότητα απαιτείται.</p>
+<canvas id="cvHeat" width="500" height="280"></canvas>
+<div class="sim-controls">
+  <label>Μάζα m (kg): <span id="hmval">1.0</span></label>
+  <input type="range" min="1" max="10" value="10" id="slHM" oninput="updateHeat()">
+  <label>ΔΤ (°C): <span id="hdtval">20</span></label>
+  <input type="range" min="1" max="100" value="20" id="slHDT" oninput="updateHeat()">
+</div>
+<div class="sim-controls">
+  <label>Υλικό:</label>
+  <select id="hmat" onchange="updateHeat()" style="padding:6px 10px;border-radius:8px;border:1.5px solid var(--border);background:var(--card);color:var(--fg);font-size:.9rem">
+    <option value="4186">Νερό (c=4186)</option>
+    <option value="900">Αλουμίνιο (c=900)</option>
+    <option value="450">Σίδηρος (c=450)</option>
+    <option value="385">Χαλκός (c=385)</option>
+    <option value="128">Μόλυβδος (c=128)</option>
+  </select>
+</div>
+<div id="heatResult" class="formula" style="text-align:center;font-size:1.05rem"></div>
+</div>`,
+
+    quiz:[
+      {q:"Σώμα μάζας 2 kg και c=450 J/kg·K θερμαίνεται κατά 10°C. Πόση θερμότητα απορρόφησε;",
+       opts:["900 J","4500 J","9000 J","450 J"],
+       ans:2,fb:["❌ Λάθος. Q = m·c·ΔT = 2×450×10 = 9000 J",
+                  "❌ Λάθος. Q = 2×450×10 = 9000 J — όχι 2×450×5.",
+                  "✅ Σωστά! Q = m·c·ΔT = 2 kg × 450 J/kg·K × 10 K = 9000 J",
+                  "❌ Λάθος. Ξέχασες να πολλαπλασιάσεις με m και ΔT."]},
+      {q:"Ποιος είναι ο 1ος Νόμος Θερμοδυναμικής;",
+       opts:["Q = mcΔT","ΔU = Q − W","η = 1 − T₂/T₁","PV = nRT"],
+       ans:1,fb:["❌ Λάθος. Αυτή είναι η σχέση θερμιδομετρίας.",
+                  "✅ Σωστά! ΔU = Q − W: η μεταβολή εσωτερικής ενέργειας ισούται με την εισερχόμενη θερμότητα μείον το έργο που παράγει το σύστημα.",
+                  "❌ Λάθος. Αυτή είναι η απόδοση κύκλου Carnot.",
+                  "❌ Λάθος. Αυτή είναι η εξίσωση τέλειου αερίου."]},
+      {q:"Σε ισόχωρη διεργασία:",
+       opts:["P = σταθερό","T = σταθερό","V = σταθερό","Q = 0"],
+       ans:2,fb:["❌ Λάθος. P=σταθερό ορίζει ισοβαρή διεργασία.",
+                  "❌ Λάθος. T=σταθερό ορίζει ισόθερμη διεργασία.",
+                  "✅ Σωστά! Ισόχωρη: V=σταθερό → W=0, άρα Q=ΔU.",
+                  "❌ Λάθος. Q=0 ορίζει αδιαβατική διεργασία."]},
+      {q:"Ποιο υλικό έχει τη μεγαλύτερη ειδική θερμοχωρητικότητα;",
+       opts:["Σίδηρος","Χαλκός","Νερό","Αλουμίνιο"],
+       ans:2,fb:["❌ Λάθος. c_σιδήρου ≈ 450 J/kg·K.",
+                  "❌ Λάθος. c_χαλκού ≈ 385 J/kg·K.",
+                  "✅ Σωστά! Νερό: c = 4186 J/kg·K — η μεγαλύτερη από τις συνηθισμένες ουσίες. Γι' αυτό χρησιμοποιείται στα ψυγεία.",
+                  "❌ Λάθος. c_αλουμινίου ≈ 900 J/kg·K, μικρότερη από νερό."]},
+      {q:"Θερμική μηχανή λαμβάνει Q₁=1000 J και αποδίδει Q₂=400 J. Ποια η απόδοσή της;",
+       opts:["40%","60%","25%","160%"],
+       ans:1,fb:["❌ Λάθος. η = W/Q₁ = (Q₁−Q₂)/Q₁ = 600/1000 = 60%",
+                  "✅ Σωστά! η = (Q₁−Q₂)/Q₁ = (1000−400)/1000 = 600/1000 = 60%",
+                  "❌ Λάθος. η = 600/1000 = 0.60 = 60%",
+                  "❌ Λάθος. Η απόδοση δεν μπορεί να υπερβαίνει 100%!"]},
+      {q:"Τι λέει ο 2ος Νόμος Θερμοδυναμικής;",
+       opts:["Η ενέργεια διατηρείται","Δεν μπορεί να μετατραπεί πλήρως θερμότητα σε έργο","Η θερμοκρασία μετράται σε Kelvin","PV = σταθερό σε ισόθερμη"],
+       ans:1,fb:["❌ Λάθος. Αυτό λέει ο 1ος Νόμος (διατήρηση ενέργειας).",
+                  "✅ Σωστά! Ο 2ος Νόμος: κανένα σύστημα δεν μπορεί να μετατρέψει πλήρως θερμότητα σε έργο — η απόδοση πάντα < 100%.",
+                  "❌ Λάθος. Αυτό είναι ορισμός κλίμακας Kelvin.",
+                  "❌ Λάθος. Αυτό ορίζει ισόθερμη μεταβολή."]},
+      {q:"Κύκλος Carnot μεταξύ T₁=500K και T₂=300K. Ποια η μέγιστη θεωρητική απόδοση;",
+       opts:["60%","40%","167%","83%"],
+       ans:1,fb:["❌ Λάθος. η_Carnot = 1 − T₂/T₁ = 1 − 300/500 = 1 − 0.6 = 0.4 = 40%",
+                  "✅ Σωστά! η_Carnot = 1 − T₂/T₁ = 1 − 300/500 = 0.40 = 40%. Πραγματικές μηχανές: ακόμα λιγότερο!",
+                  "❌ Λάθος. Η απόδοση ποτέ δεν ξεπερνά 100%.",
+                  "❌ Λάθος. Θυμήσου: η = 1 − T₂/T₁, όχι T₂/T₁."]},
+      {q:"Ποιο αέριο είναι ο κύριος υπεύθυνος για το ενισχυμένο φαινόμενο θερμοκηπίου;",
+       opts:["Οξυγόνο (O₂)","Άζωτο (N₂)","Διοξείδιο άνθρακα (CO₂)","Αργό (Ar)"],
+       ans:2,fb:["❌ Λάθος. Το O₂ δεν είναι αέριο θερμοκηπίου.",
+                  "❌ Λάθος. Το N₂ δεν συμβάλλει στο φαινόμενο θερμοκηπίου.",
+                  "✅ Σωστά! Το CO₂ από την καύση ορυκτών καυσίμων είναι ο κύριος υπεύθυνος. Επίσης: CH₄, N₂O, H₂O.",
+                  "❌ Λάθος. Το αργό είναι αδρανές αέριο και δεν επηρεάζει το φαινόμενο θερμοκηπίου."]},
+      {q:"1 kg νερού (c=4186 J/kg·K) θερμαίνεται από 20°C σε 100°C. Πόση θερμότητα απαιτείται;",
+       opts:["4186 J","41860 J","334880 J","83720 J"],
+       ans:2,fb:["❌ Λάθος. Q = 1×4186×(100−20) = 4186×80 = 334880 J",
+                  "❌ Λάθος. ΔT = 80°C, όχι 10°C.",
+                  "✅ Σωστά! Q = m·c·ΔT = 1×4186×(100−20) = 4186×80 = 334880 J ≈ 335 kJ",
+                  "❌ Λάθος. ΔT = 80°C — υπολόγισε σωστά τη διαφορά θερμοκρασίας."]},
+      {q:"Σε αδιαβατική διεργασία:",
+       opts:["Η θερμοκρασία παραμένει σταθερή","Η πίεση παραμένει σταθερή","Δεν ανταλλάσσεται θερμότητα με το περιβάλλον","Ο όγκος παραμένει σταθερός"],
+       ans:2,fb:["❌ Λάθος. Αυτό ορίζει ισόθερμη διεργασία.",
+                  "❌ Λάθος. Αυτό ορίζει ισοβαρή διεργασία.",
+                  "✅ Σωστά! Αδιαβατική: Q=0. Από ΔU=Q−W προκύπτει ΔU=−W. Παράδειγμα: γρήγορη συμπίεση αέρα.",
+                  "❌ Λάθος. Αυτό ορίζει ισόχωρη διεργασία."]},
+      {q:"Δύο σώματα ίδιας μάζας, ένα σίδηρο (c=450) και ένα αλουμίνιο (c=900), απορροφούν ίδια ποσότητα θερμότητας. Ποιο θερμαίνεται περισσότερο;",
+       opts:["Το αλουμίνιο","Ο σίδηρος","Και τα δύο εξίσου","Εξαρτάται από τη μάζα"],
+       ans:1,fb:["❌ Λάθος. ΔT = Q/(mc). Μικρότερο c → μεγαλύτερο ΔT.",
+                  "✅ Σωστά! ΔT = Q/(mc). Ο σίδηρος έχει μικρότερο c (450 < 900), άρα θερμαίνεται περισσότερο για ίδιο Q.",
+                  "❌ Λάθος. Διαφορετικά c → διαφορετική θέρμανση.",
+                  "❌ Λάθος. Η μάζα είναι ίδια — ο παράγοντας που αλλάζει είναι το c."]},
+      {q:"Η ειδική θερμοχωρητικότητα c ενός υλικού εκφράζει:",
+       opts:["Την ποσότητα θερμότητας για θέρμανση 1 kg κατά 1°C","Την ταχύτητα μεταφοράς θερμότητας","Τη θερμοκρασία τήξης","Το άθροισμα θερμικής και κινητικής ενέργειας"],
+       ans:0,fb:["✅ Σωστά! c = Q/(m·ΔT) → J/(kg·K): ποσότητα θερμότητας που χρειάζεται για να θερμανθεί 1 kg κατά 1 Kelvin (ή 1°C).",
+                  "❌ Λάθος. Η ταχύτητα μεταφοράς θερμότητας σχετίζεται με τη θερμική αγωγιμότητα.",
+                  "❌ Λάθος. Η θερμοκρασία τήξης σχετίζεται με λανθάνουσα θερμότητα, όχι c.",
+                  "❌ Λάθος. Αυτό είναι η εσωτερική ενέργεια U."]},
+      {q:"Ποσό θερμότητας Q=5000 J προστίθεται σε ένα σύστημα που παράγει W=2000 J έργο. Ποια η μεταβολή εσωτερικής ενέργειας;",
+       opts:["7000 J","3000 J","−3000 J","2500 J"],
+       ans:1,fb:["❌ Λάθος. ΔU = Q − W = 5000 − 2000 = 3000 J",
+                  "✅ Σωστά! ΔU = Q − W = 5000 J − 2000 J = 3000 J (1ος Νόμος Θερμοδυναμικής)",
+                  "❌ Λάθος. ΔU = Q − W = +3000, όχι −3000.",
+                  "❌ Λάθος. ΔU = Q − W = 3000 J"]},
+      {q:"Η θερμική μεταφορά από σώμα υψηλότερης σε χαμηλότερης θερμοκρασίας ονομάζεται:",
+       opts:["Αγωγή, μόνο","Αγωγή, μεταφορά (συναγωγή) ή ακτινοβολία","Μόνο ακτινοβολία","Συναγωγή, μόνο"],
+       ans:1,fb:["❌ Λάθος. Η αγωγή είναι μόνο ένας τρόπος μεταφοράς θερμότητας.",
+                  "✅ Σωστά! Υπάρχουν 3 τρόποι: αγωγή (στερεά), συναγωγή (ρευστά), ακτινοβολία (κενό/αέρας). Η θερμότητα πάντα ρέει από θερμό σε ψυχρό.",
+                  "❌ Λάθος. Η ακτινοβολία δεν είναι ο μοναδικός τρόπος.",
+                  "❌ Λάθος. Η συναγωγή αφορά κυρίως ρευστά."]},
+      {q:"Ποιο από τα παρακάτω ισχύει για ισόθερμη εκτόνωση ιδανικού αερίου;",
+       opts:["ΔU > 0","Q = 0","ΔU = 0 και Q = W","W = 0"],
+       ans:2,fb:["❌ Λάθος. Σε ισόθερμη: T=σταθ. → ΔU=0 (για ιδανικό αέριο).",
+                  "❌ Λάθος. Q=0 ορίζει αδιαβατική, όχι ισόθερμη.",
+                  "✅ Σωστά! Ισόθερμη ιδανικού αερίου: T=σταθ. → ΔU=0. Από 1ο Νόμο: 0=Q−W → Q=W. Το αέριο παίρνει θερμότητα και την μετατρέπει πλήρως σε έργο.",
+                  "❌ Λάθος. W=0 ορίζει ισόχωρη."]}
+    ]
+  },
+
+  { title:"Ηλεκτρισμός (Γ' — Προχωρημένο)",
+    theory:`<div class="card">
+<h2>7.1 Νόμος Ohm — Βαθύτερη Ανάλυση</h2>
+<p>Ο νόμος Ohm ισχύει για <strong>ωμικούς αντιστάτες</strong> (σταθερό R σε σταθερή θερμοκρασία).</p>
+<div class="formula">V = I · R &nbsp;|&nbsp; I = V/R &nbsp;|&nbsp; R = V/I</div>
+<div class="diagram">
+<svg width="380" height="200" viewBox="0 0 380 200">
+  <defs>
+    <marker id="ivArr" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#374151"/></marker>
+  </defs>
+  <!-- axes -->
+  <line x1="40" y1="170" x2="370" y2="170" stroke="#374151" stroke-width="2" marker-end="url(#ivArr)"/>
+  <line x1="40" y1="170" x2="40" y2="20" stroke="#374151" stroke-width="2" marker-end="url(#ivArr)"/>
+  <text x="375" y="174" font-size="11" fill="#374151">V</text>
+  <text x="28" y="16" font-size="11" fill="#374151">I</text>
+  <!-- R1 = low resistance: steep slope -->
+  <line x1="40" y1="170" x2="330" y2="40" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="335" y="38" font-size="11" fill="#2563eb" font-weight="bold">R₁ (μικρή)</text>
+  <!-- R2 = medium -->
+  <line x1="40" y1="170" x2="330" y2="80" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="335" y="78" font-size="11" fill="#16a34a" font-weight="bold">R₂</text>
+  <!-- R3 = high resistance: shallow slope -->
+  <line x1="40" y1="170" x2="330" y2="130" stroke="#dc2626" stroke-width="2.5"/>
+  <text x="335" y="128" font-size="11" fill="#dc2626" font-weight="bold">R₃ (μεγάλη)</text>
+  <text x="200" y="192" text-anchor="middle" font-size="10" fill="#6b7280">Μεγαλύτερη κλίση = μικρότερη αντίσταση R</text>
+</svg>
+</div>
+
+<h3>7.2 Σειριακά Κυκλώματα</h3>
+<p>Σε σειρά: το <strong>ίδιο ρεύμα</strong> διαρρέει όλους τους αντιστάτες.</p>
+<div class="formula">R_ολ = R₁ + R₂ + R₃ + … &nbsp;&nbsp; I = I₁ = I₂ = I₃</div>
+<div class="formula">V_ολ = V₁ + V₂ + V₃ &nbsp;&nbsp; (κανόνας τάσεων Kirchhoff)</div>
+<div class="diagram">
+<svg width="380" height="140" viewBox="0 0 380 140">
+  <defs>
+    <marker id="sArr" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#16a34a"/></marker>
+  </defs>
+  <!-- wire top -->
+  <line x1="20" y1="50" x2="60" y2="50" stroke="#374151" stroke-width="2"/>
+  <!-- R1 -->
+  <rect x="60" y="37" width="60" height="26" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="90" y="54" text-anchor="middle" font-size="12" fill="#92400e" font-weight="bold">R₁</text>
+  <line x1="120" y1="50" x2="150" y2="50" stroke="#374151" stroke-width="2"/>
+  <!-- R2 -->
+  <rect x="150" y="37" width="60" height="26" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="180" y="54" text-anchor="middle" font-size="12" fill="#92400e" font-weight="bold">R₂</text>
+  <line x1="210" y1="50" x2="240" y2="50" stroke="#374151" stroke-width="2"/>
+  <!-- R3 -->
+  <rect x="240" y="37" width="60" height="26" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="270" y="54" text-anchor="middle" font-size="12" fill="#92400e" font-weight="bold">R₃</text>
+  <line x1="300" y1="50" x2="360" y2="50" stroke="#374151" stroke-width="2"/>
+  <!-- bottom return -->
+  <line x1="360" y1="50" x2="360" y2="100" stroke="#374151" stroke-width="2"/>
+  <line x1="360" y1="100" x2="20" y2="100" stroke="#374151" stroke-width="2"/>
+  <line x1="20" y1="100" x2="20" y2="50" stroke="#374151" stroke-width="2"/>
+  <!-- current arrow -->
+  <line x1="180" y1="108" x2="230" y2="108" stroke="#16a34a" stroke-width="2" marker-end="url(#sArr)"/>
+  <text x="205" y="125" text-anchor="middle" font-size="10" fill="#16a34a">I (ίδιο παντού)</text>
+</svg>
+</div>
+
+<h3>7.3 Παράλληλα Κυκλώματα</h3>
+<p>Παράλληλα: η <strong>ίδια τάση</strong> εφαρμόζεται σε κάθε κλάδο. Το ρεύμα μοιράζεται.</p>
+<div class="formula">1/R_ολ = 1/R₁ + 1/R₂ + 1/R₃ &nbsp;&nbsp; V = V₁ = V₂ = V₃</div>
+<div class="formula">I_ολ = I₁ + I₂ + I₃ &nbsp;&nbsp; (κανόνας ρευμάτων Kirchhoff)</div>
+<div class="info-box">💡 Σε παράλληλο: R_ολ &lt; R_min. Αν 2 ίσες αντιστάσεις R παράλληλα → R_ολ = R/2</div>
+
+<h3>7.4 Ηλεκτρική Ισχύς & Ενέργεια</h3>
+<div class="formula">P = V·I = I²·R = V²/R &nbsp;&nbsp; (Watt)</div>
+<div class="formula">W = P·t = V·I·t &nbsp;&nbsp; (Joule) &nbsp;&nbsp; ή &nbsp;&nbsp; (kWh για λογαριασμό ΔΕΗ)</div>
+<div class="warn-box">⚠️ Λαμπτήρες 100W και 60W παράλληλα (V=220V):<br>
+I₁=100/220=0.45A, I₂=60/220=0.27A, I_ολ=0.73A<br>
+R₁=220²/100=484Ω, R₂=220²/60=807Ω, R_ολ=302Ω</div>
+
+<h3>7.5 Εισαγωγή στον Ηλεκτρομαγνητισμό</h3>
+<p>Το <strong>ηλεκτρικό πεδίο</strong> Ε εξασκεί δύναμη σε φορτία. Κινούμενα φορτία δημιουργούν <strong>μαγνητικό πεδίο</strong>.</p>
+<div class="formula">F = q·E &nbsp;&nbsp; (δύναμη ηλεκτρικού πεδίου σε φορτίο q)</div>
+<div class="formula">F = q·v·B·sinθ &nbsp;&nbsp; (δύναμη Lorentz — κινούμενο φορτίο σε Β)</div>
+<div class="info-box">⚡ Εναλλασσόμενο ρεύμα (AC): αλλάζει κατεύθυνση. Στην Ελλάδα: 50 Hz, 230 V (τιμή rms). Το DC (συνεχές) έχει σταθερή κατεύθυνση.</div>
+</div>`,
+
+    experiment:`<div class="card">
+<h2>🔬 Πείραμα: Χαρακτηριστική I-V (Νόμος Ohm)</h2>
+<p>Ρύθμισε τάση και αντίσταση. Παρατήρησε το σημείο λειτουργίας και τις γραμμές I-V για διαφορετικές αντιστάσεις.</p>
+<canvas id="cvIV" width="500" height="280"></canvas>
+<div class="sim-controls">
+  <label>Τάση V: <span id="ivVval">6</span> V</label>
+  <input type="range" min="1" max="12" value="6" id="slIVV" oninput="updateIV()">
+  <label>Αντίσταση R: <span id="ivRval">30</span> Ω</label>
+  <input type="range" min="5" max="100" value="30" id="slIVR" oninput="updateIV()">
+</div>
+<div id="ivResult" class="formula" style="text-align:center;font-size:1.05rem"></div>
+</div>
+
+<div class="card">
+<h2>🔬 Πείραμα: Σειρά vs Παράλληλο — Ισχύς</h2>
+<p>Υπολόγισε ισχύ και συνολική αντίσταση και για τις δύο συνδεσμολογίες.</p>
+<canvas id="cvSerPar" width="500" height="180"></canvas>
+<div class="sim-controls">
+  <label>R₁ (Ω): <span id="spR1val">20</span></label>
+  <input type="range" min="5" max="100" value="20" id="slSPR1" oninput="updateSerPar()">
+  <label>R₂ (Ω): <span id="spR2val">30</span></label>
+  <input type="range" min="5" max="100" value="30" id="slSPR2" oninput="updateSerPar()">
+  <label>Τάση V: <span id="spVval">12</span></label>
+  <input type="range" min="1" max="24" value="12" id="slSPV" oninput="updateSerPar()">
+</div>
+<div id="serparResult" class="formula" style="font-size:.88rem;line-height:2"></div>
+</div>`,
+
+    quiz:[
+      {q:"Κύκλωμα με R₁=10Ω, R₂=20Ω, R₃=30Ω σε σειρά και V=12V. Ποια η ένταση ρεύματος;",
+       opts:["0.1 A","2 A","0.2 A","6 A"],
+       ans:2,fb:["❌ Λάθος. R_ολ=60Ω, I=V/R=12/60=0.2A",
+                  "❌ Λάθος. R_ολ=10+20+30=60Ω → I=12/60=0.2A",
+                  "✅ Σωστά! R_ολ = 10+20+30 = 60Ω → I = V/R_ολ = 12/60 = 0.2 A",
+                  "❌ Λάθος. I = 12/60 = 0.2A, όχι 12/2."]},
+      {q:"Δύο αντιστάτες R₁=8Ω και R₂=8Ω συνδέονται παράλληλα. Ποια η συνολική αντίσταση;",
+       opts:["16 Ω","8 Ω","4 Ω","1 Ω"],
+       ans:2,fb:["❌ Λάθος. Παράλληλα η R_ολ ΜΙΚΡΑΙΝΕΙ.",
+                  "❌ Λάθος. 8Ω θα ήταν αν συνδέονταν σε σειρά... Παράλληλα: 1/R=1/8+1/8=2/8 → R=4Ω",
+                  "✅ Σωστά! 1/R_ολ = 1/8 + 1/8 = 2/8 → R_ολ = 4 Ω. Ισοδύναμα: δύο ίσες R παράλληλα = R/2",
+                  "❌ Λάθος. 1/R_ολ = 2/8 → R_ολ = 4Ω, όχι 1Ω."]},
+      {q:"Σε παράλληλο κύκλωμα (V=12V) με R₁=4Ω και R₂=6Ω, ποιο το ολικό ρεύμα;",
+       opts:["1.2 A","5 A","5.5 A","2.4 A"],
+       ans:1,fb:["❌ Λάθος. I₁=12/4=3A, I₂=12/6=2A, I_ολ=5A",
+                  "✅ Σωστά! I₁=V/R₁=12/4=3A, I₂=V/R₂=12/6=2A. I_ολ=I₁+I₂=5A",
+                  "❌ Λάθος. I_ολ = I₁+I₂ = 3+2 = 5A",
+                  "❌ Λάθος. Πρόσεξε: παράλληλα V=ίδιο, οπότε I₁=12/4=3A και I₂=12/6=2A."]},
+      {q:"Αντιστάτης R=50Ω διαρρέεται από I=0.4A. Ποια η ισχύς που καταναλώνει;",
+       opts:["8 W","20 W","80 W","0.008 W"],
+       ans:0,fb:["✅ Σωστά! P = I²·R = (0.4)² × 50 = 0.16 × 50 = 8 W",
+                  "❌ Λάθος. P = I²·R = 0.16×50 = 8W, όχι I×R = 20.",
+                  "❌ Λάθος. P = I²·R = 0.4²×50 = 8W — όχι I²×R².",
+                  "❌ Λάθος. P = I²·R = 8 W"]},
+      {q:"Λαμπτήρας 100W συνδεδεμένος στα 220V. Ποια η αντίστασή του;",
+       opts:["220 Ω","0.45 Ω","484 Ω","48400 Ω"],
+       ans:2,fb:["❌ Λάθος. R = V²/P = 220²/100 = 48400/100 = 484Ω",
+                  "❌ Λάθος. 0.45 είναι το ρεύμα I=P/V=100/220.",
+                  "✅ Σωστά! R = V²/P = (220)²/100 = 48400/100 = 484 Ω",
+                  "❌ Λάθος. R = V²/P = 484Ω — δεν πολλαπλασιάζουμε, διαιρούμε."]},
+      {q:"Χαρακτηριστική I-V: η κλίση της γραμμής I=V/R είναι:",
+       opts:["R (αντίσταση)","1/R (αγωγιμότητα)","V/I (σταθερά)","I²/V"],
+       ans:1,fb:["❌ Λάθος. Η κλίση ΔI/ΔV = 1/R (αγωγιμότητα), όχι R.",
+                  "✅ Σωστά! I = V·(1/R): η κλίση I ως προς V είναι 1/R = G (αγωγιμότητα, μονάδα Siemens). Μεγαλύτερη κλίση = μικρότερη αντίσταση.",
+                  "❌ Λάθος. V/I = R, όχι κλίση.",
+                  "❌ Λάθος. I²/V δεν είναι κλίση."]},
+      {q:"Ένας αντιστάτης 20Ω και ένας 30Ω συνδέονται σε σειρά σε τάση 10V. Ποια η πτώση τάσης στον 20Ω;",
+       opts:["4 V","6 V","5 V","10 V"],
+       ans:0,fb:["✅ Σωστά! R_ολ=50Ω, I=10/50=0.2A. V₁=I·R₁=0.2×20=4V",
+                  "❌ Λάθος. I=10/50=0.2A → V₁=0.2×20=4V (όχι 6V που αντιστοιχεί στα 30Ω).",
+                  "❌ Λάθος. Δεν μοιράζεται εξίσου. V₁/V₂=R₁/R₂=20/30.",
+                  "❌ Λάθος. Η συνολική τάση μοιράζεται. V₁=4V, V₂=6V."]},
+      {q:"Ποιος νόμος λέει ότι σε κόμβο ηλεκτρικού κυκλώματος το άθροισμα των εισερχόμενων ρευμάτων ισούται με των εξερχόμενων;",
+       opts:["1ος Νόμος Kirchhoff (KCL)","2ος Νόμος Kirchhoff (KVL)","Νόμος Joule","Νόμος Faraday"],
+       ans:0,fb:["✅ Σωστά! 1ος Νόμος Kirchhoff (KCL = Kirchhoff's Current Law): ΣI_εισ = ΣI_εξ σε κάθε κόμβο.",
+                  "❌ Λάθος. KVL (2ος Νόμος) αφορά τάσεις σε βρόχο: ΣV = 0.",
+                  "❌ Λάθος. Νόμος Joule: Q = I²·R·t (θερμότητα).",
+                  "❌ Λάθος. Νόμος Faraday αφορά ηλεκτρομαγνητική επαγωγή."]},
+      {q:"Ηλεκτρική συσκευή 2kW λειτουργεί 3 ώρες. Κόστος αν 1kWh = 0.20€;",
+       opts:["0.60 €","1.20 €","6.00 €","0.12 €"],
+       ans:1,fb:["❌ Λάθος. Ενέργεια = 2kW × 3h = 6kWh. Κόστος = 6 × 0.20 = 1.20€",
+                  "✅ Σωστά! Ενέργεια = P·t = 2kW × 3h = 6kWh. Κόστος = 6kWh × 0.20€/kWh = 1.20€",
+                  "❌ Λάθος. 6 kWh × 0.20 = 1.20€, όχι 6€.",
+                  "❌ Λάθος. Ξέχασες ότι P = 2kW, όχι 200W."]},
+      {q:"Ποια η δύναμη Lorentz σε φορτίο q=2C που κινείται με v=3m/s κάθετα σε πεδίο B=0.5T;",
+       opts:["3 N","1.5 N","6 N","0.33 N"],
+       ans:0,fb:["✅ Σωστά! F = q·v·B·sin90° = 2×3×0.5×1 = 3 N",
+                  "❌ Λάθος. F = qvB = 2×3×0.5 = 3N, όχι q·B = 1.",
+                  "❌ Λάθος. F = 2×3×0.5 = 3N — δεν πολλαπλασιάζεις μόνο 2 από τα 3.",
+                  "❌ Λάθος. F = qvB = 3N."]},
+      {q:"Τρεις αντιστάτες 6Ω, 12Ω, 4Ω σε σειρά. Ποια η ολική αντίσταση;",
+       opts:["22 Ω","2 Ω","8 Ω","44 Ω"],
+       ans:0,fb:["✅ Σωστά! R_ολ = 6 + 12 + 4 = 22 Ω",
+                  "❌ Λάθος. Σε σειρά, R_ολ = R₁+R₂+R₃ = 6+12+4 = 22Ω.",
+                  "❌ Λάθος. 8Ω δεν προκύπτει από τίποτα εδώ.",
+                  "❌ Λάθος. Δεν πολλαπλασιάζουμε τις αντιστάσεις σε σειρά."]},
+      {q:"Ποιο ισχύει για εναλλασσόμενο ρεύμα (AC) στην Ελλάδα;",
+       opts:["50 Hz, 230 V (rms)","60 Hz, 110 V","50 Hz, 110 V","60 Hz, 230 V"],
+       ans:0,fb:["✅ Σωστά! Ελλάδα (και Ευρώπη): 50 Hz, 230 V rms. Η κορυφή τάσης: V_max = 230√2 ≈ 325V.",
+                  "❌ Λάθος. 60Hz/110V είναι ΗΠΑ, Καναδάς.",
+                  "❌ Λάθος. Η Ελλάδα χρησιμοποιεί 230V (rms), 50Hz.",
+                  "❌ Λάθος. Ευρώπη: 50Hz, όχι 60Hz."]},
+      {q:"Αντιστάτης 100Ω συνδέεται παράλληλα με άλλον 100Ω. Τι γίνεται η ισχύς σε σχέση με έναν μόνο;",
+       opts:["Μειώνεται στο μισό","Παραμένει ίδια","Διπλασιάζεται","Τετραπλασιάζεται"],
+       ans:2,fb:["❌ Λάθος. Παράλληλα R_ολ=50Ω. P=V²/R=V²/50. Με έναν: P=V²/100. Άρα P διπλασιάζεται.",
+                  "❌ Λάθος. Η συνολική αντίσταση μισεύεται → ισχύς διπλασιάζεται.",
+                  "✅ Σωστά! P_ολ = V²/R_ολ = V²/50 = 2·(V²/100) = 2·P₁. Διπλασιασμός ισχύος!",
+                  "❌ Λάθος. Τετραπλασιασμός θα γινόταν αν ο R μειωνόταν στο 1/4."]},
+      {q:"Σε σειριακό κύκλωμα V=24V, R₁=8Ω, R₂=16Ω. Ποια η τάση στον R₂;",
+       opts:["8 V","16 V","12 V","24 V"],
+       ans:1,fb:["❌ Λάθος. I=24/24=1A. V₂=I·R₂=1×16=16V",
+                  "✅ Σωστά! R_ολ=24Ω, I=V/R_ολ=24/24=1A. V₂=I·R₂=1×16=16V",
+                  "❌ Λάθος. I=1A, V₂=1×16=16V (όχι 12V).",
+                  "❌ Λάθος. Μόνο η συνολική τάση είναι 24V — η V₂ είναι μέρος της."]},
+      {q:"Το ηλεκτρικό πεδίο Ε ασκεί δύναμη F σε φορτίο q. Ποια η σχέση;",
+       opts:["F = q/E","F = q·E","F = E/q","F = q·E²"],
+       ans:1,fb:["❌ Λάθος. F = q·E — δεν διαιρούμε.",
+                  "✅ Σωστά! F = q·E. Αν q = 1C και E = 1 V/m → F = 1 N. Μεγαλύτερο φορτίο ή ισχυρότερο πεδίο → μεγαλύτερη δύναμη.",
+                  "❌ Λάθος. F = q·E, όχι E/q.",
+                  "❌ Λάθος. F = q·E — η ισχύς είναι 1, όχι 2."]}
+    ]
+  }
+];
+
+// ===== RENDER =====
+let currentChapter = 0;
+let currentSection = 'theory';
+
+function showChapter(n){
+  currentChapter = n;
+  document.querySelectorAll('.ch-tab').forEach((t,i)=>t.classList.toggle('active',i===n));
+  renderContent();
+}
+
+function showSection(s){
+  currentSection = s;
+  document.querySelectorAll('.sec-tab').forEach(t=>t.classList.toggle('active',t.dataset.s===s));
+  const c = chapters[currentChapter];
+  const cont = document.getElementById('sec-content');
+  if(s==='theory') cont.innerHTML = c.theory;
+  else if(s==='experiment') cont.innerHTML = c.experiment, initExperiments();
+  else if(s==='quiz') renderQuiz(c.quiz);
+}
+
+function renderContent(){
+  const c = chapters[currentChapter];
+  document.getElementById('chapters').innerHTML = `
+    <div class="sec-tabs">
+      <button class="sec-tab${currentSection==='theory'?' active':''}" data-s="theory" onclick="showSection('theory')">📖 Θεωρία</button>
+      <button class="sec-tab${currentSection==='experiment'?' active':''}" data-s="experiment" onclick="showSection('experiment')">🔬 Πείραμα</button>
+      <button class="sec-tab${currentSection==='quiz'?' active':''}" data-s="quiz" onclick="showSection('quiz')">📝 Quiz</button>
+    </div>
+    <div id="sec-content"></div>`;
+  showSection(currentSection);
+}
+
+function renderQuiz(qs){
+  let html = '<form id="quizForm">';
+  qs.forEach((q,qi)=>{
+    html += `<div class="quiz-q" id="qq${qi}"><p>${qi+1}. ${q.q}</p>`;
+    q.opts.forEach((o,oi)=>{
+      html += `<button type="button" class="quiz-opt" onclick="answerQ(${qi},${oi})" id="qo${qi}_${oi}">${o}</button>`;
+    });
+    html += `<div class="feedback" id="fb${qi}"></div></div>`;
+  });
+  html += `</form><div class="score-box" id="scoreBox" hidden></div>
+  <div style="text-align:center;margin:16px 0"><button class="btn btn-green" onclick="checkAll()">✅ Υποβολή Quiz</button>
+  <button class="btn btn-primary" style="margin-left:8px" onclick="resetQuiz()">🔄 Επανάληψη</button></div>`;
+  document.getElementById('sec-content').innerHTML = html;
+  window._quizAnswers = new Array(qs.length).fill(null);
+}
+
+function answerQ(qi,oi){
+  window._quizAnswers[qi] = oi;
+  const c = chapters[currentChapter];
+  // highlight selected
+  for(let i=0;i<c.quiz[qi].opts.length;i++){
+    const el = document.getElementById(`qo${qi}_${i}`);
+    el.style.borderColor = i===oi ? 'var(--accent)' : '';
+    el.style.background = i===oi ? 'var(--border)' : '';
+  }
+}
+
+function checkAll(){
+  const c = chapters[currentChapter];
+  let score=0;
+  c.quiz.forEach((q,qi)=>{
+    const sel = window._quizAnswers[qi];
+    if(sel===null) return;
+    const fb = document.getElementById(`fb${qi}`);
+    q.opts.forEach((_,oi)=>{
+      const el = document.getElementById(`qo${qi}_${oi}`);
+      el.classList.remove('correct','wrong');
+      if(oi===q.ans) el.classList.add('correct');
+      else if(oi===sel) el.classList.add('wrong');
+      el.disabled = true;
+    });
+    fb.className = 'feedback show '+(sel===q.ans?'ok':'err');
+    fb.textContent = q.fb[sel];
+    if(sel===q.ans) score++;
+  });
+  const answered = window._quizAnswers.filter(x=>x!==null).length;
+  const sb = document.getElementById('scoreBox');
+  sb.hidden = false;
+  sb.innerHTML = `🏆 Αποτέλεσμα: ${score}/${answered} (${Math.round(score/Math.max(1,answered)*100)}%)`;
+  sb.style.color = score===answered?'var(--green)':score>=answered/2?'var(--yellow)':'var(--red)';
+}
+
+function resetQuiz(){
+  renderQuiz(chapters[currentChapter].quiz);
+}
+
+// ===== EXPERIMENTS =====
+function initExperiments(){
+  const ch = currentChapter;
+  if(ch===0){updateCoulomb();updateCharges();resetContact();resetInduction();resetElectroscope();resetConductor();initFilings();}
+  else if(ch===1){updateOhm();updateCircuit();}
+  else if(ch===2){updatePower();}
+  else if(ch===3){updatePendulum();}
+  else if(ch===4){updateWave();updateSound();}
+  else if(ch===5){updateHeat();}
+  else if(ch===6){updateIV();updateSerPar();}
+}
+
+// CHAPTER 1
+function updateCoulomb(){
+  const q1=+document.getElementById('slQ1').value;
+  const q2=+document.getElementById('slQ2').value;
+  const r=+document.getElementById('slR').value*0.1;
+  document.getElementById('q1val').textContent=q1;
+  document.getElementById('q2val').textContent=q2;
+  document.getElementById('rval').textContent=r.toFixed(1);
+  const F=(9e9*q1*1e-6*q2*1e-6)/(r*r);
+  document.getElementById('coulombResult').textContent=`F = 9×10⁹ × ${q1}×10⁻⁶ × ${q2}×10⁻⁶ / ${r.toFixed(1)}² = ${F.toFixed(2)} N`;
+  drawCoulomb(q1,q2,r,F);
+}
+
+function drawCoulomb(q1,q2,r,F){
+  const cv=document.getElementById('cvCoulomb');
+  if(!cv) return;
+  const ctx=cv.getContext('2d');
+  const W=cv.width,H=cv.height;
+  ctx.clearRect(0,0,W,H);
+  const isDark=document.documentElement.dataset.theme==='dark'||
+    (window.matchMedia('(prefers-color-scheme:dark)').matches&&!document.documentElement.dataset.theme);
+  ctx.fillStyle=isDark?'#1e293b':'#f8fafc';
+  ctx.fillRect(0,0,W,H);
+  // draw charges
+  const cx1=100,cx2=400,cy=140;
+  const maxF=Math.min(F*2,50);
+  const arrowLen=Math.min(maxF,60);
+  // q1
+  ctx.beginPath();ctx.arc(cx1,cy,30,0,Math.PI*2);
+  ctx.fillStyle='#bfdbfe';ctx.fill();
+  ctx.strokeStyle='#2563eb';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle='#1e40af';ctx.font='bold 14px Nunito';ctx.textAlign='center';
+  ctx.fillText(`+${q1}μC`,cx1,cy+5);
+  // q2
+  ctx.beginPath();ctx.arc(cx2,cy,30,0,Math.PI*2);
+  ctx.fillStyle='#fde68a';ctx.fill();
+  ctx.strokeStyle='#d97706';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle='#92400e';
+  ctx.fillText(`+${q2}μC`,cx2,cy+5);
+  // distance line
+  ctx.setLineDash([5,5]);ctx.strokeStyle='#9ca3af';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(cx1+32,cy-20);ctx.lineTo(cx2-32,cy-20);ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='#6b7280';ctx.font='12px Nunito';
+  ctx.fillText(`r = ${r.toFixed(1)} m`,250,cy-28);
+  // force arrows
+  const col=F>10?'#dc2626':'#16a34a';
+  drawArrow(ctx,cx1+32,cy,cx1+32+arrowLen,cy,col);
+  drawArrow(ctx,cx2-32,cy,cx2-32-arrowLen,cy,col);
+  // result
+  ctx.fillStyle=isDark?'#f1f5f9':'#1a1a2e';
+  ctx.font='bold 16px Nunito';
+  ctx.fillText(`F = ${F.toFixed(2)} N`,250,cy+70);
+  ctx.font='13px Nunito';ctx.fillStyle='#6b7280';
+  ctx.fillText(F>5?'Μεγάλη δύναμη!':'Μικρή δύναμη',250,cy+90);
+}
+
+function drawArrow(ctx,x1,y1,x2,y2,color){
+  ctx.strokeStyle=color;ctx.fillStyle=color;ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+  const ang=Math.atan2(y2-y1,x2-x1);
+  ctx.beginPath();
+  ctx.moveTo(x2,y2);
+  ctx.lineTo(x2-10*Math.cos(ang-0.4),y2-10*Math.sin(ang-0.4));
+  ctx.lineTo(x2-10*Math.cos(ang+0.4),y2-10*Math.sin(ang+0.4));
+  ctx.closePath();ctx.fill();
+}
+
+let _charges=[1,-1];
+function updateCharges(){drawCharges();}
+function toggleCharge(i){_charges[i]*=-1;drawCharges();}
+function resetCharges(){_charges=[1,-1];drawCharges();}
+function drawCharges(){
+  const cv=document.getElementById('cvCharges');if(!cv)return;
+  const ctx=cv.getContext('2d');const W=cv.width,H=cv.height;
+  const isDark=document.documentElement.dataset.theme==='dark'||
+    (window.matchMedia('(prefers-color-scheme:dark)').matches&&!document.documentElement.dataset.theme);
+  ctx.fillStyle=isDark?'#1e293b':'#f8fafc';ctx.fillRect(0,0,W,H);
+  const same=_charges[0]===_charges[1];
+  const col=same?'#dc2626':'#16a34a';
+  const label=same?'ΑΠΩΣΗ ↔':'ΕΛΞΗ →←';
+  // draw bodies
+  [[130,100],[370,100]].forEach(([cx,cy],i)=>{
+    const q=_charges[i];
+    ctx.beginPath();ctx.arc(cx,cy,35,0,Math.PI*2);
+    ctx.fillStyle=q>0?'#bfdbfe':'#fde68a';ctx.fill();
+    ctx.strokeStyle=q>0?'#2563eb':'#d97706';ctx.lineWidth=2.5;ctx.stroke();
+    ctx.fillStyle=q>0?'#1e40af':'#92400e';ctx.font='bold 22px Nunito';ctx.textAlign='center';
+    ctx.fillText(q>0?'+':'−',cx,cy+8);
+    ctx.font='12px Nunito';ctx.fillText(`Σώμα ${String.fromCharCode(65+i)}`,cx,cy+52);
+  });
+  // arrows
+  if(same){
+    drawArrow(ctx,95,100,45,100,col);
+    drawArrow(ctx,405,100,455,100,col);
+  }else{
+    drawArrow(ctx,185,100,230,100,col);
+    drawArrow(ctx,315,100,270,100,col);
+  }
+  ctx.fillStyle=col;ctx.font='bold 18px Nunito';ctx.textAlign='center';
+  ctx.fillText(label,250,160);
+  const st=document.getElementById('chargeStatus');
+  if(st){
+    st.textContent=same?'Ίδια φορτία ('+(_charges[0]>0?'+/+':'−/−')+') → ΑΠΩΣΗ':'Αντίθετα φορτία (+/−) → ΕΛΞΗ';
+    st.style.background=same?'#fef2f2':'#f0fdf4';
+    st.style.color=same?'#991b1b':'#166534';
+  }
+}
+
+// ===== ΦΟΡΤΙΣΗ ΑΠΟ ΕΠΑΦΗ =====
+let contactStep=0;
+const contactSteps=[
+  {label:'Αρχική κατάσταση: ουδέτερη σφαίρα, φορτισμένο ράβδο (+)',rodX:60,rodCharge:'+',sphereX:350,sphereCharge:0,msg:'Η σφαίρα είναι ουδέτερη (ίσος αριθμός + και −). Το ράβδο είναι θετικά φορτισμένο.'},
+  {label:'Επαφή: το ράβδο αγγίζει τη σφαίρα',rodX:272,rodCharge:'+',sphereX:350,sphereCharge:0,contact:true,msg:'Το ράβδο αγγίζει τη σφαίρα. Ηλεκτρόνια μεταφέρονται από τη σφαίρα στο ράβδο (προς το θετικό φορτίο).'},
+  {label:'Μετά την επαφή: η σφαίρα φορτίστηκε θετικά',rodX:60,rodCharge:'+',sphereX:350,sphereCharge:'+',msg:'Η σφαίρα έχασε ηλεκτρόνια → φορτίστηκε ΘΕΤΙΚΑ. Το ράβδο και η σφαίρα έχουν ΙΔΙΟ πρόσημο φορτίου.'},
+];
+function stepContact(){
+  contactStep=(contactStep+1)%contactSteps.length;
+  drawContact();
+}
+function resetContact(){contactStep=0;drawContact();}
+function drawContact(){
+  const cv=document.getElementById('cvContact');if(!cv)return;
+  const ctx=cv.getContext('2d');const W=cv.width,H=cv.height;
+  const isDark=document.documentElement.dataset.theme==='dark'||(window.matchMedia('(prefers-color-scheme:dark)').matches&&!document.documentElement.dataset.theme);
+  ctx.fillStyle=isDark?'#1e293b':'#f8fafc';ctx.fillRect(0,0,W,H);
+  const s=contactSteps[contactStep];
+  // ράβδο
+  ctx.save();
+  const rw=80,rh=22,rx=s.rodX,ry=90;
+  ctx.fillStyle='#fde68a';ctx.strokeStyle='#d97706';ctx.lineWidth=2;
+  ctx.beginPath();ctx.roundRect(rx-rw/2,ry-rh/2,rw,rh,6);ctx.fill();ctx.stroke();
+  ctx.fillStyle='#92400e';ctx.font='bold 13px Nunito';ctx.textAlign='center';
+  ctx.fillText('Ράβδος '+s.rodCharge,rx,ry+5);
+  // μίσχος ράβδου
+  ctx.strokeStyle='#6b7280';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(rx,ry+11);ctx.lineTo(rx,ry+45);ctx.stroke();
+  ctx.restore();
+  // σφαίρα
+  const sx=s.sphereX,sy=100,sr=38;
+  ctx.beginPath();ctx.arc(sx,sy,sr,0,Math.PI*2);
+  const sCharge=s.sphereCharge;
+  ctx.fillStyle=sCharge===0?'#e5e7eb':sCharge==='+'?'#bfdbfe':'#fde68a';
+  ctx.fill();ctx.strokeStyle=sCharge===0?'#9ca3af':sCharge==='+'?'#2563eb':'#d97706';
+  ctx.lineWidth=2.5;ctx.stroke();
+  // φορτία μέσα στη σφαίρα
+  if(sCharge===0){
+    // ανάμεικτα + και −
+    [[sx-12,sy-10,'+'],[sx+10,sy-10,'−'],[sx-10,sy+10,'−'],[sx+12,sy+10,'+']].forEach(([x,y,c])=>{
+      ctx.fillStyle=c==='+'?'#dc2626':'#2563eb';ctx.font='bold 13px Nunito';ctx.textAlign='center';ctx.fillText(c,x,y+4);
+    });
+  } else {
+    ctx.fillStyle=sCharge==='+'?'#1e40af':'#92400e';ctx.font='bold 28px Nunito';ctx.textAlign='center';
+    ctx.fillText(sCharge==='+'?'+':'−',sx,sy+10);
+  }
+  ctx.fillStyle=isDark?'#94a3b8':'#374151';ctx.font='12px Nunito';ctx.textAlign='center';
+  ctx.fillText('Αγώγιμη Σφαίρα',sx,sy+sr+18);
+  // βέλος μεταφοράς e−
+  if(s.contact){
+    ctx.fillStyle='#7c3aed';ctx.font='bold 12px Nunito';ctx.textAlign='center';
+    ctx.fillText('e⁻ →',205,75);
+    drawArrow(ctx,270,sy,300,sy,'#7c3aed');
+  }
+  // βήμα
+  ctx.fillStyle=isDark?'#94a3b8':'#374151';ctx.font='13px Nunito';ctx.textAlign='center';
+  ctx.fillText(`Βήμα ${contactStep+1}/${contactSteps.length}: ${s.label}`,W/2,175);
+  const st=document.getElementById('contactStatus');
+  if(st) st.innerHTML=s.msg;
+}
+
+// ===== ΦΟΡΤΙΣΗ ΑΠΟ ΕΠΑΓΩΓΗ =====
+let inductionStep=0;
+const inductionSteps=[
+  {label:'Αρχική κατάσταση: ουδέτερη σφαίρα',rodX:80,near:false,grounded:false,separated:false,msg:'Η σφαίρα είναι ουδέτερη — τα φορτία κατανέμονται ομοιόμορφα.'},
+  {label:'Πλησίασμα ράβδου (χωρίς επαφή)',rodX:170,near:true,grounded:false,separated:false,msg:'Το θετικό ράβδο έλκει τα e⁻ της σφαίρας. Αριστερά: αρνητικό, δεξιά: θετικό — χωρίς επαφή!'},
+  {label:'Γείωση: ηλεκτρόνια εισρέουν από γη',rodX:170,near:true,grounded:true,separated:false,msg:'Με το δάκτυλο (γείωση) αγγίζουμε τη δεξιά πλευρά. Ηλεκτρόνια εισρέουν από τη γη → ουδετεροποιούνται τα + δεξιά.'},
+  {label:'Αφαίρεση γείωσης — ύστερα ράβδου',rodX:80,near:false,grounded:false,separated:true,msg:'Αφαιρούμε πρώτα το δάκτυλο, μετά το ράβδο. Η σφαίρα παραμένει με περίσσεια e⁻ → ΑΡΝΗΤΙΚΑ φορτισμένη!'},
+];
+function stepInduction(){
+  inductionStep=(inductionStep+1)%inductionSteps.length;
+  drawInduction();
+}
+function resetInduction(){inductionStep=0;drawInduction();}
+function drawInduction(){
+  const cv=document.getElementById('cvInduction');if(!cv)return;
+  const ctx=cv.getContext('2d');const W=cv.width,H=cv.height;
+  const isDark=document.documentElement.dataset.theme==='dark'||(window.matchMedia('(prefers-color-scheme:dark)').matches&&!document.documentElement.dataset.theme);
+  ctx.fillStyle=isDark?'#1e293b':'#f8fafc';ctx.fillRect(0,0,W,H);
+  const s=inductionSteps[inductionStep];
+  // ράβδο
+  const rw=70,rh=20,rx=s.rodX,ry=100;
+  ctx.fillStyle='#fde68a';ctx.strokeStyle='#d97706';ctx.lineWidth=2;
+  ctx.beginPath();ctx.roundRect(rx-rw/2,ry-rh/2,rw,rh,5);ctx.fill();ctx.stroke();
+  ctx.fillStyle='#92400e';ctx.font='bold 12px Nunito';ctx.textAlign='center';
+  ctx.fillText('Ράβδος +',rx,ry+4);
+  // σφαίρα
+  const sx=340,sy=100,sr=50;
+  ctx.beginPath();ctx.arc(sx,sy,sr,0,Math.PI*2);
+  ctx.fillStyle=s.separated?'#fde68a':isDark?'#334155':'#e5e7eb';
+  ctx.fill();ctx.strokeStyle=s.separated?'#d97706':'#9ca3af';ctx.lineWidth=2.5;ctx.stroke();
+  // κατανομή φορτίων στη σφαίρα
+  if(!s.near&&!s.separated){
+    // ουδέτερη
+    [[sx-15,sy-10,'+'],[sx+12,sy-10,'−'],[sx-12,sy+10,'−'],[sx+15,sy+10,'+']].forEach(([x,y,c])=>{
+      ctx.fillStyle=c==='+'?'#dc2626':'#2563eb';ctx.font='bold 12px Nunito';ctx.textAlign='center';ctx.fillText(c,x,y+4);
+    });
+  } else if(s.near&&!s.separated){
+    // αριστερά: −, δεξιά: + (ή ουδέτερο αν γείωση)
+    const leftCharge='−', rightCharge=s.grounded?'0':'+';
+    [sx-20,sx-22,sx-18].forEach((x,i)=>{
+      ctx.fillStyle='#2563eb';ctx.font='bold 13px Nunito';ctx.textAlign='center';
+      ctx.fillText('−',x,[sy-12,sy,sy+12][i]+4);
+    });
+    if(!s.grounded){
+      [sx+18,sx+22,sx+20].forEach((x,i)=>{
+        ctx.fillStyle='#dc2626';ctx.font='bold 13px Nunito';ctx.textAlign='center';
+        ctx.fillText('+',x,[sy-12,sy,sy+12][i]+4);
+      });
+    }
+    if(s.grounded){
+      // βέλος e− από γη
+      ctx.fillStyle='#16a34a';ctx.font='bold 11px Nunito';ctx.textAlign='center';
+      ctx.fillText('e⁻ εισρέουν',sx+70,sy+20);
+      drawArrow(ctx,sx+110,sy+5,sx+55,sy+5,'#16a34a');
+      // γείωση σύμβολο
+      ctx.strokeStyle='#374151';ctx.lineWidth=2;
+      ctx.beginPath();ctx.moveTo(sx+50,sy);ctx.lineTo(sx+70,sy);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(sx+70,sy-8);ctx.lineTo(sx+70,sy+8);ctx.stroke();
+      ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(sx+73,sy-5);ctx.lineTo(sx+73,sy+5);ctx.stroke();
+      ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(sx+76,sy-2);ctx.lineTo(sx+76,sy+2);ctx.stroke();
+    }
+  } else if(s.separated){
+    // αρνητικά φορτισμένη
+    [sx-10,sx+8,sx-8,sx+10,sx,sx-15].forEach((x,i)=>{
+      ctx.fillStyle='#2563eb';ctx.font='bold 13px Nunito';ctx.textAlign='center';
+      ctx.fillText('−',x,[sy-15,sy-10,sy,sy+5,sy+15,sy+8][i]+4);
+    });
+    ctx.fillStyle='#2563eb';ctx.font='bold 18px Nunito';ctx.textAlign='center';
+    ctx.fillText('−',sx,sy+4);
+  }
+  ctx.fillStyle=isDark?'#94a3b8':'#374151';ctx.font='12px Nunito';ctx.textAlign='center';
+  ctx.fillText('Σφαίρα',sx,sy+sr+16);
+  ctx.fillText(`Βήμα ${inductionStep+1}/${inductionSteps.length}: ${s.label}`,W/2,178);
+  const st=document.getElementById('inductionStatus');
+  if(st) st.innerHTML=s.msg;
+}
+
+// ===== ΗΛΕΚΤΡΟΣΚΟΠΙΟ =====
+let escopeState=0; // 0=ουδέτερο, 1=επαγωγή (κοντά), 2=επαφή (φορτισμένο)
+function approachElectroscope(){escopeState=1;drawElectroscope();}
+function touchElectroscope(){escopeState=2;drawElectroscope();}
+function resetElectroscope(){escopeState=0;drawElectroscope();}
+function drawElectroscope(){
+  const cv=document.getElementById('cvElectroscope');if(!cv)return;
+  const ctx=cv.getContext('2d');const W=cv.width,H=cv.height;
+  const isDark=document.documentElement.dataset.theme==='dark'||(window.matchMedia('(prefers-color-scheme:dark)').matches&&!document.documentElement.dataset.theme);
+  ctx.fillStyle=isDark?'#1e293b':'#f8fafc';ctx.fillRect(0,0,W,H);
+  const angle=escopeState===0?0:escopeState===1?25:45; // γωνία φύλλων σε μοίρες
+  // φορτισμένο σώμα (αριστερά)
+  if(escopeState>0){
+    const bx=escopeState===2?168:80,by=50;
+    ctx.beginPath();ctx.arc(bx,by,22,0,Math.PI*2);
+    ctx.fillStyle='#fde68a';ctx.fill();ctx.strokeStyle='#d97706';ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle='#92400e';ctx.font='bold 16px Nunito';ctx.textAlign='center';ctx.fillText('+',bx,by+6);
+    ctx.fillStyle=isDark?'#94a3b8':'#6b7280';ctx.font='10px Nunito';ctx.fillText('φορτισμένο',bx,by+38);
+    if(escopeState===1){
+      ctx.strokeStyle='#d97706';ctx.lineWidth=1.5;ctx.setLineDash([5,4]);
+      ctx.beginPath();ctx.moveTo(bx+22,by);ctx.lineTo(190,by);ctx.stroke();
+      ctx.setLineDash([]);
+    }
+  }
+  // γυάλινος θόλος
+  const gx=250,gy=50,gr=55;
+  ctx.beginPath();ctx.arc(gx,gy,gr,Math.PI,Math.PI*2);
+  ctx.fillStyle='rgba(147,197,253,0.25)';ctx.fill();
+  ctx.strokeStyle='#93c5fd';ctx.lineWidth=2;ctx.stroke();
+  // μεταλλική πλάκα πάνω
+  ctx.fillStyle='#9ca3af';ctx.strokeStyle='#6b7280';ctx.lineWidth=2;
+  ctx.beginPath();ctx.roundRect(190,gy-4,120,8,4);ctx.fill();ctx.stroke();
+  // κατακόρυφος μεταλλικός στύλος
+  ctx.strokeStyle='#6b7280';ctx.lineWidth=4;
+  ctx.beginPath();ctx.moveTo(gx,gy+4);ctx.lineTo(gx,gy+gr+60);ctx.stroke();
+  // ορθογώνια θήκη (κάτω μέρος)
+  ctx.fillStyle=isDark?'#334155':'#d1d5db';ctx.strokeStyle='#6b7280';ctx.lineWidth=2;
+  ctx.beginPath();ctx.roundRect(185,gy+gr,130,80,6);ctx.fill();ctx.stroke();
+  // γυάλινο παράθυρο
+  ctx.fillStyle='rgba(147,197,253,0.15)';ctx.strokeStyle='#93c5fd';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.roundRect(200,gy+gr+10,100,55,4);ctx.fill();ctx.stroke();
+  // φύλλα (χρυσόφυλλα)
+  const pivotX=gx,pivotY=gy+gr+52,leafLen=50;
+  const rad=angle*Math.PI/180;
+  const leafColor=escopeState===2?'#f59e0b':'#fcd34d';
+  // αριστερό φύλλο
+  ctx.strokeStyle=leafColor;ctx.lineWidth=4;
+  ctx.beginPath();ctx.moveTo(pivotX,pivotY);
+  ctx.lineTo(pivotX-leafLen*Math.sin(rad),pivotY+leafLen*Math.cos(rad));ctx.stroke();
+  // δεξί φύλλο
+  ctx.beginPath();ctx.moveTo(pivotX,pivotY);
+  ctx.lineTo(pivotX+leafLen*Math.sin(rad),pivotY+leafLen*Math.cos(rad));ctx.stroke();
+  // γωνία ένδειξη
+  if(angle>0){
+    ctx.fillStyle=leafColor;ctx.font='bold 11px Nunito';ctx.textAlign='center';
+    ctx.fillText(`${angle}°`,pivotX,pivotY+leafLen+16);
+  }
+  // κατανομή φορτίων στην πλάκα
+  if(escopeState===1){
+    // επαγωγή: − στην πλάκα, + στα φύλλα
+    ctx.fillStyle='#2563eb';ctx.font='bold 12px Nunito';ctx.textAlign='center';
+    [gx-15,gx,gx+15].forEach(x=>ctx.fillText('−',x,gy-2));
+    ctx.fillStyle='#dc2626';
+    ctx.fillText('+',pivotX-10,pivotY+10);ctx.fillText('+',pivotX+10,pivotY+10);
+    ctx.fillStyle='#7c3aed';ctx.font='10px Nunito';
+    ctx.fillText('e⁻ ανεβαίνουν',gx-60,gy+gr+25);
+  } else if(escopeState===2){
+    // επαφή: + παντού
+    ctx.fillStyle='#dc2626';ctx.font='bold 12px Nunito';ctx.textAlign='center';
+    [gx-15,gx,gx+15].forEach(x=>ctx.fillText('+',x,gy-2));
+    ctx.fillText('+',pivotX-10,pivotY+10);ctx.fillText('+',pivotX+10,pivotY+10);
+  }
+  // ετικέτα
+  const msgs=['Ουδέτερο: φύλλα κλειστά (0°)','Επαγωγή: φύλλα ανοίγουν ελαφρά — e⁻ αναδιατάσσονται','Επαφή: φύλλα ανοίγουν πλήρως — σφαίρα φορτίστηκε'];
+  const colors=['#166534','#92400e','#991b1b'];
+  const st=document.getElementById('electroscopeStatus');
+  if(st){st.textContent=msgs[escopeState];st.style.color=colors[escopeState];}
+  ctx.fillStyle=isDark?'#94a3b8':'#374151';ctx.font='12px Nunito';ctx.textAlign='center';
+  ctx.fillText('Ηλεκτροσκόπιο',gx,H-8);
+}
+
+// ===== ΑΓΩΓΟΙ & ΜΟΝΩΤΕΣ =====
+const materialData={
+  copper:{name:'Χαλκός',conducts:true,color:'#b45309',msg:'Ο χαλκός είναι <strong>ΑΓΩΓΟΣ</strong> — τα ελεύθερα ηλεκτρόνια του μεταφέρουν ρεύμα.'},
+  aluminum:{name:'Αλουμίνιο',conducts:true,color:'#9ca3af',msg:'Το αλουμίνιο είναι <strong>ΑΓΩΓΟΣ</strong> — μεταλλικό στοιχείο με ελεύθερα ηλεκτρόνια.'},
+  graphite:{name:'Γραφίτης',conducts:true,color:'#4b5563',msg:'Ο γραφίτης (μολύβι) είναι <strong>ΑΓΩΓΟΣ</strong> — τα ηλεκτρόνια κινούνται μεταξύ στρωμάτων άνθρακα.'},
+  plastic:{name:'Πλαστικό',conducts:false,color:'#fbbf24',msg:'Το πλαστικό είναι <strong>ΜΟΝΩΤΗΣ</strong> — δεν έχει ελεύθερα ηλεκτρόνια, δεν άγει ρεύμα.'},
+  wood:{name:'Ξύλο',conducts:false,color:'#a16207',msg:'Το ξύλο (ξερό) είναι <strong>ΜΟΝΩΤΗΣ</strong> — χρησιμοποιείται για μόνωση ηλεκτρικών στελεχών.'},
+  glass:{name:'Γυαλί',conducts:false,color:'#bfdbfe',msg:'Το γυαλί είναι <strong>ΜΟΝΩΤΗΣ</strong> — χρησιμοποιείται σε ηλεκτρικές διατάξεις για μόνωση.'},
+};
+let selMaterial=null;
+function testMaterial(m){selMaterial=m;drawConductor();}
+function resetConductor(){selMaterial=null;drawConductor();}
+function drawConductor(){
+  const cv=document.getElementById('cvConductor');if(!cv)return;
+  const ctx=cv.getContext('2d');const W=cv.width,H=cv.height;
+  const isDark=document.documentElement.dataset.theme==='dark'||(window.matchMedia('(prefers-color-scheme:dark)').matches&&!document.documentElement.dataset.theme);
+  ctx.fillStyle=isDark?'#1e293b':'#f8fafc';ctx.fillRect(0,0,W,H);
+  const m=selMaterial?materialData[selMaterial]:null;
+  const lit=m&&m.conducts;
+  const wc=lit?'#f59e0b':'#374151';
+  // Layout: Battery left (vertical IEC), bulb on top wire
+  // Path: bat(+,y=30) → bulb → top right (x=440) → down (y=130) → left to probe2(x=330)
+  //        bat(-,y=140) → right to probe1(x=190)
+  // Gap/material between probe1(x=190) and probe2(x=330) at y=130
+  const batX=55,batTop=30,batBot=142;
+  const bulbX=150,bulbY=30,br=18;
+  const p1x=195,p2x=330,py=130;
+  ctx.strokeStyle=wc;ctx.lineWidth=2.5;
+  // Top wire: battery+ → bulb → right corner → down
+  ctx.beginPath();ctx.moveTo(batX+18,batTop);ctx.lineTo(bulbX-br,bulbY);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(bulbX+br,bulbY);ctx.lineTo(440,batTop);ctx.lineTo(440,py);ctx.lineTo(p2x,py);ctx.stroke();
+  // Bottom wire: battery- → probe1
+  ctx.beginPath();ctx.moveTo(batX+18,batBot);ctx.lineTo(p1x,batBot);ctx.lineTo(p1x,py);ctx.stroke();
+  // probe tips (→ and ←)
+  ctx.fillStyle='#6b7280';
+  // probe1 tip (→ pointing right)
+  ctx.beginPath();ctx.moveTo(p1x,py-7);ctx.lineTo(p1x+12,py);ctx.lineTo(p1x,py+7);ctx.closePath();ctx.fill();
+  // probe2 tip (← pointing left)
+  ctx.beginPath();ctx.moveTo(p2x,py-7);ctx.lineTo(p2x-12,py);ctx.lineTo(p2x,py+7);ctx.closePath();ctx.fill();
+  // material or gap between probes
+  const gapL=p1x+14,gapR=p2x-14,gapMid=(gapL+gapR)/2;
+  if(m){
+    ctx.fillStyle=m.color;ctx.strokeStyle='#6b7280';ctx.lineWidth=2;
+    ctx.beginPath();ctx.roundRect(gapL,py-16,gapR-gapL,32,5);ctx.fill();ctx.stroke();
+    const tc=(m.color==='#fbbf24'||m.color==='#bfdbfe'||m.color==='#9ca3af')?'#1e293b':'#f9fafb';
+    ctx.fillStyle=tc;ctx.font='bold 13px Nunito';ctx.textAlign='center';
+    ctx.fillText(m.name,gapMid,py+5);
+  } else {
+    ctx.strokeStyle='#9ca3af';ctx.lineWidth=1.5;ctx.setLineDash([5,5]);
+    ctx.beginPath();ctx.moveTo(gapL,py);ctx.lineTo(gapR,py);ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle=isDark?'#94a3b8':'#9ca3af';ctx.font='11px Nunito';ctx.textAlign='center';
+    ctx.fillText('← επίλεξε υλικό →',gapMid,py+18);
+  }
+  // Battery IEC vertical
+  ctx.strokeStyle='#374151';ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.moveTo(batX+18,batTop);ctx.lineTo(batX+18,batTop+25);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(batX+18,batBot-25);ctx.lineTo(batX+18,batBot);ctx.stroke();
+  [[batTop+25,3,'+'],[batTop+33,1.5,null],[batTop+43,3,null],[batTop+51,1.5,'−']].forEach(([y,lw,lbl])=>{
+    const hw=lw===3?13:9;
+    ctx.lineWidth=lw;ctx.beginPath();ctx.moveTo(batX+18-hw,y);ctx.lineTo(batX+18+hw,y);ctx.stroke();
+    if(lbl){ctx.fillStyle='#374151';ctx.font='bold 12px Nunito';ctx.textAlign='center';ctx.fillText(lbl,batX+18,lbl==='+'?y-6:y+14);}
+  });
+  // Bulb
+  if(lit){ctx.shadowBlur=28;ctx.shadowColor='#fbbf24';}
+  ctx.beginPath();ctx.arc(bulbX,bulbY,br,0,Math.PI*2);
+  ctx.fillStyle=lit?'#fef08a':'#e5e7eb';ctx.fill();
+  ctx.strokeStyle=lit?'#f59e0b':'#9ca3af';ctx.lineWidth=2.5;ctx.stroke();
+  ctx.shadowBlur=0;
+  if(lit){
+    ctx.strokeStyle='#fbbf24';ctx.lineWidth=2;
+    for(let a=0;a<Math.PI*2;a+=Math.PI/4){
+      ctx.beginPath();ctx.moveTo(bulbX+Math.cos(a)*(br+4),bulbY+Math.sin(a)*(br+4));
+      ctx.lineTo(bulbX+Math.cos(a)*(br+12),bulbY+Math.sin(a)*(br+12));ctx.stroke();
+    }
+  }
+  ctx.font=`${br}px serif`;ctx.textAlign='center';ctx.fillText('💡',bulbX,bulbY+br/2-2);
+  // labels
+  ctx.fillStyle=isDark?'#94a3b8':'#6b7280';ctx.font='11px Nunito';ctx.textAlign='center';
+  ctx.fillText('Άκρο 1',p1x,py+35);ctx.fillText('Άκρο 2',p2x,py+35);
+  // status
+  const st=document.getElementById('conductorStatus');if(!st)return;
+  if(!m)st.innerHTML='Επίλεξε υλικό για να δεις αν ανάψει η λάμπα!';
+  else st.innerHTML=`<span style="color:${m.conducts?'#166534':'#991b1b'};font-weight:bold">${m.conducts?'⚡ ΑΓΩΓΟΣ':'🚫 ΜΟΝΩΤΗΣ'}</span> — ${m.msg}`;
+}
+
+// ===== ΡΙΝΙΣΜΑΤΑ ΣΙΔΗΡΟΥ =====
+let filingsArr=[],filingsAnimId=null,filingsRod={x:-300,y:-300};
+function resetFilings(){
+  const cv=document.getElementById('cvFilings');if(!cv)return;
+  const W=cv.width,H=cv.height;
+  filingsArr=[];
+  for(let i=0;i<220;i++){
+    const rx=25+Math.random()*(W-50),ry=15+Math.random()*(H-30);
+    filingsArr.push({rx,ry,cx:rx,cy:ry,angle:Math.random()*Math.PI,vx:0,vy:0,va:0});
+  }
+  if(!filingsAnimId) animateFilings();
+}
+function initFilings(){
+  const cv=document.getElementById('cvFilings');if(!cv)return;
+  cv.addEventListener('mousemove',e=>{const r=cv.getBoundingClientRect();filingsRod={x:e.clientX-r.left,y:e.clientY-r.top};});
+  cv.addEventListener('touchmove',e=>{e.preventDefault();const r=cv.getBoundingClientRect();filingsRod={x:e.touches[0].clientX-r.left,y:e.touches[0].clientY-r.top};},{passive:false});
+  cv.addEventListener('mouseleave',()=>{filingsRod={x:-300,y:-300};});
+  resetFilings();
+}
+function animateFilings(){
+  const cv=document.getElementById('cvFilings');
+  if(!cv){filingsAnimId=null;return;}
+  const ctx=cv.getContext('2d');const W=cv.width,H=cv.height;
+  const isDark=document.documentElement.dataset.theme==='dark'||(window.matchMedia('(prefers-color-scheme:dark)').matches&&!document.documentElement.dataset.theme);
+  ctx.fillStyle=isDark?'#0f172a':'#1e1e2e';ctx.fillRect(0,0,W,H);
+  // subtle grid of dots for ambience
+  ctx.fillStyle='rgba(255,255,255,0.04)';
+  for(let x=20;x<W;x+=30)for(let y=20;y<H;y+=30)ctx.fillRect(x,y,1,1);
+  const rx=filingsRod.x,ry=filingsRod.y;
+  const inCanvas=rx>0&&rx<W&&ry>0&&ry<H;
+  const R=110; // attraction radius
+  filingsArr.forEach(f=>{
+    const dx=rx-f.cx,dy=ry-f.cy,dist=Math.sqrt(dx*dx+dy*dy);
+    if(inCanvas&&dist<R&&dist>8){
+      const str=(R-dist)/R;
+      f.vx+=dx/dist*str*str*2.5;
+      f.vy+=dy/dist*str*str*2.5;
+      const ta=Math.atan2(dy,dx);
+      let da=ta-f.angle;
+      while(da>Math.PI/2)da-=Math.PI;while(da<-Math.PI/2)da+=Math.PI;
+      f.va+=da*0.18;
+    } else {
+      f.vx+=(f.rx-f.cx)*0.04;
+      f.vy+=(f.ry-f.cy)*0.04;
+      f.va*=0.85;
+    }
+    f.vx*=0.72;f.vy*=0.72;f.va*=0.72;
+    f.cx+=f.vx;f.cy+=f.vy;f.angle+=f.va;
+    const d2=inCanvas?Math.sqrt((rx-f.cx)**2+(ry-f.cy)**2):R+1;
+    const glow=d2<R?1-(d2/R):0;
+    ctx.save();ctx.translate(f.cx,f.cy);ctx.rotate(f.angle);
+    const r=Math.round(160+glow*80),g=Math.round(140+glow*80),b=Math.round(100+glow*40);
+    ctx.fillStyle=`rgba(${r},${g},${b},${0.45+glow*0.55})`;
+    ctx.beginPath();ctx.roundRect(-8,-1.5,16,3,1.5);ctx.fill();
+    ctx.restore();
+  });
+  // draw rod at cursor
+  if(inCanvas){
+    ctx.save();ctx.translate(rx,ry);
+    ctx.shadowBlur=15;ctx.shadowColor='#f59e0b';
+    ctx.fillStyle='#fde68a';ctx.strokeStyle='#d97706';ctx.lineWidth=2;
+    ctx.beginPath();ctx.roundRect(-35,-11,70,22,6);ctx.fill();ctx.stroke();
+    ctx.shadowBlur=0;
+    ctx.fillStyle='#92400e';ctx.font='bold 12px Nunito';ctx.textAlign='center';ctx.fillText('Ράβδος +',0,5);
+    // glow halo
+    ctx.beginPath();ctx.arc(0,0,R,0,Math.PI*2);
+    ctx.strokeStyle='rgba(245,158,11,0.12)';ctx.lineWidth=1;ctx.stroke();
+    ctx.restore();
+  } else {
+    ctx.fillStyle='rgba(255,255,255,0.25)';ctx.font='13px Nunito';ctx.textAlign='center';
+    ctx.fillText('🖱️ Μετακίνησε τον κέρσορα εδώ!',W/2,H/2);
+  }
+  filingsAnimId=requestAnimationFrame(animateFilings);
+}
+
+// CHAPTER 2
+function updateOhm(){
+  const V=+document.getElementById('slV').value;
+  const R=+document.getElementById('slRo').value;
+  document.getElementById('vval').textContent=V;
+  document.getElementById('roval').textContent=R;
+  const I=(V/R).toFixed(3);
+  document.getElementById('ohmResult').textContent=`I = V/R = ${V}/${R} = ${I} A`;
+  drawOhm(V,R,+I);
+}
+
+function drawOhm(V,R,I){
+  const cv=document.getElementById('cvOhm');if(!cv)return;
+  const ctx=cv.getContext('2d');const W=cv.width,H=cv.height;
+  const isDark=document.documentElement.dataset.theme==='dark'||
+    (window.matchMedia('(prefers-color-scheme:dark)').matches&&!document.documentElement.dataset.theme);
+  ctx.fillStyle=isDark?'#1e293b':'#f8fafc';ctx.fillRect(0,0,W,H);
+  // circuit rectangle
+  const pad=60,thick=4;
+  ctx.strokeStyle='#374151';ctx.lineWidth=thick;ctx.beginPath();
+  ctx.rect(pad,pad,W-2*pad,H-2*pad);ctx.stroke();
+  // battery left
+  ctx.fillStyle='#dcfce7';ctx.fillRect(pad-20,H/2-20,40,40);
+  ctx.strokeStyle='#16a34a';ctx.lineWidth=2;ctx.strokeRect(pad-20,H/2-20,40,40);
+  ctx.fillStyle='#166534';ctx.font='bold 12px Nunito';ctx.textAlign='center';
+  ctx.fillText(`${V}V`,pad,H/2+5);
+  // resistor top
+  const ry=pad-8,rx1=W/2-40,rx2=W/2+40;
+  ctx.fillStyle='#fef3c7';ctx.fillRect(rx1,ry,80,20);
+  ctx.strokeStyle='#d97706';ctx.lineWidth=2;ctx.strokeRect(rx1,ry,80,20);
+  ctx.fillStyle='#92400e';ctx.font='bold 12px Nunito';ctx.fillText(`${R}Ω`,W/2,ry+14);
+  // ammeter right
+  ctx.beginPath();ctx.arc(W-pad,H/2,18,0,Math.PI*2);
+  ctx.fillStyle='#eff6ff';ctx.fill();ctx.strokeStyle='#2563eb';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle='#1d4ed8';ctx.font='bold 13px Nunito';ctx.fillText('A',W-pad,H/2+5);
+  // current value
+  const barH=Math.min(I*30,100);
+  ctx.fillStyle='#3b82f6';ctx.fillRect(W-40,H-pad-barH,20,barH);
+  ctx.fillStyle=isDark?'#f1f5f9':'#1a1a2e';ctx.font='12px Nunito';
+  ctx.fillText(`I = ${I}A`,W-30,H-pad+14);
+  ctx.fillText('Νόμος Ohm: V = I·R',W/2,H-10);
+}
+
+function updateCircuit(){
+  const R1=+document.getElementById('slR1').value;
+  const R2=+document.getElementById('slR2').value;
+  document.getElementById('r1v').textContent=R1;
+  document.getElementById('r2v').textContent=R2;
+  const Rs=R1+R2;
+  const Rp=(R1*R2/(R1+R2)).toFixed(1);
+  const V=12;
+  const Is=(V/Rs).toFixed(2);
+  const Ip=(V/Rp).toFixed(2);
+  document.getElementById('circuitResult').innerHTML=
+    `<strong>Σειρά:</strong> R_ολ = ${Rs} Ω, I = ${V}/${Rs} = ${Is} A<br>
+     <strong>Παράλληλη:</strong> R_ολ = ${Rp} Ω, I = ${V}/${Rp} = ${Ip} A (V=12V και στα δύο)`;
+  drawCircuitComp(R1,R2,Rs,+Rp,+Is,+Ip);
+}
+
+function drawCircuitComp(R1,R2,Rs,Rp,Is,Ip){
+  const cv=document.getElementById('cvCircuit');if(!cv)return;
+  const ctx=cv.getContext('2d');const W=cv.width,H=cv.height;
+  const isDark=document.documentElement.dataset.theme==='dark'||
+    (window.matchMedia('(prefers-color-scheme:dark)').matches&&!document.documentElement.dataset.theme);
+  ctx.fillStyle=isDark?'#1e293b':'#f8fafc';ctx.fillRect(0,0,W,H);
+  // SERIES (left)
+  ctx.fillStyle='#2563eb';ctx.font='bold 13px Nunito';ctx.textAlign='center';
+  ctx.fillText('ΣΕΙΡΑ',125,20);
+  ctx.strokeStyle='#374151';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(20,40);ctx.lineTo(230,40);ctx.lineTo(230,100);ctx.lineTo(20,100);ctx.lineTo(20,40);ctx.stroke();
+  // Battery IEC (vertical, left wire x=20)
+  ctx.fillStyle=isDark?'#1e293b':'#f8fafc';ctx.fillRect(14,56,12,28);
+  ctx.strokeStyle='#374151';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(12,61);ctx.lineTo(28,61);ctx.stroke();
+  ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(16,68);ctx.lineTo(24,68);ctx.stroke();
+  ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(12,75);ctx.lineTo(28,75);ctx.stroke();
+  ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(16,82);ctx.lineTo(24,82);ctx.stroke();
+  ctx.fillStyle='#dc2626';ctx.font='bold 9px Nunito';ctx.textAlign='left';ctx.fillText('+',30,63);
+  ctx.fillStyle='#374151';ctx.font='bold 12px Nunito';ctx.textAlign='right';ctx.fillText('V',11,73);
+  // Switch Δ (top wire, x=22..50)
+  ctx.fillStyle=isDark?'#1e293b':'#f8fafc';ctx.fillRect(23,37,28,6);
+  ctx.fillStyle='#374151';
+  ctx.beginPath();ctx.arc(26,40,3,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.arc(48,40,3,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='#374151';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(26,40);ctx.lineTo(45,31);ctx.stroke();
+  ctx.fillStyle='#374151';ctx.font='10px Nunito';ctx.textAlign='center';ctx.fillText('Δ',37,27);
+  // R1 on top
+  ctx.fillStyle='#fef3c7';ctx.strokeStyle='#d97706';ctx.lineWidth=1.5;
+  ctx.fillRect(60,30,45,20);ctx.strokeRect(60,30,45,20);
+  ctx.fillStyle='#92400e';ctx.font='11px Nunito';ctx.fillText(`R₁=${R1}Ω`,82,44);
+  ctx.fillStyle='#fef3c7';ctx.strokeStyle='#d97706';
+  ctx.fillRect(130,30,45,20);ctx.strokeRect(130,30,45,20);
+  ctx.fillStyle='#92400e';ctx.fillText(`R₂=${R2}Ω`,152,44);
+  ctx.fillStyle='#374151';ctx.font='12px Nunito';ctx.textAlign='center';
+  ctx.fillText(`R_ολ = ${Rs} Ω`,125,125);
+  ctx.fillStyle='#dc2626';ctx.fillText(`I = ${Is} A`,125,140);
+  // PARALLEL (right) — correct parallel topology: R1, R2 as vertical branches
+  ctx.fillStyle='#7c3aed';ctx.font='bold 13px Nunito';ctx.textAlign='center';
+  ctx.fillText('ΠΑΡΑΛΛΗΛΗ',380,20);
+  ctx.strokeStyle='#374151';ctx.lineWidth=2;
+  // Top rail y=40
+  ctx.beginPath();ctx.moveTo(270,40);ctx.lineTo(480,40);ctx.stroke();
+  // Bottom rail y=107
+  ctx.beginPath();ctx.moveTo(270,107);ctx.lineTo(480,107);ctx.stroke();
+  // Left outer wire x=270
+  ctx.beginPath();ctx.moveTo(270,40);ctx.lineTo(270,107);ctx.stroke();
+  // Right outer wire x=480
+  ctx.beginPath();ctx.moveTo(480,40);ctx.lineTo(480,107);ctx.stroke();
+  // Battery IEC vertical at x=270
+  ctx.fillStyle=isDark?'#1e293b':'#f8fafc';ctx.fillRect(263,57,14,30);
+  ctx.strokeStyle='#374151';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(261,62);ctx.lineTo(279,62);ctx.stroke();
+  ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(265,69);ctx.lineTo(275,69);ctx.stroke();
+  ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(261,77);ctx.lineTo(279,77);ctx.stroke();
+  ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(265,84);ctx.lineTo(275,84);ctx.stroke();
+  ctx.fillStyle='#dc2626';ctx.font='bold 9px Nunito';ctx.textAlign='left';ctx.fillText('+',281,64);
+  ctx.fillStyle='#374151';ctx.font='bold 12px Nunito';ctx.textAlign='right';ctx.fillText('V',261,75);
+  // Switch Δ on top rail
+  ctx.fillStyle=isDark?'#1e293b':'#f8fafc';ctx.fillRect(277,37,28,6);
+  ctx.fillStyle='#374151';
+  ctx.beginPath();ctx.arc(280,40,3,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.arc(302,40,3,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='#374151';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(280,40);ctx.lineTo(299,30);ctx.stroke();
+  ctx.fillStyle='#374151';ctx.font='10px Nunito';ctx.textAlign='center';ctx.fillText('Δ',291,26);
+  // R1 vertical branch at x=345 (wire + rect + wire)
+  ctx.strokeStyle='#374151';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(345,40);ctx.lineTo(345,52);ctx.stroke();
+  ctx.fillStyle='#fef3c7';ctx.strokeStyle='#d97706';ctx.lineWidth=1.5;
+  ctx.fillRect(333,52,24,32);ctx.strokeRect(333,52,24,32);
+  ctx.strokeStyle='#374151';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(345,84);ctx.lineTo(345,107);ctx.stroke();
+  ctx.fillStyle='#92400e';ctx.font='11px Nunito';ctx.textAlign='left';ctx.fillText(`R₁=${R1}Ω`,360,71);
+  // R2 vertical branch at x=430
+  ctx.strokeStyle='#374151';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(430,40);ctx.lineTo(430,52);ctx.stroke();
+  ctx.fillStyle='#fef3c7';ctx.strokeStyle='#d97706';ctx.lineWidth=1.5;
+  ctx.fillRect(418,52,24,32);ctx.strokeRect(418,52,24,32);
+  ctx.strokeStyle='#374151';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(430,84);ctx.lineTo(430,107);ctx.stroke();
+  ctx.fillStyle='#92400e';ctx.font='11px Nunito';ctx.textAlign='left';ctx.fillText(`R₂=${R2}Ω`,456,71);
+  // Results
+  ctx.fillStyle='#374151';ctx.font='12px Nunito';ctx.textAlign='center';
+  ctx.fillText(`R_ολ = ${Rp} Ω`,375,130);
+  ctx.fillStyle='#dc2626';ctx.fillText(`I_ολ = ${Ip} A`,375,145);
+}
+
+// CHAPTER 3
+function updatePower(){
+  const P=+document.getElementById('slPW').value;
+  const h=+document.getElementById('slHR').value;
+  document.getElementById('pwval').textContent=P;
+  document.getElementById('hrval').textContent=h;
+  const kWh=(P*h/1000).toFixed(3);
+  const J=(P*h*3600).toFixed(0);
+  const cost=(kWh*0.30).toFixed(3);
+  document.getElementById('powerResult').innerHTML=
+    `Ισχύς: ${P} W<br>
+     Χρόνος: ${h} ώρες/ημέρα (${h*365} ώρες/έτος)<br>
+     Κατανάλωση/ημέρα: <strong>${kWh} kWh</strong><br>
+     Σε Joule: ${(+J).toLocaleString('el')} J<br>
+     Κόστος/ημέρα (~0.30€/kWh): ${cost} €<br>
+     Κόστος/έτος: ${(kWh*365*0.30).toFixed(2)} €`;
+  drawPower(P,h,+kWh);
+}
+
+function drawPower(P,h,kWh){
+  const cv=document.getElementById('cvPower');if(!cv)return;
+  const ctx=cv.getContext('2d');const W=cv.width,H=cv.height;
+  const isDark=document.documentElement.dataset.theme==='dark'||
+    (window.matchMedia('(prefers-color-scheme:dark)').matches&&!document.documentElement.dataset.theme);
+  ctx.fillStyle=isDark?'#1e293b':'#f8fafc';ctx.fillRect(0,0,W,H);
+  // power bar
+  const maxP=3000;
+  const bw=Math.min(P/maxP*(W-100),W-100);
+  ctx.fillStyle='#fef3c7';ctx.fillRect(50,40,W-100,30);
+  ctx.fillStyle='#f59e0b';ctx.fillRect(50,40,bw,30);
+  ctx.strokeStyle='#d97706';ctx.lineWidth=1.5;ctx.strokeRect(50,40,W-100,30);
+  ctx.fillStyle=isDark?'#f1f5f9':'#1a1a2e';ctx.font='bold 13px Nunito';ctx.textAlign='left';
+  ctx.fillText(`Ισχύς: ${P} W`,55,60);
+  // devices icons
+  const devices=[
+    {name:'Κινητό ~5W',p:5},{name:'Λάμπα LED ~10W',p:10},
+    {name:'Τηλεόραση ~100W',p:100},{name:'Κλιματιστικό ~1500W',p:1500},
+    {name:'Φούρνος ~3000W',p:3000}];
+  ctx.font='11px Nunito';ctx.fillStyle='#6b7280';
+  ctx.fillText('Σύγκριση με άλλες συσκευές:',50,95);
+  devices.forEach((d,i)=>{
+    const bw2=Math.min(d.p/maxP*(W-200),W-200);
+    ctx.fillStyle='#eff6ff';ctx.fillRect(50,100+i*18,bw2,12);
+    const col=d.p<=P?'#2563eb':'#94a3b8';
+    ctx.fillStyle=col;ctx.font='10px Nunito';ctx.fillText(d.name,55,110+i*18);
+  });
+  ctx.fillStyle=kWh>1?'#dc2626':'#16a34a';
+  ctx.font='bold 15px Nunito';ctx.textAlign='center';
+  ctx.fillText(`${kWh} kWh/ημέρα`,W/2,H-10);
+}
+
+// CHAPTER 4 — PENDULUM
+let _pendAnim=null;let _pendT=0;let _pendRunning=false;
+function updatePendulum(){
+  const L=+document.getElementById('slLen').value*0.1;
+  const A=+document.getElementById('slAmp').value;
+  document.getElementById('lenval').textContent=L.toFixed(1);
+  document.getElementById('ampval').textContent=A;
+  const T=2*Math.PI*Math.sqrt(L/9.8);
+  const f=1/T;
+  document.getElementById('pendResult').textContent=
+    `T = 2π√(L/g) = 2π√(${L.toFixed(1)}/9.8) = ${T.toFixed(2)} s | f = ${f.toFixed(2)} Hz`;
+  if(!_pendRunning) drawPendStatic(L,A);
+}
+
+function togglePendulum(){
+  _pendRunning=!_pendRunning;
+  document.getElementById('pendBtn').textContent=_pendRunning?'⏸ Παύση':'▶ Εκκίνηση';
+  if(_pendRunning) animPendulum();
+  else cancelAnimationFrame(_pendAnim);
+}
+
+function animPendulum(){
+  const L=+document.getElementById('slLen').value*0.1;
+  const A=+document.getElementById('slAmp').value*Math.PI/180;
+  const T=2*Math.PI*Math.sqrt(L/9.8);
+  _pendT+=0.016;
+  const ang=A*Math.cos(2*Math.PI*_pendT/T);
+  drawPendDynamic(L,ang,A);
+  if(_pendRunning) _pendAnim=requestAnimationFrame(animPendulum);
+}
+
+function drawPendStatic(L,Adeg){
+  drawPendDynamic(L,Adeg*Math.PI/180,Adeg*Math.PI/180);
+}
+
+function drawPendDynamic(L,ang,A){
+  const cv=document.getElementById('cvPendulum');if(!cv)return;
+  const ctx=cv.getContext('2d');const W=cv.width,H=cv.height;
+  const isDark=document.documentElement.dataset.theme==='dark'||
+    (window.matchMedia('(prefers-color-scheme:dark)').matches&&!document.documentElement.dataset.theme);
+  ctx.fillStyle=isDark?'#1e293b':'#f8fafc';ctx.fillRect(0,0,W,H);
+  const px=W/2,py=30;
+  const pxLen=Math.min(L*120,220);
+  const bx=px+Math.sin(ang)*pxLen;
+  const by=py+Math.cos(ang)*pxLen;
+  // support
+  ctx.fillStyle='#374151';ctx.fillRect(px-40,py-8,80,10);
+  // trail
+  ctx.beginPath();
+  for(let a=-A;a<=A;a+=0.05){
+    const tx=px+Math.sin(a)*pxLen,ty=py+Math.cos(a)*pxLen;
+    a===-A?ctx.moveTo(tx,ty):ctx.lineTo(tx,ty);
+  }
+  ctx.strokeStyle='#e0e7ff';ctx.lineWidth=1;ctx.stroke();
+  // string
+  ctx.strokeStyle='#374151';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(bx,by);ctx.stroke();
+  // bob
+  ctx.beginPath();ctx.arc(bx,by,16,0,Math.PI*2);
+  ctx.fillStyle='#2563eb';ctx.fill();
+  ctx.strokeStyle='#1d4ed8';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle='#fff';ctx.font='bold 11px Nunito';ctx.textAlign='center';
+  ctx.fillText('m',bx,by+4);
+  // eq line
+  ctx.setLineDash([4,4]);ctx.strokeStyle='#94a3b8';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(px,py+pxLen+20);ctx.stroke();
+  ctx.setLineDash([]);
+  // labels
+  ctx.fillStyle=isDark?'#f1f5f9':'#374151';
+  ctx.font='12px Nunito';ctx.textAlign='left';
+  ctx.fillText(`L = ${L.toFixed(1)} m`,20,H-20);
+  ctx.textAlign='right';
+  ctx.fillText(`θ = ${(ang*180/Math.PI).toFixed(1)}°`,W-20,H-20);
+}
+
+// CHAPTER 5 — WAVE
+let _waveAnim=null;let _waveT=0;let _waveRunning=false;
+function updateWave(){
+  const f=+document.getElementById('slFW').value;
+  const A=+document.getElementById('slAW').value;
+  document.getElementById('fwval').textContent=f;
+  document.getElementById('awval').textContent=A;
+  const v=320;const lam=(v/f).toFixed(1);const T=(1/f).toFixed(2);
+  document.getElementById('waveResult').textContent=
+    `f=${f}Hz | T=${T}s | v=320m/s (αέρας) | λ=v/f=${lam}m`;
+  if(!_waveRunning) drawWaveStatic(f,A);
+}
+
+function toggleWave(){
+  _waveRunning=!_waveRunning;
+  document.getElementById('waveBtn').textContent=_waveRunning?'⏸ Παύση':'▶ Εκκίνηση';
+  if(_waveRunning) animWave();
+  else cancelAnimationFrame(_waveAnim);
+}
+
+function animWave(){
+  _waveT+=0.04;
+  const f=+document.getElementById('slFW').value;
+  const A=+document.getElementById('slAW').value;
+  drawWaveDynamic(f,A,_waveT);
+  if(_waveRunning) _waveAnim=requestAnimationFrame(animWave);
+}
+
+function drawWaveStatic(f,A){drawWaveDynamic(f,A,0);}
+
+function drawWaveDynamic(f,A,t){
+  const cv=document.getElementById('cvWave');if(!cv)return;
+  const ctx=cv.getContext('2d');const W=cv.width,H=cv.height;
+  const isDark=document.documentElement.dataset.theme==='dark'||
+    (window.matchMedia('(prefers-color-scheme:dark)').matches&&!document.documentElement.dataset.theme);
+  ctx.fillStyle=isDark?'#1e293b':'#f8fafc';ctx.fillRect(0,0,W,H);
+  const cy=H/2;
+  // axis
+  ctx.strokeStyle='#94a3b8';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(0,cy);ctx.lineTo(W,cy);ctx.stroke();
+  // wave
+  ctx.beginPath();ctx.strokeStyle='#7c3aed';ctx.lineWidth=3;
+  for(let x=0;x<W;x++){
+    const y=cy-A*Math.sin(2*Math.PI*f*x/W*2-t*f*2);
+    x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  }
+  ctx.stroke();
+  // wavelength indicator
+  const lam=W/f/2;
+  ctx.strokeStyle='#dc2626';ctx.lineWidth=1.5;ctx.setLineDash([4,3]);
+  ctx.beginPath();ctx.moveTo(50,cy-A-20);ctx.lineTo(50+lam,cy-A-20);ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='#dc2626';ctx.font='12px Nunito';ctx.textAlign='center';
+  ctx.fillText('λ',50+lam/2,cy-A-8);
+  // amplitude
+  ctx.strokeStyle='#16a34a';ctx.lineWidth=1.5;ctx.setLineDash([4,3]);
+  ctx.beginPath();ctx.moveTo(W-30,cy);ctx.lineTo(W-30,cy-A);ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='#16a34a';ctx.font='12px Nunito';ctx.textAlign='left';
+  ctx.fillText('A',W-25,cy-A/2);
+}
+
+// Web Audio for sound experiment
+let soundAudioCtx=null,soundOsc=null,soundGain=null,soundPlaying=false;
+function toggleSoundPlay(){
+  const btn=document.getElementById('soundPlayBtn');
+  if(soundPlaying){
+    if(soundOsc){try{soundOsc.stop();}catch(e){}soundOsc=null;}
+    if(soundAudioCtx){soundAudioCtx.close();soundAudioCtx=null;}
+    soundPlaying=false;
+    btn.textContent='▶ Ακούσε τον Ηχο';
+    btn.classList.remove('btn-red');btn.classList.add('btn-green');
+  } else {
+    const fs=+document.getElementById('slFS').value;
+    const as=+document.getElementById('slAS').value;
+    soundAudioCtx=new (window.AudioContext||window.webkitAudioContext)();
+    soundOsc=soundAudioCtx.createOscillator();
+    soundGain=soundAudioCtx.createGain();
+    soundOsc.type='sine';
+    soundOsc.frequency.setValueAtTime(fs,soundAudioCtx.currentTime);
+    soundGain.gain.setValueAtTime(as/100*0.4,soundAudioCtx.currentTime);
+    soundOsc.connect(soundGain);
+    soundGain.connect(soundAudioCtx.destination);
+    soundOsc.start();
+    // αυτόματη διακοπή μετά 3δευτερόλεπτα
+    soundPlaying=true;
+    btn.textContent='⏹ Σταμάτα';
+    btn.classList.remove('btn-green');btn.classList.add('btn-red');
+    setTimeout(()=>{ if(soundPlaying) toggleSoundPlay(); },3000);
+  }
+}
+function updateSoundOsc(){
+  if(!soundPlaying||!soundOsc||!soundGain) return;
+  const fs=+document.getElementById('slFS').value;
+  const as=+document.getElementById('slAS').value;
+  soundOsc.frequency.setValueAtTime(fs,soundAudioCtx.currentTime);
+  soundGain.gain.setValueAtTime(as/100*0.4,soundAudioCtx.currentTime);
+}
+function updateSound(){
+  const fs=+document.getElementById('slFS').value;
+  const as=+document.getElementById('slAS').value;
+  document.getElementById('fsval').textContent=fs;
+  document.getElementById('asval').textContent=as;
+  drawSound(fs,as);
+  const note=fs<200?'Βαθύς (μπάσος)':fs<600?'Μέσος':fs<1200?'Ψηλός':'Πολύ οξύς';
+  document.getElementById('soundResult').innerHTML=
+    `Συχνότητα: <strong>${fs} Hz</strong> → ${note}<br>
+     Ένταση: <strong>${as}%</strong> ${as>75?'(Πολύ δυνατός 🔊)':as>40?'(Μέτριος 🔉)':'(Χαμηλός 🔈)'}<br>
+     Σε dB (εκτίμηση): ~${Math.round(20+as*0.6)} dB`;
+}
+
+function drawSound(fs,as){
+  const cv=document.getElementById('cvSound');if(!cv)return;
+  const ctx=cv.getContext('2d');const W=cv.width,H=cv.height;
+  const isDark=document.documentElement.dataset.theme==='dark'||
+    (window.matchMedia('(prefers-color-scheme:dark)').matches&&!document.documentElement.dataset.theme);
+  ctx.fillStyle=isDark?'#1e293b':'#f8fafc';ctx.fillRect(0,0,W,H);
+  const cy=H/2,A=as*0.55;
+  ctx.strokeStyle='#94a3b8';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(0,cy);ctx.lineTo(W,cy);ctx.stroke();
+  ctx.beginPath();ctx.strokeStyle='#f59e0b';ctx.lineWidth=2.5;
+  const cycles=Math.max(1,Math.round(fs/200));
+  for(let x=0;x<W;x++){
+    const y=cy-A*Math.sin(2*Math.PI*cycles*x/W);
+    x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  }
+  ctx.stroke();
+  ctx.fillStyle=isDark?'#94a3b8':'#6b7280';ctx.font='11px Nunito';ctx.textAlign='left';
+  ctx.fillText(`${fs} Hz — ${cycles} κύκλοι`,10,H-8);
+}
+
+// CHAPTER 6 — HEAT (Q=mcΔT)
+const _heatMaterials={4186:{name:'Νερό',color:'#2563eb'},900:{name:'Αλουμίνιο',color:'#7c3aed'},450:{name:'Σίδηρος',color:'#dc2626'},385:{name:'Χαλκός',color:'#d97706'},128:{name:'Μόλυβδος',color:'#6b7280'}};
+function updateHeat(){
+  const m=+document.getElementById('slHM').value*0.1;
+  const dt=+document.getElementById('slHDT').value;
+  const cVal=+document.getElementById('hmat').value;
+  document.getElementById('hmval').textContent=m.toFixed(1);
+  document.getElementById('hdtval').textContent=dt;
+  const Q=m*cVal*dt;
+  document.getElementById('heatResult').textContent=
+    `Q = ${m.toFixed(1)} kg × ${cVal} J/kg·K × ${dt}°C = ${Math.round(Q).toLocaleString('el-GR')} J = ${(Q/1000).toFixed(2)} kJ`;
+  drawHeat(m,cVal,dt,Q);
+}
+function drawHeat(m,cVal,dt,Q){
+  const cv=document.getElementById('cvHeat');if(!cv)return;
+  const ctx=cv.getContext('2d');const W=cv.width,H=cv.height;
+  const isDark=document.documentElement.dataset.theme==='dark'||
+    (window.matchMedia('(prefers-color-scheme:dark)').matches&&!document.documentElement.dataset.theme);
+  ctx.fillStyle=isDark?'#1e293b':'#f8fafc';ctx.fillRect(0,0,W,H);
+  const fg=isDark?'#f1f5f9':'#1a1a2e';const fg2='#6b7280';
+  // title
+  ctx.fillStyle=fg;ctx.font='bold 14px Nunito';ctx.textAlign='center';
+  ctx.fillText('Σύγκριση Q για διαφορετικά υλικά (m='+m.toFixed(1)+'kg, ΔT='+dt+'°C)',W/2,22);
+  // bar chart for all materials
+  const matKeys=Object.keys(_heatMaterials);
+  const barW=58,gap=12,startX=30,baseY=230;
+  const maxQ=m*4186*dt;
+  matKeys.forEach((c,i)=>{
+    const mat=_heatMaterials[c];
+    const q=m*c*dt;
+    const bh=Math.max(4,Math.round((q/maxQ)*(baseY-50)));
+    const bx=startX+i*(barW+gap);
+    const by=baseY-bh;
+    // bar
+    ctx.fillStyle=mat.color;
+    ctx.beginPath();
+    ctx.roundRect?ctx.roundRect(bx,by,barW,bh,6):ctx.rect(bx,by,barW,bh);
+    ctx.fill();
+    // value label
+    ctx.fillStyle=fg;ctx.font='bold 11px Nunito';ctx.textAlign='center';
+    const qkj=(q/1000).toFixed(1);
+    ctx.fillText(qkj+'kJ',bx+barW/2,by-6);
+    // material name
+    ctx.fillStyle=mat.color;ctx.font='bold 10px Nunito';
+    ctx.fillText(mat.name,bx+barW/2,baseY+14);
+    ctx.fillStyle=fg2;ctx.font='9px Nunito';
+    ctx.fillText('c='+c,bx+barW/2,baseY+27);
+    // highlight selected
+    if(+c===cVal){
+      ctx.strokeStyle=fg;ctx.lineWidth=2.5;
+      ctx.strokeRect(bx-2,by-2,barW+4,bh+4);
+    }
+  });
+  // baseline
+  ctx.strokeStyle=fg2;ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(startX-8,baseY);ctx.lineTo(W-10,baseY);ctx.stroke();
+  // highlight result
+  ctx.fillStyle=isDark?'#7c3aed':'#2563eb';
+  ctx.font='bold 13px Nunito';ctx.textAlign='left';
+  ctx.fillText('→ Επιλεγμένο: '+_heatMaterials[cVal].name+' Q='+Math.round(Q/1000)+'kJ',20,H-10);
+}
+
+// CHAPTER 7 — ELECTRICITY I-V
+function updateIV(){
+  const V=+document.getElementById('slIVV').value;
+  const R=+document.getElementById('slIVR').value;
+  document.getElementById('ivVval').textContent=V;
+  document.getElementById('ivRval').textContent=R;
+  const I=(V/R);
+  document.getElementById('ivResult').textContent=
+    `I = V/R = ${V}V / ${R}Ω = ${I.toFixed(3)} A = ${(I*1000).toFixed(1)} mA | P = V·I = ${(V*I).toFixed(2)} W`;
+  drawIV(V,R);
+}
+function drawIV(Vsel,Rsel){
+  const cv=document.getElementById('cvIV');if(!cv)return;
+  const ctx=cv.getContext('2d');const W=cv.width,H=cv.height;
+  const isDark=document.documentElement.dataset.theme==='dark'||
+    (window.matchMedia('(prefers-color-scheme:dark)').matches&&!document.documentElement.dataset.theme);
+  ctx.fillStyle=isDark?'#1e293b':'#f8fafc';ctx.fillRect(0,0,W,H);
+  const fg=isDark?'#f1f5f9':'#1a1a2e';const fg2='#6b7280';
+  const ox=55,oy=H-40,axW=W-80,axH=H-70;
+  const Vmax=12,Imax=1.2;
+  // axes
+  ctx.strokeStyle=fg2;ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(ox,oy);ctx.lineTo(ox+axW,oy);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(ox,oy);ctx.lineTo(ox,oy-axH);ctx.stroke();
+  ctx.fillStyle=fg;ctx.font='12px Nunito';ctx.textAlign='center';
+  ctx.fillText('V (Volt)',ox+axW/2,H-8);
+  ctx.save();ctx.translate(14,oy-axH/2);ctx.rotate(-Math.PI/2);ctx.fillText('I (Ampere)',0,0);ctx.restore();
+  // grid lines
+  [2,4,6,8,10,12].forEach(v=>{
+    const x=ox+v/Vmax*axW;
+    ctx.strokeStyle=isDark?'#334155':'#e2e8f0';ctx.lineWidth=1;ctx.setLineDash([3,3]);
+    ctx.beginPath();ctx.moveTo(x,oy);ctx.lineTo(x,oy-axH);ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle=fg2;ctx.font='10px Nunito';ctx.textAlign='center';
+    ctx.fillText(v,x,oy+14);
+  });
+  [0.2,0.4,0.6,0.8,1.0,1.2].forEach(i=>{
+    const y=oy-i/Imax*axH;
+    ctx.strokeStyle=isDark?'#334155':'#e2e8f0';ctx.lineWidth=1;ctx.setLineDash([3,3]);
+    ctx.beginPath();ctx.moveTo(ox,y);ctx.lineTo(ox+axW,y);ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle=fg2;ctx.font='10px Nunito';ctx.textAlign='right';
+    ctx.fillText(i.toFixed(1),ox-6,y+4);
+  });
+  // draw I-V lines for reference resistances
+  const refRs=[{R:10,c:'#2563eb'},{R:20,c:'#16a34a'},{R:50,c:'#d97706'},{R:100,c:'#dc2626'}];
+  refRs.forEach(({R,c})=>{
+    ctx.strokeStyle=c;ctx.lineWidth=R===Rsel?3:1.5;ctx.globalAlpha=R===Rsel?1:0.45;ctx.setLineDash([]);
+    ctx.beginPath();
+    ctx.moveTo(ox,oy);
+    const Iend=Vmax/R;
+    const ye=oy-Math.min(Iend,Imax)/Imax*axH;
+    const xe=ox+(Iend<=Imax?Vmax:Imax*R)/Vmax*axW;
+    ctx.lineTo(xe,ye);ctx.stroke();
+    ctx.globalAlpha=1;
+    ctx.fillStyle=c;ctx.font='bold 10px Nunito';ctx.textAlign='left';
+    ctx.fillText(`R=${R}Ω`,xe+4,ye+4);
+  });
+  // draw selected R line if not in refRs
+  const inRef=refRs.some(r=>r.R===Rsel);
+  if(!inRef){
+    ctx.strokeStyle='#7c3aed';ctx.lineWidth=3;ctx.setLineDash([]);
+    ctx.beginPath();ctx.moveTo(ox,oy);
+    const Iend2=Vmax/Rsel;
+    const ye2=oy-Math.min(Iend2,Imax)/Imax*axH;
+    const xe2=ox+(Iend2<=Imax?Vmax:Imax*Rsel)/Vmax*axW;
+    ctx.lineTo(xe2,ye2);ctx.stroke();
+    ctx.fillStyle='#7c3aed';ctx.font='bold 10px Nunito';ctx.textAlign='left';
+    ctx.fillText(`R=${Rsel}Ω (επιλ.)`,xe2+4,ye2+4);
+  }
+  // operating point
+  const Iop=Vsel/Rsel;
+  const xop=ox+Vsel/Vmax*axW;
+  const yop=oy-Math.min(Iop,Imax)/Imax*axH;
+  ctx.beginPath();ctx.arc(xop,yop,7,0,Math.PI*2);
+  ctx.fillStyle='#ff0000';ctx.fill();
+  ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
+  // dashed lines to axes
+  ctx.strokeStyle='#ff000077';ctx.lineWidth=1;ctx.setLineDash([4,3]);
+  ctx.beginPath();ctx.moveTo(xop,yop);ctx.lineTo(xop,oy);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(xop,yop);ctx.lineTo(ox,yop);ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='#dc2626';ctx.font='bold 11px Nunito';ctx.textAlign='left';
+  ctx.fillText(`(${Vsel}V, ${Iop.toFixed(3)}A)`,xop+10,yop-8);
+}
+
+function updateSerPar(){
+  const R1=+document.getElementById('slSPR1').value;
+  const R2=+document.getElementById('slSPR2').value;
+  const V=+document.getElementById('slSPV').value;
+  document.getElementById('spR1val').textContent=R1;
+  document.getElementById('spR2val').textContent=R2;
+  document.getElementById('spVval').textContent=V;
+  const Rser=R1+R2;
+  const Rpar=R1*R2/(R1+R2);
+  const Iser=V/Rser;
+  const Ipar=V/Rpar;
+  const Pser=V*Iser;
+  const Ppar=V*Ipar;
+  document.getElementById('serparResult').innerHTML=
+    `<strong>Σειρά:</strong> R_ολ=${Rser}Ω | I=${Iser.toFixed(3)}A | P=${Pser.toFixed(2)}W | V₁=${(Iser*R1).toFixed(2)}V, V₂=${(Iser*R2).toFixed(2)}V<br>
+     <strong>Παράλληλα:</strong> R_ολ=${Rpar.toFixed(1)}Ω | I_ολ=${Ipar.toFixed(3)}A (I₁=${(V/R1).toFixed(3)}A, I₂=${(V/R2).toFixed(3)}A) | P=${Ppar.toFixed(2)}W`;
+  drawSerPar(R1,R2,V,Rser,Rpar,Iser,Ipar,Pser,Ppar);
+}
+function drawSerPar(R1,R2,V,Rser,Rpar,Iser,Ipar,Pser,Ppar){
+  const cv=document.getElementById('cvSerPar');if(!cv)return;
+  const ctx=cv.getContext('2d');const W=cv.width,H=cv.height;
+  const isDark=document.documentElement.dataset.theme==='dark'||
+    (window.matchMedia('(prefers-color-scheme:dark)').matches&&!document.documentElement.dataset.theme);
+  ctx.fillStyle=isDark?'#1e293b':'#f8fafc';ctx.fillRect(0,0,W,H);
+  const fg=isDark?'#f1f5f9':'#1a1a2e';const fg2='#6b7280';
+  // two bars: series vs parallel power
+  const maxP=Math.max(Pser,Ppar)*1.1;
+  const bW=120,baseY=H-35;
+  // Series bar
+  const bhS=Math.max(4,(Pser/maxP)*(H-80));
+  ctx.fillStyle='#2563eb';
+  ctx.beginPath();
+  ctx.roundRect?ctx.roundRect(80,baseY-bhS,bW,bhS,8):ctx.rect(80,baseY-bhS,bW,bhS);
+  ctx.fill();
+  ctx.fillStyle=fg;ctx.font='bold 12px Nunito';ctx.textAlign='center';
+  ctx.fillText(`P=${Pser.toFixed(1)}W`,80+bW/2,baseY-bhS-8);
+  ctx.fillText('ΣΕΙΡΑ',80+bW/2,baseY+16);
+  ctx.fillStyle=fg2;ctx.font='10px Nunito';
+  ctx.fillText(`R=${Rser}Ω | I=${Iser.toFixed(2)}A`,80+bW/2,baseY+30);
+  // Parallel bar
+  const bhP=Math.max(4,(Ppar/maxP)*(H-80));
+  ctx.fillStyle='#16a34a';
+  ctx.beginPath();
+  ctx.roundRect?ctx.roundRect(290,baseY-bhP,bW,bhP,8):ctx.rect(290,baseY-bhP,bW,bhP);
+  ctx.fill();
+  ctx.fillStyle=fg;ctx.font='bold 12px Nunito';ctx.textAlign='center';
+  ctx.fillText(`P=${Ppar.toFixed(1)}W`,290+bW/2,baseY-bhP-8);
+  ctx.fillText('ΠΑΡΑΛΛΗΛΑ',290+bW/2,baseY+16);
+  ctx.fillStyle=fg2;ctx.font='10px Nunito';
+  ctx.fillText(`R=${Rpar.toFixed(1)}Ω | I=${Ipar.toFixed(2)}A`,290+bW/2,baseY+30);
+  // baseline
+  ctx.strokeStyle=fg2;ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(60,baseY);ctx.lineTo(W-20,baseY);ctx.stroke();
+  // title
+  ctx.fillStyle=fg;ctx.font='bold 13px Nunito';ctx.textAlign='center';
+  ctx.fillText(`V=${V}V | R₁=${R1}Ω | R₂=${R2}Ω — Σύγκριση Ισχύος`,W/2,20);
+}
+
+// ===== THEME =====
+function toggleTheme(){
+  const r=document.documentElement;
+  r.dataset.theme=r.dataset.theme==='dark'?'light':'dark';
+}
+
+// ===== INIT =====
+renderContent();
+</script>
+
+</body></html>
