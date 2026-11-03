@@ -2265,6 +2265,169 @@ drawPressure();
 drawEnergy();
 drawHeat();
 drawElec();
+
+// ── STATES OF MATTER SIMULATION ──
+(function(){
+  'use strict';
+  const N=25, R=7;
+  let particles=[], animId=null, lastT=-20;
+
+  function getCanvas(){ return document.getElementById('statesCanvas'); }
+
+  function initParticles(canvas){
+    particles=[];
+    const W=canvas.width, H=canvas.height;
+    const cols=5, rows=5, sx=W/2-(cols-1)*34/2, sy=H*0.6-(rows-1)*30/2;
+    for(let r=0;r<rows;r++) for(let c=0;c<cols;c++)
+      particles.push({x:sx+c*34+(Math.random()-.5)*2, y:sy+r*30+(Math.random()-.5)*2,
+        vx:0,vy:0, hx:sx+c*34, hy:sy+r*30});
+  }
+
+  function phase(T){
+    if(T<-5)  return {s:1,l:0,g:0};
+    if(T<5)   {const f=(T+5)/10; return {s:1-f,l:f,g:0};}
+    if(T<95)  return {s:0,l:1,g:0};
+    if(T<105) {const f=(T-95)/10; return {s:0,l:1-f,g:f};}
+    return {s:0,l:0,g:1};
+  }
+
+  function step(T, W, H){
+    const ph=phase(T);
+    const spd=Math.sqrt((T+273)/273)*(0.3+ph.g*4+ph.l*1.2);
+    for(let i=0;i<particles.length;i++){
+      const p=particles[i];
+      // Spring toward home in solid
+      if(ph.s>0){p.vx+=0.18*ph.s*(p.hx-p.x); p.vy+=0.18*ph.s*(p.hy-p.y);}
+      // Gravity-like for liquid (pool at bottom)
+      if(ph.l>0){
+        const cy=H*0.62;
+        p.vy+=0.09*ph.l*(p.y<cy?1:-0.4);
+        p.vx+=0.015*ph.l*(W/2-p.x)/W*10;
+      }
+      // Thermal noise
+      p.vx+=(Math.random()-.5)*0.5*spd;
+      p.vy+=(Math.random()-.5)*0.5*spd;
+      // Speed cap
+      const maxV=1.2+ph.g*5.5+ph.l*2.5;
+      const sp=Math.sqrt(p.vx*p.vx+p.vy*p.vy);
+      if(sp>maxV){p.vx=p.vx/sp*maxV; p.vy=p.vy/sp*maxV;}
+      // Damping
+      const damp=ph.s>0.5?0.72:(ph.g>0.5?0.998:0.90);
+      p.vx*=damp; p.vy*=damp;
+      // Move
+      p.x+=p.vx; p.y+=p.vy;
+      // Walls
+      if(p.x<R){p.x=R;p.vx=Math.abs(p.vx);}
+      if(p.x>W-R){p.x=W-R;p.vx=-Math.abs(p.vx);}
+      if(p.y<R){p.y=R;p.vy=Math.abs(p.vy);}
+      if(p.y>H-R){p.y=H-R;p.vy=-Math.abs(p.vy);}
+    }
+    // Repulsion between particles
+    for(let i=0;i<particles.length;i++)
+      for(let j=i+1;j<particles.length;j++){
+        const dx=particles[j].x-particles[i].x, dy=particles[j].y-particles[i].y;
+        const d=Math.sqrt(dx*dx+dy*dy), md=R*2+2;
+        if(d<md&&d>0){
+          const f=(md-d)/md*0.35*(1-ph.g*0.75);
+          particles[i].vx-=dx/d*f; particles[i].vy-=dy/d*f;
+          particles[j].vx+=dx/d*f; particles[j].vy+=dy/d*f;
+        }
+      }
+  }
+
+  function render(ctx, T, W, H){
+    const ph=phase(T);
+    // Background
+    const bg=ctx.createLinearGradient(0,0,0,H);
+    if(ph.s>0.5){bg.addColorStop(0,'#0f172a');bg.addColorStop(1,'#0c2340');}
+    else if(ph.g>0.5){bg.addColorStop(0,'#0f172a');bg.addColorStop(1,'#3b0a00');}
+    else{bg.addColorStop(0,'#0f172a');bg.addColorStop(1,'#071a2e');}
+    ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+
+    // Bonds in solid
+    if(ph.s>0.2){
+      ctx.strokeStyle=`rgba(147,197,253,${ph.s*0.35})`; ctx.lineWidth=1;
+      for(let i=0;i<particles.length;i++)
+        for(let j=i+1;j<particles.length;j++){
+          const dx=particles[j].x-particles[i].x, dy=particles[j].y-particles[i].y;
+          if(dx*dx+dy*dy<44*44){
+            ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y);
+            ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke();
+          }
+        }
+    }
+
+    // Particles
+    for(const p of particles){
+      let ri,gi,bi;
+      if(ph.s>0.4){ri=120;gi=185;bi=255;}          // ice blue
+      else if(ph.g>0.4){                             // orange-red hot
+        const h=Math.min(1,(T-100)/60);
+        ri=255; gi=Math.round(140-h*110); bi=Math.round(40*(1-h));
+      } else {ri=59;gi=130;bi=246;}                  // liquid blue
+
+      const gr=ctx.createRadialGradient(p.x-R*.3,p.y-R*.3,R*.1,p.x,p.y,R);
+      gr.addColorStop(0,`rgba(${Math.min(255,ri+90)},${Math.min(255,gi+70)},${Math.min(255,bi+50)},0.95)`);
+      gr.addColorStop(1,`rgba(${ri},${gi},${bi},0.75)`);
+      ctx.beginPath(); ctx.arc(p.x,p.y,R,0,Math.PI*2);
+      ctx.fillStyle=gr; ctx.fill();
+    }
+
+    // Phase label overlay (bottom bar)
+    let lbl='', col='';
+    if(ph.s>0.6){lbl='❄️ ΣΤΕΡΕΟ';col='#93c5fd';}
+    else if(ph.s>0.1){lbl='🫧 ΤΗΞΗ  (T = 0°C  σταθερή)';col='#c4b5fd';}
+    else if(ph.l>0.6){lbl='💧 ΥΓΡΟ';col='#60a5fa';}
+    else if(ph.l>0.1){lbl='♨️ ΒΡΑΣΜΟΣ  (T = 100°C  σταθερή)';col='#fcd34d';}
+    else{lbl='💨 ΑΕΡΙΟ';col='#fb923c';}
+    ctx.fillStyle=`rgba(0,0,0,0.5)`; ctx.fillRect(0,H-26,W,26);
+    ctx.fillStyle=col; ctx.font='bold 11px system-ui,sans-serif';
+    ctx.textAlign='center'; ctx.fillText(lbl,W/2,H-9);
+  }
+
+  function loop(){
+    const canvas=getCanvas(); if(!canvas)return;
+    const T=parseInt(document.getElementById('statesTempSlider').value);
+    const ctx=canvas.getContext('2d');
+    step(T, canvas.width, canvas.height);
+    render(ctx, T, canvas.width, canvas.height);
+    animId=requestAnimationFrame(loop);
+  }
+
+  function setupCanvas(){
+    const canvas=getCanvas(); if(!canvas)return;
+    const W=Math.min(500, canvas.parentElement.clientWidth-4);
+    canvas.width=W; canvas.height=Math.round(W*0.56);
+    initParticles(canvas);
+  }
+
+  window.statesOnSlider=function(){
+    const T=parseInt(document.getElementById('statesTempSlider').value);
+    document.getElementById('statesTempVal').textContent=(T>=0?'':'')+T+' °C';
+    const ph=phase(T);
+    const lbl=document.getElementById('statesPhaseLabel');
+    if(ph.s>0.6)      lbl.innerHTML='❄️ <strong>Στερεό</strong> — μόρια σε τακτική διάταξη, μόνο μικρές δονήσεις';
+    else if(ph.s>0.1) lbl.innerHTML='🫧 <strong>Τήξη</strong> — αλλαγή φάσης · θερμοκρασία <u>σταθερή</u> στους 0°C';
+    else if(ph.l>0.6) lbl.innerHTML='💧 <strong>Υγρό</strong> — μόρια κινούνται ελεύθερα αλλά παραμένουν κοντά';
+    else if(ph.l>0.1) lbl.innerHTML='♨️ <strong>Βρασμός</strong> — αλλαγή φάσης · θερμοκρασία <u>σταθερή</u> στους 100°C';
+    else              lbl.innerHTML='💨 <strong>Αέριο</strong> — μόρια κινούνται γρήγορα, γεμίζουν όλο τον χώρο';
+    // Re-init if crossing phase boundary
+    if((lastT<0&&T>=0)||(lastT>=0&&T<0)||(lastT<100&&T>=100)||(lastT>=100&&T<100)) initParticles(getCanvas());
+    lastT=T;
+  };
+
+  // Start simulation when experiment section becomes visible
+  const obs=new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting){
+      if(!animId){setupCanvas(); loop();}
+    } else {
+      if(animId){cancelAnimationFrame(animId); animId=null;}
+    }
+  },{threshold:0.1});
+  document.addEventListener('DOMContentLoaded',()=>{
+    const c=getCanvas(); if(c) obs.observe(c);
+  });
+})();
 </script>
 <script>
 // buildQuizzes must run after ALL quiz divs (quiz5, quiz6) are in the DOM
@@ -2428,19 +2591,17 @@ document.addEventListener('DOMContentLoaded', function(){ buildQuizzes(); });
       <canvas id="heatCanvas" style="height:200px;margin-top:12px"></canvas>
     </div>
     <div class="interactive" style="margin-top:16px">
-      <h4>🔬 Προσομοίωση: Καταστάσεις Ύλης (PhET)</h4>
-      <p style="font-size:.88rem;color:var(--fg2);margin-bottom:12px">Εξερεύνησε πώς συμπεριφέρονται τα μόρια στις τρεις φυσικές καταστάσεις και κατά τις αλλαγές φάσης — τήξη, βρασμός, υγροποίηση.</p>
-      <div style="text-align:center;padding:8px 0">
-        <a href="https://phet.colorado.edu/sims/html/states-of-matter-basics/latest/states-of-matter-basics_el.html" target="_blank" rel="noopener" class="btn" style="display:inline-block;text-decoration:none;padding:11px 28px;font-size:1rem">
-          🚀 Άνοιγμα Προσομοίωσης PhET
-        </a>
-        <p style="font-size:.8rem;color:var(--fg2);margin-top:8px">Ανοίγει σε νέο παράθυρο — PhET Interactive Simulations (Πανεπιστήμιο Colorado Boulder)</p>
+      <h4>🔬 Προσομοίωση: Καταστάσεις Ύλης — Μόρια σε Κίνηση</h4>
+      <p style="font-size:.88rem;color:var(--fg2);margin-bottom:10px">Ρύθμισε τη θερμοκρασία και παρατήρησε πώς αλλάζει η κίνηση των μορίων κατά τις αλλαγές φάσης.</p>
+      <div class="slider-row">
+        <label>Θερμοκρασία (°C)</label>
+        <input type="range" id="statesTempSlider" min="-20" max="150" value="-20" oninput="statesOnSlider()">
+        <span class="val-badge" id="statesTempVal">−20 °C</span>
       </div>
-      <ul style="margin-top:10px;font-size:.88rem;color:var(--fg)">
-        <li>Παρατήρησε τη διάταξη μορίων σε <strong>στερεό, υγρό, αέριο</strong></li>
-        <li>Θέρμαινε / ψύξε και παρακολούθησε αλλαγές φάσης σε πραγματικό χρόνο</li>
-        <li>Σύγκρινε διαφορετικά υλικά: νερό, αζώτιο, οξυγόνο</li>
-      </ul>
+      <div id="statesPhaseLabel" style="text-align:center;margin:8px 0;font-size:.92rem;font-weight:700;min-height:1.4em;color:var(--accent)">
+        ❄️ Στερεό — μόρια σε τακτική διάταξη, μικρές δονήσεις
+      </div>
+      <canvas id="statesCanvas" style="width:100%;border-radius:10px;display:block;background:#0f172a;height:240px"></canvas>
     </div>
   </div>
   <!-- QUIZ -->
