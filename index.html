@@ -1420,6 +1420,7 @@
                         <option value="2">2 Ομάδες</option>
                         <option value="3">3 Ομάδες</option>
                         <option value="4">4 Ομάδες</option>
+                        <option value="5">5 Ομάδες</option>
                     </select>
                 </div>
                 <div id="team-names" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-bottom:14px;">
@@ -1715,7 +1716,7 @@
 
         function updateTeamInputs() {
             const n = parseInt(document.getElementById('quiz-teams-count').value);
-            const names = ['Αϊνστάιν','Κιουρί','Νεύτων','Μέντελεεφ'];
+            const names = ['Αϊνστάιν','Κιουρί','Νεύτων','Μέντελεεφ','Αρχιμήδης'];
             let html = '';
             for (let i = 0; i < n; i++) {
                 html += `<input id="team${i+1}" placeholder="Ομάδα ${i+1}" style="padding:8px;border-radius:6px;border:none;font-size:.9rem;" value="${names[i]}">`;
