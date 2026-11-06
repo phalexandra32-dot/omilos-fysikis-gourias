@@ -697,20 +697,20 @@
 
     <!-- ════════ STICKY ANCHOR NAVIGATION ════════ -->
     <nav class="anchor-nav" aria-label="Πλοήγηση ενοτήτων">
-        <a href="#section-dokimasies" class="nav-dokimasies">📋 Δοκιμασίες</a>
+        <a href="#section-dokimasies" class="nav-dokimasies" id="nav-link-dokimasies">📋 Δοκιμασίες</a>
         <a href="#section-theoria">📚 Θεωρία</a>
         <a href="#section-ergastiria">🔬 Εργαστήρια</a>
         <a href="#section-quiz">🏆 Quiz</a>
         <a href="#section-prosomioseis">💻 Προσομοιώσεις</a>
         <a href="#section-projects">🚀 Προτζεκτ</a>
         <a href="#section-tainies">🎬 Ταινίες</a>
-        <a href="#section-biographies">🔬 Βιογραφίες</a>
+        <a id="nav-link-biographies" href="#section-biographies">🔬 Βιογραφίες</a>
     </nav>
 
     <div class="container">
 
-        <!-- ════════ ΔΟΚΙΜΑΣΙΕΣ SECTION (SCRD: pre/post test) ════════ -->
-        <div class="dokimasies-section" id="section-dokimasies">
+        <!-- ════════ ΔΟΚΙΜΑΣΙΕΣ SECTION (SCRD: pre/post test) — ΜΟΝΟ ΦΥΣΙΚΗ ════════ -->
+        <div class="dokimasies-section" id="section-dokimasies" data-club-show="physics">
             <div class="section-title" style="color:#e65100; border-left-color:#ff6f00;">
                 <i class="fa-solid fa-clipboard-list"></i> Δοκιμασίες Αξιολόγησης
             </div>
@@ -799,13 +799,20 @@
 
             <!-- Β' CONTENT -->
             <div id="theoria-b">
-                <div style="display:flex; gap:14px; flex-wrap:wrap;">
+                <!-- Φυσική Β' — εμφανίζεται μόνο για Όμιλο Φυσικής -->
+                <div data-club-show="physics" style="display:flex; gap:14px; flex-wrap:wrap;">
                     <a href="fysiki-b-gymnasiou.html" target="_blank"
                        style="display:inline-flex;align-items:center;gap:6px;background:#1565c0;color:#fff;
                               padding:12px 24px;border-radius:10px;font-weight:700;font-size:.95rem;
                               text-decoration:none;box-shadow:0 2px 8px rgba(21,101,192,.3);">
                         <i class="fa-solid fa-atom"></i> Φυσική Β' Γυμνάσιο
                     </a>
+                </div>
+                <div data-club-show="physics" style="margin-top:12px; background:#e3f2fd; border-radius:10px; padding:14px; font-size:.85rem; color:#37474f;">
+                    <strong>Β' Γυμνάσιο — Φυσική:</strong> Κίνηση, Δυνάμεις &amp; Νόμοι Newton, Ενέργεια &amp; Έργο, Θερμότητα &amp; Διαστολή
+                </div>
+                <!-- Χημεία Β' — εμφανίζεται μόνο για Όμιλο Χημείας -->
+                <div data-club-show="chem" style="display:none; gap:14px; flex-wrap:wrap;">
                     <a href="xhmeia-b-gymnasiou.html" target="_blank"
                        style="display:inline-flex;align-items:center;gap:6px;background:#00796b;color:#fff;
                               padding:12px 24px;border-radius:10px;font-weight:700;font-size:.95rem;
@@ -813,26 +820,20 @@
                         <i class="fa-solid fa-vial"></i> Χημεία Β' Γυμνάσιο
                     </a>
                 </div>
-                <div style="margin-top:12px; background:#e3f2fd; border-radius:10px; padding:14px; font-size:.85rem; color:#37474f;">
-                    <strong>Β' Γυμνάσιο — Φυσική:</strong> Κίνηση, Δυνάμεις &amp; Νόμοι Newton, Ενέργεια &amp; Έργο, Θερμότητα &amp; Διαστολή<br>
+                <div data-club-show="chem" style="display:none; margin-top:12px; background:#e0f2f1; border-radius:10px; padding:14px; font-size:.85rem; color:#37474f;">
                     <strong>Β' Γυμνάσιο — Χημεία:</strong> Δομή Ατόμου, Χημικοί Δεσμοί, Οξέα &amp; Βάσεις, Ηλεκτρολύτες
                 </div>
             </div>
 
             <!-- Γ' CONTENT -->
             <div id="theoria-g" style="display:none;">
-                <div style="display:flex; gap:14px; flex-wrap:wrap;">
+                <!-- Φυσική Γ' — εμφανίζεται μόνο για Όμιλο Φυσικής -->
+                <div data-club-show="physics" style="display:flex; gap:14px; flex-wrap:wrap;">
                     <a href="fysiki-g-gymnasiou.html" target="_blank"
                        style="display:inline-flex;align-items:center;gap:6px;background:#1565c0;color:#fff;
                               padding:12px 24px;border-radius:10px;font-weight:700;font-size:.95rem;
                               text-decoration:none;box-shadow:0 2px 8px rgba(21,101,192,.3);">
                         <i class="fa-solid fa-atom"></i> Φυσική Γ' Γυμνάσιο
-                    </a>
-                    <a href="xhmeia-g-gymnasiou.html" target="_blank"
-                       style="display:inline-flex;align-items:center;gap:6px;background:#00796b;color:#fff;
-                              padding:12px 24px;border-radius:10px;font-weight:700;font-size:.95rem;
-                              text-decoration:none;box-shadow:0 2px 8px rgba(0,121,107,.3);">
-                        <i class="fa-solid fa-vial"></i> Χημεία Γ' Γυμνάσιο
                     </a>
                     <a href="prosomoseis.html" target="_blank"
                        style="display:inline-flex;align-items:center;gap:6px;background:#7c3aed;color:#fff;
@@ -841,15 +842,26 @@
                         <i class="fa-solid fa-flask"></i> Εικονικές Προσομοιώσεις
                     </a>
                 </div>
-                <div style="margin-top:12px; background:#e3f2fd; border-radius:10px; padding:14px; font-size:.85rem; color:#37474f;">
-                    <strong>Γ' Γυμνάσιο — Φυσική:</strong> Ηλεκτρισμός &amp; Κυκλώματα, Νόμος Ohm, Ηλεκτρομαγνητισμός, Κύματα &amp; Ήχος<br>
+                <div data-club-show="physics" style="margin-top:12px; background:#e3f2fd; border-radius:10px; padding:14px; font-size:.85rem; color:#37474f;">
+                    <strong>Γ' Γυμνάσιο — Φυσική:</strong> Ηλεκτρισμός &amp; Κυκλώματα, Νόμος Ohm, Ηλεκτρομαγνητισμός, Κύματα &amp; Ήχος
+                </div>
+                <!-- Χημεία Γ' — εμφανίζεται μόνο για Όμιλο Χημείας -->
+                <div data-club-show="chem" style="display:none; gap:14px; flex-wrap:wrap;">
+                    <a href="xhmeia-g-gymnasiou.html" target="_blank"
+                       style="display:inline-flex;align-items:center;gap:6px;background:#00796b;color:#fff;
+                              padding:12px 24px;border-radius:10px;font-weight:700;font-size:.95rem;
+                              text-decoration:none;box-shadow:0 2px 8px rgba(0,121,107,.3);">
+                        <i class="fa-solid fa-vial"></i> Χημεία Γ' Γυμνάσιο
+                    </a>
+                </div>
+                <div data-club-show="chem" style="display:none; margin-top:12px; background:#e0f2f1; border-radius:10px; padding:14px; font-size:.85rem; color:#37474f;">
                     <strong>Γ' Γυμνάσιο — Χημεία:</strong> Χημικές Αντιδράσεις, Οξειδοαναγωγή, Χημεία Ατμόσφαιρας, Βιομηχανική Χημεία
                 </div>
             </div>
         </div>
 
         <!-- ════════ ΕΡΓΑΣΤΗΡΙΑ (Numbered Virtual Labs) ════════ -->
-        <div class="labs-section" id="section-ergastiria">
+        <div class="labs-section" id="section-ergastiria" data-club-show="physics">
             <div class="section-title" style="color:#1a237e; border-left-color:#1565c0;">
                 <i class="fa-solid fa-flask"></i> Εικονικά Εργαστήρια — Ακολουθία Παρέμβασης
             </div>
@@ -902,6 +914,65 @@
                     <span class="lab-badge" style="background:#c62828;">Β' Γυμνάσιο · Θερμοδυναμική</span>
                     <p>Προσομοίωση μορίων αερίου. Σχέση θερμοκρασίας–πίεσης. Νόμος Gay-Lussac με γραφική παράσταση P-T.</p>
                     <a href="https://phet.colorado.edu/el/simulations/gas-properties" target="_blank" style="background:#c62828;">▶ PhET Αέρια</a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ════════ ΕΡΓΑΣΤΗΡΙΑ ΧΗΜΕΙΑΣ (Numbered Virtual Labs) ════════ -->
+        <div class="labs-section" id="section-ergastiria-chem" data-club-show="chem" style="display:none;">
+            <div class="section-title" style="color:#004d40; border-left-color:#00796b;">
+                <i class="fa-solid fa-flask"></i> Εικονικά Εργαστήρια Χημείας — Ακολουθία Παρέμβασης
+            </div>
+            <p style="color:#37474f; font-size:.88rem; margin-bottom:4px;">
+                Ολοκλήρωσε τα εργαστήρια <strong>με τη σειρά</strong>. Χρησιμοποίησε PhET Interactive Simulations για κάθε πείραμα.
+            </p>
+            <p style="color:#78909c; font-size:.8rem; margin-bottom:16px;">Β' Γυμνάσιο: Εργαστήρια 1–2 (Δομή &amp; Δεσμοί) &nbsp;|&nbsp; Γ' Γυμνάσιο: Εργαστήρια 3–5 (Αντιδράσεις &amp; Περιβάλλον)</p>
+            <div class="lab-cards-grid">
+
+                <div class="lab-card" style="border-left-color:#00796b;">
+                    <div class="lab-num" style="background:#00796b;">ΕΡΓΑΣΤΗΡΙΟ 1</div>
+                    <div style="font-size:1.8rem; margin-top:8px;">⚗️</div>
+                    <h4>Οξέα &amp; Βάσεις — Μέτρηση pH</h4>
+                    <span class="lab-badge" style="background:#00796b;">Β' Γυμνάσιο · Χημεία</span>
+                    <p>Μέτρηση pH, συγκέντρωση H⁺/OH⁻, σύγκριση ισχυρών &amp; ασθενών οξέων. Χρήση εικονικού pH-μέτρου.</p>
+                    <a href="https://phet.colorado.edu/el/simulations/acid-base-solutions" target="_blank" style="background:#00796b;">▶ PhET Οξέα-Βάσεις</a>
+                </div>
+
+                <div class="lab-card" style="border-left-color:#00796b;">
+                    <div class="lab-num" style="background:#00796b;">ΕΡΓΑΣΤΗΡΙΟ 2</div>
+                    <div style="font-size:1.8rem; margin-top:8px;">🏗️</div>
+                    <h4>Δομή Ατόμου — Κατασκευή Ατόμων</h4>
+                    <span class="lab-badge" style="background:#00796b;">Β' Γυμνάσιο · Χημεία</span>
+                    <p>Πρωτόνια, νετρόνια, ηλεκτρόνια. Κατανόηση ατομικού αριθμού, μάζας και ισοτόπων με εικονική κατασκευή.</p>
+                    <a href="https://phet.colorado.edu/el/simulations/build-an-atom" target="_blank" style="background:#00796b;">▶ PhET Δομή Ατόμου</a>
+                </div>
+
+                <div class="lab-card" style="border-left-color:#1b5e20;">
+                    <div class="lab-num" style="background:#1b5e20;">ΕΡΓΑΣΤΗΡΙΟ 3</div>
+                    <div style="font-size:1.8rem; margin-top:8px;">⚖️</div>
+                    <h4>Χημική Ισορροπία &amp; Αρχή Le Chatelier</h4>
+                    <span class="lab-badge" style="background:#1b5e20;">Γ' Γυμνάσιο · Χημεία</span>
+                    <p>Συγκεντρώσεις αντιδρώντων/προϊόντων, επίδραση θερμοκρασίας και πίεσης στην ισορροπία. Γραφική παράσταση.</p>
+                    <a href="https://phet.colorado.edu/el/simulations/reactions-and-rates" target="_blank" style="background:#1b5e20;">▶ PhET Αντιδράσεις</a>
+                </div>
+
+                <div class="lab-card" style="border-left-color:#1b5e20;">
+                    <div class="lab-num" style="background:#1b5e20;">ΕΡΓΑΣΤΗΡΙΟ 4</div>
+                    <div style="font-size:1.8rem; margin-top:8px;">💧</div>
+                    <h4>Ηλεκτρόλυση Νερού</h4>
+                    <span class="lab-badge" style="background:#1b5e20;">Γ' Γυμνάσιο · Χημεία</span>
+                    <p>Διάσπαση H₂O σε H₂ και O₂ με ηλεκτρικό ρεύμα. Σύνδεση με κυψέλες καυσίμου και πράσινη ενέργεια.</p>
+                    <a href="https://phet.colorado.edu/el/simulations/electrolysis" target="_blank" style="background:#1b5e20;">▶ PhET Ηλεκτρόλυση</a>
+                </div>
+
+                <div class="lab-card" style="border-left-color:#1b5e20;">
+                    <div class="lab-num" style="background:#1b5e20;">ΕΡΓΑΣΤΗΡΙΟ 5</div>
+                    <div style="font-size:1.8rem; margin-top:8px;">🌿</div>
+                    <h4>Φαινόμενο Θερμοκηπίου</h4>
+                    <span class="lab-badge" style="background:#1b5e20;">Γ' Γυμνάσιο · Χημεία</span>
+                    <p>CO₂, CH₄, H₂O ως αέρια θερμοκηπίου. Εξέταση επίδρασης στη θερμοκρασία Γης. Σύνδεση με κλιματική αλλαγή.</p>
+                    <a href="https://phet.colorado.edu/el/simulations/greenhouse" target="_blank" style="background:#1b5e20;">▶ PhET Θερμοκήπιο</a>
                 </div>
 
             </div>
@@ -1069,6 +1140,7 @@
                 <i class="fa-solid fa-laptop-code"></i> Εικονικά Εργαστήρια & Προσομοιώσεις
             </div>
 
+            <div data-club-show="physics">
             <h4 style="color: #0d47a1; margin-bottom:10px;"><i class="fa-solid fa-atom"></i> Φυσική — PhET Interactive Simulations</h4>
             <div class="sim-grid">
                 <div class="sim-card">
@@ -1109,6 +1181,36 @@
                 </div>
             </div>
 
+            <h4 style="color: #37474f; margin-top:20px; margin-bottom:10px;"><i class="fa-brands fa-android"></i> phyphox — Εργαστήριο με το Κινητό σου</h4>
+            <div class="sim-grid">
+                <div class="sim-card" style="background:#f5f5f5;">
+                    <span class="sim-icon">📱</span>
+                    <h4>Επιτάχυνση Βαρύτητας (g)</h4>
+                    <p>Μέτρηση g με τον επιταχυνσιόμετρο του κινητού. Πείραμα ελεύθερης πτώσης.</p>
+                    <a href="https://phyphox.org" target="_blank" style="background:#37474f;">▶ phyphox.org</a>
+                </div>
+                <div class="sim-card" style="background:#f5f5f5;">
+                    <span class="sim-icon">🚗</span>
+                    <h4>Επιτάχυνση Αυτοκινήτου</h4>
+                    <p>Βάλε το κινητό στο αυτοκίνητο και μέτρα την επιτάχυνση εκκίνησης. Σύγκριση με F1.</p>
+                    <a href="https://phyphox.org" target="_blank" style="background:#37474f;">▶ phyphox.org</a>
+                </div>
+                <div class="sim-card" style="background:#f5f5f5;">
+                    <span class="sim-icon">🔊</span>
+                    <h4>Ανάλυση Ήχου</h4>
+                    <p>Φάσμα ήχων, συχνότητα θεμελιώδους, ανάλυση μουσικής νότας.</p>
+                    <a href="https://phyphox.org" target="_blank" style="background:#37474f;">▶ phyphox.org</a>
+                </div>
+                <div class="sim-card" style="background:#f5f5f5;">
+                    <span class="sim-icon">🧲</span>
+                    <h4>Μαγνητικό Πεδίο</h4>
+                    <p>Ανιχνεύστε μαγνητικό πεδίο στην τάξη, γύρω από καλώδια ή μαγνήτη.</p>
+                    <a href="https://phyphox.org" target="_blank" style="background:#37474f;">▶ phyphox.org</a>
+                </div>
+            </div>
+            </div><!-- end data-club-show=physics -->
+
+            <div data-club-show="chem" style="display:none;">
             <h4 style="color: #004d40; margin-top:20px; margin-bottom:10px;"><i class="fa-solid fa-vial"></i> Χημεία — PhET Simulations</h4>
             <div class="sim-grid">
                 <div class="sim-card" style="background:#f0faf8;">
@@ -1148,34 +1250,7 @@
                     <a href="https://phet.colorado.edu/el/simulations/greenhouse" target="_blank" style="background:#00796b;">▶ Άνοιξε</a>
                 </div>
             </div>
-
-            <h4 style="color: #37474f; margin-top:20px; margin-bottom:10px;"><i class="fa-brands fa-android"></i> phyphox — Εργαστήριο με το Κινητό σου</h4>
-            <div class="sim-grid">
-                <div class="sim-card" style="background:#f5f5f5;">
-                    <span class="sim-icon">📱</span>
-                    <h4>Επιτάχυνση Βαρύτητας (g)</h4>
-                    <p>Μέτρηση g με τον επιταχυνσιόμετρο του κινητού. Πείραμα ελεύθερης πτώσης.</p>
-                    <a href="https://phyphox.org" target="_blank" style="background:#37474f;">▶ phyphox.org</a>
-                </div>
-                <div class="sim-card" style="background:#f5f5f5;">
-                    <span class="sim-icon">🚗</span>
-                    <h4>Επιτάχυνση Αυτοκινήτου</h4>
-                    <p>Βάλε το κινητό στο αυτοκίνητο και μέτρα την επιτάχυνση εκκίνησης. Σύγκριση με F1.</p>
-                    <a href="https://phyphox.org" target="_blank" style="background:#37474f;">▶ phyphox.org</a>
-                </div>
-                <div class="sim-card" style="background:#f5f5f5;">
-                    <span class="sim-icon">🔊</span>
-                    <h4>Ανάλυση Ήχου</h4>
-                    <p>Φάσμα ήχων, συχνότητα θεμελιώδους, ανάλυση μουσικής νότας.</p>
-                    <a href="https://phyphox.org" target="_blank" style="background:#37474f;">▶ phyphox.org</a>
-                </div>
-                <div class="sim-card" style="background:#f5f5f5;">
-                    <span class="sim-icon">🧲</span>
-                    <h4>Μαγνητικό Πεδίο</h4>
-                    <p>Ανιχνεύστε μαγνητικό πεδίο στην τάξη, γύρω από καλώδια ή μαγνήτη.</p>
-                    <a href="https://phyphox.org" target="_blank" style="background:#37474f;">▶ phyphox.org</a>
-                </div>
-            </div>
+            </div><!-- end data-club-show=chem -->
         </div>
 
         <!-- ════════ CONSTRUCTIONS SECTION ════════ -->
@@ -1259,7 +1334,7 @@
             </div>
             <p style="color:#555; font-size:0.88rem; margin-bottom:15px;">Παρακολουθούμε τμήματα ταινιών και συζητάμε τη Φυσική και Χημεία πίσω από τις σκηνές!</p>
             <div class="movie-grid">
-                <div class="movie-card">
+                <div class="movie-card" data-club-show="physics">
                     <h4>Interstellar</h4>
                     <div class="year">2014 · Christopher Nolan</div>
                     <p>Βαρύτητα, σχετικότητα χρόνου, ορίζοντας γεγονότων μαύρης τρύπας. Η καλύτερη εκλαΐκευση της Γενικής Σχετικότητας!</p>
@@ -1269,7 +1344,7 @@
                         <span class="topic-tag">Χωροχρόνος</span>
                     </div>
                 </div>
-                <div class="movie-card">
+                <div class="movie-card" data-club-show="chem">
                     <h4>The Martian</h4>
                     <div class="year">2015 · Ridley Scott</div>
                     <p>Επιβίωση στον Άρη με χημεία, βιολογία και φυσική. Πώς φυτεύεις πατάτες με περιττώματα; Αναλύουμε τη χημεία.</p>
@@ -1279,7 +1354,7 @@
                         <span class="topic-tag">Αστρονομία</span>
                     </div>
                 </div>
-                <div class="movie-card">
+                <div class="movie-card" data-club-show="physics">
                     <h4>Hidden Figures</h4>
                     <div class="year">2016 · Theodore Melfi</div>
                     <p>Τρεις μαύρες γυναίκες μαθηματικοί στη NASA! Υπολογισμός τροχιάς του John Glenn. Γιατί η Φυσική δεν έχει φύλο;</p>
@@ -1289,7 +1364,7 @@
                         <span class="topic-tag">Ιστορία</span>
                     </div>
                 </div>
-                <div class="movie-card">
+                <div class="movie-card" data-club-show="physics">
                     <h4>October Sky</h4>
                     <div class="year">1999 · Joe Johnston</div>
                     <p>Ένας έφηβος από την Δυτική Βιρτζίνια χτίζει πυραύλους! Φυσική πυραύλων, Newton 3ος νόμος, ώθηση αντίδρασης.</p>
@@ -1299,7 +1374,7 @@
                         <span class="topic-tag">Έμπνευση</span>
                     </div>
                 </div>
-                <div class="movie-card">
+                <div class="movie-card" data-club-show="physics">
                     <h4>Oppenheimer</h4>
                     <div class="year">2023 · Christopher Nolan</div>
                     <p>Πυρηνική φυσική, αλυσιδωτή αντίδραση σχάσης, βόμβα ατόμου. Τι είναι η ενέργεια δέσμευσης; E=mc². (Για Γ' Γυμνάσιο)</p>
@@ -1309,7 +1384,7 @@
                         <span class="topic-tag">Ιστορία</span>
                     </div>
                 </div>
-                <div class="movie-card">
+                <div class="movie-card" data-club-show="physics">
                     <h4>Top Gun: Maverick</h4>
                     <div class="year">2022 · Joseph Kosinski</div>
                     <p>Αεροδυναμική στα άκρα! F/A-18 και Su-57 — ανάλυση πτητικής μηχανικής, υπερηχητικές ταχύτητες, Mach number. Ο αγαπημένος του ομίλου!</p>
@@ -1319,7 +1394,7 @@
                         <span class="topic-tag">Φυσική Πτήσης</span>
                     </div>
                 </div>
-                <div class="movie-card">
+                <div class="movie-card" data-club-show="physics">
                     <h4>The Imitation Game</h4>
                     <div class="year">2014 · Morten Tyldum</div>
                     <p>Alan Turing και η πρώτη υπολογιστική μηχανή. Κρυπτογραφία, λογική, αλγόριθμοι — Φυσική ή Πληροφορική; Και τα δύο!</p>
@@ -1329,7 +1404,7 @@
                         <span class="topic-tag">Ιστορία</span>
                     </div>
                 </div>
-                <div class="movie-card">
+                <div class="movie-card" data-club-show="chem">
                     <h4>Apollo 13</h4>
                     <div class="year">1995 · Ron Howard</div>
                     <p>Αποστολή διάσωσης με περιορισμένα μέσα στο διάστημα. Φυσική διαστημικής πτήσης, οξυγόνο, CO₂ — μια υπέροχη κατάσταση έκτακτης ανάγκης!</p>
@@ -1348,56 +1423,56 @@
                 <i class="fa-solid fa-newspaper"></i> Άρθρα & Ενδιαφέροντα Θέματα
             </div>
             <div class="article-grid">
-                <div class="article-card">
+                <div class="article-card" data-club-show="physics">
                     <div class="a-cat">✈️ Αεροναυτική · Φυσική</div>
                     <h4>Πώς Πετάει ένα F-16: Φυσική 101</h4>
                     <p>Πώς καταφέρνει ένα μαχητικό αεροσκάφος τόνων να αψηφά τη βαρύτητα και να κυριαρχεί στους αιθέρες; Το μυστικό κρύβεται στη θεμελιώδη αρχή του Bernoulli και στη μηχανική των ρευστών, όπου η διαφορά ταχύτητας του αέρα πάνω και κάτω από τις πτέρυγες δημιουργεί την απαραίτητη άνωση. Σε συνδυασμό με την τεράστια ώθηση από τον προηγμένο κινητήρα turbofan, το αεροσκάφος ισορροπεί ανάμεσα στις τέσσερις δυνάμεις της πτήσης: άνωση, βάρος, ώθηση και οπισθέλκουσα.</p>
                     <p>Οι βάσεις για την ανθρώπινη πτήση τέθηκαν από τους <strong>αδελφούς Orville και Wilbur Wright</strong>, οι οποίοι το 1903 κατάφεραν την πρώτη ελεγχόμενη, μηχανοκίνητη πτήση βαρύτερου από τον αέρα αντικειμένου. Αξιοποιώντας αεροδυναμικές δοκιμές σε αεροδυναμική σήραγγα, απέδειξαν πώς η γεωμετρία της πτέρυγας επηρεάζει την αεροδυναμική συμπεριφορά και τον έλεγχο.</p>
                     <p>Στη σύγχρονη εποχή, αεροναυπηγοί όπως ο <strong>Harry Hillaker</strong>, ο κύριος σχεδιαστής του F-16 στη General Dynamics, πήγαν αυτές τις αρχές ένα βήμα παραπέρα. Ενσωματώνοντας συστήματα ηλεκτρονικού ελέγχου πτήσης (fly-by-wire) και αεροδυναμικά χαρακτηριστικά ασταθούς σχεδίασης, επέτρεψαν στο μαχητικό να εκτελεί ακραίους ελιγμούς που υπό κανονικές συνθήκες θα ήταν αδύνατον να ελέγξουν οι πιλότοι.</p>
                 </div>
-                <div class="article-card">
+                <div class="article-card" data-club-show="physics">
                     <div class="a-cat">🚗 Αυτοκίνητα · Μηχανολογία</div>
                     <h4>Κινητήρας Τετράχρονος: Η Φυσική Βήμα-Βήμα</h4>
                     <p>Ο παραδοσιακός τετράχρονος κινητήρας εσωτερικής καύσης λειτουργεί βασιζόμενος στις αρχές της θερμοδυναμικής και της χημείας μέσω του γνωστού κύκλου Otto. Ο κύκλος αυτός περιλαμβάνει τέσσερις διακριτές φάσεις: εισαγωγή μείγματος αέρα-καυσίμου, συμπίεση, ελεγχόμενη ανάφλεξη (έκρηξη) και εξαγωγή καυσαερίων, μετατρέποντας τη χημική ενέργεια σε θερμική και τελικά σε μηχανική περιστροφική κίνηση.</p>
                     <p>Η επαναστατική αυτή εφευρετικότητα οφείλεται στον Γερμανό μηχανικό <strong>Nikolaus Otto</strong>, ο οποίος το 1876 κατασκεύασε τον πρώτο λειτουργικό τετράχρονο κινητήρα συμπίεσης φορτίου. Η εφεύρεσή του έλυσε τα προβλήματα απόδοσης των παλαιότερων ατμομηχανών και δημιούργησε μια συμπαγή πηγή ισχύος που άλλαξε ριζικά τις μεταφορές.</p>
                     <p>Λίγα χρόνια αργότερα, πρωτοπόροι της αυτοκινητοβιομηχανίας όπως ο <strong>Gottlieb Daimler</strong> και ο <strong>Karl Benz</strong> αξιοποίησαν και εξέλιξαν περαιτέρω τον κινητήρα του Otto. Προσαρμόζοντάς τον σε ελαφρύτερα οχήματα, άνοιξαν τον δρόμο για τη μαζική παραγωγή των αυτοκινήτων που κινούν τον σύγχρονο κόσμο.</p>
                 </div>
-                <div class="article-card">
+                <div class="article-card" data-club-show="physics">
                     <div class="a-cat">🚀 Διαστημική · Αστρονομία</div>
                     <h4>LHC: Το Μεγαλύτερο Μηχάνημα στον Κόσμο</h4>
                     <p>Σε μια υπόγεια κυκλική σήραγγα 27 χιλιομέτρων στα σύνορα Γαλλίας-Ελβετίας, ο Μεγάλος Επιταχυντής Αδρονίων (LHC) του CERN επιταχύνει δέσμες πρωτονίων σχεδόν στην ταχύτητα του φωτός. Μέσα από τις τρομερές συγκρούσεις τους, οι επιστήμονες αναδημιουργούν για κλάσματα δευτερολέπτου τις συνθήκες θερμοκρασίας και ενέργειας που επικρατούσαν ελάχιστα μετά τη γέννηση του σύμπαντος.</p>
                     <p>Η θεωρητική βάση για αυτά τα πειράματα θεμελιώθηκε από φυσικούς όπως ο <strong>Peter Higgs</strong> και ο <strong>François Englert</strong>, οι οποίοι το 1964 πρότειναν τον μηχανισμό Higgs. Η θεωρία αυτή προέβλεπε την ύπαρξη ενός πεδίου διάχυτου στο σύμπαν που δίνει στα θεμελιώδη σωματίδια τη μάζα τους, αποτελώντας το «ιερό δισκοπότηρο» της σύγχρονης φυσικής.</p>
                     <p>Η υλοποίηση αυτού του τιτάνιου εγχειρήματος κατέστη δυνατή χάρη στις προσπάθειες χιλιάδων μηχανικών και φυσικών, όπως ο <strong>Lyn Evans</strong>, ο οποίος ηγήθηκε της κατασκευής του LHC. Με τη χρήση υπεραγώγιμων μαγνητών που ψύχονται με υγρό ήλιο και ανιχνευτών τεράστιας ακρίβειας, η ομάδα του CERN κατάφερε το 2012 να επιβεβαιώσει πειραματικά την ύπαρξη του σωματιδίου Higgs.</p>
                 </div>
-                <div class="article-card">
+                <div class="article-card" data-club-show="chem">
                     <div class="a-cat">🔋 Ενέργεια · Χημεία</div>
                     <h4>Μπαταρίες Λιθίου: Από το Κινητό στο Tesla</h4>
                     <p>Οι επαναφορτιζόμενες μπαταρίες ιόντων λιθίου αποτελούν την καρδιά της φορητής τεχνολογίας και της ηλεκτροκίνησης, αποθηκεύοντας ενέργεια μέσω χημικών αντιδράσεων οξειδοαναγωγής. Κατά τη φόρτιση και την εκφόρτιση, τα ιόντα λιθίου (Li⁺) μετακινούνται διαρκώς μέσω ενός οργανικού ηλεκτρολύτη ανάμεσα στην άνοδο και την κάθοδο, απελευθερώνοντας σταθερή ροή ηλεκτρονίων.</p>
                     <p>Η εξέλιξη αυτής της τεχνολογίας βασίστηκε στο έργο τριών πρωτοπόρων επιστημόνων: του <strong>Stanley Whittingham</strong>, ο οποίος τη δεκαετία του 1970 χρησιμοποίησε ιόντα λιθίου στην πρώτη πρωτότυπη μπαταρία, του <strong>John Goodenough</strong>, ο οποίος διπλασίασε την τάση της χρησιμοποιώντας οξείδιο κοβαλτίου, και του <strong>Akira Yoshino</strong>, ο οποίος δημιούργησε την πρώτη ασφαλή εμπορική μπαταρία το 1985. Η συμβολή τους τιμήθηκε το 2019 με το Νόμπελ Χημείας.</p>
                     <p>Στη συνέχεια, οραματιστές και μηχανικοί όπως ο <strong>Elon Musk</strong> και η ομάδα της <strong>Tesla</strong> αντιλήφθηκαν τη δυναμική της μαζικής κλίμακας. Συνδυάζοντας χιλιάδες από αυτές τις κυψέλες σε έξυπνα συστήματα διαχείρισης θερμοκρασίας και ενέργειας, κατάφεραν να μετατρέψουν τα ηλεκτρικά οχήματα από πειραματικά κατασκευάσματα σε κυρίαρχη δύναμη παγκοσμίως.</p>
                 </div>
-                <div class="article-card">
+                <div class="article-card" data-club-show="physics">
                     <div class="a-cat">🌊 Ακουστική · Μουσική</div>
                     <h4>Γιατί η Κιθάρα Ηχεί Διαφορετικά από το Βιολί;</h4>
                     <p>Αν δύο μουσικά όργανα παίξουν την ίδια ακριβώς νότα (π.χ. Λα στα 440 Hz), ο ήχος τους παραμένει μοναδικός και άμεσα αναγνωριστικός. Αυτό συμβαίνει επειδή η Φυσική της ακουστικής δείχνει ότι, πέρα από τη βασική συχνότητα, κάθε όργανο παράγει ένα στρώμα αρμονικών συχνοτήτων (overtones) των οποίων η σύνθεση και η απόσβεση προσδιορίζουν τη λεγόμενη χροιά (timbre).</p>
                     <p>Στη χρυσή εποχή της οργανοποιίας, ο <strong>Antonio Stradivari</strong> τον 17ο και 18ο αιώνα εφάρμοσε διαισθητικές και πρωτοποριακές αρχές ακουστικής μηχανικής. Με την ακριβή επιλογή ξύλων, τη γεωμετρική σχεδίαση του σώματος και την τέλεια εφαρμογή των F-οπών στο βιολί, κατάφερε να ενισχύσει συγκεκριμένες αρμονικές, δημιουργώντας έναν ήχο απαράμιλλης διαύγειας και έντασης που παραμένει ασυναγώνιστος.</p>
                     <p>Αντίστοιχα, στην εξέλιξη της κιθάρας, ο <strong>Christian Friedrich Martin</strong> τον 19ο αιώνα επινόησε την εσωτερική δομή στήριξης γνωστή ως «X-bracing». Αυτή η καινοτομία επέτρεψε στο καπάκι της ακουστικής κιθάρας να αντέχει την τεράστια τάση των χορδών διατηρώντας παράλληλα την ελαστικότητα που απαιτείται για να πάλλονται πλούσια οι αρμονικές του ήχου.</p>
                 </div>
-                <div class="article-card">
+                <div class="article-card" data-club-show="physics">
                     <div class="a-cat">🧲 Ηλεκτρομαγνητισμός</div>
                     <h4>Maglev: Τρένα που Επιπλέουν Με Μαγνήτες</h4>
                     <p>Τα τρένα Maglev (Magnetic Levitation) αποτελούν το αποκορύφωμα της εφαρμογής του ηλεκτρομαγνητισμού στις μεταφορές, καταφέρνοντας να κινούνται με ταχύτητες άνω των 600 km/h χωρίς να αγγίζουν καν τις ράγες. Αξιοποιώντας το φαινόμενο Meissner και ισχυρούς υπεραγώγιμους μαγνήτες που ψύχονται με υγρό ήλιο, το τρένο αιωρείται σταθερά πάνω από την τροχιά, μηδενίζοντας την τριβή με το έδαφος.</p>
                     <p>Ο Βρετανός φυσικός και μηχανικός <strong>Eric Laithwaite</strong>, γνωστός και ως «πατέρας του ηλεκτρικού τρένου», υπήρξε ο πρωτοπόρος που ανέπτυξε τον γραμμικό επαγωγικό κινητήρα στα μέσα του 20ού αιώνα. Η δουλειά του απέδειξε πώς ένα περιστρεφόμενο μοτέρ μπορεί να «ξεδιπλωθεί» σε μια ευθεία γραμμή, δημιουργώντας μαγνητικά πεδία που ωθούν το όχημα προς τα εμπρός χωρίς μηχανικά γρανάζια.</p>
                     <p>Τις βάσεις για την ίδια την αιώρηση έθεσαν οι Αμερικανοί φυσικοί <strong>James Danby</strong> και <strong>John Powell</strong>, οι οποίοι στα τέλη της δεκαετίας του 1960 κατοχύρωσαν με δίπλωμα ευρεσιτεχνίας τη χρήση υπεραγώγιμων μαγνητών για τρένα υψηλής ταχύτητας. Το όραμά τους ενσωματώθηκε αργότερα στα υπερσύγχρονα ιαπωνικά συστήματα L0 Series.</p>
                 </div>
-                <div class="article-card">
+                <div class="article-card" data-club-show="chem">
                     <div class="a-cat">🧪 Χημεία · Αλχημεία</div>
                     <h4>Πώς Φτιάχνεται το Ατσάλι; Χημεία Κατεργασίας Μετάλλων</h4>
                     <p>Το ατσάλι αποτελεί τον θεμέλιο λίθο του σύγχρονου πολιτισμού, από τα θεμέλια των κτιρίων μέχρι τα προηγμένα αεροσκάφη. Η παραγωγή του βασίζεται σε σύνθετες χημικές αντιδράσεις αναγωγής μέσα σε υψικαμίνους, όπου το σιδηρομετάλλευμα συνδυάζεται με κάρβουνο και ασβεστόλιθο σε θερμοκρασίες που ξεπερνούν τους 1500°C, απομακρύνοντας το οξυγόνο και ρυθμίζοντας την περιεκτικότητα σε άνθρακα.</p>
                     <p>Η επανάσταση στη μαζική παραγωγή ατσαλιού ήρθε το 1856 από τον Βρετανό εφευρέτη <strong>Sir Henry Bessemer</strong>. Η εφεύρεσή του, ο «μετατροπέας Bessemer», επέτρεψε την απομάκρυνση των ακαθαρσιών από τον υγρό χυτοσίδηρο με την εμφύσηση αέρα, μειώνοντας δραματικά το κόστος και τον χρόνο παραγωγής και μετατρέποντας το ατσάλι από είδος πολυτελείας σε κοινό υλικό.</p>
                     <p>Μεταγενέστεροι μεταλλολόγοι εξέλιξαν τη μέθοδο με τη χρήση καθαρού οξυγόνου (Basic Oxygen Steelmaking) και την προσθήκη κραμάτων όπως το χρώμιο και το νικέλιο. Αυτές οι εξελίξεις δημιούργησαν ανοξείδωτους και ανθεκτικούς τύπους ατσαλιού που ανταποκρίνονται στις απαιτητικές συνθήκες της σύγχρονης μηχανικής.</p>
                 </div>
-                <div class="article-card">
+                <div class="article-card" data-club-show="chem">
                     <div class="a-cat">🌍 Περιβάλλον · Χημεία</div>
                     <h4>Όζον: Ο Θυρεωρός της Ζωής</h4>
                     <p>Ψηλά στη στρατόσφαιρα της Γης, το όζον (O₃) σχηματίζει μια κρίσιμη και αόρατη ασπίδα που φιλτράρει την επιβλαβή υπεριώδη ακτινοβολία (UV) του Ήλιου. Το όζον παράγεται και διασπάται διαρκώς μέσω φωτοχημικών αντιδράσεων, όταν η ηλιακή ακτινοβολία διασπά τα μόρια οξυγόνου (O₂), τα οποία στη συνέχεια επανασυνδέονται δημιουργώντας τριατομικά μόρια.</p>
@@ -1491,28 +1566,28 @@
         <div class="section-title"><i class="fa-solid fa-video"></i> Βίντεο Πειραμάτων 🎥</div>
         <p style="color:#555;font-size:.88rem;margin-bottom:15px;">Επιλεγμένα βίντεο πειραμάτων και επιστημονικής θεματολογίας — παρακολουθούμε και συζητάμε στον όμιλο!</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;">
-            <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.12);">
+            <div data-club-show="physics" style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.12);">
                 <a href="https://www.youtube.com/watch?v=1Xp_imnO6WE" target="_blank" rel="noopener" style="display:block;position:relative;">
                     <img src="https://img.youtube.com/vi/1Xp_imnO6WE/mqdefault.jpg" style="width:100%;display:block;" alt="Lenz's Law">
                     <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(255,0,0,.85);color:#fff;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">▶</div>
                 </a>
                 <div style="padding:10px;"><strong style="font-size:.9rem;">⚡ Νόμος του Lenz – μαγνήτης & χαλκός</strong><br><span style="font-size:.78rem;color:#666;">Φυσική Γ' – Ηλεκτρομαγνητισμός</span></div>
             </div>
-            <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.12);">
+            <div data-club-show="chem" style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.12);">
                 <a href="https://www.youtube.com/watch?v=RnvCbquYeIM" target="_blank" rel="noopener" style="display:block;position:relative;">
                     <img src="https://img.youtube.com/vi/RnvCbquYeIM/mqdefault.jpg" style="width:100%;display:block;" alt="Elephant Toothpaste">
                     <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(255,0,0,.85);color:#fff;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">▶</div>
                 </a>
                 <div style="padding:10px;"><strong style="font-size:.9rem;">🐘 Elephant Toothpaste – H₂O₂</strong><br><span style="font-size:.78rem;color:#666;">Χημεία – Καταλυτικές Αντιδράσεις</span></div>
             </div>
-            <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.12);">
+            <div data-club-show="physics" style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.12);">
                 <a href="https://www.youtube.com/watch?v=0USff-mZIs4" target="_blank" rel="noopener" style="display:block;position:relative;">
                     <img src="https://img.youtube.com/vi/0USff-mZIs4/mqdefault.jpg" style="width:100%;display:block;" alt="Non-Newtonian fluid">
                     <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(255,0,0,.85);color:#fff;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">▶</div>
                 </a>
                 <div style="padding:10px;"><strong style="font-size:.9rem;">🌊 Μη-Νευτώνεια Ρευστά (Oobleck)</strong><br><span style="font-size:.78rem;color:#666;">Φυσική – Ρεολογία & Ρευστά</span></div>
             </div>
-            <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.12);">
+            <div data-club-show="chem" style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.12);">
                 <a href="https://www.youtube.com/watch?v=OoO5d5P0Jn4" target="_blank" rel="noopener" style="display:block;position:relative;">
                     <img src="https://img.youtube.com/vi/OoO5d5P0Jn4/mqdefault.jpg" style="width:100%;display:block;" alt="Liquid Nitrogen">
                     <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(255,0,0,.85);color:#fff;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">▶</div>
@@ -1523,7 +1598,7 @@
     </div>
 
     <!-- ════════ BIOGRAPHIES SECTION ════════ -->
-    <div class="section-box" id="section-biographies">
+    <div class="section-box" id="section-biographies" data-club-show="physics">
         <div class="section-title"><i class="fa-solid fa-microscope"></i> Βιογραφίες Σημαντικών Φυσικών 🔬</div>
         <p style="color:#555;font-size:.88rem;margin-bottom:18px;">Οι επιστήμονες που άλλαξαν την εικόνα μας για τον κόσμο — και τιμήθηκαν με Νόμπελ Φυσικής.</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;">
@@ -1588,7 +1663,7 @@
     </div>
 
     <!-- ════════ BIO CHEMISTRY SECTION ════════ -->
-    <div class="section-box" id="section-bio-chem">
+    <div class="section-box" id="section-bio-chem" data-club-show="chem">
         <div class="section-title"><i class="fa-solid fa-flask"></i> Βιογραφίες Σημαντικών Χημικών 🧪</div>
         <p style="color:#555;font-size:.88rem;margin-bottom:18px;">Οι επιστήμονες που διαμόρφωσαν τη σύγχρονη χημεία — και τιμήθηκαν με Νόμπελ Χημείας.</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;">
@@ -1643,37 +1718,37 @@
         <div class="section-title"><i class="fa-solid fa-file-lines"></i> Φύλλα Εργασίας 📄</div>
         <p style="color:#555;font-size:.88rem;margin-bottom:15px;">Εκτυπώσιμα φύλλα δραστηριοτήτων για τις συνεδρίες του ομίλου. Εκτύπωσε και φέρε στην τάξη!</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;">
-            <div style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);border-radius:10px;padding:16px;border-left:4px solid #1976d2;">
+            <div data-club-show="physics" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);border-radius:10px;padding:16px;border-left:4px solid #1976d2;">
                 <div style="font-size:1.8rem;margin-bottom:8px;">📋</div>
                 <h4 style="color:#0d47a1;margin-bottom:6px;">Νόμος του Hooke</h4>
                 <p style="font-size:.82rem;color:#37474f;margin-bottom:10px;">Μέτρηση επιμήκυνσης ελατηρίου, κατασκευή διαγράμματος F-x, εύρεση σταθεράς k.</p>
                 <div style="font-size:.78rem;background:#0d47a1;color:white;padding:4px 10px;border-radius:15px;display:inline-block;">Φυσική Β' Γυμνάσιο</div>
             </div>
-            <div style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);border-radius:10px;padding:16px;border-left:4px solid #1976d2;">
+            <div data-club-show="physics" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);border-radius:10px;padding:16px;border-left:4px solid #1976d2;">
                 <div style="font-size:1.8rem;margin-bottom:8px;">⚡</div>
                 <h4 style="color:#0d47a1;margin-bottom:6px;">Νόμος του Ohm</h4>
                 <p style="font-size:.82rem;color:#37474f;margin-bottom:10px;">Μέτρηση τάσης-έντασης σε κυκλώματα. Κατασκευή χαρακτηριστικής καμπύλης I-V.</p>
                 <div style="font-size:.78rem;background:#0d47a1;color:white;padding:4px 10px;border-radius:15px;display:inline-block;">Φυσική Γ' Γυμνάσιο</div>
             </div>
-            <div style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);border-radius:10px;padding:16px;border-left:4px solid #1976d2;">
+            <div data-club-show="physics" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);border-radius:10px;padding:16px;border-left:4px solid #1976d2;">
                 <div style="font-size:1.8rem;margin-bottom:8px;">🌊</div>
                 <h4 style="color:#0d47a1;margin-bottom:6px;">Ταχύτητα Ήχου στον Αέρα</h4>
                 <p style="font-size:.82rem;color:#37474f;margin-bottom:10px;">Μέτρηση με phyphox και ηχεία. Εξαρτηση ταχύτητας από θερμοκρασία.</p>
                 <div style="font-size:.78rem;background:#0d47a1;color:white;padding:4px 10px;border-radius:15px;display:inline-block;">Φυσική Β' Γυμνάσιο</div>
             </div>
-            <div style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border-radius:10px;padding:16px;border-left:4px solid #00796b;">
+            <div data-club-show="chem" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border-radius:10px;padding:16px;border-left:4px solid #00796b;">
                 <div style="font-size:1.8rem;margin-bottom:8px;">⚗️</div>
                 <h4 style="color:#004d40;margin-bottom:6px;">Αντίδραση Εξουδετέρωσης</h4>
                 <p style="font-size:.82rem;color:#37474f;margin-bottom:10px;">HCl + NaOH → NaCl + H₂O. Παρατήρηση με δείκτη φαινολοφθαλεΐνης.</p>
                 <div style="font-size:.78rem;background:#00796b;color:white;padding:4px 10px;border-radius:15px;display:inline-block;">Χημεία Γ' Γυμνάσιο</div>
             </div>
-            <div style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border-radius:10px;padding:16px;border-left:4px solid #00796b;">
+            <div data-club-show="chem" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border-radius:10px;padding:16px;border-left:4px solid #00796b;">
                 <div style="font-size:1.8rem;margin-bottom:8px;">🔋</div>
                 <h4 style="color:#004d40;margin-bottom:6px;">Ηλεκτρολυτικά Στοιχεία</h4>
                 <p style="font-size:.82rem;color:#37474f;margin-bottom:10px;">Αντίδραση Zn + CuSO₄. Μέτρηση τάσης στοιχείου Daniell. Σύνδεση με βιομηχανία.</p>
                 <div style="font-size:.78rem;background:#00796b;color:white;padding:4px 10px;border-radius:15px;display:inline-block;">Χημεία Β' Γυμνάσιο</div>
             </div>
-            <div style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border-radius:10px;padding:16px;border-left:4px solid #00796b;">
+            <div data-club-show="chem" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border-radius:10px;padding:16px;border-left:4px solid #00796b;">
                 <div style="font-size:1.8rem;margin-bottom:8px;">🧪</div>
                 <h4 style="color:#004d40;margin-bottom:6px;">Ταχύτητα Χημικής Αντίδρασης</h4>
                 <p style="font-size:.82rem;color:#37474f;margin-bottom:10px;">Πείραμα ιωδίου-αμύλου. Μέτρηση επίδρασης θερμοκρασίας & συγκέντρωσης.</p>
@@ -1854,6 +1929,21 @@
             document.getElementById('tab-physics').className = 'club-tab' + (club === 'physics' ? ' active-physics' : '');
             document.getElementById('tab-chem').className = 'club-tab' + (club === 'chem' ? ' active-chem' : '');
 
+            // Show/hide all data-club-show elements
+            document.querySelectorAll('[data-club-show]').forEach(el => {
+                const show = el.getAttribute('data-club-show');
+                if (show === club) {
+                    // Restore flex display for elements that have flex-related inline styles
+                    if (el.style.gap || el.style.flexWrap || el.classList.contains('sim-grid') || el.classList.contains('lab-cards-grid')) {
+                        el.style.display = 'flex';
+                    } else {
+                        el.style.display = '';
+                    }
+                } else {
+                    el.style.display = 'none';
+                }
+            });
+
             // Show/hide project sub-panels
             const pp = document.getElementById('projects-physics');
             const pc = document.getElementById('projects-chem');
@@ -1871,6 +1961,14 @@
             const qc = document.getElementById('section-quiz-chem');
             if (qp) qp.style.display = club === 'physics' ? 'block' : 'none';
             if (qc) qc.style.display = club === 'chem' ? 'block' : 'none';
+
+            // Show/hide Δοκιμασίες nav link
+            const navDok = document.getElementById('nav-link-dokimasies');
+            if (navDok) navDok.style.display = club === 'physics' ? '' : 'none';
+
+            // Update biographies nav link target
+            const navBio = document.getElementById('nav-link-biographies');
+            if (navBio) navBio.href = club === 'physics' ? '#section-biographies' : '#section-bio-chem';
 
             render();
         }
