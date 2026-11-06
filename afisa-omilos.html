@@ -252,11 +252,12 @@ body { background: #111; display: flex; justify-content: center; align-items: fl
   flex-direction: column;
   gap: 4px;
 }
-#qrCanvas {
+#qrDiv img, #qrDiv canvas {
   border-radius: 6px;
   display: block;
 }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
 <div class="poster">
@@ -485,7 +486,7 @@ body { background: #111; display: flex; justify-content: center; align-items: fl
     </div>
     <div style="text-align:center">
       <div class="qr-placeholder">
-        <canvas id="qrCanvas" width="72" height="72"></canvas>
+        <div id="qrDiv"></div>
         <span style="font-size:8px;letter-spacing:0">Σάρωσε για είσοδο</span>
       </div>
     </div>
@@ -507,16 +508,14 @@ for (let i = 0; i < 120; i++) {
 // collage uses inline SVGs
 
 
-// ── real QR code ──
-(function(){
-  const URL = 'https://phalexandra32-dot.github.io/omilos-fysikis-gourias/';
-  const canvas = document.getElementById('qrCanvas');
-  const s = new Image();
-  s.onload = () => { const ctx = canvas.getContext('2d'); ctx.drawImage(s,0,0,72,72); };
-  s.onerror = () => {};
-  // QR via Google Charts API (no auth required, public endpoint)
-  s.src = 'https://chart.googleapis.com/chart?cht=qr&chs=72x72&chl=' + encodeURIComponent(URL) + '&chco=FFFFFF&chf=bg,s,00000000';
-})();
+// ── real QR code (pure JS, no network) ──
+new QRCode(document.getElementById('qrDiv'), {
+  text: 'https://phalexandra32-dot.github.io/omilos-fysikis-gourias/',
+  width: 72, height: 72,
+  colorDark: '#ffffff',
+  colorLight: '#00000000',
+  correctLevel: QRCode.CorrectLevel.M
+});
 
 // ── hero canvas: charged particle simulation ──
 const canvas = document.getElementById('heroCanvas');
