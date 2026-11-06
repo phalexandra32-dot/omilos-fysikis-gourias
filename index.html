@@ -159,6 +159,152 @@
             background: #e0f2f1;
         }
 
+        /* ════════ STICKY ANCHOR NAV ════════ */
+        .anchor-nav {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background: #fff;
+            border-bottom: 2px solid #e0e0e0;
+            box-shadow: 0 2px 10px rgba(0,0,0,.1);
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            padding: 6px 10px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .anchor-nav::-webkit-scrollbar { display:none; }
+        .anchor-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: .82rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #555;
+            white-space: nowrap;
+            transition: background .2s, color .2s;
+            border: 1.5px solid transparent;
+        }
+        .anchor-nav a:hover {
+            background: #e3f2fd;
+            color: #0d47a1;
+            border-color: #90caf9;
+        }
+        .anchor-nav a.nav-dokimasies {
+            background: #fff3e0;
+            color: #e65100;
+            border-color: #ffb74d;
+        }
+        .anchor-nav a.nav-dokimasies:hover {
+            background: #ffe0b2;
+            color: #bf360c;
+        }
+
+        /* ════════ ΔΟΚΙΜΑΣΙΕΣ SECTION ════════ */
+        .dokimasies-section {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border: 2px solid #ffb74d;
+            border-radius: 16px;
+            padding: 28px 24px;
+            margin-bottom: 28px;
+        }
+        .dokimasies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+            margin-top: 18px;
+        }
+        .dokimasies-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 3px 12px rgba(0,0,0,.1);
+            text-align: center;
+            border-top: 5px solid #ff6f00;
+        }
+        .dokimasies-card.posttest { border-top-color: #2e7d32; }
+        .dokimasies-card h4 { font-size: 1.1rem; margin-bottom: 8px; color: #333; }
+        .dokimasies-card p { font-size: .85rem; color: #666; margin-bottom: 16px; }
+        .btn-dokimasies {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 26px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: .95rem;
+            text-decoration: none;
+            transition: transform .15s, box-shadow .15s;
+            box-shadow: 0 3px 10px rgba(0,0,0,.2);
+        }
+        .btn-dokimasies:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.25); }
+        .btn-pretest  { background: #ff6f00; color: #fff; }
+        .btn-posttest { background: #2e7d32; color: #fff; }
+        .btn-posttest.locked { background: #9e9e9e; cursor: default; pointer-events: none; }
+
+        /* ════════ ΕΡΓΑΣΤΗΡΙΑ SECTION ════════ */
+        .labs-section {
+            background: linear-gradient(135deg, #e8eaf6, #e3f2fd);
+            border: 2px solid #90caf9;
+            border-radius: 16px;
+            padding: 28px 24px;
+            margin-bottom: 28px;
+        }
+        .lab-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+            margin-top: 18px;
+        }
+        .lab-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 2px 10px rgba(0,0,0,.08);
+            border-left: 5px solid #1565c0;
+            position: relative;
+        }
+        .lab-num {
+            position: absolute;
+            top: -12px;
+            left: 16px;
+            background: #1565c0;
+            color: #fff;
+            font-size: .75rem;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 10px;
+            letter-spacing: .5px;
+        }
+        .lab-card h4 { font-size: .98rem; color: #1a237e; margin: 10px 0 6px; }
+        .lab-card p { font-size: .82rem; color: #37474f; margin-bottom: 12px; line-height: 1.45; }
+        .lab-badge {
+            display: inline-block;
+            font-size: .72rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #0d47a1;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .lab-card a {
+            display: inline-block;
+            padding: 7px 16px;
+            background: #1565c0;
+            color: #fff;
+            border-radius: 8px;
+            font-size: .82rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background .2s;
+        }
+        .lab-card a:hover { background: #0d47a1; }
+
         .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
 
         /* Weekly Schedule Banner */
@@ -553,7 +699,48 @@
         </button>
     </nav>
 
+    <!-- ════════ STICKY ANCHOR NAVIGATION ════════ -->
+    <nav class="anchor-nav" aria-label="Πλοήγηση ενοτήτων">
+        <a href="#section-dokimasies" class="nav-dokimasies">📋 Δοκιμασίες</a>
+        <a href="#section-theoria">📚 Θεωρία</a>
+        <a href="#section-ergastiria">🔬 Εργαστήρια</a>
+        <a href="#section-quiz">🏆 Quiz</a>
+        <a href="#section-prosomioseis">💻 Προσομοιώσεις</a>
+        <a href="#section-projects">🚀 Προτζεκτ</a>
+        <a href="#section-tainies">🎬 Ταινίες</a>
+        <a href="#section-biographies">🔬 Βιογραφίες</a>
+    </nav>
+
     <div class="container">
+
+        <!-- ════════ ΔΟΚΙΜΑΣΙΕΣ SECTION (SCRD: pre/post test) ════════ -->
+        <div class="dokimasies-section" id="section-dokimasies">
+            <div class="section-title" style="color:#e65100; border-left-color:#ff6f00;">
+                <i class="fa-solid fa-clipboard-list"></i> Δοκιμασίες Αξιολόγησης
+            </div>
+            <p style="color:#5d4037; font-size:.9rem; margin-bottom:4px;">
+                Συμπλήρωσε την αρχική δοκιμασία <strong>πριν ξεκινήσουν τα εργαστήρια</strong> και την τελική <strong>μετά την ολοκλήρωσή τους</strong>. Χρησιμοποίησε τον κωδικό που σου έδωσε η καθηγήτρια.
+            </p>
+            <p style="color:#8d6e63; font-size:.8rem; margin-bottom:0;">Β' Γυμνάσιο: Θερμοδυναμική &nbsp;|&nbsp; Γ' Γυμνάσιο: Ηλεκτρισμός</p>
+            <div class="dokimasies-grid">
+                <div class="dokimasies-card">
+                    <div style="font-size:2.2rem; margin-bottom:10px;">📝</div>
+                    <h4>Αρχική Δοκιμασία (Α' Φάση)</h4>
+                    <p>Συμπλήρωσε <strong>πριν</strong> τα εικονικά εργαστήρια. Θερμοδυναμική (Β') ή Ηλεκτρισμός (Γ').</p>
+                    <a href="pretest.html" class="btn-dokimasies btn-pretest">
+                        <i class="fa-solid fa-pencil"></i> Αρχική Δοκιμασία
+                    </a>
+                </div>
+                <div class="dokimasies-card posttest">
+                    <div style="font-size:2.2rem; margin-bottom:10px;">✅</div>
+                    <h4>Τελική Δοκιμασία (Β' Φάση)</h4>
+                    <p>Συμπλήρωσε <strong>μετά</strong> την ολοκλήρωση των 5 εργαστηρίων. Ίδιες ερωτήσεις — μέτρηση προόδου.</p>
+                    <a href="posttest.html" class="btn-dokimasies btn-posttest">
+                        <i class="fa-solid fa-check-to-slot"></i> Τελική Δοκιμασία
+                    </a>
+                </div>
+            </div>
+        </div>
 
         <!-- Weekly Schedule Banner -->
         <div class="schedule-banner">
@@ -594,6 +781,136 @@
             </div>
         </div>
 
+        <!-- ════════ ΘΕΩΡΙΑ SECTION ════════ -->
+        <div class="section-box" id="section-theoria" style="margin-bottom:28px;">
+            <div class="section-title">
+                <i class="fa-solid fa-book-open"></i> Θεωρία — Διαδραστικά Βιβλία Ομίλου
+            </div>
+            <p style="color:#555; font-size:.9rem; margin-bottom:16px;">
+                Θεωρία, πειράματα με sliders και αυτοαξιολόγηση 15 ερωτήσεων. Επίλεξε τάξη και κλάδο.
+            </p>
+            <!-- Β'/Γ' TAB SWITCHER -->
+            <div style="display:flex; gap:10px; margin-bottom:18px; flex-wrap:wrap;">
+                <button onclick="switchTheoriaTab('b')" id="tab-theoria-b"
+                    style="padding:9px 20px; border-radius:20px; border:none; font-weight:700; font-size:.9rem; cursor:pointer; background:#1565c0; color:#fff; transition:.2s;">
+                    Β' Γυμνάσιο
+                </button>
+                <button onclick="switchTheoriaTab('g')" id="tab-theoria-g"
+                    style="padding:9px 20px; border-radius:20px; border:none; font-weight:700; font-size:.9rem; cursor:pointer; background:#e3f2fd; color:#1565c0; transition:.2s;">
+                    Γ' Γυμνάσιο
+                </button>
+            </div>
+
+            <!-- Β' CONTENT -->
+            <div id="theoria-b">
+                <div style="display:flex; gap:14px; flex-wrap:wrap;">
+                    <a href="fysiki-b-gymnasiou.html" target="_blank"
+                       style="display:inline-flex;align-items:center;gap:6px;background:#1565c0;color:#fff;
+                              padding:12px 24px;border-radius:10px;font-weight:700;font-size:.95rem;
+                              text-decoration:none;box-shadow:0 2px 8px rgba(21,101,192,.3);">
+                        <i class="fa-solid fa-atom"></i> Φυσική Β' Γυμνάσιο
+                    </a>
+                    <a href="xhmeia-b-gymnasiou.html" target="_blank"
+                       style="display:inline-flex;align-items:center;gap:6px;background:#00796b;color:#fff;
+                              padding:12px 24px;border-radius:10px;font-weight:700;font-size:.95rem;
+                              text-decoration:none;box-shadow:0 2px 8px rgba(0,121,107,.3);">
+                        <i class="fa-solid fa-vial"></i> Χημεία Β' Γυμνάσιο
+                    </a>
+                </div>
+                <div style="margin-top:12px; background:#e3f2fd; border-radius:10px; padding:14px; font-size:.85rem; color:#37474f;">
+                    <strong>Β' Γυμνάσιο — Φυσική:</strong> Κίνηση, Δυνάμεις &amp; Νόμοι Newton, Ενέργεια &amp; Έργο, Θερμότητα &amp; Διαστολή<br>
+                    <strong>Β' Γυμνάσιο — Χημεία:</strong> Δομή Ατόμου, Χημικοί Δεσμοί, Οξέα &amp; Βάσεις, Ηλεκτρολύτες
+                </div>
+            </div>
+
+            <!-- Γ' CONTENT -->
+            <div id="theoria-g" style="display:none;">
+                <div style="display:flex; gap:14px; flex-wrap:wrap;">
+                    <a href="fysiki-g-gymnasiou.html" target="_blank"
+                       style="display:inline-flex;align-items:center;gap:6px;background:#1565c0;color:#fff;
+                              padding:12px 24px;border-radius:10px;font-weight:700;font-size:.95rem;
+                              text-decoration:none;box-shadow:0 2px 8px rgba(21,101,192,.3);">
+                        <i class="fa-solid fa-atom"></i> Φυσική Γ' Γυμνάσιο
+                    </a>
+                    <a href="xhmeia-g-gymnasiou.html" target="_blank"
+                       style="display:inline-flex;align-items:center;gap:6px;background:#00796b;color:#fff;
+                              padding:12px 24px;border-radius:10px;font-weight:700;font-size:.95rem;
+                              text-decoration:none;box-shadow:0 2px 8px rgba(0,121,107,.3);">
+                        <i class="fa-solid fa-vial"></i> Χημεία Γ' Γυμνάσιο
+                    </a>
+                    <a href="prosomoseis.html" target="_blank"
+                       style="display:inline-flex;align-items:center;gap:6px;background:#7c3aed;color:#fff;
+                              padding:12px 24px;border-radius:10px;font-weight:700;font-size:.95rem;
+                              text-decoration:none;box-shadow:0 2px 8px rgba(124,58,237,.3);">
+                        <i class="fa-solid fa-flask"></i> Εικονικές Προσομοιώσεις
+                    </a>
+                </div>
+                <div style="margin-top:12px; background:#e3f2fd; border-radius:10px; padding:14px; font-size:.85rem; color:#37474f;">
+                    <strong>Γ' Γυμνάσιο — Φυσική:</strong> Ηλεκτρισμός &amp; Κυκλώματα, Νόμος Ohm, Ηλεκτρομαγνητισμός, Κύματα &amp; Ήχος<br>
+                    <strong>Γ' Γυμνάσιο — Χημεία:</strong> Χημικές Αντιδράσεις, Οξειδοαναγωγή, Χημεία Ατμόσφαιρας, Βιομηχανική Χημεία
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════ ΕΡΓΑΣΤΗΡΙΑ (Numbered Virtual Labs) ════════ -->
+        <div class="labs-section" id="section-ergastiria">
+            <div class="section-title" style="color:#1a237e; border-left-color:#1565c0;">
+                <i class="fa-solid fa-flask"></i> Εικονικά Εργαστήρια — Ακολουθία Παρέμβασης
+            </div>
+            <p style="color:#37474f; font-size:.88rem; margin-bottom:4px;">
+                Ολοκλήρωσε τα εργαστήρια <strong>με τη σειρά</strong>. Πριν ξεκινήσεις, βεβαιώσου ότι έχεις συμπληρώσει την <a href="#section-dokimasies" style="color:#e65100;">Αρχική Δοκιμασία</a>.
+            </p>
+            <p style="color:#78909c; font-size:.8rem; margin-bottom:16px;">Β' Γυμνάσιο: Εργαστήρια 1–3 (Θερμοδυναμική) &nbsp;|&nbsp; Γ' Γυμνάσιο: Εργαστήρια 1–5 (Ηλεκτρισμός)</p>
+            <div class="lab-cards-grid">
+
+                <div class="lab-card">
+                    <div class="lab-num">ΕΡΓΑΣΤΗΡΙΟ 1</div>
+                    <div style="font-size:1.8rem; margin-top:8px;">⚡</div>
+                    <h4>Ηλεκτρικά Κυκλώματα DC</h4>
+                    <span class="lab-badge">Γ' Γυμνάσιο · Ηλεκτρισμός</span>
+                    <p>Κατασκευή απλών &amp; σύνθετων κυκλωμάτων. Μέτρηση τάσης (V) και έντασης (A) με εικονικό βολτόμετρο &amp; αμπερόμετρο.</p>
+                    <a href="https://phet.colorado.edu/el/simulations/circuit-construction-kit-dc" target="_blank">▶ PhET Κυκλώματα</a>
+                </div>
+
+                <div class="lab-card">
+                    <div class="lab-num">ΕΡΓΑΣΤΗΡΙΟ 2</div>
+                    <div style="font-size:1.8rem; margin-top:8px;">📊</div>
+                    <h4>Νόμος Ohm — Χαρακτηριστική I-V</h4>
+                    <span class="lab-badge">Γ' Γυμνάσιο · Ηλεκτρισμός</span>
+                    <p>Μέτρηση I για διάφορες τιμές V. Κατασκευή χαρακτηριστικής καμπύλης I-V. Υπολογισμός αντίστασης R=V/I.</p>
+                    <a href="https://phet.colorado.edu/el/simulations/circuit-construction-kit-dc" target="_blank">▶ PhET Κυκλώματα</a>
+                </div>
+
+                <div class="lab-card">
+                    <div class="lab-num">ΕΡΓΑΣΤΗΡΙΟ 3</div>
+                    <div style="font-size:1.8rem; margin-top:8px;">🔋</div>
+                    <h4>Σύνδεση Αντιστάσεων</h4>
+                    <span class="lab-badge">Γ' Γυμνάσιο · Ηλεκτρισμός</span>
+                    <p>Σειρά vs παράλληλη σύνδεση. Σύγκριση ολικής αντίστασης με πειραματικές μετρήσεις &amp; θεωρητικούς υπολογισμούς.</p>
+                    <a href="https://phet.colorado.edu/el/simulations/circuit-construction-kit-dc" target="_blank">▶ PhET Κυκλώματα</a>
+                </div>
+
+                <div class="lab-card" style="border-left-color:#c62828;">
+                    <div class="lab-num" style="background:#c62828;">ΕΡΓΑΣΤΗΡΙΟ 4</div>
+                    <div style="font-size:1.8rem; margin-top:8px;">🌡️</div>
+                    <h4>Θερμοκρασία &amp; Θερμική Διαστολή</h4>
+                    <span class="lab-badge" style="background:#c62828;">Β' Γυμνάσιο · Θερμοδυναμική</span>
+                    <p>Μέτρηση θερμοκρασίας με phyphox. Γραφική παράσταση διαστολής στερεών &amp; υγρών. Σύνδεση με καθημερινά φαινόμενα.</p>
+                    <a href="https://phyphox.org" target="_blank" style="background:#c62828;">▶ phyphox.org</a>
+                </div>
+
+                <div class="lab-card" style="border-left-color:#c62828;">
+                    <div class="lab-num" style="background:#c62828;">ΕΡΓΑΣΤΗΡΙΟ 5</div>
+                    <div style="font-size:1.8rem; margin-top:8px;">💨</div>
+                    <h4>Κινητική Θεωρία Αερίων</h4>
+                    <span class="lab-badge" style="background:#c62828;">Β' Γυμνάσιο · Θερμοδυναμική</span>
+                    <p>Προσομοίωση μορίων αερίου. Σχέση θερμοκρασίας–πίεσης. Νόμος Gay-Lussac με γραφική παράσταση P-T.</p>
+                    <a href="https://phet.colorado.edu/el/simulations/gas-properties" target="_blank" style="background:#c62828;">▶ PhET Αέρια</a>
+                </div>
+
+            </div>
+        </div>
+
         <!-- Controls & Categories -->
         <div class="action-row">
             <div class="cat-filters">
@@ -615,6 +932,7 @@
         <div class="grid" id="content-grid"></div>
 
         <!-- ════════ QUIZ SECTION ════════ -->
+        <div id="section-quiz"></div>
         <div class="section-box" id="section-quiz-physics" style="margin-top:25px; border: 2px solid #0d47a1; background: linear-gradient(to bottom right, #e3f2fd, #fff);">
             <div class="section-title" style="color: #0d47a1;">
                 <i class="fa-solid fa-trophy"></i> Παιχνίδι Γνώσεων Φυσικής 🏆
@@ -750,7 +1068,7 @@
         </div>
 
         <!-- ════════ SIMULATIONS SECTION ════════ -->
-        <div class="section-box">
+        <div class="section-box" id="section-prosomioseis">
             <div class="section-title">
                 <i class="fa-solid fa-laptop-code"></i> Εικονικά Εργαστήρια & Προσομοιώσεις
             </div>
@@ -1000,7 +1318,7 @@
         </div>
 
         <!-- ════════ MOVIES SECTION ════════ -->
-        <div class="section-box">
+        <div class="section-box" id="section-tainies">
             <div class="section-title">
                 <i class="fa-solid fa-film"></i> Ταινίες Επιστήμης — Science Films Club 🎬
             </div>
@@ -1270,7 +1588,7 @@
     </div>
 
     <!-- ════════ BIOGRAPHIES SECTION ════════ -->
-    <div class="section-box" id="section-bio">
+    <div class="section-box" id="section-biographies">
         <div class="section-title"><i class="fa-solid fa-microscope"></i> Βιογραφίες Σημαντικών Φυσικών 🔬</div>
         <p style="color:#555;font-size:.88rem;margin-bottom:18px;">Οι επιστήμονες που άλλαξαν την εικόνα μας για τον κόσμο — και τιμήθηκαν με Νόμπελ Φυσικής.</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;">
@@ -1707,6 +2025,23 @@
 
         // Initial Render
         render();
+
+        // ════════ ΘΕΩΡΙΑ TABS ════════
+        function switchTheoriaTab(tab) {
+            const b = document.getElementById('theoria-b');
+            const g = document.getElementById('theoria-g');
+            const tbB = document.getElementById('tab-theoria-b');
+            const tbG = document.getElementById('tab-theoria-g');
+            if (tab === 'b') {
+                b.style.display = '';  g.style.display = 'none';
+                tbB.style.background = '#1565c0'; tbB.style.color = '#fff';
+                tbG.style.background = '#e3f2fd'; tbG.style.color = '#1565c0';
+            } else {
+                b.style.display = 'none'; g.style.display = '';
+                tbG.style.background = '#1565c0'; tbG.style.color = '#fff';
+                tbB.style.background = '#e3f2fd'; tbB.style.color = '#1565c0';
+            }
+        }
 
         // ════════ QUIZ GAME ════════
         const quizBank = [
