@@ -241,7 +241,7 @@ body { background: #111; display: flex; justify-content: center; align-items: fl
 .footer-left span { font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 1px; }
 .footer-left strong { color: rgba(255,255,255,0.65); font-size: 12px; }
 .qr-placeholder {
-  width: 80px; height: 88px;
+  width: 160px; height: 170px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -250,10 +250,16 @@ body { background: #111; display: flex; justify-content: center; align-items: fl
   letter-spacing: 1px;
   text-align: center;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
+}
+#qrDiv {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 6px;
+  display: inline-block;
 }
 #qrDiv img, #qrDiv canvas {
-  border-radius: 6px;
+  border-radius: 4px;
   display: block;
 }
 </style>
@@ -511,9 +517,9 @@ for (let i = 0; i < 120; i++) {
 // ── real QR code (pure JS, no network) ──
 new QRCode(document.getElementById('qrDiv'), {
   text: 'https://phalexandra32-dot.github.io/omilos-fysikis-gourias/',
-  width: 72, height: 72,
-  colorDark: '#ffffff',
-  colorLight: '#00000000',
+  width: 148, height: 148,
+  colorDark: '#000000',
+  colorLight: '#ffffff',
   correctLevel: QRCode.CorrectLevel.M
 });
 
