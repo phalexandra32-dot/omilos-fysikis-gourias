@@ -1020,6 +1020,7 @@ canvas{display:block;width:100%;border-radius:8px;cursor:default}
 function showChap(i){
   document.querySelectorAll('.chapter').forEach((c,j)=>c.classList.toggle('active',i===j));
   document.querySelectorAll('#chapNav button').forEach((b,j)=>b.classList.toggle('active',i===j));
+  if(i!==5 && window.statesStop) window.statesStop();
 }
 function showSec(ch,sec){
   const chapter=document.getElementById('ch'+ch);
@@ -1029,6 +1030,11 @@ function showSec(ch,sec){
   if(sec===1){
     const drawFns=[calcDensity,drawMotion,drawSpring,drawPressure,drawEnergy,drawHeat,drawElec];
     if(drawFns[ch]) requestAnimationFrame(()=>drawFns[ch]());
+    // States-of-matter simulation for ch5
+    if(ch===5 && window.statesStart) requestAnimationFrame(window.statesStart);
+  } else {
+    // Stop states animation when leaving ch5 experiment tab
+    if(ch===5 && window.statesStop) window.statesStop();
   }
 }
 
@@ -2396,10 +2402,20 @@ drawElec();
 
   function setupCanvas(){
     const canvas=getCanvas(); if(!canvas)return;
-    const W=Math.min(500, canvas.parentElement.clientWidth-4);
+    let cw=canvas.parentElement.clientWidth-4;
+    if(cw<=0) cw=canvas.getBoundingClientRect().width||380;
+    if(cw<=0) cw=380;
+    const W=Math.min(500, cw);
     canvas.width=W; canvas.height=Math.round(W*0.56);
     initParticles(canvas);
   }
+
+  window.statesStart=function(){
+    if(!animId){ setupCanvas(); loop(); }
+  };
+  window.statesStop=function(){
+    if(animId){ cancelAnimationFrame(animId); animId=null; }
+  };
 
   window.statesOnSlider=function(){
     const T=parseInt(document.getElementById('statesTempSlider').value);
