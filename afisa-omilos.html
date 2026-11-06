@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Αφίσα Ομίλου</title>
+<style>
+:root {
+  --phys: #0d47a1;
+  --chem: #004d40;
+  --gold: #ffd54f;
+  --light: #e3f2fd;
+  --spark: #ff6f00;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #111; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 20px; font-family: 'Segoe UI', system-ui, sans-serif; }
+
+.poster {
+  width: 794px;
+  min-height: 1123px;
+  background: linear-gradient(160deg, #0a1628 0%, #0d2b4e 35%, #0a1f1a 70%, #061710 100%);
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 20px 80px rgba(0,0,0,0.9);
+}
+
+/* ── starfield ── */
+.stars { position: absolute; inset: 0; }
+.star { position: absolute; border-radius: 50%; background: white; animation: twinkle var(--d,3s) ease-in-out infinite var(--delay,0s); }
+@keyframes twinkle { 0%,100%{opacity:.15} 50%{opacity:1} }
+
+/* ── glowing orbs ── */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: .25;
+  pointer-events: none;
+}
+.orb-blue { width: 500px; height: 500px; background: radial-gradient(circle, #1565c0, transparent); top: -100px; left: -100px; }
+.orb-teal { width: 400px; height: 400px; background: radial-gradient(circle, #00695c, transparent); bottom: -80px; right: -80px; }
+.orb-gold { width: 300px; height: 300px; background: radial-gradient(circle, #ff8f00, transparent); top: 400px; left: 300px; opacity: .15; }
+
+/* ── header strip ── */
+.header {
+  position: relative;
+  padding: 40px 48px 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.school-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 10px;
+}
+.title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+.atom-icon {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.titles h1 {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #64b5f6, #80cbc4, #ffd54f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+.titles h2 {
+  font-size: 15px;
+  color: rgba(255,255,255,0.55);
+  font-weight: 400;
+  margin-top: 6px;
+  letter-spacing: 1px;
+}
+.year-badge {
+  margin-left: auto;
+  background: linear-gradient(135deg, var(--gold), #ff8f00);
+  color: #1a0a00;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  align-self: flex-start;
+  margin-top: 6px;
+  white-space: nowrap;
+}
+
+/* ── hero canvas strip ── */
+.canvas-strip {
+  position: relative;
+  margin: 0 48px;
+  padding: 28px 0 20px;
+}
+.canvas-strip canvas {
+  width: 100%;
+  height: 160px;
+  border-radius: 12px;
+  display: block;
+}
+.canvas-label {
+  font-size: 10px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 2px;
+  text-align: center;
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+
+/* ── section title ── */
+.section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  padding: 0 48px;
+  margin-bottom: 16px;
+}
+
+/* ── activity tags strip ── */
+.activity-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0 48px;
+  margin-bottom: 22px;
+  align-items: center;
+}
+.act-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .3px;
+  border: 1px solid;
+}
+.act-pill.phys {
+  background: rgba(21,101,192,.12);
+  border-color: rgba(66,165,245,.3);
+  color: #90caf9;
+}
+.act-pill.chem {
+  background: rgba(0,105,92,.12);
+  border-color: rgba(77,182,172,.3);
+  color: #80cbc4;
+}
+.act-pill.both {
+  background: rgba(255,111,0,.1);
+  border-color: rgba(255,213,79,.25);
+  color: #ffe082;
+}
+.act-pill .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.phys .dot { background: #42a5f5; }
+.chem .dot { background: #4db6ac; }
+.both .dot { background: #ffd54f; }
+
+/* ── photo collage ── */
+.collage {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 130px 130px;
+  gap: 8px;
+  padding: 0 48px;
+  margin-bottom: 22px;
+}
+.photo {
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+.photo.tall { grid-row: span 2; }
+.photo canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.photo svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.photo-label {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 6px 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  background: linear-gradient(to top, rgba(0,0,0,.7), transparent);
+  color: rgba(255,255,255,.85);
+}
+
+/* ── quote bar ── */
+.quote-bar {
+  margin: 0 48px 28px;
+  padding: 18px 24px;
+  background: rgba(255,213,79,.06);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+}
+.quote-bar p {
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.6;
+}
+.quote-bar cite {
+  display: block;
+  font-size: 11px;
+  color: rgba(255,213,79,0.6);
+  margin-top: 6px;
+  font-style: normal;
+  letter-spacing: 1px;
+}
+
+/* ── footer ── */
+.poster-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 48px 36px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.footer-left { display: flex; flex-direction: column; gap: 4px; }
+.footer-left span { font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 1px; }
+.footer-left strong { color: rgba(255,255,255,0.65); font-size: 12px; }
+.qr-placeholder {
+  width: 72px; height: 72px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 1px;
+  text-align: center;
+  flex-direction: column;
+  gap: 3px;
+}
+.qr-grid {
+  display: grid;
+  grid-template-columns: repeat(5,8px);
+  grid-template-rows: repeat(5,8px);
+  gap: 2px;
+}
+.qr-cell { border-radius: 1px; background: rgba(255,255,255,0.4); }
+.qr-cell.on { background: rgba(255,255,255,0.8); }
+</style>
+</head>
+<body>
+<div class="poster">
+
+  <!-- Background -->
+  <div class="stars" id="stars"></div>
+  <div class="orb orb-blue"></div>
+  <div class="orb orb-teal"></div>
+  <div class="orb orb-gold"></div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="school-label">Γυμνάσιο Γουριάς · Αιτωλοακαρνανίας</div>
+    <div class="title-row">
+      <svg class="atom-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="36" cy="36" rx="30" ry="10" stroke="url(#a)" stroke-width="2" fill="none"/>
+        <ellipse cx="36" cy="36" rx="30" ry="10" stroke="url(#b)" stroke-width="2" fill="none" transform="rotate(60 36 36)"/>
+        <ellipse cx="36" cy="36" rx="30" ry="10" stroke="url(#c)" stroke-width="2" fill="none" transform="rotate(120 36 36)"/>
+        <circle cx="36" cy="36" r="5" fill="url(#d)"/>
+        <defs>
+          <linearGradient id="a" x1="6" y1="36" x2="66" y2="36" gradientUnits="userSpaceOnUse"><stop stop-color="#42a5f5"/><stop offset="1" stop-color="#1565c0"/></linearGradient>
+          <linearGradient id="b" x1="6" y1="36" x2="66" y2="36" gradientUnits="userSpaceOnUse"><stop stop-color="#4db6ac"/><stop offset="1" stop-color="#00695c"/></linearGradient>
+          <linearGradient id="c" x1="6" y1="36" x2="66" y2="36" gradientUnits="userSpaceOnUse"><stop stop-color="#ffd54f"/><stop offset="1" stop-color="#ff8f00"/></linearGradient>
+          <radialGradient id="d" cx="50%" cy="50%" r="50%"><stop stop-color="#fff9c4"/><stop offset="1" stop-color="#ffd54f"/></radialGradient>
+        </defs>
+      </svg>
+      <div class="titles">
+        <h1>Όμιλος Φυσικών Επιστημών</h1>
+        <h2>Φυσική &amp; Χημεία · Γυμνάσιο Γουριάς</h2>
+      </div>
+      <div class="year-badge">2026 – 2027</div>
+    </div>
+  </div>
+
+  <!-- Live canvas: particle simulation -->
+  <div class="canvas-strip">
+    <canvas id="heroCanvas"></canvas>
+    <div class="canvas-label">⚡ Προσομοίωση Σωματιδίων · Ηλεκτρομαγνητισμός &amp; Κβαντική</div>
+  </div>
+
+  <!-- Activity pills -->
+  <div class="section-title">Δράσεις του Ομίλου Φυσικής &amp; Χημείας</div>
+  <div class="activity-strip">
+    <div class="act-pill phys"><div class="dot"></div>Προσομοιώσεις Φυσικής</div>
+    <div class="act-pill chem"><div class="dot"></div>Πειράματα Χημείας</div>
+    <div class="act-pill phys"><div class="dot"></div>Projects &amp; Έρευνα</div>
+    <div class="act-pill chem"><div class="dot"></div>Κατασκευές</div>
+    <div class="act-pill both"><div class="dot"></div>Παρουσιάσεις</div>
+    <div class="act-pill both"><div class="dot"></div>Φύλλα Εργασίας</div>
+  </div>
+
+  <!-- Photo collage (canvas placeholders — αντικαταστήστε με πραγματικές φωτογραφίες) -->
+  <div class="section-title">Στιγμές από τον Όμιλο</div>
+  <div class="collage">
+    <div class="photo tall" id="ph0"><svg viewBox="0 0 200 270" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="270" fill="#0a1628"/>
+<!-- Physics experiment: pendulum + spring scale -->
+<line x1="30" y1="20" x2="170" y2="20" stroke="#42a5f5" stroke-width="3" stroke-linecap="round"/>
+<line x1="100" y1="20" x2="78" y2="100" stroke="#90caf9" stroke-width="2"/>
+<circle cx="78" cy="110" r="12" fill="none" stroke="#42a5f5" stroke-width="2"/>
+<circle cx="78" cy="110" r="5" fill="#ffd54f"/>
+<!-- spring scale on right -->
+<line x1="140" y1="20" x2="140" y2="60" stroke="#90caf9" stroke-width="2"/>
+<path d="M133 60 Q140 65 147 60 Q140 70 133 65 Q140 75 147 70 Q140 80 133 75 Q140 85 147 80 Q140 90 133 85 Q140 95 147 90" stroke="#4db6ac" stroke-width="1.5" fill="none"/>
+<rect x="130" y="90" width="20" height="30" rx="3" fill="none" stroke="#4db6ac" stroke-width="2"/>
+<line x1="140" y1="120" x2="140" y2="145" stroke="#90caf9" stroke-width="2"/>
+<rect x="128" y="145" width="24" height="16" rx="3" fill="#1565c0" stroke="#42a5f5" stroke-width="1.5"/>
+<!-- table -->
+<line x1="20" y1="200" x2="180" y2="200" stroke="#546e7a" stroke-width="3" stroke-linecap="round"/>
+<line x1="40" y1="200" x2="40" y2="230" stroke="#546e7a" stroke-width="2"/>
+<line x1="160" y1="200" x2="160" y2="230" stroke="#546e7a" stroke-width="2"/>
+<!-- ruler on table -->
+<rect x="30" y="188" width="90" height="10" rx="2" fill="#37474f" stroke="#78909c" stroke-width="1"/>
+<line x1="40" y1="188" x2="40" y2="193" stroke="#90a4ae" stroke-width="1"/>
+<line x1="55" y1="188" x2="55" y2="193" stroke="#90a4ae" stroke-width="1"/>
+<line x1="70" y1="188" x2="70" y2="193" stroke="#90a4ae" stroke-width="1"/>
+<line x1="85" y1="188" x2="85" y2="193" stroke="#90a4ae" stroke-width="1"/>
+<line x1="100" y1="188" x2="100" y2="193" stroke="#90a4ae" stroke-width="1"/>
+<!-- weight on table -->
+<rect x="145" y="175" width="22" height="22" rx="3" fill="#1565c0" stroke="#42a5f5" stroke-width="1.5"/>
+<text x="156" y="190" text-anchor="middle" fill="#ffd54f" font-size="8" font-family="monospace">1kg</text>
+<!-- label -->
+<text x="100" y="250" text-anchor="middle" fill="#90caf9" font-size="9" font-family="sans-serif" letter-spacing="1">ΦΥΣΙΚΗ · ΜΗΧΑΝΙΚΗ</text>
+</svg><div class="photo-label">Πειράματα Φυσικής</div></div>
+    <div class="photo" id="ph1"><svg viewBox="0 0 200 135" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="135" fill="#071510"/>
+<!-- Chemistry: 2 flasks with reaction -->
+<!-- left flask -->
+<path d="M60 30 L60 70 L35 110 Q33 115 38 118 L82 118 Q87 115 85 110 L60 70" stroke="#4db6ac" stroke-width="2" fill="rgba(0,105,92,0.3)"/>
+<line x1="52" y1="30" x2="68" y2="30" stroke="#4db6ac" stroke-width="2.5" stroke-linecap="round"/>
+<ellipse cx="60" cy="100" rx="18" ry="8" fill="rgba(77,182,172,0.5)"/>
+<!-- bubbles in left flask -->
+<circle cx="52" cy="88" r="3" fill="none" stroke="#80cbc4" stroke-width="1"/>
+<circle cx="62" cy="93" r="2" fill="none" stroke="#80cbc4" stroke-width="1"/>
+<circle cx="58" cy="80" r="2.5" fill="none" stroke="#80cbc4" stroke-width="1"/>
+<!-- reaction arrow -->
+<line x1="95" y1="75" x2="115" y2="75" stroke="#ffd54f" stroke-width="2"/>
+<polygon points="115,70 125,75 115,80" fill="#ffd54f"/>
+<!-- sparks -->
+<line x1="108" y1="62" x2="112" y2="55" stroke="#ff8f00" stroke-width="1.5"/>
+<line x1="112" y1="65" x2="118" y2="60" stroke="#ff8f00" stroke-width="1.5"/>
+<line x1="106" y1="68" x2="100" y2="63" stroke="#ff8f00" stroke-width="1.5"/>
+<!-- right flask (erlenmeyer) -->
+<path d="M150 25 L150 65 L125 108 Q123 113 128 116 L172 116 Q177 113 175 108 L150 65" stroke="#ff8f00" stroke-width="2" fill="rgba(230,81,0,0.2)"/>
+<line x1="142" y1="25" x2="158" y2="25" stroke="#ff8f00" stroke-width="2.5" stroke-linecap="round"/>
+<ellipse cx="150" cy="98" rx="18" ry="7" fill="rgba(255,111,0,0.5)"/>
+<!-- bubbles rising -->
+<circle cx="143" cy="82" r="2.5" fill="none" stroke="#ffcc02" stroke-width="1"/>
+<circle cx="152" cy="86" r="2" fill="none" stroke="#ffcc02" stroke-width="1"/>
+<circle cx="148" cy="74" r="3" fill="none" stroke="#ffcc02" stroke-width="1"/>
+<text x="100" y="130" text-anchor="middle" fill="#4db6ac" font-size="8" font-family="sans-serif" letter-spacing="1">ΧΗΜΙΚΕΣ ΑΝΤΙΔΡΑΣΕΙΣ</text>
+</svg><div class="photo-label">Χημικές Αντιδράσεις</div></div>
+    <div class="photo" id="ph2"><svg viewBox="0 0 200 135" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="135" fill="#0d0f1a"/>
+<!-- Digital simulation: atom model on screen -->
+<!-- laptop/screen frame -->
+<rect x="20" y="15" width="160" height="100" rx="6" fill="#1a1a2e" stroke="#42a5f5" stroke-width="2"/>
+<rect x="26" y="21" width="148" height="88" rx="3" fill="#0d1b2a"/>
+<!-- atom nucleus -->
+<circle cx="100" cy="65" r="10" fill="rgba(255,213,79,0.8)" stroke="#ffd54f" stroke-width="1.5"/>
+<circle cx="100" cy="65" r="5" fill="#ff8f00"/>
+<!-- orbit 1 -->
+<ellipse cx="100" cy="65" rx="38" ry="14" fill="none" stroke="rgba(66,165,245,0.7)" stroke-width="1.5"/>
+<circle cx="62" cy="65" r="4" fill="#42a5f5"/>
+<!-- orbit 2 rotated -->
+<ellipse cx="100" cy="65" rx="38" ry="14" fill="none" stroke="rgba(77,182,172,0.7)" stroke-width="1.5" transform="rotate(60 100 65)"/>
+<circle cx="119" cy="98" r="4" fill="#4db6ac"/>
+<!-- orbit 3 -->
+<ellipse cx="100" cy="65" rx="38" ry="14" fill="none" stroke="rgba(255,160,0,0.6)" stroke-width="1.5" transform="rotate(-60 100 65)"/>
+<circle cx="119" cy="32" r="4" fill="#ffa000"/>
+<!-- grid lines on screen -->
+<line x1="26" y1="38" x2="174" y2="38" stroke="rgba(66,165,245,0.1)" stroke-width="1"/>
+<line x1="26" y1="92" x2="174" y2="92" stroke="rgba(66,165,245,0.1)" stroke-width="1"/>
+<line x1="68" y1="21" x2="68" y2="109" stroke="rgba(66,165,245,0.1)" stroke-width="1"/>
+<line x1="132" y1="21" x2="132" y2="109" stroke="rgba(66,165,245,0.1)" stroke-width="1"/>
+<!-- laptop base -->
+<rect x="10" y="115" width="180" height="8" rx="3" fill="#263238" stroke="#37474f" stroke-width="1"/>
+<text x="100" y="130" text-anchor="middle" fill="#42a5f5" font-size="8" font-family="sans-serif" letter-spacing="1">ΨΗΦΙΑΚΕΣ ΠΡΟΣΟΜΟΙΩΣΕΙΣ</text>
+</svg><div class="photo-label">Κατασκευές</div></div>
+    <div class="photo" id="ph3"><svg viewBox="0 0 200 135" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="135" fill="#0a0f1e"/>
+<!-- Electric circuits experiment -->
+<!-- battery -->
+<rect x="15" y="55" width="30" height="18" rx="3" fill="#37474f" stroke="#78909c" stroke-width="1.5"/>
+<line x1="45" y1="58" x2="50" y2="58" stroke="#ff8f00" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="45" y1="70" x2="50" y2="70" stroke="#78909c" stroke-width="2.5" stroke-linecap="round"/>
+<text x="30" y="68" text-anchor="middle" fill="#ffd54f" font-size="7" font-family="monospace">9V</text>
+<!-- wires -->
+<polyline points="50,58 100,58 100,30 155,30" stroke="#ef5350" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="50,70 100,70 100,98 155,98" stroke="#42a5f5" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- resistor -->
+<line x1="155" y1="30" x2="162" y2="30" stroke="#ef5350" stroke-width="2"/>
+<rect x="162" y="24" width="24" height="12" rx="2" fill="#37474f" stroke="#ff7043" stroke-width="1.5"/>
+<line x1="186" y1="30" x2="192" y2="30" stroke="#ef5350" stroke-width="2"/>
+<!-- right wire down -->
+<line x1="192" y1="30" x2="192" y2="98" stroke="#78909c" stroke-width="2"/>
+<!-- bulb -->
+<circle cx="174" cy="98" r="12" fill="rgba(255,213,79,0.15)" stroke="#ffd54f" stroke-width="2"/>
+<line x1="171" y1="104" x2="171" y2="110" stroke="#ffd54f" stroke-width="1.5"/>
+<line x1="177" y1="104" x2="177" y2="110" stroke="#ffd54f" stroke-width="1.5"/>
+<line x1="168" y1="110" x2="180" y2="110" stroke="#78909c" stroke-width="2"/>
+<!-- glow -->
+<circle cx="174" cy="96" r="6" fill="rgba(255,213,79,0.4)"/>
+<line x1="174" y1="84" x2="174" y2="80" stroke="rgba(255,213,79,0.5)" stroke-width="1.5"/>
+<line x1="183" y1="87" x2="186" y2="84" stroke="rgba(255,213,79,0.5)" stroke-width="1.5"/>
+<line x1="165" y1="87" x2="162" y2="84" stroke="rgba(255,213,79,0.5)" stroke-width="1.5"/>
+<!-- ammeter -->
+<circle cx="100" cy="30" r="10" fill="#1a237e" stroke="#42a5f5" stroke-width="1.5"/>
+<text x="100" y="34" text-anchor="middle" fill="#42a5f5" font-size="9" font-family="sans-serif">A</text>
+<!-- voltmeter -->
+<circle cx="100" cy="98" r="10" fill="#1b5e20" stroke="#66bb6a" stroke-width="1.5"/>
+<text x="100" y="102" text-anchor="middle" fill="#66bb6a" font-size="9" font-family="sans-serif">V</text>
+<line x1="155" y1="98" x2="162" y2="98" stroke="#42a5f5" stroke-width="2"/>
+<line x1="186" y1="98" x2="192" y2="98" stroke="#42a5f5" stroke-width="2"/>
+<text x="100" y="128" text-anchor="middle" fill="#78909c" font-size="8" font-family="sans-serif" letter-spacing="1">ΗΛΕΚΤΡΙΚΑ ΚΥΚΛΩΜΑΤΑ</text>
+</svg><div class="photo-label">Προσομοιώσεις</div></div>
+    <div class="photo" id="ph4"><svg viewBox="0 0 200 135" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="135" fill="#0f0a1e"/>
+<!-- Presentation: students around table with project -->
+<!-- table -->
+<ellipse cx="100" cy="80" rx="65" ry="28" fill="rgba(55,71,79,0.5)" stroke="#546e7a" stroke-width="2"/>
+<!-- project board on table -->
+<rect x="72" y="55" width="56" height="38" rx="3" fill="#1a237e" stroke="#42a5f5" stroke-width="1.5"/>
+<line x1="78" y1="65" x2="120" y2="65" stroke="#42a5f5" stroke-width="1"/>
+<line x1="78" y1="72" x2="115" y2="72" stroke="#42a5f5" stroke-width="1"/>
+<!-- bar chart on board -->
+<rect x="80" y="75" width="6" height="12" fill="#42a5f5"/>
+<rect x="90" y="69" width="6" height="18" fill="#4db6ac"/>
+<rect x="100" y="73" width="6" height="14" fill="#ffd54f"/>
+<rect x="110" y="67" width="6" height="20" fill="#42a5f5"/>
+<!-- student figures around table -->
+<!-- top student -->
+<circle cx="100" cy="38" r="8" fill="#37474f" stroke="#78909c" stroke-width="1.5"/>
+<line x1="100" y1="46" x2="100" y2="58" stroke="#78909c" stroke-width="2"/>
+<!-- left student -->
+<circle cx="38" cy="78" r="8" fill="#37474f" stroke="#78909c" stroke-width="1.5"/>
+<line x1="46" y1="78" x2="68" y2="78" stroke="#78909c" stroke-width="2"/>
+<!-- right student -->
+<circle cx="162" cy="78" r="8" fill="#37474f" stroke="#78909c" stroke-width="1.5"/>
+<line x1="154" y1="78" x2="132" y2="78" stroke="#78909c" stroke-width="2"/>
+<!-- bottom student -->
+<circle cx="100" cy="118" r="8" fill="#37474f" stroke="#4db6ac" stroke-width="1.5"/>
+<line x1="100" y1="110" x2="100" y2="98" stroke="#4db6ac" stroke-width="2"/>
+<!-- speech bubble from top student -->
+<ellipse cx="120" cy="28" rx="18" ry="10" fill="rgba(66,165,245,0.15)" stroke="#42a5f5" stroke-width="1"/>
+<text x="120" y="31" text-anchor="middle" fill="#90caf9" font-size="7">E=mc²</text>
+<text x="100" y="134" text-anchor="middle" fill="#b39ddb" font-size="8" font-family="sans-serif" letter-spacing="1">ΠΑΡΟΥΣΙΑΣΕΙΣ &amp; PROJECTS</text>
+</svg><div class="photo-label">Projects &amp; Παρουσιάσεις</div></div>
+  </div>
+
+  <!-- Quote -->
+  <div class="quote-bar">
+    <p>«Η επιστήμη δεν είναι μόνο ένα σώμα γνώσης· είναι ένας τρόπος σκέψης — ένας τρόπος αμφισβήτησης, δοκιμής, ανακάλυψης.»</p>
+    <cite>— Carl Sagan</cite>
+  </div>
+
+  <!-- Footer -->
+  <div class="poster-footer">
+    <div class="footer-left">
+      <span>Εγγραφές &amp; Πληροφορίες · Γυμνάσιο Γουριάς · Σχ. Έτος 2026–2027</span>
+      <strong>Υπεύθυνη Εκπαιδευτικός: Αλεξάνδρα Κούση</strong>
+      <span style="margin-top:3px;font-size:10px;opacity:.5;line-height:1.6">
+        Φυσικός · PhD Φυσικής, Παν. Θεσσαλίας<br>
+        MEd Ειδική Αγωγή &amp; Εκπαίδευση · MA Διδακτική Θετικών Επιστημών &amp; ΤΠΕ, Παν. Αιγαίου
+      </span>
+    </div>
+    <div style="text-align:center">
+      <div class="qr-placeholder">
+        <div class="qr-grid" id="qrGrid"></div>
+        <span style="margin-top:4px;font-size:8px;letter-spacing:0">QR · Ιστοσελίδα</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── stars ──
+const starsEl = document.getElementById('stars');
+for (let i = 0; i < 120; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const size = Math.random() * 2.5 + 0.5;
+  s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;
+    --d:${(Math.random()*4+2).toFixed(1)}s;--delay:-${(Math.random()*5).toFixed(1)}s`;
+  starsEl.appendChild(s);
+}
+
+// collage uses inline SVGs
+
+
+// ── fake QR pattern ──
+const qrGrid = document.getElementById('qrGrid');
+const pattern = [1,1,1,0,1,1,0,0,1,1,1,1,0,1,0,1,0,1,0,1,1,0,0,0,1];
+pattern.forEach(v => {
+  const c = document.createElement('div');
+  c.className = 'qr-cell' + (v ? ' on' : '');
+  qrGrid.appendChild(c);
+});
+
+// ── hero canvas: charged particle simulation ──
+const canvas = document.getElementById('heroCanvas');
+const dpr = window.devicePixelRatio || 1;
+const W = canvas.parentElement.clientWidth - 0;
+canvas.width = W * dpr;
+canvas.height = 160 * dpr;
+canvas.style.width = W + 'px';
+canvas.style.height = '160px';
+const ctx = canvas.getContext('2d');
+ctx.scale(dpr, dpr);
+const cW = W, cH = 160;
+
+// Colour palettes: physics (blue) & chemistry (teal/green)
+const palettes = [
+  ['#1565c0','#1976d2','#42a5f5','#90caf9','#bbdefb'],
+  ['#004d40','#00695c','#4db6ac','#80cbc4','#b2dfdb'],
+  ['#ff8f00','#ffa000','#ffd54f','#ffe082'],
+];
+
+class Particle {
+  constructor(type) {
+    this.reset(type);
+  }
+  reset(type) {
+    this.type = type || Math.floor(Math.random() * 3);
+    this.x = Math.random() * cW;
+    this.y = Math.random() * cH;
+    this.r = Math.random() * 3 + 1;
+    this.vx = (Math.random() - 0.5) * 1.4;
+    this.vy = (Math.random() - 0.5) * 1.4;
+    this.alpha = Math.random() * 0.5 + 0.4;
+    this.palette = palettes[this.type];
+    this.color = this.palette[Math.floor(Math.random() * this.palette.length)];
+    this.life = Math.random() * 300 + 200;
+    this.age = 0;
+    this.trail = [];
+    this.trailLen = Math.floor(Math.random() * 10 + 5);
+  }
+  update() {
+    this.trail.push({x: this.x, y: this.y});
+    if (this.trail.length > this.trailLen) this.trail.shift();
+    this.x += this.vx;
+    this.y += this.vy;
+    // Slight wave
+    this.vx += Math.sin(this.age * 0.03) * 0.03;
+    this.vy += Math.cos(this.age * 0.03) * 0.03;
+    // Damping
+    this.vx *= 0.998;
+    this.vy *= 0.998;
+    // Wrap
+    if (this.x < -10) this.x = cW + 10;
+    if (this.x > cW + 10) this.x = -10;
+    if (this.y < -10) this.y = cH + 10;
+    if (this.y > cH + 10) this.y = -10;
+    this.age++;
+  }
+  draw() {
+    // Trail
+    for (let i = 0; i < this.trail.length; i++) {
+      const t = i / this.trail.length;
+      ctx.beginPath();
+      ctx.arc(this.trail[i].x, this.trail[i].y, this.r * t * 0.6, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.globalAlpha = t * this.alpha * 0.4;
+      ctx.fill();
+    }
+    // Core glow
+    const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r * 2.5);
+    grad.addColorStop(0, this.color);
+    grad.addColorStop(1, 'transparent');
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r * 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = grad;
+    ctx.globalAlpha = this.alpha * 0.3;
+    ctx.fill();
+    // Core dot
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = this.color;
+    ctx.globalAlpha = this.alpha;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+}
+
+// Connection lines between close particles
+function drawConnections(particles) {
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const a = particles[i], b = particles[j];
+      const dist = Math.hypot(a.x - b.x, a.y - b.y);
+      if (dist < 90 && a.type === b.type) {
+        const alpha = (1 - dist / 90) * 0.25;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = a.color;
+        ctx.globalAlpha = alpha;
+        ctx.lineWidth = 0.6;
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+      }
+    }
+  }
+}
+
+const NUM = 55;
+const particles = [];
+for (let i = 0; i < NUM; i++) particles.push(new Particle(i % 3));
+
+let frame = 0;
+function animate() {
+  // Dark trail
+  ctx.fillStyle = 'rgba(10,22,40,0.25)';
+  ctx.fillRect(0, 0, cW, cH);
+
+  drawConnections(particles);
+  particles.forEach(p => { p.update(); p.draw(); });
+
+  // Scan line effect
+  frame++;
+  const scanY = (frame * 0.5) % (cH + 20) - 10;
+  const scanGrad = ctx.createLinearGradient(0, scanY - 20, 0, scanY + 20);
+  scanGrad.addColorStop(0, 'transparent');
+  scanGrad.addColorStop(0.5, 'rgba(100,180,255,0.04)');
+  scanGrad.addColorStop(1, 'transparent');
+  ctx.fillStyle = scanGrad;
+  ctx.globalAlpha = 1;
+  ctx.fillRect(0, scanY - 20, cW, 40);
+
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
