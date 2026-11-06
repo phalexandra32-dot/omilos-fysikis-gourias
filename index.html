@@ -1645,12 +1645,8 @@
             </div>
         </div>
 
-        <!-- ════════ ARTICLES SECTION ════════ -->
-        <div class="section-box">
-            <div class="section-title">
-                <i class="fa-solid fa-newspaper"></i> Άρθρα & Ενδιαφέροντα Θέματα
-            </div>
-            <div class="article-grid">
+        <!-- ════════ ARTICLES SECTION — removed per user request ════════ -->
+        <div style="display:none"><div class="article-grid">
                 <div class="article-card" data-club-show="physics">
                     <div class="a-cat">✈️ Αεροναυτική · Φυσική</div>
                     <h4>Πώς Πετάει ένα F-16: Φυσική 101</h4>
@@ -1708,7 +1704,7 @@
                     <p>Τη δεκαετία του 1970, οι ατμοσφαιρικοί χημικοί <strong>Mario Molina</strong> και <strong>F. Sherwood Rowland</strong> ανακάλυψαν ότι οι συνθετικές ουσίες CFCs (χλωροφθοράνθρακες) καταστρέφουν καταλυτικά το όζον στη στρατόσφαιρα. Η έρευνά τους οδήγησε στην ιστορική Συνθήκη του Μόντρεαλ το 1987, αποδεικνύοντας πώς η παγκόσμια επιστημονική συνεργασία μπορεί να σώσει το περιβάλλον του πλανήτη.</p>
                 </div>
             </div>
-        </div>
+        </div></div>
 
     </div>
 
@@ -2103,6 +2099,9 @@
             { id: 8, club: 'physics', cat: 'make', title: '🍋 Ηλεκτρογεννήτρια Λεμονιού', desc: 'Άναψε ένα LED με 4 λεμόνια! Χαλκός ως κάθοδος, γαλβανισμένο καρφί ως άνοδος.', link: '#section-constructions' },
             { id: 9, club: 'physics', cat: 'make', title: '☀️ Ηλιακός Θερμαντήρας Νερού', desc: 'Μαύρος σωλήνας κήπου + αλουμινόχαρτο = δωρεάν ζεστό νερό! Αρχές ηλιακής ενέργειας.', link: '#section-constructions' },
             { id: 10, club: 'physics', cat: 'make', title: '⏱️ Εκκρεμές & Μέτρηση g', desc: 'Με απλό νήμα και παξιμάδι επαλήθευσε T=2π√(L/g) και μέτρησε g πειραματικά!', link: '#section-constructions' },
+            // Physics — Articles
+            { id: 11, club: 'physics', cat: 'article', title: '🚗 Κινητήρας 4 Χρόνων: Βήμα-Βήμα', desc: 'Πώς η χημεία καύσης γίνεται κίνηση: εισαγωγή, συμπίεση, ανάφλεξη, εξαγωγή.', link: '#' },
+            { id: 12, club: 'physics', cat: 'article', title: '🧲 Maglev Τρένα: Φυσική Επίπλευσης', desc: 'Υπεραγωγιμότητα, φαινόμενο Meissner, και πώς επιτυγχάνεται 600 km/h χωρίς ρόδες.', link: '#' },
             // Physics — Movies
             { id: 13, club: 'physics', cat: 'movie', title: '🎬 Interstellar (2014)', desc: 'Βαρύτητα, διαστολή χρόνου, μαύρη τρύπα Gargantua. Ανάλυση Γενικής Σχετικότητας στην οθόνη.', link: 'https://www.youtube.com/watch?v=zSWdZVtXT7E' },
             { id: 14, club: 'physics', cat: 'movie', title: '🎬 Top Gun: Maverick (2022)', desc: 'Αεροδυναμική F/A-18, υπερηχητικές ταχύτητες Mach, φυσική μαχητικής πτήσης. Το αγαπημένο!', link: 'https://www.youtube.com/watch?v=giXco2jaZ_4' },
@@ -2126,6 +2125,10 @@
             { id: 109, club: 'chem', cat: 'make', title: '🌈 Χρωματογραφία από Μαρκαδόρους', desc: 'Διαχωρισμός χρωστικών στο φίλτρο καφέ. Απλή μέθοδος ανάλυσης μιγμάτων!', link: '#section-constructions' },
             { id: 119, club: 'chem', cat: 'make', title: '🧪 Elephant Toothpaste', desc: 'H₂O₂ + KI = εκρηκτικός αφρός O₂! Θεαματική επίδειξη κατάλυσης που θα εντυπωσιάσει!', link: '#section-constructions' },
             { id: 120, club: 'chem', cat: 'make', title: '💎 Κρύσταλλοι Alum', desc: 'Καλλιέργεια κρυστάλλων από υπέρκορο διάλυμα — φαινόμενο κρυστάλλωσης σε εξέλιξη!', link: '#section-constructions' },
+            // Chemistry — Articles
+            { id: 110, club: 'chem', cat: 'article', title: '🔋 Μπαταρίες Λιθίου: Από το Κινητό στο Tesla', desc: 'Αντιδράσεις οξειδοαναγωγής, Li⁺ ιόντα. Γιατί η θερμοκρασία καταστρέφει τις μπαταρίες.', link: '#' },
+            { id: 111, club: 'chem', cat: 'article', title: '🌿 Όζον: Ο Θυρεωρός της Ζωής', desc: 'Τι είναι το O₃, πώς σχηματίζεται, και γιατί τα CFC το καταστρέφουν. Η Συνθήκη Μόντρεαλ.', link: '#' },
+            { id: 112, club: 'chem', cat: 'article', title: '⚗️ Πώς Φτιάχνεται το Ατσάλι;', desc: 'Αναγωγή σιδήρου με κάρβουνο, θερμοκρασίες 1500°C. Χημεία πίσω από τα αεροπλάνα.', link: '#' },
             // Chemistry — Movies
             { id: 113, club: 'chem', cat: 'movie', title: '🎬 The Martian (2015)', desc: 'Επιβίωση στον Άρη με χημεία! Παραγωγή νερού, καλλιέργεια πατάτας, χημεία ρόκετ.', link: 'https://www.youtube.com/watch?v=ej3ioOneTy8' },
             { id: 114, club: 'chem', cat: 'movie', title: '🎬 Oppenheimer (2023)', desc: 'Πυρηνική σχάση, αλυσιδωτή αντίδραση, E=mc². Η ιστορία της ατομικής βόμβας.', link: '#' },
