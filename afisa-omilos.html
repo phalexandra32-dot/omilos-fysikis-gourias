@@ -8,28 +8,28 @@
   Dark-only: committed to dark print/screen aesthetic
 */
 :root {
-  --bg:       #07111f;
-  --bg2:      #0d1e35;
-  --bg3:      #142540;
-  --fg:       #f0f4fa;
-  --fg2:      rgba(240,244,250,0.65);
-  --fg3:      rgba(240,244,250,0.32);
-  --gold:     #d4a52a;
-  --gold2:    #b8871a;
-  --gold-bg:  rgba(212,165,42,0.08);
-  --gold-bd:  rgba(212,165,42,0.28);
-  --blue:     #4a9edd;
-  --blue-bg:  rgba(74,158,221,0.09);
-  --teal:     #38c4b0;
-  --teal-bg:  rgba(56,196,176,0.09);
-  --div:      rgba(240,244,250,0.07);
+  --bg:       #f5f7fa;
+  --bg2:      #edf0f5;
+  --bg3:      #e2e8f0;
+  --fg:       #1a2540;
+  --fg2:      rgba(26,37,64,0.65);
+  --fg3:      rgba(26,37,64,0.42);
+  --gold:     #b8860b;
+  --gold2:    #9a6e08;
+  --gold-bg:  rgba(184,134,11,0.07);
+  --gold-bd:  rgba(184,134,11,0.30);
+  --blue:     #2a6faf;
+  --blue-bg:  rgba(42,111,175,0.08);
+  --teal:     #1f8f7c;
+  --teal-bg:  rgba(31,143,124,0.08);
+  --div:      rgba(26,37,64,0.10);
   --Fd: "EB Garamond", "Palatino Linotype", Georgia, serif;
   --Fb: "Inter", system-ui, -apple-system, sans-serif;
-  color-scheme: dark;
+  color-scheme: light;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  background: #040c18;
+  background: #d4d9e4;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -49,15 +49,15 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 40px 120px rgba(0,0,0,0.95), 0 0 0 1px rgba(212,165,42,0.18);
+  box-shadow: 0 20px 80px rgba(0,0,0,0.14), 0 0 0 1px rgba(184,134,11,0.15);
 }
 
 /* ── Ambient glows ── */
 .glows { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
 .g { position: absolute; border-radius: 50%; filter: blur(110px); pointer-events: none; }
-.g1 { width: 650px; height: 650px; background: radial-gradient(circle, rgba(74,158,221,0.07), transparent); top: -200px; left: -180px; }
-.g2 { width: 550px; height: 550px; background: radial-gradient(circle, rgba(56,196,176,0.05), transparent); bottom: -100px; right: -130px; }
-.g3 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(212,165,42,0.045), transparent); top: 420px; left: 220px; }
+.g1 { width: 650px; height: 650px; background: radial-gradient(circle, rgba(42,111,175,0.05), transparent); top: -200px; left: -180px; }
+.g2 { width: 550px; height: 550px; background: radial-gradient(circle, rgba(31,143,124,0.04), transparent); bottom: -100px; right: -130px; }
+.g3 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(184,134,11,0.035), transparent); top: 420px; left: 220px; }
 
 /* ── Top chrome rule ── */
 .rule-top {
@@ -440,15 +440,8 @@ body {
       <div class="act b">
         <div class="act-ic">📋</div>
         <div>
-          <div class="act-ttl">Φύλλα Εργασίας &amp; ΕΜΔ</div>
+          <div class="act-ttl">Φύλλα Εργασίας</div>
           <div class="act-dsc">Προσβάσιμο εκπαιδευτικό υλικό για όλους τους μαθητές</div>
-        </div>
-      </div>
-      <div class="act b">
-        <div class="act-ic">🏆</div>
-        <div>
-          <div class="act-ttl">Επιστημονικές Συναντήσεις</div>
-          <div class="act-dsc">Συνέδρια, ανακοινώσεις &amp; επιστημονική κοινότητα</div>
         </div>
       </div>
     </div>
