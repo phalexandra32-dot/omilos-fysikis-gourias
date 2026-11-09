@@ -416,6 +416,8 @@
         .card-body { padding: 15px; }
         .card-title { font-size: 1.1rem; margin-bottom: 8px; }
         .card-desc { font-size: 1rem; color: #555; margin-bottom: 12px; line-height: 1.65; }
+        .card-delete { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; margin-left: 12px; padding: 5px 10px; background: none; border: 1px solid #ccc; border-radius: 6px; color: #888; font-size: 0.8rem; cursor: pointer; }
+        .card-delete:hover { border-color: #c62828; color: #c62828; }
         .card-tag {
             display: inline-block;
             background: #f0f0f0;
@@ -2210,11 +2212,28 @@
             { id: 132, club: 'chem', cat: 'project', title: '💧 Ανάλυση Νερού Βρύσης vs Εμφιαλωμένου', desc: 'pH, σκληρότητα, χλώριο — ποιο νερό είναι καλύτερο χημικά; Αποτελέσματα με πραγματικά αντιδραστήρια.', link: '#' }
         ];
 
-        function getItems() {
+        // User-added items live in their own key and are merged with the built-in
+        // defaults, so updates to defaultData always show. The old 'club_data_2026'
+        // key stored a full stale copy of everything and is dropped on first load.
+        const USER_ITEMS_KEY = 'club_user_items_2026';
+        try { localStorage.removeItem('club_data_2026'); } catch(e) {}
+
+        function getUserItems() {
             try {
-                const stored = localStorage.getItem('club_data_2026');
-                return stored ? JSON.parse(stored) : defaultData;
-            } catch(e) { return defaultData; }
+                const stored = localStorage.getItem(USER_ITEMS_KEY);
+                const arr = stored ? JSON.parse(stored) : [];
+                return Array.isArray(arr) ? arr : [];
+            } catch(e) { return []; }
+        }
+
+        function getItems() {
+            return defaultData.concat(getUserItems());
+        }
+
+        function deleteUserItem(id) {
+            const rest = getUserItems().filter(i => i.id !== id);
+            try { localStorage.setItem(USER_ITEMS_KEY, JSON.stringify(rest)); } catch(e) {}
+            render();
         }
 
         function switchClub(club) {
@@ -2297,8 +2316,12 @@
                         <div class="card-title"><strong>${item.title}</strong></div>
                         <div class="card-desc">${item.desc}</div>
                         ${item.link && item.link !== '#' ? `<a href="${item.link}" target="_blank" style="color: var(--secondary-physics); font-weight: bold; font-size: 0.9rem;">Προβολή <i class="fa-solid fa-arrow-right"></i></a>` : '<span style="color:#aaa; font-size:0.85rem;">Υλικό σε ετοιμασία</span>'}
+                        ${item.user ? `<button type="button" class="card-delete" aria-label="Αφαίρεση κάρτας" title="Αφαίρεση (μόνο από αυτόν τον browser)"><i class="fa-solid fa-trash-can"></i> Αφαίρεση</button>` : ''}
                     </div>
                 `;
+                if (item.user) {
+                    card.querySelector('.card-delete').addEventListener('click', () => deleteUserItem(item.id));
+                }
                 grid.appendChild(card);
             });
         }
@@ -2334,17 +2357,18 @@
 
         function saveItem(e) {
             e.preventDefault();
-            const items = getItems();
+            const items = getUserItems();
             const newItem = {
                 id: Date.now(),
                 club: document.getElementById('itemClub').value,
                 cat: document.getElementById('itemCat').value,
                 title: document.getElementById('itemTitle').value,
                 desc: document.getElementById('itemDesc').value,
-                link: document.getElementById('itemLink').value || '#'
+                link: document.getElementById('itemLink').value || '#',
+                user: true
             };
             items.push(newItem);
-            try { localStorage.setItem('club_data_2026', JSON.stringify(items)); } catch(e) {}
+            try { localStorage.setItem(USER_ITEMS_KEY, JSON.stringify(items)); } catch(e) {}
             closeModal();
             render();
         }
