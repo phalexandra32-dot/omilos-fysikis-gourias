@@ -22,6 +22,8 @@
   .back { color: var(--muted); text-decoration: none; font-size: 0.92rem; }
   .back:hover { color: var(--fg); }
   .school { font-size: 0.8rem; color: var(--muted); }
+  .school a { color: var(--accent); font-weight: 600; text-decoration: none; }
+  .school a:hover { text-decoration: underline; }
   header.hero {
     background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border-radius: 14px;
     padding: 24px 26px; margin-bottom: 18px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); transition: background .3s;
@@ -96,7 +98,7 @@
 <div class="wrap">
   <div class="topbar">
     <a class="back" href="index.html"><i class="fa-solid fa-arrow-left"></i> Επιστροφή στην κεντρική σελίδα</a>
-    <span class="school">Όμιλος Φυσικών Επιστημών · Γυμνάσιο Γουριάς</span>
+    <span class="school">Όμιλος Φυσικών Επιστημών · Γυμνάσιο Γουριάς &nbsp;·&nbsp; <span id="other-club"></span></span>
   </div>
 
   <header class="hero" id="hero">
@@ -154,10 +156,18 @@ let solved = false;
 const $ = (id) => document.getElementById(id);
 const STORE = (k) => 'xword_' + k;
 
+function clubOf(k) { return k.startsWith('ximeia') ? 'chem' : 'physics'; }
+let CLUB = 'physics';
 function buildTabs() {
   const t = $('tabs');
   t.innerHTML = '';
-  ORDER.forEach(k => {
+  const h = $('hero').querySelector('h1');
+  h.innerHTML = '<i class="fa-solid fa-table-cells"></i> ' + (CLUB === 'chem' ? 'Σταυρόλεξο Χημείας' : 'Σταυρόλεξο Φυσικής');
+  document.title = (CLUB === 'chem' ? 'Σταυρόλεξο Χημείας' : 'Σταυρόλεξο Φυσικής') + ' — Όμιλος Φυσικών Επιστημών Γουριάς';
+  $('other-club').innerHTML = CLUB === 'chem'
+    ? '<a href="#fysiki-b"><i class="fa-solid fa-atom"></i> Σταυρόλεξα Φυσικής</a>'
+    : '<a href="#ximeia-b"><i class="fa-solid fa-flask"></i> Σταυρόλεξα Χημείας</a>';
+  ORDER.filter(k => clubOf(k) === CLUB).forEach(k => {
     const p = PUZZLES[k];
     const b = document.createElement('button');
     b.className = 'tab'; b.setAttribute('role', 'tab'); b.id = 'tab-' + k;
@@ -169,6 +179,7 @@ function buildTabs() {
 }
 
 function load(k) {
+  if (clubOf(k) !== CLUB) { CLUB = clubOf(k); buildTabs(); }
   cur = k; P = PUZZLES[k]; solved = false;
   document.querySelectorAll('.tab').forEach(b => b.setAttribute('aria-selected', b.id === 'tab-' + k ? 'true' : 'false'));
   document.documentElement.style.setProperty('--accent', P.color);
@@ -375,9 +386,12 @@ $('btn-clear').addEventListener('click', () => {
   setStatus('info', 'Το πλέγμα καθαρίστηκε. Καλή επιτυχία!');
 });
 
-buildTabs();
 const start = (location.hash || '').replace('#', '');
-load(PUZZLES[start] ? start : ORDER[0]);
+const startKey = PUZZLES[start] ? start : ORDER[0];
+CLUB = clubOf(startKey);
+buildTabs();
+load(startKey);
+window.addEventListener('hashchange', () => { const k = (location.hash || '').replace('#', ''); if (PUZZLES[k] && k !== cur) load(k); });
 window.addEventListener('resize', () => { const g = $('grid'); const size = Math.max(26, Math.min(44, Math.floor((Math.min(window.innerWidth, 1080) - 80) / P.cols))); g.style.setProperty('--cell', size + 'px'); g.style.gridTemplateColumns = `repeat(${P.cols}, ${size}px)`; });
 </script>
 </body>
