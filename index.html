@@ -171,7 +171,7 @@
             border-bottom: 2px solid #e0e0e0;
             box-shadow: 0 2px 10px rgba(0,0,0,.1);
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             gap: 4px;
             padding: 6px 10px;
             overflow-x: auto;
@@ -179,6 +179,18 @@
             scrollbar-width: none;
         }
         .anchor-nav::-webkit-scrollbar { display:none; }
+        /* Όλα τα κουμπιά του μενού πρέπει να φτάνονται. Σε στενή οθόνη το μενού κυλά οριζόντια, ξεκινώντας από το πρώτο κουμπί·
+           σε φαρδιά οθόνη όσα δεν χωρούν κατεβαίνουν σε δεύτερη σειρά. (Με κεντράρισμα, τα πρώτα κουμπιά έβγαιναν εκτός οθόνης.) */
+        .anchor-nav > a:first-child { margin-left: auto; }
+        .anchor-nav > a:last-child { margin-right: auto; }
+        @media (min-width: 900px) {
+            .anchor-nav { flex-wrap: wrap; justify-content: center; overflow-x: visible; }
+            .anchor-nav > a:first-child { margin-left: 0; }
+            .anchor-nav > a:last-child { margin-right: 0; }
+        }
+        /* Όταν πατιέται ένα κουμπί του μενού, η ενότητα σταματά κάτω από το μενού και όχι πίσω του. */
+        [id^="section-"] { scroll-margin-top: 70px; }
+        @media (min-width: 900px) { [id^="section-"] { scroll-margin-top: 118px; } }
         .anchor-nav a {
             display: inline-flex;
             align-items: center;
@@ -717,6 +729,7 @@
     <nav class="anchor-nav" aria-label="Πλοήγηση ενοτήτων">
         <a href="#section-theoria">📚 Θεωρία</a>
         <a href="#section-ergastiria">🔬 Εργαστήρια</a>
+        <a href="#section-perseas">🛡️ Περσέας</a>
         <a href="#section-iraklis">🦁 Ηρακλής</a>
         <a href="#section-prometheus">🔥 Προμηθέας</a>
         <a href="#section-odysseas">🌊 Οδυσσέας</a>
@@ -997,6 +1010,39 @@
 
         <!-- ════════ QUIZ SECTION ════════ -->
         <div id="section-quiz"></div>
+
+        <!-- Περσέας – Το Μυστήριο της Μέδουσας: παιχνίδι Φυσικής Γυμνασίου (το φως) -->
+        <div class="section-box" id="section-perseas" style="margin-top:25px; border: 2px solid #17635a; background: linear-gradient(to bottom right, #e0f2ef, #fff);">
+            <div class="section-title" style="color: #0f4f47;">
+                <i class="fa-solid fa-shield-halved"></i> Περσέας – Το Μυστήριο της Μέδουσας 🛡️
+            </div>
+            <div style="display:flex; gap:22px; flex-wrap:wrap; align-items:flex-start;">
+                <div style="flex:1 1 300px; background:linear-gradient(135deg,#07121a,#123a3f); border-radius:10px; padding:20px; text-align:center; box-shadow:0 4px 14px rgba(23,99,90,0.35); min-height:160px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                    <div style="font-size:4rem; margin-bottom:8px;">🛡️</div>
+                    <div style="color:#f1cc77; font-size:1.1rem; font-weight:bold; letter-spacing:0.05em;">ΠΕΡΣΕΑΣ</div>
+                    <div style="color:#c79245; font-size:0.85rem; margin-top:4px;">Το Μυστήριο της Μέδουσας</div>
+                </div>
+                <div style="flex:1 1 300px;">
+                    <p style="color:#555; font-size:0.95rem; margin-bottom:10px;">
+                        Όποιος κοιτάξει τη Μέδουσα κατάματα γίνεται πέτρα. Πώς θα τη νικήσει ο <strong>Περσέας</strong>
+                        χωρίς να την κοιτάξει; Η απάντηση κρύβεται στο <strong>φως</strong>: σκιές, καθρέφτες,
+                        ανάκλαση και διάθλαση — με οδηγούς την Αθηνά, τον Ερμή, τη Δανάη, την Ανδρομέδα και τον Πολυδέκτη.
+                    </p>
+                    <p style="color:#777; font-size:0.85rem; margin-bottom:16px;">
+                        Φυσική <strong>Γυμνασίου</strong> · 12 σταθμοί · ~45 λεπτά.
+                        Δέκα είδη γρίφων: παρείσακτος, σωστή ακτίνα, συμπλήρωση κενών, στόχευση με την ασπίδα,
+                        ουράνιο τόξο, σταυρόλεξα, ακροστιχίδες και άλλα.
+                        Παίζεται σε κινητό, tablet, υπολογιστή και διαδραστικό πίνακα.
+                        Εγκαθίσταται σαν εφαρμογή. Έχει κουμπί <strong>μεγαλύτερης γραμματοσειράς</strong> και απαλή μουσική αυλού.
+                    </p>
+                    <a href="perseas/"
+                       style="display:inline-block; background: linear-gradient(135deg, #0f4f47, #1f7a6d); color:white; padding:14px 32px; border-radius:8px; font-size:1.1rem; font-weight:bold; text-decoration:none; box-shadow: 0 4px 14px rgba(23,99,90,0.4);"
+                       onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+                        🛡️ Παίξε: Περσέας – Το Μυστήριο της Μέδουσας!
+                    </a>
+                </div>
+            </div>
+        </div>
 
         <!-- Ηρακλής – Οι 12 Άθλοι της Φυσικής και της Χημείας: παιχνίδι Φυσικής και Χημείας Γυμνασίου -->
         <div class="section-box" id="section-iraklis" style="margin-top:25px; border: 2px solid #8a5a12; background: linear-gradient(to bottom right, #fff8e1, #fff);">
