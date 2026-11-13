@@ -1,9 +1,9 @@
-// Οδυσσέας – Service Worker v2
+// Οδυσσέας – Service Worker v3 (νέα οπτικά SVG)
 // Το παιχνίδι ανοίγει και χωρίς σύνδεση.
 // Αγγίζει ΜΟΝΟ τα δικά του αποθηκευμένα αρχεία: στην ίδια διεύθυνση φιλοξενούνται
 // κι άλλα παιχνίδια (Λαβύρινθος, Ίκαρος, Προμηθέας), που κρατούν τα δικά τους αντίγραφα.
 const PREFIX = 'odysseas-';
-const CACHE = PREFIX + 'v1';
+const CACHE = PREFIX + 'v3';
 const SCOPE = self.registration.scope;
 const CORE = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
