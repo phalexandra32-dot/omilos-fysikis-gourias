@@ -3,1317 +3,1606 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
-<title>Ο Οδυσσέας και ο Κύκλωπας</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <meta name="theme-color" content="#04080f">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Οδυσσέας">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;0,700;1,400&display=swap">
+<title>Ο Οδυσσέας &amp; ο Κύκλωπας</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════ */
 :root {
-  font-size: 22px;
-  --bg: #04080f;
-  --bg2: #070e1a;
-  --bg3: #0a1525;
-  --panel: rgba(5,10,22,0.93);
-  --border: #1a3a6b;
+  --bg:          #04080f;
+  --bg2:         #080d16;
+  --gold:        #c9a84c;
+  --gold-dim:    #8a6f2e;
+  --gold-glow:   rgba(201,168,76,.35);
+  --sea1:        #42a5f5;
   --border-gold: #c9a84c;
-  --fg: #c8d8f0;
-  --fg2: #98b8d8;
-  --fg3: #6888a8;
-  --sea1: #42a5f5;
-  --sea2: #1565c0;
-  --sea3: #0d47a1;
-  --gold: #c9a84c;
-  --gold2: #e8c46e;
-  --success: #4caf7a;
-  --error: #e05c5c;
-  --stone: #546e7a;
-  --stone2: #78909c;
-  color-scheme: dark;
+  --rock:        #1a1f2e;
+  --rock2:       #0e1219;
+  --fire1:       #ff6b1a;
+  --fire2:       #ffb347;
+  --fire3:       #fff176;
+  --ember:       rgba(255,120,30,.7);
+  --smoke:       rgba(80,60,40,.18);
+  --text:        #e8dcc8;
+  --text-dim:    #a09070;
+  --radius:      10px;
+  --panel-bg:    rgba(14,18,25,.88);
+  --panel-border:1px solid rgba(201,168,76,.4);
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: 22px !important;
-  min-height: 100vh;
-  overflow-x: hidden;
-  padding-left: max(16px, env(safe-area-inset-left,0px));
-  padding-right: max(16px, env(safe-area-inset-right,0px));
-  padding-block: max(16px, env(safe-area-inset-top,0px)) max(16px, env(safe-area-inset-bottom,0px));
+/* ═══════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{height:100%;font-size:16px}
+body{
+  min-height:100vh;
+  font-family:'EB Garamond',Georgia,serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  padding-bottom:env(safe-area-inset-bottom);
 }
-body.font-large { font-size: 26px !important; }
 
-h1,h2,h3,h4 { font-family: 'Cinzel', serif; letter-spacing: 0.05em; }
-
-.screen {
-  position: fixed; inset: 0;
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.5s ease;
-  overflow-y: auto;
-  display: flex; flex-direction: column; align-items: center;
-  padding: 16px max(16px, env(safe-area-inset-left,0px));
-}
-.screen.active { opacity: 1; pointer-events: all; }
-
-/* ── BACKGROUND EFFECTS ── */
-#bg-cave {
-  position: fixed; inset: 0; z-index: -1;
+/* ═══════════════════════════════════════════
+   CAVE BACKGROUND
+═══════════════════════════════════════════ */
+#bg-cave{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
-    radial-gradient(ellipse at 50% 100%, #0d2a4a 0%, #07131f 40%, #04080f 70%),
-    radial-gradient(ellipse at 20% 30%, rgba(10,40,80,0.4) 0%, transparent 60%);
-}
-.drip {
-  position: fixed; top: -10px; z-index: 0;
-  width: 2px; background: linear-gradient(to bottom, #1a4a7a, transparent);
-  animation: drip-fall linear infinite;
-  pointer-events: none;
-}
-@keyframes drip-fall {
-  0%   { top: -10%; opacity: 0; }
-  10%  { opacity: 0.5; }
-  90%  { opacity: 0.3; }
-  100% { top: 100%; opacity: 0; }
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(42,165,245,.07) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 35% at 80% 70%, rgba(201,168,76,.05) 0%, transparent 70%),
+    radial-gradient(ellipse 100% 60% at 50% 100%, rgba(10,20,40,.9) 0%, transparent 80%),
+    linear-gradient(180deg, #020408 0%, #04080f 40%, #060c18 100%);
 }
 
-/* ── HUD ── */
-#hud {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: none; align-items: center; justify-content: space-between;
-  padding: max(8px, env(safe-area-inset-top,0px)) max(16px, env(safe-area-inset-right,0px)) 8px max(16px, env(safe-area-inset-left,0px));
-  background: linear-gradient(to bottom, rgba(4,8,15,0.96) 70%, transparent);
-  font-family: 'Cinzel', serif; font-size: 0.8rem;
-}
-#hud.visible { display: flex; }
-.hud-keys { display: flex; gap: 4px; color: var(--gold); font-size: 1.2rem; }
-.hud-key { transition: transform 0.3s; opacity: 0.3; }
-.hud-key.earned { opacity: 1; color: var(--sea1); animation: key-earn 0.6s ease; }
-@keyframes key-earn { 50% { transform: scale(1.5); filter: drop-shadow(0 0 8px #42a5f5); } }
-.hud-stage { color: var(--fg2); font-size: 0.75rem; }
-.hud-score { color: var(--sea1); }
-
-/* ── GREEK PANEL ── */
-.greek-panel {
-  background: var(--panel);
-  border: 2px solid var(--border);
-  border-radius: 4px;
-  position: relative;
-  box-shadow: 0 0 40px rgba(21,101,192,0.1), inset 0 0 60px rgba(0,0,0,0.5);
-}
-.greek-panel::before {
-  content: '';
-  position: absolute; inset: 4px;
-  border: 1px solid rgba(201,168,76,0.2);
-  border-radius: 2px;
-  pointer-events: none;
+/* Rock wall texture overlay */
+#bg-cave::before{
+  content:'';
+  position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(
+      87deg,
+      transparent 0px, transparent 18px,
+      rgba(0,0,0,.12) 18px, rgba(0,0,0,.12) 20px
+    ),
+    repeating-linear-gradient(
+      3deg,
+      transparent 0px, transparent 28px,
+      rgba(255,255,255,.018) 28px, rgba(255,255,255,.018) 30px
+    );
+  opacity:.6;
 }
 
-/* ── BUTTONS ── */
-.btn {
-  font-family: 'Cinzel', serif;
-  font-size: 1rem; letter-spacing: 0.08em;
-  padding: 12px 28px;
-  border: 2px solid var(--border-gold);
-  background: linear-gradient(135deg, #071525 0%, #040c1a 100%);
-  color: var(--gold2);
-  border-radius: 3px; cursor: pointer;
-  transition: all 0.2s;
-  position: relative; overflow: hidden;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-}
-.btn:hover { border-color: var(--gold2); color: #fff; box-shadow: 0 0 20px rgba(66,165,245,0.3); }
-.btn:active { transform: scale(0.97); }
-.btn-sea {
-  background: linear-gradient(135deg, #0a2a4a 0%, #061525 100%);
-  border-color: var(--sea1);
-  color: var(--sea1);
-  box-shadow: 0 0 15px rgba(66,165,245,0.2);
-}
-.btn-sea:hover { box-shadow: 0 0 30px rgba(66,165,245,0.5); color: #fff; }
-.btn-gold {
-  background: linear-gradient(135deg, #2a1f05 0%, #1a1205 100%);
-  border-color: var(--gold);
-  color: var(--gold2);
-}
-.btn-sm { padding: 7px 16px; font-size: 0.8rem; }
-
-/* ── INTRO SCREEN ── */
-#s-intro { justify-content: center; min-height: 100vh; }
-.intro-bg {
-  background: radial-gradient(ellipse at 50% 100%, #0d2a4a 0%, #061018 40%, var(--bg) 70%);
-  position: absolute; inset: 0;
-}
-.intro-box {
-  max-width: 580px; width: 100%;
-  text-align: center;
-  padding: 40px 32px;
-  position: relative; z-index: 1;
-}
-.intro-title {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(1.8rem, 6vw, 3rem);
-  font-weight: 900; color: var(--gold2);
-  text-shadow: 0 0 40px rgba(66,165,245,0.4), 0 2px 4px rgba(0,0,0,0.8);
-  line-height: 1.15; letter-spacing: 0.08em; margin-bottom: 6px;
-}
-.intro-subtitle {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(0.85rem, 2.5vw, 1rem);
-  color: var(--sea1); letter-spacing: 0.15em; margin-bottom: 20px;
-}
-.intro-desc {
-  font-size: 1rem; line-height: 1.7;
-  color: var(--fg2); margin-bottom: 28px; font-style: italic;
-}
-.ornament { color: var(--gold); font-size: 1.3rem; margin-bottom: 14px; letter-spacing: 0.3em; }
-.topics-row {
-  display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
-  margin-bottom: 28px;
-}
-.topic-chip {
-  font-family: 'Cinzel', serif; font-size: 0.75rem;
-  padding: 5px 12px; border: 1px solid var(--sea2);
-  border-radius: 20px; color: var(--sea1); letter-spacing: 0.05em;
-  background: rgba(21,101,192,0.15);
-}
-.cave-art {
-  font-size: 3.5rem; margin-bottom: 16px;
-  animation: float 3s ease-in-out infinite alternate;
-}
-@keyframes float { 0%{transform:translateY(0)} 100%{transform:translateY(-10px)} }
-
-/* ── STAGE SCREEN ── */
-#s-stage { min-height: 100vh; padding-top: 68px; align-items: stretch; }
-.stage-inner { max-width: 680px; width: 100%; margin: 0 auto; }
-.stage-header {
-  text-align: center; padding: 24px 24px 16px;
-  margin-bottom: 20px;
-}
-.stage-label {
-  font-family: 'Cinzel', serif; font-size: 0.75rem;
-  color: var(--sea1); letter-spacing: 0.2em; text-transform: uppercase;
-  margin-bottom: 6px;
-}
-.stage-title {
-  font-size: clamp(1.3rem, 4vw, 1.9rem);
-  color: var(--gold2); margin-bottom: 12px;
-  text-shadow: 0 0 20px rgba(66,165,245,0.3);
-}
-.stage-guide {
-  display: flex; align-items: center; gap: 12px;
-  background: rgba(13,71,161,0.15);
-  border: 1px solid rgba(66,165,245,0.25);
-  border-radius: 8px; padding: 14px 18px;
-  margin-bottom: 16px; text-align: left;
-}
-.guide-emoji { font-size: 2.5rem; flex-shrink: 0; }
-.guide-text { font-size: 0.95rem; line-height: 1.65; color: var(--fg2); font-style: italic; }
-.guide-name { font-family: 'Cinzel', serif; font-size: 0.8rem; color: var(--sea1); font-style: normal; display: block; margin-bottom: 4px; }
-
-/* ── MINI-GAME SECTIONS ── */
-.mini-section {
-  margin-bottom: 24px;
-  padding: 20px 22px;
-}
-.mini-title {
-  font-family: 'Cinzel', serif; font-size: 0.85rem;
-  color: var(--gold); letter-spacing: 0.15em;
-  text-transform: uppercase; margin-bottom: 14px;
-  display: flex; align-items: center; gap: 8px;
-}
-.mini-title::after {
-  content: ''; flex: 1;
-  height: 1px; background: rgba(201,168,76,0.3);
+/* SVG stalactite ceiling */
+#stalactites{
+  position:fixed;top:0;left:0;width:100%;height:160px;z-index:1;pointer-events:none;
+  opacity:.85;
 }
 
-/* ── RIDDLES ── */
-.riddle-box { margin-bottom: 20px; }
-.riddle-q {
-  font-size: 1.0rem; line-height: 1.6;
-  color: var(--fg); margin-bottom: 12px;
-  font-weight: 600;
+/* Torch glow overlays */
+.torch-glow{
+  position:fixed;z-index:2;pointer-events:none;
+  border-radius:50%;
+  animation:torchPulse 3s ease-in-out infinite alternate;
 }
-.riddle-q em { font-style: italic; color: var(--sea1); }
-.options-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 8px;
+#tg-left{
+  width:260px;height:400px;
+  left:-60px;top:40px;
+  background:radial-gradient(ellipse at 70% 30%, rgba(255,140,30,.22) 0%, transparent 70%);
 }
-@media (max-width: 480px) { .options-grid { grid-template-columns: 1fr; } }
-.opt-btn {
-  font-family: 'EB Garamond', serif;
-  font-size: 0.9rem; padding: 10px 14px;
-  border: 1px solid var(--border); border-radius: 4px;
-  background: rgba(10,21,37,0.8); color: var(--fg2);
-  cursor: pointer; text-align: left;
-  transition: all 0.18s; line-height: 1.4;
+#tg-right{
+  width:260px;height:400px;
+  right:-60px;top:40px;
+  background:radial-gradient(ellipse at 30% 30%, rgba(255,140,30,.22) 0%, transparent 70%);
 }
-.opt-btn:hover:not(:disabled) { border-color: var(--sea1); color: var(--fg); background: rgba(21,101,192,0.15); }
-.opt-btn.correct { border-color: var(--success); background: rgba(76,175,122,0.15); color: #a5d6a7; pointer-events: none; }
-.opt-btn.wrong { border-color: var(--error); background: rgba(224,92,92,0.1); color: #ef9a9a; pointer-events: none; }
-.opt-btn:disabled { opacity: 0.6; cursor: default; }
-.riddle-feedback {
-  margin-top: 10px; padding: 10px 14px;
-  border-radius: 4px; font-size: 0.88rem; line-height: 1.5;
-  display: none;
-}
-.riddle-feedback.show { display: block; }
-.riddle-feedback.ok { background: rgba(76,175,122,0.12); border-left: 3px solid #4caf7a; color: #a5d6a7; }
-.riddle-feedback.err { background: rgba(224,92,92,0.1); border-left: 3px solid #e05c5c; color: #ef9a9a; }
-.riddle-sep { border: none; border-top: 1px solid rgba(26,58,107,0.5); margin: 18px 0; }
-
-/* ── MATCHING ── */
-.matching-game {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-}
-@media(max-width:480px){ .matching-game { grid-template-columns: 1fr; gap: 6px; } }
-.match-col { display: flex; flex-direction: column; gap: 8px; }
-.match-col-label {
-  font-family: 'Cinzel', serif; font-size: 0.72rem;
-  color: var(--fg3); letter-spacing: 0.1em;
-  text-transform: uppercase; margin-bottom: 2px;
-}
-.match-item {
-  padding: 10px 14px; border-radius: 4px;
-  border: 2px solid var(--border);
-  background: rgba(10,21,37,0.9);
-  color: var(--fg2); font-size: 0.88rem; line-height: 1.4;
-  cursor: pointer; transition: all 0.18s;
-  user-select: none; min-height: 48px;
-  display: flex; align-items: center;
-}
-.match-item.left { border-color: rgba(66,165,245,0.3); }
-.match-item.right { border-color: rgba(201,168,76,0.25); }
-.match-item.left:hover:not(.matched):not(.disabled) { border-color: var(--sea1); color: var(--fg); background: rgba(21,101,192,0.15); }
-.match-item.right:hover:not(.matched):not(.disabled) { border-color: var(--gold); color: var(--fg); background: rgba(201,168,76,0.08); }
-.match-item.selected { border-color: var(--sea1) !important; background: rgba(21,101,192,0.3) !important; color: #fff; box-shadow: 0 0 12px rgba(66,165,245,0.4); }
-.match-item.flash-wrong { animation: flash-err 0.5s ease; }
-@keyframes flash-err { 0%,100%{background:rgba(10,21,37,0.9)} 50%{background:rgba(224,92,92,0.25); border-color:#e05c5c;} }
-/* Matched pair colors */
-.match-item.m0 { border-color: #2e7d32 !important; background: rgba(46,125,50,0.15) !important; color: #a5d6a7 !important; cursor: default; }
-.match-item.m1 { border-color: #1565c0 !important; background: rgba(21,101,192,0.2) !important; color: #90caf9 !important; cursor: default; }
-.match-item.m2 { border-color: #6a1b9a !important; background: rgba(106,27,154,0.2) !important; color: #ce93d8 !important; cursor: default; }
-.match-item.m3 { border-color: #c17900 !important; background: rgba(193,121,0,0.15) !important; color: #ffcc80 !important; cursor: default; }
-.match-item.disabled { opacity: 0.5; cursor: default; }
-.match-hint { font-size: 0.82rem; color: var(--fg3); margin-bottom: 10px; font-style: italic; }
-
-/* ── ACROSTIC ── */
-.acrostic-grid { display: flex; flex-direction: column; gap: 10px; }
-.acro-row { display: flex; align-items: flex-start; gap: 10px; }
-.acro-letter {
-  font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.3rem;
-  color: var(--gold2); width: 32px; flex-shrink: 0;
-  text-align: center; padding-top: 6px;
-  text-shadow: 0 0 10px rgba(201,168,76,0.4);
-}
-.acro-cell { flex: 1; }
-.acro-clue { font-size: 0.82rem; color: var(--fg3); margin-bottom: 4px; line-height: 1.4; }
-.acro-input {
-  width: 100%; padding: 7px 10px;
-  font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 0.08em;
-  background: rgba(10,21,37,0.9); border: 1px solid var(--border);
-  color: var(--fg); border-radius: 3px;
-  text-transform: uppercase; outline: none;
-  transition: border-color 0.2s;
-}
-.acro-input:focus { border-color: var(--sea1); }
-.acro-input.ok { border-color: var(--success) !important; background: rgba(76,175,122,0.1); color: #a5d6a7; }
-.acro-input.err { border-color: var(--error); background: rgba(224,92,92,0.08); animation: shake 0.4s; }
-@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
-.acro-hidden-word {
-  margin-top: 16px; padding: 12px 16px;
-  background: rgba(13,71,161,0.2); border: 1px solid rgba(66,165,245,0.3);
-  border-radius: 4px; text-align: center; display: none;
-}
-.acro-hidden-word.show { display: block; }
-.acro-hidden-word span { font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--gold2); letter-spacing: 0.2em; }
-.acro-check-btn {
-  margin-top: 12px; padding: 9px 22px;
-  font-family: 'Cinzel', serif; font-size: 0.82rem;
-  border: 1px solid var(--sea2); border-radius: 3px;
-  background: rgba(21,101,192,0.1); color: var(--sea1);
-  cursor: pointer; letter-spacing: 0.08em;
-  transition: all 0.18s;
-}
-.acro-check-btn:hover { background: rgba(21,101,192,0.3); }
-
-/* ── STAGE COMPLETE / NEXT ── */
-.stage-complete {
-  text-align: center; padding: 24px;
-  display: none;
-}
-.stage-complete.show { display: block; }
-.complete-emoji { font-size: 3rem; margin-bottom: 10px; }
-.complete-msg {
-  font-family: 'Cinzel', serif; font-size: 1.1rem;
-  color: var(--gold2); margin-bottom: 8px;
-}
-.complete-sub { font-size: 0.9rem; color: var(--fg2); margin-bottom: 20px; font-style: italic; }
-
-/* ── LOCKED OVERLAY ── */
-.locked-msg {
-  display: flex; align-items: center; gap: 10px;
-  padding: 12px 16px; border-radius: 4px;
-  background: rgba(10,21,37,0.6);
-  border: 1px dashed rgba(84,110,122,0.5);
-  color: var(--fg3); font-size: 0.85rem; font-style: italic;
-  margin-bottom: 10px;
-}
-.locked-msg .lock-icon { font-size: 1.1rem; }
-.section-locked { opacity: 0.5; pointer-events: none; }
-
-/* ── VICTORY SCREEN ── */
-#s-victory { justify-content: center; min-height: 100vh; }
-.victory-box {
-  max-width: 560px; width: 100%;
-  text-align: center; padding: 40px 32px;
-}
-.victory-title {
-  font-family: 'Cinzel', serif; font-size: clamp(1.8rem,6vw,3rem);
-  font-weight: 900; color: var(--gold2);
-  text-shadow: 0 0 40px rgba(201,168,76,0.5);
-  margin-bottom: 8px;
-}
-.victory-emoji { font-size: 4rem; margin-bottom: 16px; }
-.victory-text { font-size: 1.0rem; line-height: 1.7; color: var(--fg2); font-style: italic; margin-bottom: 24px; }
-.keys-display { display: flex; justify-content: center; gap: 10px; font-size: 2rem; margin-bottom: 24px; }
-.victory-topics {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 10px; margin-bottom: 24px;
-}
-.victory-topic {
-  background: rgba(13,71,161,0.15);
-  border: 1px solid rgba(66,165,245,0.25);
-  border-radius: 6px; padding: 10px 14px;
-  font-size: 0.85rem; color: var(--fg2);
-}
-.victory-topic strong { color: var(--sea1); display: block; }
-
-/* ── FONT TOGGLE ── */
-#font-toggle {
-  position: fixed; bottom: max(16px, env(safe-area-inset-bottom,0px));
-  right: max(16px, env(safe-area-inset-right,0px));
-  z-index: 999;
-  font-family: 'Cinzel', serif; font-size: 0.85rem;
-  padding: 7px 11px;
-  border: 1px solid var(--border-gold);
-  background: rgba(4,8,15,0.9); color: var(--gold);
-  border-radius: 4px; cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-}
-#font-toggle:hover { background: rgba(21,101,192,0.2); }
-
-/* ── PROGRESS DOTS ── */
-.progress-dots {
-  display: flex; justify-content: center; gap: 8px;
-  margin-bottom: 20px;
-}
-.prog-dot {
-  width: 10px; height: 10px; border-radius: 50%;
-  background: var(--border); transition: all 0.3s;
-}
-.prog-dot.done { background: var(--sea1); box-shadow: 0 0 6px rgba(66,165,245,0.6); }
-.prog-dot.current { background: var(--gold); box-shadow: 0 0 6px rgba(201,168,76,0.6); }
-
-/* ── SCORE BADGE ── */
-.score-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 5px 14px;
-  background: rgba(13,71,161,0.2);
-  border: 1px solid rgba(66,165,245,0.3);
-  border-radius: 20px;
-  font-family: 'Cinzel', serif; font-size: 0.8rem;
-  color: var(--sea1); margin-bottom: 16px;
+@keyframes torchPulse{
+  from{opacity:.7;transform:scale(.97)}
+  to{opacity:1;transform:scale(1.03)}
 }
 
-/* ── WAVE ANIMATION ── */
-@keyframes wave-pulse {
-  0%,100% { opacity: 0.3; transform: scaleX(1); }
-  50% { opacity: 0.6; transform: scaleX(1.05); }
+/* Torch fixtures */
+.torch{
+  position:fixed;top:60px;z-index:3;pointer-events:none;
+  display:flex;flex-direction:column;align-items:center;
+  gap:0;
 }
-.wave-line {
-  height: 2px; border-radius: 1px;
-  background: linear-gradient(to right, transparent, var(--sea2), transparent);
-  animation: wave-pulse 2s ease-in-out infinite;
-  margin: 8px 0;
+#torch-left{left:12px}
+#torch-right{right:12px}
+
+/* Drip effect */
+.drip{
+  position:fixed;bottom:0;width:3px;border-radius:0 0 3px 3px;
+  background:linear-gradient(to bottom, rgba(42,100,180,.6), rgba(10,30,80,.0));
+  animation:drip 4s ease-in infinite;
+  z-index:1;pointer-events:none;
+}
+@keyframes drip{
+  0%{height:0;opacity:1}
+  80%{height:120px;opacity:.7}
+  100%{height:140px;opacity:0}
+}
+
+/* ═══════════════════════════════════════════
+   HUD
+═══════════════════════════════════════════ */
+#hud{
+  position:fixed;top:0;left:0;right:0;z-index:30;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px 10px;
+  padding-top:calc(10px + env(safe-area-inset-top));
+  background:linear-gradient(to bottom, rgba(2,4,8,.95) 70%, transparent);
+  border-bottom:1px solid rgba(201,168,76,.2);
+  gap:10px;
+}
+#hud-keys{display:flex;gap:6px;align-items:center}
+.key-slot{
+  width:34px;height:34px;border-radius:50%;
+  border:2px solid rgba(201,168,76,.25);
+  background:rgba(10,15,25,.7);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .4s;
+  overflow:hidden;
+}
+.key-slot.earned{
+  border-color:var(--gold);
+  background:rgba(201,168,76,.18);
+  box-shadow:0 0 10px rgba(201,168,76,.5);
+}
+.key-slot svg{width:20px;height:20px}
+#hud-info{
+  display:flex;flex-direction:column;align-items:center;
+  font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.08em;color:var(--gold-dim);
+  flex:1;min-width:0;text-align:center;
+}
+#hud-topic{font-size:.6rem;color:var(--text-dim);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%}
+#hud-score{
+  font-family:'Cinzel',serif;font-size:.85rem;font-weight:700;
+  color:var(--gold);text-shadow:0 0 8px rgba(201,168,76,.6);
+  white-space:nowrap;
+}
+
+/* ═══════════════════════════════════════════
+   SCREENS
+═══════════════════════════════════════════ */
+.screen{
+  position:relative;z-index:10;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:80px 16px 32px;
+}
+.screen.hidden{display:none}
+
+/* ═══════════════════════════════════════════
+   INTRO SCREEN
+═══════════════════════════════════════════ */
+#s-intro{text-align:center;gap:20px}
+
+.cave-entrance{
+  width:min(340px, 90vw);
+  margin:0 auto 8px;
+  filter:drop-shadow(0 0 24px rgba(201,168,76,.2));
+}
+
+.intro-title{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.6rem,5vw,2.8rem);
+  font-weight:900;
+  color:var(--gold);
+  text-shadow:0 0 20px rgba(201,168,76,.5), 0 2px 4px rgba(0,0,0,.8);
+  letter-spacing:.04em;
+  line-height:1.15;
+}
+.intro-subtitle{
+  font-family:'Cinzel',serif;
+  font-size:clamp(.75rem,2.5vw,1rem);
+  color:var(--text-dim);
+  letter-spacing:.12em;
+  margin-top:4px;
+}
+.intro-desc{
+  max-width:480px;font-size:1.05rem;
+  line-height:1.65;color:var(--text);
+  font-style:italic;
+  text-shadow:0 1px 3px rgba(0,0,0,.7);
+}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px 36px;
+  font-family:'Cinzel',serif;font-size:1rem;font-weight:700;letter-spacing:.08em;
+  color:#04080f;
+  background:linear-gradient(135deg, #e8c86a 0%, #c9a84c 50%, #a07828 100%);
+  border:none;border-radius:var(--radius);cursor:pointer;
+  box-shadow:0 0 20px rgba(201,168,76,.4), 0 4px 12px rgba(0,0,0,.5);
+  transition:all .25s;
+  position:relative;overflow:hidden;
+}
+.btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom, rgba(255,255,255,.18), transparent);
+  pointer-events:none;
+}
+.btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 32px rgba(201,168,76,.6), 0 6px 18px rgba(0,0,0,.5);
+}
+.btn:active{transform:translateY(0)}
+
+/* ═══════════════════════════════════════════
+   STAGE SCREEN
+═══════════════════════════════════════════ */
+#s-stage{
+  align-items:stretch;
+  padding-top:72px;
+  gap:0;
+  max-width:700px;
+  margin:0 auto;width:100%;
+}
+
+/* Stage header */
+.stage-header{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 18px;
+  background:var(--panel-bg);
+  border:var(--panel-border);
+  border-radius:var(--radius) var(--radius) 0 0;
+  backdrop-filter:blur(6px);
+  position:relative;overflow:hidden;
+}
+.stage-header::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(to right, transparent, var(--stage-color, var(--gold)), transparent);
+}
+.guide-portrait{
+  flex-shrink:0;width:68px;height:68px;
+  border-radius:50%;
+  border:2px solid var(--stage-color, var(--gold));
+  background:rgba(0,0,0,.4);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  box-shadow:0 0 16px rgba(var(--stage-color-rgb,201,168,76),.3);
+}
+.guide-portrait svg{width:64px;height:64px}
+.stage-header-text{flex:1;min-width:0}
+.stage-name{
+  font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;
+  color:var(--stage-color,var(--gold));
+  text-shadow:0 0 8px rgba(201,168,76,.4);
+}
+.stage-topic{
+  font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.1em;
+  color:var(--text-dim);margin-top:2px;
+}
+.stage-narrative{
+  font-size:.9rem;font-style:italic;color:var(--text);
+  margin-top:5px;line-height:1.5;
+}
+
+/* Phase panels */
+.phase-panel{
+  background:var(--panel-bg);
+  border:var(--panel-border);
+  border-top:none;
+  padding:16px 18px 20px;
+  backdrop-filter:blur(4px);
+}
+.phase-panel+.phase-panel{border-top:none}
+.phase-panel:last-child{border-radius:0 0 var(--radius) var(--radius)}
+
+.phase-label{
+  font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.12em;
+  color:var(--gold-dim);text-transform:uppercase;
+  margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;
+}
+.phase-label::after{content:'';flex:1;height:1px;background:rgba(201,168,76,.2)}
+
+/* Riddles */
+.riddle-block{margin-bottom:16px}
+.riddle-block:last-child{margin-bottom:0}
+.riddle-q{
+  font-size:1rem;font-weight:600;color:var(--text);
+  line-height:1.5;margin-bottom:10px;
+}
+.riddle-opts{display:flex;flex-direction:column;gap:6px}
+.opt-btn{
+  text-align:left;padding:9px 14px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:8px;
+  color:var(--text);font-family:'EB Garamond',serif;font-size:.95rem;
+  cursor:pointer;transition:all .2s;line-height:1.4;
+}
+.opt-btn:hover{background:rgba(201,168,76,.1);border-color:rgba(201,168,76,.4)}
+.opt-btn.correct{
+  background:rgba(76,175,80,.2);border-color:#66bb6a;
+  color:#a5d6a7;pointer-events:none;
+}
+.opt-btn.wrong{
+  background:rgba(244,67,54,.15);border-color:#ef5350;
+  color:#ef9a9a;pointer-events:none;
+}
+.opt-btn:disabled{pointer-events:none;opacity:.5}
+
+/* Matching */
+.match-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;
+}
+.match-col{display:flex;flex-direction:column;gap:6px}
+.match-btn{
+  padding:9px 12px;border-radius:8px;cursor:pointer;
+  font-family:'EB Garamond',serif;font-size:.9rem;
+  line-height:1.4;text-align:center;transition:all .2s;
+}
+.match-left{
+  background:rgba(66,165,245,.1);border:1px solid rgba(66,165,245,.3);color:var(--sea1);
+}
+.match-right{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--text);
+}
+.match-btn.selected{
+  box-shadow:0 0 0 2px var(--gold);border-color:var(--gold);
+  background:rgba(201,168,76,.18);color:var(--gold);
+}
+.match-btn.matched{
+  background:rgba(76,175,80,.18);border-color:#66bb6a;
+  color:#a5d6a7;pointer-events:none;cursor:default;
+}
+.match-btn.wrong-flash{animation:flashWrong .4s ease}
+@keyframes flashWrong{0%,100%{background:inherit}50%{background:rgba(244,67,54,.35)}}
+.match-score-msg{
+  margin-top:8px;font-family:'Cinzel',serif;font-size:.75rem;
+  color:var(--gold);text-align:center;min-height:1.2em;
+}
+
+/* Acrostic */
+.acro-intro{font-style:italic;color:var(--text-dim);font-size:.9rem;margin-bottom:12px;line-height:1.5}
+.acro-row{
+  display:flex;align-items:center;gap:8px;margin-bottom:8px;
+}
+.acro-letter{
+  width:34px;height:34px;flex-shrink:0;
+  border-radius:6px;
+  background:rgba(201,168,76,.18);border:1px solid rgba(201,168,76,.5);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;
+  color:var(--gold);text-transform:uppercase;
+  box-shadow:0 0 8px rgba(201,168,76,.2);
+}
+.acro-clue{font-size:.88rem;color:var(--text-dim);flex:1;line-height:1.4}
+.acro-input{
+  width:100%;padding:7px 10px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:6px;
+  color:var(--text);font-family:'EB Garamond',serif;font-size:.95rem;
+  outline:none;transition:border-color .2s;
+}
+.acro-input:focus{border-color:rgba(201,168,76,.5)}
+.acro-input.ok{background:rgba(76,175,80,.15);border-color:#66bb6a;color:#a5d6a7}
+.acro-input.err{background:rgba(244,67,54,.12);border-color:#ef5350}
+.acro-word-reveal{
+  margin-top:12px;text-align:center;
+  font-family:'Cinzel',serif;font-size:1.3rem;font-weight:700;
+  color:var(--gold);letter-spacing:.2em;
+  text-shadow:0 0 12px rgba(201,168,76,.6);
+  min-height:2rem;
+}
+
+/* Complete button */
+.complete-btn{
+  display:none;margin-top:14px;width:100%;
+}
+.complete-btn.show{display:flex}
+
+/* Stage progress bar */
+.stage-progress{
+  height:3px;background:rgba(255,255,255,.07);
+  border-radius:0;overflow:hidden;
+  position:relative;
+}
+.stage-progress-fill{
+  height:100%;border-radius:0;
+  background:linear-gradient(to right, var(--stage-color,var(--gold)), var(--gold));
+  transition:width .6s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 0 6px var(--stage-color,var(--gold));
+}
+
+/* ═══════════════════════════════════════════
+   VICTORY SCREEN
+═══════════════════════════════════════════ */
+#s-victory{text-align:center;gap:20px}
+.victory-scene{
+  width:min(380px,92vw);margin:0 auto;
+  filter:drop-shadow(0 0 30px rgba(201,168,76,.3));
+}
+.victory-title{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.8rem,6vw,3rem);
+  font-weight:900;color:var(--gold);
+  text-shadow:0 0 24px rgba(201,168,76,.6), 0 2px 4px rgba(0,0,0,.8);
+  letter-spacing:.05em;
+}
+.victory-subtitle{
+  font-size:1.1rem;font-style:italic;color:var(--text);
+  line-height:1.6;max-width:460px;
+}
+.final-score{
+  font-family:'Cinzel',serif;font-size:2rem;font-weight:700;
+  color:var(--gold);
+  text-shadow:0 0 20px rgba(201,168,76,.7);
+}
+.score-label{font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:.12em;color:var(--text-dim)}
+
+/* Collected keys display */
+.keys-display{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:4px}
+.key-big{
+  width:48px;height:48px;border-radius:50%;
+  border:2px solid var(--gold);
+  background:rgba(201,168,76,.18);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 14px rgba(201,168,76,.5);
+}
+.key-big svg{width:28px;height:28px}
+
+/* ═══════════════════════════════════════════
+   FEEDBACK / NOTIFICATION
+═══════════════════════════════════════════ */
+#feedback{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+  z-index:200;
+  font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.06em;
+  padding:10px 22px;border-radius:24px;
+  background:rgba(14,18,25,.95);border:1px solid var(--gold);
+  color:var(--gold);
+  box-shadow:0 4px 20px rgba(0,0,0,.5), 0 0 12px rgba(201,168,76,.3);
+  pointer-events:none;
+  transition:opacity .4s;
+  opacity:0;white-space:nowrap;
+}
+#feedback.show{opacity:1}
+
+/* ═══════════════════════════════════════════
+   TORCH FLAME COMPONENT
+═══════════════════════════════════════════ */
+.torch-body{
+  width:14px;height:28px;
+  background:linear-gradient(to bottom, #5a3010 0%, #2a1508 100%);
+  border-radius:3px 3px 2px 2px;
+  border:1px solid rgba(201,168,76,.3);
+  position:relative;
+}
+.torch-body::before{
+  content:'';position:absolute;top:-3px;left:50%;transform:translateX(-50%);
+  width:18px;height:5px;
+  background:rgba(201,168,76,.5);border-radius:50%;
+}
+.flame-wrap{
+  position:absolute;bottom:100%;left:50%;transform:translateX(-50%);
+  width:22px;height:40px;
+}
+.flame-layer{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  border-radius:50% 50% 20% 20% / 60% 60% 40% 40%;
+  transform-origin:bottom center;
+}
+.fl1{
+  width:18px;height:34px;
+  background:radial-gradient(ellipse at 50% 70%, var(--fire3) 0%, var(--fire2) 40%, var(--fire1) 70%, transparent 100%);
+  animation:flicker1 1.8s ease-in-out infinite alternate;
+}
+.fl2{
+  width:14px;height:28px;
+  background:radial-gradient(ellipse at 50% 70%, #fff9c4 0%, var(--fire2) 50%, var(--fire1) 100%);
+  animation:flicker2 1.3s ease-in-out infinite alternate;
+}
+.fl3{
+  width:8px;height:18px;
+  background:radial-gradient(ellipse at 50% 70%, #ffffff 0%, var(--fire3) 60%, transparent 100%);
+  animation:flicker3 .9s ease-in-out infinite alternate;
+}
+@keyframes flicker1{
+  0%{transform:translateX(-50%) scaleX(1) scaleY(1) rotate(-2deg)}
+  33%{transform:translateX(-52%) scaleX(.92) scaleY(1.08) rotate(1deg)}
+  66%{transform:translateX(-48%) scaleX(1.06) scaleY(.96) rotate(-1deg)}
+  100%{transform:translateX(-50%) scaleX(.95) scaleY(1.05) rotate(2deg)}
+}
+@keyframes flicker2{
+  0%{transform:translateX(-50%) scaleX(1) scaleY(1) rotate(1deg)}
+  50%{transform:translateX(-53%) scaleX(.88) scaleY(1.12) rotate(-2deg)}
+  100%{transform:translateX(-48%) scaleX(1.08) scaleY(.94) rotate(1.5deg)}
+}
+@keyframes flicker3{
+  0%{transform:translateX(-50%) scaleY(1) rotate(-1deg)}
+  50%{transform:translateX(-52%) scaleY(1.15) rotate(2deg)}
+  100%{transform:translateX(-49%) scaleY(.9) rotate(-1deg)}
+}
+.ember{
+  position:absolute;width:3px;height:3px;border-radius:50%;
+  background:var(--fire2);
+  animation:riseEmber var(--dur,2s) ease-out var(--delay,0s) infinite;
+  opacity:0;
+}
+@keyframes riseEmber{
+  0%{transform:translate(0,0);opacity:.9}
+  50%{opacity:.5}
+  100%{transform:translate(var(--dx,5px), -50px);opacity:0}
+}
+
+/* ═══════════════════════════════════════════
+   UTILITY
+═══════════════════════════════════════════ */
+.mt8{margin-top:8px}
+.text-center{text-align:center}
+.hidden{display:none!important}
+
+/* Attribution */
+.attrib{
+  position:fixed;bottom:6px;right:10px;
+  font-size:.5rem;color:rgba(255,255,255,.12);
+  font-family:'EB Garamond',serif;
+  pointer-events:none;z-index:200;letter-spacing:.04em;
+}
+
+/* Responsive */
+@media(max-width:420px){
+  .match-grid{grid-template-columns:1fr 1fr}
+  .match-btn{font-size:.8rem;padding:7px 8px}
+}
+@media(min-width:600px){
+  #s-stage{padding-left:24px;padding-right:24px}
 }
 </style>
 </head>
 <body>
 
-<!-- HUD -->
-<div id="hud">
-  <div class="hud-keys" id="hud-keys">
-    <span class="hud-key" id="k1">🗝️</span>
-    <span class="hud-key" id="k2">🗝️</span>
-    <span class="hud-key" id="k3">🗝️</span>
-    <span class="hud-key" id="k4">🗝️</span>
-    <span class="hud-key" id="k5">🗝️</span>
-  </div>
-  <div class="hud-stage" id="hud-stage">Επίπεδο 1/5</div>
-  <div class="hud-score" id="hud-score">0 πόντοι</div>
-</div>
-
-<!-- Background -->
+<!-- ═══ BACKGROUND LAYER ═══ -->
 <div id="bg-cave"></div>
 
-<!-- Font Toggle -->
-<button id="font-toggle" onclick="toggleFont()" title="Μέγεθος γραμματοσειράς">Α+</button>
+<!-- Stalactite SVG ceiling -->
+<svg id="stalactites" viewBox="0 0 1200 160" preserveAspectRatio="xMidYMin slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0d14"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </linearGradient>
+    <filter id="rockf">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" seed="2"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feBlend in="SourceGraphic" mode="multiply"/>
+    </filter>
+  </defs>
+  <!-- Rock ceiling band -->
+  <rect x="0" y="0" width="1200" height="40" fill="#0a0d14"/>
+  <!-- Stalactites -->
+  <path d="M0,0 L0,40 Q30,45 50,80 Q60,110 70,80 Q85,45 110,40 Q140,45 155,100 Q165,135 175,100 Q185,55 220,40 Q250,45 265,90 Q275,120 285,90 Q295,52 330,40 Q360,44 375,88 Q383,115 392,88 Q403,50 440,40 Q470,44 485,76 Q493,100 502,76 Q512,48 550,40 Q580,44 598,95 Q606,122 614,95 Q624,52 660,40 Q690,44 708,82 Q716,108 724,82 Q734,50 770,40 Q800,44 818,98 Q826,128 834,98 Q846,54 880,40 Q910,44 925,72 Q933,96 941,72 Q952,48 988,40 Q1018,44 1035,88 Q1043,116 1051,88 Q1062,52 1098,40 Q1130,44 1148,96 Q1156,124 1165,96 Q1176,54 1200,40 L1200,0 Z" fill="#0a0d14"/>
+  <!-- Wet sheen on tips -->
+  <ellipse cx="70" cy="80" rx="3" ry="5" fill="rgba(66,165,245,.4)"/>
+  <ellipse cx="175" cy="102" rx="3" ry="5" fill="rgba(66,165,245,.35)"/>
+  <ellipse cx="285" cy="92" rx="3" ry="5" fill="rgba(66,165,245,.4)"/>
+  <ellipse cx="502" cy="78" rx="3" ry="5" fill="rgba(66,165,245,.35)"/>
+  <ellipse cx="614" cy="96" rx="3" ry="5" fill="rgba(66,165,245,.4)"/>
+  <ellipse cx="724" cy="84" rx="3" ry="5" fill="rgba(66,165,245,.35)"/>
+  <ellipse cx="834" cy="100" rx="3" ry="5" fill="rgba(66,165,245,.4)"/>
+  <ellipse cx="1051" cy="90" rx="3" ry="5" fill="rgba(66,165,245,.35)"/>
+  <ellipse cx="1165" cy="98" rx="3" ry="5" fill="rgba(66,165,245,.4)"/>
+  <!-- Ceiling gradient overlay -->
+  <rect x="0" y="0" width="1200" height="160" fill="url(#sg)" opacity="0.6"/>
+</svg>
 
-<!-- ═══════════════════════════════════════
-     INTRO SCREEN
-═══════════════════════════════════════ -->
-<div class="screen active" id="s-intro">
-  <div class="intro-bg"></div>
-  <div class="intro-box">
-    <div class="cave-art">🌊</div>
-    <div class="ornament">— ✦ —</div>
-    <h1 class="intro-title">Ο Οδυσσέας<br>&amp; ο Κύκλωπας</h1>
-    <div class="intro-subtitle">Η ΑΠΟΔΡΑΣΗ ΑΠΟ ΤΗ ΣΠΗΛΙΑ</div>
-    <div class="wave-line"></div>
-    <p class="intro-desc">
-      Ο Οδυσσέας και οι σύντροφοί του είναι παγιδευμένοι στη σπηλιά
-      του Κύκλωπα Πολύφημου. Ο τεράστιος βράχος στη είσοδο δεν ανοίγει
-      με τη δύναμη. Μόνο η <strong style="color:var(--gold)">γνώση της Φυσικής</strong> μπορεί να τους σώσει!
-      Λύσε 5 αίθουσες γρίφων και ξεκλείδωσε την έξοδο.
-    </p>
-    <div class="topics-row">
-      <span class="topic-chip">🔆 Οπτική</span>
-      <span class="topic-chip">🔊 Ήχος</span>
-      <span class="topic-chip">⬇️ Πίεση</span>
-      <span class="topic-chip">⚖️ Μοχλοί</span>
-      <span class="topic-chip">🌊 Απόδραση</span>
+<!-- Torch glow overlays -->
+<div class="torch-glow" id="tg-left"></div>
+<div class="torch-glow" id="tg-right"></div>
+
+<!-- Left Torch -->
+<div class="torch" id="torch-left">
+  <div class="flame-wrap">
+    <div class="flame-layer fl1"></div>
+    <div class="flame-layer fl2"></div>
+    <div class="flame-layer fl3"></div>
+    <div class="ember" style="--dur:1.6s;--delay:0s;--dx:6px;left:4px"></div>
+    <div class="ember" style="--dur:2.1s;--delay:.5s;--dx:-5px;left:14px"></div>
+    <div class="ember" style="--dur:1.4s;--delay:.9s;--dx:8px;left:9px"></div>
+  </div>
+  <div class="torch-body"></div>
+</div>
+
+<!-- Right Torch -->
+<div class="torch" id="torch-right">
+  <div class="flame-wrap">
+    <div class="flame-layer fl1"></div>
+    <div class="flame-layer fl2"></div>
+    <div class="flame-layer fl3"></div>
+    <div class="ember" style="--dur:1.8s;--delay:.3s;--dx:-6px;left:14px"></div>
+    <div class="ember" style="--dur:2.2s;--delay:.7s;--dx:5px;left:4px"></div>
+    <div class="ember" style="--dur:1.5s;--delay:1.1s;--dx:-8px;left:9px"></div>
+  </div>
+  <div class="torch-body"></div>
+</div>
+
+<!-- Drips -->
+<div class="drip" style="left:18%;animation-delay:0s;animation-duration:5s"></div>
+<div class="drip" style="left:35%;animation-delay:1.3s;animation-duration:4.2s"></div>
+<div class="drip" style="left:52%;animation-delay:2.6s;animation-duration:5.5s"></div>
+<div class="drip" style="left:68%;animation-delay:.7s;animation-duration:3.9s"></div>
+<div class="drip" style="left:82%;animation-delay:1.9s;animation-duration:4.7s"></div>
+
+<!-- HUD -->
+<div id="hud">
+  <div id="hud-keys">
+    <div class="key-slot" id="k1">
+      <svg viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,.2)" stroke-width="1.5"><circle cx="8" cy="8" r="4"/><path d="M12 8h8M17 8v3"/></svg>
     </div>
-    <button class="btn btn-sea" onclick="startGame()" style="font-size:1.1rem; padding:14px 36px;">
-      ⚔️ Ξεκίνα την Αποστολή!
-    </button>
-    <p style="margin-top:16px; font-size:0.78rem; color:var(--fg3);">
-      ⏱ ~40 λεπτά · 5 επίπεδα · Γρίφοι · Αντιστοιχία · Ακροστιχίδα · 📲 PWA
-    </p>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════
-     STAGE SCREEN (dynamic content)
-═══════════════════════════════════════ -->
-<div class="screen" id="s-stage">
-  <div class="stage-inner" id="stage-inner">
-    <!-- filled by JS -->
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════
-     VICTORY SCREEN
-═══════════════════════════════════════ -->
-<div class="screen" id="s-victory">
-  <div class="victory-box">
-    <div class="victory-emoji">🌊⚓🏛️</div>
-    <h1 class="victory-title">Η Απόδραση!</h1>
-    <div class="wave-line"></div>
-    <p class="victory-text">
-      Ο Οδυσσέας και οι σύντροφοί του <strong style="color:var(--gold)">ελευθερώθηκαν</strong>!
-      Με τη δύναμη της γνώσης της Φυσικής, ξεγέλασαν τον Κύκλωπα,
-      άνοιξαν την πέτρινη πόρτα και επέστρεψαν στα πλοία τους.
-      Ο Πολύφημος ούρλιαξε, αλλά οι επιστήμονες-ήρωες είχαν ήδη φύγει!
-    </p>
-    <div class="keys-display" id="v-keys">🗝️🗝️🗝️🗝️🗝️</div>
-    <div class="victory-topics">
-      <div class="victory-topic"><strong>🔆 Οπτική</strong>Ανάκλαση &amp; Διάθλαση φωτός</div>
-      <div class="victory-topic"><strong>🔊 Ήχος</strong>Συχνότητα &amp; Ηχώ</div>
-      <div class="victory-topic"><strong>⬇️ Πίεση</strong>P = F / A, Pascal</div>
-      <div class="victory-topic"><strong>⚖️ Μοχλοί</strong>3 Τάξεις &amp; ΜΑ</div>
+    <div class="key-slot" id="k2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,.2)" stroke-width="1.5"><circle cx="8" cy="8" r="4"/><path d="M12 8h8M17 8v3"/></svg>
     </div>
-    <div id="v-score" style="font-family:'Cinzel',serif; color:var(--sea1); margin-bottom:20px; font-size:1.1rem;"></div>
-    <button class="btn btn-gold" onclick="restartGame()">🔄 Παίξε Ξανά</button>
+    <div class="key-slot" id="k3">
+      <svg viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,.2)" stroke-width="1.5"><circle cx="8" cy="8" r="4"/><path d="M12 8h8M17 8v3"/></svg>
+    </div>
+    <div class="key-slot" id="k4">
+      <svg viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,.2)" stroke-width="1.5"><circle cx="8" cy="8" r="4"/><path d="M12 8h8M17 8v3"/></svg>
+    </div>
+    <div class="key-slot" id="k5">
+      <svg viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,.2)" stroke-width="1.5"><circle cx="8" cy="8" r="4"/><path d="M12 8h8M17 8v3"/></svg>
+    </div>
   </div>
+  <div id="hud-info">
+    <div id="hud-level">Αρχή</div>
+    <div id="hud-topic"></div>
+  </div>
+  <div id="hud-score">0 πόντοι</div>
 </div>
+
+<!-- ═══ INTRO SCREEN ═══ -->
+<div class="screen" id="s-intro">
+  <!-- Cave entrance SVG -->
+  <svg class="cave-entrance" viewBox="0 0 340 220" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ff6b1a" stop-opacity="1"/>
+        <stop offset="40%" stop-color="#c94800" stop-opacity=".8"/>
+        <stop offset="100%" stop-color="#600000" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="eyeIris" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ff2200"/>
+        <stop offset="50%" stop-color="#c94800"/>
+        <stop offset="100%" stop-color="#7a2000"/>
+      </radialGradient>
+      <filter id="eyeBlur"><feGaussianBlur stdDeviation="4"/></filter>
+      <filter id="caveBlur"><feGaussianBlur stdDeviation="2"/></filter>
+      <linearGradient id="caveWall" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1a1f2e"/>
+        <stop offset="100%" stop-color="#0a0d14"/>
+      </linearGradient>
+      <radialGradient id="caveDepth" cx="50%" cy="40%" r="50%">
+        <stop offset="0%" stop-color="#0d1520"/>
+        <stop offset="100%" stop-color="#020408"/>
+      </radialGradient>
+    </defs>
+    <!-- Cave walls left -->
+    <path d="M0,220 L0,60 Q10,40 30,30 Q55,18 70,35 Q85,50 90,70 Q95,90 100,100 Q105,110 108,120 Q112,130 115,140 L115,220 Z" fill="url(#caveWall)"/>
+    <!-- Cave walls right -->
+    <path d="M340,220 L340,60 Q330,40 310,30 Q285,18 270,35 Q255,50 250,70 Q245,90 240,100 Q235,110 232,120 Q228,130 225,140 L225,220 Z" fill="url(#caveWall)"/>
+    <!-- Cave interior dark -->
+    <path d="M115,220 L115,140 Q118,110 120,80 Q130,50 170,45 Q210,50 220,80 Q222,110 225,140 L225,220 Z" fill="url(#caveDepth)"/>
+    <!-- Stalactites above entrance -->
+    <path d="M100,0 L100,30 Q110,32 118,55 Q122,68 126,55 Q130,36 148,30 Q165,32 170,52 Q172,62 174,52 Q178,34 196,30 Q214,32 218,56 Q221,67 224,56 Q228,38 240,30 L240,0 Z" fill="#0d1218"/>
+    <!-- Cyclops eye glow (bg) -->
+    <circle cx="170" cy="130" r="45" fill="url(#eyeGlow)" filter="url(#eyeBlur)" opacity="0.6">
+      <animate attributeName="opacity" values="0.4;0.8;0.4" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Eye white/sclera -->
+    <ellipse cx="170" cy="130" rx="30" ry="22" fill="#1a0808"/>
+    <!-- Iris -->
+    <circle cx="170" cy="130" r="17" fill="url(#eyeIris)"/>
+    <!-- Pupil -->
+    <ellipse cx="170" cy="130" rx="6" ry="10" fill="#000">
+      <animate attributeName="rx" values="6;4;6" dur="3s" repeatCount="indefinite"/>
+    </ellipse>
+    <!-- Eye shine -->
+    <circle cx="162" cy="124" r="4" fill="rgba(255,180,100,.3)"/>
+    <!-- Eyelid shadow top -->
+    <path d="M140,108 Q155,95 170,96 Q185,95 200,108" fill="none" stroke="#0a0608" stroke-width="6" stroke-linecap="round"/>
+    <!-- Eyelid shadow bottom -->
+    <path d="M140,152 Q155,165 170,164 Q185,165 200,152" fill="none" stroke="#0a0608" stroke-width="6" stroke-linecap="round"/>
+    <!-- Rock texture strokes -->
+    <path d="M20,90 Q25,85 35,92" stroke="rgba(255,255,255,.06)" stroke-width="1.5" fill="none"/>
+    <path d="M15,120 Q22,115 32,122" stroke="rgba(255,255,255,.05)" stroke-width="1.5" fill="none"/>
+    <path d="M305,100 Q312,94 320,101" stroke="rgba(255,255,255,.06)" stroke-width="1.5" fill="none"/>
+    <path d="M308,130 Q316,124 326,131" stroke="rgba(255,255,255,.05)" stroke-width="1.5" fill="none"/>
+  </svg>
+
+  <h1 class="intro-title">Ο Οδυσσέας<br>&amp; ο Κύκλωπας</h1>
+  <p class="intro-subtitle">Φυσική · Γρίφοι · Απόδραση</p>
+
+  <p class="intro-desc">
+    Έχεις παγιδευτεί στη σπηλιά του Κύκλωπα Πολύφημου.
+    Πέντε θεοί σε περιμένουν να σε βοηθήσουν —
+    αλλά μόνο αν λύσεις τους γρίφους τους.
+    Χρησιμοποίησε τη <strong>Φυσική</strong> για να αποδράσεις!
+  </p>
+
+  <button class="btn" onclick="startGame()">
+    ⚡ Ξεκινάει η Περιπέτεια
+  </button>
+</div>
+
+<!-- ═══ STAGE SCREEN ═══ -->
+<div class="screen hidden" id="s-stage">
+  <div id="stage-content"></div>
+</div>
+
+<!-- ═══ VICTORY SCREEN ═══ -->
+<div class="screen hidden" id="s-victory">
+  <!-- Ship on horizon SVG -->
+  <svg class="victory-scene" viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0a1628"/>
+        <stop offset="40%" stop-color="#1a2d50"/>
+        <stop offset="70%" stop-color="#c97040"/>
+        <stop offset="100%" stop-color="#e8902a"/>
+      </linearGradient>
+      <linearGradient id="seaGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1e4a7a"/>
+        <stop offset="100%" stop-color="#0d2440"/>
+      </linearGradient>
+      <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ffd080"/>
+        <stop offset="60%" stop-color="#e8902a"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <filter id="glow2"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <!-- Sky -->
+    <rect width="380" height="200" fill="url(#skyGrad)"/>
+    <!-- Stars -->
+    <circle cx="30" cy="20" r="1.2" fill="white" opacity=".7"/>
+    <circle cx="90" cy="10" r="1" fill="white" opacity=".6"/>
+    <circle cx="160" cy="15" r="1.4" fill="white" opacity=".8"/>
+    <circle cx="260" cy="8" r="1" fill="white" opacity=".6"/>
+    <circle cx="330" cy="22" r="1.2" fill="white" opacity=".7"/>
+    <circle cx="50" cy="40" r=".8" fill="white" opacity=".5"/>
+    <circle cx="310" cy="35" r=".8" fill="white" opacity=".5"/>
+    <!-- Setting sun / rising -->
+    <circle cx="190" cy="105" r="28" fill="url(#sunGrad)" opacity=".9"/>
+    <line x1="190" y1="72" x2="190" y2="60" stroke="#ffd080" stroke-width="1.5" opacity=".5"/>
+    <line x1="208" y1="78" x2="216" y2="68" stroke="#ffd080" stroke-width="1.5" opacity=".4"/>
+    <line x1="172" y1="78" x2="164" y2="68" stroke="#ffd080" stroke-width="1.5" opacity=".4"/>
+    <!-- Horizon sun reflection -->
+    <rect x="150" y="118" width="80" height="4" rx="2" fill="#e8902a" opacity=".5"/>
+    <rect x="162" y="124" width="56" height="3" rx="1.5" fill="#e8902a" opacity=".3"/>
+    <!-- Sea -->
+    <rect x="0" y="118" width="380" height="82" fill="url(#seaGrad)"/>
+    <!-- Wave lines -->
+    <path d="M0,128 Q40,124 80,128 Q120,132 160,128 Q200,124 240,128 Q280,132 320,128 Q360,124 380,128" stroke="rgba(66,165,245,.3)" stroke-width="1" fill="none"/>
+    <path d="M0,138 Q50,134 95,138 Q140,142 185,138 Q230,134 275,138 Q322,142 380,138" stroke="rgba(66,165,245,.2)" stroke-width="1" fill="none"/>
+    <path d="M0,148 Q45,144 90,148 Q135,152 180,148 Q225,144 270,148 Q315,152 380,148" stroke="rgba(66,165,245,.18)" stroke-width="1" fill="none">
+      <animate attributeName="d" dur="4s" repeatCount="indefinite"
+        values="M0,148 Q45,144 90,148 Q135,152 180,148 Q225,144 270,148 Q315,152 380,148;
+                M0,150 Q45,146 90,150 Q135,154 180,150 Q225,146 270,150 Q315,154 380,150;
+                M0,148 Q45,144 90,148 Q135,152 180,148 Q225,144 270,148 Q315,152 380,148"/>
+    </path>
+    <!-- Ship silhouette -->
+    <g transform="translate(155,78)" filter="url(#glow2)">
+      <!-- Hull -->
+      <path d="M0,22 Q35,-2 70,22 L65,32 Q35,28 5,32 Z" fill="#1a1a2e"/>
+      <!-- Mast -->
+      <line x1="30" y1="22" x2="30" y2="-18" stroke="#1a1a2e" stroke-width="2.5"/>
+      <line x1="52" y1="22" x2="52" y2="-5" stroke="#1a1a2e" stroke-width="2"/>
+      <!-- Sails -->
+      <path d="M30,-16 Q48,0 30,20" fill="#c9a84c" opacity=".85"/>
+      <path d="M52,-3 Q64,6 52,20" fill="#c9a84c" opacity=".75"/>
+      <!-- Pennant -->
+      <path d="M30,-18 L42,-12 L30,-7" fill="#e8c86a" opacity=".9"/>
+      <!-- Oars suggestion -->
+      <line x1="8" y1="28" x2="2" y2="36" stroke="#1a1a2e" stroke-width="1.5"/>
+      <line x1="62" y1="28" x2="68" y2="36" stroke="#1a1a2e" stroke-width="1.5"/>
+    </g>
+  </svg>
+
+  <h2 class="victory-title">Ελευθερία!</h2>
+  <p class="victory-subtitle" id="victory-text">
+    Νίκησες τον Κύκλωπα με τη δύναμη της Φυσικής!
+    Ο Οδυσσέας μπορεί επιτέλους να γυρίσει σπίτι.
+  </p>
+  <div>
+    <div class="score-label">ΤΕΛΙΚΟ ΣΚΟΡ</div>
+    <div class="final-score" id="final-score">0</div>
+  </div>
+  <div class="keys-display" id="keys-display"></div>
+  <button class="btn" onclick="location.reload()">🔄 Νέο Παιχνίδι</button>
+</div>
+
+<!-- Feedback toast -->
+<div id="feedback"></div>
+
+<!-- Attribution -->
+<div class="attrib">© Αλεξάνδρα Κούση</div>
 
 <script>
-/* ═══════════════════════════════════════
-   GAME DATA
-═══════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   PORTRAIT SVGs — one per stage
+═══════════════════════════════════════════════════════ */
+const PORTRAITS = [
+  /* 0 — Αθηνά (Οπτική) */
+  `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="ag0" cx="50%" cy="40%" r="55%">
+        <stop offset="0%" stop-color="#d4b896"/>
+        <stop offset="100%" stop-color="#8a6040"/>
+      </radialGradient>
+      <radialGradient id="ah0" cx="50%" cy="30%" r="60%">
+        <stop offset="0%" stop-color="#c0c8e0"/>
+        <stop offset="100%" stop-color="#606888"/>
+      </radialGradient>
+    </defs>
+    <!-- Helmet -->
+    <ellipse cx="32" cy="20" rx="18" ry="16" fill="url(#ah0)"/>
+    <rect x="22" y="14" width="20" height="8" rx="4" fill="#808aaa"/>
+    <!-- Helmet crest -->
+    <path d="M32,4 Q28,8 26,16 Q28,14 32,13 Q36,14 38,16 Q36,8 32,4" fill="#c9a84c"/>
+    <!-- Cheek guards -->
+    <rect x="14" y="22" width="8" height="12" rx="2" fill="#808aaa"/>
+    <rect x="42" y="22" width="8" height="12" rx="2" fill="#808aaa"/>
+    <!-- Face -->
+    <ellipse cx="32" cy="36" rx="12" ry="13" fill="url(#ag0)"/>
+    <!-- Eyes — calm grey -->
+    <ellipse cx="27" cy="34" rx="3" ry="2.5" fill="#e8e8f0"/>
+    <circle cx="27" cy="34" r="1.8" fill="#4860a0"/>
+    <circle cx="26.3" cy="33.3" r=".6" fill="white"/>
+    <ellipse cx="37" cy="34" rx="3" ry="2.5" fill="#e8e8f0"/>
+    <circle cx="37" cy="34" r="1.8" fill="#4860a0"/>
+    <circle cx="36.3" cy="33.3" r=".6" fill="white"/>
+    <!-- Nose -->
+    <path d="M32,36 Q30,40 29,42 Q31,43 33,43 Q35,42 34,40 Z" fill="#c09070" opacity=".5"/>
+    <!-- Mouth -->
+    <path d="M28,45 Q32,48 36,45" stroke="#c08060" stroke-width="1.2" fill="none"/>
+    <!-- Owl companion small -->
+    <circle cx="52" cy="46" r="6" fill="#e8d090" opacity=".9"/>
+    <circle cx="50" cy="44" r="2" fill="#c08830"/>
+    <circle cx="54" cy="44" r="2" fill="#c08830"/>
+    <circle cx="50" cy="44" r=".8" fill="#000"/>
+    <circle cx="54" cy="44" r=".8" fill="#000"/>
+    <path d="M49,42 L52,40 L55,42" fill="#c09050" stroke="none"/>
+    <!-- Light ray accent -->
+    <line x1="8" y1="36" x2="22" y2="36" stroke="#90caf9" stroke-width="1" opacity=".6"/>
+    <line x1="8" y1="40" x2="20" y2="40" stroke="#90caf9" stroke-width=".8" opacity=".4"/>
+  </svg>`,
+
+  /* 1 — Ερμής (Ήχος) */
+  `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="ag1" cx="50%" cy="40%" r="55%">
+        <stop offset="0%" stop-color="#d4b896"/>
+        <stop offset="100%" stop-color="#8a6040"/>
+      </radialGradient>
+      <radialGradient id="ah1" cx="50%" cy="30%" r="60%">
+        <stop offset="0%" stop-color="#c8c0a0"/>
+        <stop offset="100%" stop-color="#806840"/>
+      </radialGradient>
+    </defs>
+    <!-- Traveller hat brim -->
+    <ellipse cx="32" cy="22" rx="22" ry="5" fill="#806840"/>
+    <!-- Hat crown -->
+    <ellipse cx="32" cy="16" rx="14" ry="8" fill="url(#ah1)"/>
+    <!-- Winged hat — left wing -->
+    <path d="M10,22 Q4,16 6,10 Q10,14 16,20" fill="white" opacity=".85"/>
+    <path d="M10,22 Q6,20 8,15" stroke="rgba(0,0,0,.2)" stroke-width=".5" fill="none"/>
+    <!-- Winged hat — right wing -->
+    <path d="M54,22 Q60,16 58,10 Q54,14 48,20" fill="white" opacity=".85"/>
+    <!-- Face -->
+    <ellipse cx="32" cy="38" rx="12" ry="13" fill="url(#ag1)"/>
+    <!-- Eyes — lively brown -->
+    <ellipse cx="27" cy="36" rx="3" ry="2.5" fill="#e8dcc8"/>
+    <circle cx="27" cy="36" r="1.8" fill="#6b4020"/>
+    <circle cx="26.3" cy="35.3" r=".6" fill="white"/>
+    <ellipse cx="37" cy="36" rx="3" ry="2.5" fill="#e8dcc8"/>
+    <circle cx="37" cy="36" r="1.8" fill="#6b4020"/>
+    <circle cx="36.3" cy="35.3" r=".6" fill="white"/>
+    <!-- Eyebrow raised (mischievous) -->
+    <path d="M24,32 Q27,30 30,32" stroke="#6b4020" stroke-width="1.2" fill="none"/>
+    <path d="M34,32 Q37,30 40,32" stroke="#6b4020" stroke-width="1.2" fill="none"/>
+    <!-- Mouth — slight grin -->
+    <path d="M27,45 Q32,49 37,45" stroke="#c08060" stroke-width="1.2" fill="none"/>
+    <circle cx="37" cy="45" r="1" fill="#c08060" opacity=".5"/>
+    <!-- Sound wave accent -->
+    <path d="M4,30 Q6,27 8,30 Q10,33 12,30" stroke="#ce93d8" stroke-width="1.2" fill="none" opacity=".8"/>
+    <path d="M2,30 Q5,24 8,30 Q11,36 14,30" stroke="#ce93d8" stroke-width=".8" fill="none" opacity=".5"/>
+    <!-- Caduceus hint -->
+    <line x1="52" y1="30" x2="52" y2="58" stroke="#c9a84c" stroke-width="1.5"/>
+    <path d="M46,34 Q52,38 58,34" stroke="#c9a84c" stroke-width="1" fill="none"/>
+    <path d="M46,40 Q52,44 58,40" stroke="#c9a84c" stroke-width="1" fill="none"/>
+  </svg>`,
+
+  /* 2 — Ποσειδώνας (Πίεση) */
+  `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="ag2" cx="50%" cy="40%" r="55%">
+        <stop offset="0%" stop-color="#c8b898"/>
+        <stop offset="100%" stop-color="#806040"/>
+      </radialGradient>
+    </defs>
+    <!-- Crown of waves -->
+    <path d="M14,18 Q18,8 22,16 Q26,8 32,16 Q38,8 42,16 Q46,8 50,18 L50,24 Q42,20 32,22 Q22,20 14,24 Z" fill="#4fc3f7"/>
+    <path d="M14,18 Q18,8 22,16 Q26,8 32,16 Q38,8 42,16 Q46,8 50,18" stroke="#0d87c8" stroke-width=".8" fill="none"/>
+    <!-- White hair/beard broad -->
+    <ellipse cx="32" cy="30" rx="16" ry="10" fill="#e8e8ee"/>
+    <!-- Face -->
+    <ellipse cx="32" cy="36" rx="12" ry="12" fill="url(#ag2)"/>
+    <!-- Beard covering chin -->
+    <path d="M20,42 Q32,54 44,42 Q40,50 32,52 Q24,50 20,42" fill="#d8d8e4"/>
+    <!-- Moustache -->
+    <path d="M22,43 Q27,46 32,44 Q37,46 42,43" stroke="#c8c8d8" stroke-width="2" fill="none"/>
+    <!-- Eyes — sea blue deep -->
+    <ellipse cx="27" cy="34" rx="3" ry="2.5" fill="#e0f4ff"/>
+    <circle cx="27" cy="34" r="1.8" fill="#0d6090"/>
+    <circle cx="26.3" cy="33.3" r=".6" fill="white"/>
+    <ellipse cx="37" cy="34" rx="3" ry="2.5" fill="#e0f4ff"/>
+    <circle cx="37" cy="34" r="1.8" fill="#0d6090"/>
+    <circle cx="36.3" cy="33.3" r=".6" fill="white"/>
+    <!-- Trident -->
+    <line x1="54" y1="10" x2="54" y2="58" stroke="#c9a84c" stroke-width="2"/>
+    <line x1="50" y1="14" x2="50" y2="22" stroke="#c9a84c" stroke-width="1.5"/>
+    <line x1="58" y1="14" x2="58" y2="22" stroke="#c9a84c" stroke-width="1.5"/>
+    <line x1="54" y1="10" x2="50" y2="14" stroke="#c9a84c" stroke-width="1.5"/>
+    <line x1="54" y1="10" x2="58" y2="14" stroke="#c9a84c" stroke-width="1.5"/>
+    <!-- Bubble accents -->
+    <circle cx="8" cy="28" r="3" stroke="#4fc3f7" stroke-width="1" fill="none" opacity=".7"/>
+    <circle cx="6" cy="20" r="2" stroke="#4fc3f7" stroke-width=".8" fill="none" opacity=".5"/>
+    <circle cx="12" cy="40" r="2.5" stroke="#4fc3f7" stroke-width=".8" fill="none" opacity=".6"/>
+  </svg>`,
+
+  /* 3 — Ήφαιστος (Μοχλοί) */
+  `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="ag3" cx="50%" cy="40%" r="55%">
+        <stop offset="0%" stop-color="#c8a880"/>
+        <stop offset="100%" stop-color="#7a5030"/>
+      </radialGradient>
+    </defs>
+    <!-- Forge soot on forehead -->
+    <ellipse cx="32" cy="20" rx="16" ry="12" fill="#2a1808" opacity=".6"/>
+    <!-- Rough dark beard/hair -->
+    <ellipse cx="32" cy="28" rx="17" ry="14" fill="#1a1008"/>
+    <!-- Face -->
+    <ellipse cx="32" cy="36" rx="13" ry="13" fill="url(#ag3)"/>
+    <!-- Forge marks on cheek -->
+    <path d="M20,38 Q22,40 20,42" stroke="#c06030" stroke-width="1" fill="none" opacity=".5"/>
+    <!-- Eyes — amber from forge light -->
+    <ellipse cx="27" cy="34" rx="3.2" ry="2.5" fill="#ffe090"/>
+    <circle cx="27" cy="34" r="1.8" fill="#8b4000"/>
+    <circle cx="26.3" cy="33.3" r=".6" fill="rgba(255,220,100,.5)"/>
+    <ellipse cx="37" cy="34" rx="3.2" ry="2.5" fill="#ffe090"/>
+    <circle cx="37" cy="34" r="1.8" fill="#8b4000"/>
+    <circle cx="36.3" cy="33.3" r=".6" fill="rgba(255,220,100,.5)"/>
+    <!-- Furrowed brow -->
+    <path d="M24,30 Q27,27 30,30" stroke="#5a3010" stroke-width="1.5" fill="none"/>
+    <path d="M34,30 Q37,27 40,30" stroke="#5a3010" stroke-width="1.5" fill="none"/>
+    <!-- Stout nose -->
+    <path d="M32,37 L29,43 Q31,44 32,44 Q33,44 35,43 Z" fill="#a07050" opacity=".6"/>
+    <!-- Mouth set, determined -->
+    <path d="M27,46 Q32,48 37,46" stroke="#8a5030" stroke-width="1.5" fill="none"/>
+    <!-- Hammer -->
+    <rect x="48" y="8" width="10" height="7" rx="1.5" fill="#808090"/>
+    <line x1="53" y1="15" x2="53" y2="56" stroke="#6a4020" stroke-width="2.5"/>
+    <!-- Sparks -->
+    <circle cx="6" cy="20" r="1.5" fill="#ff9000" opacity=".9">
+      <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="10" cy="30" r="1" fill="#ffb347" opacity=".8">
+      <animate attributeName="opacity" values="0;1;0" dur=".9s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="4" cy="40" r="1.2" fill="#ff6b1a" opacity=".7">
+      <animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <line x1="8" y1="18" x2="12" y2="14" stroke="#ff9000" stroke-width=".8" opacity=".6"/>
+    <line x1="6" y1="28" x2="10" y2="24" stroke="#ffb347" stroke-width=".8" opacity=".5"/>
+  </svg>`,
+
+  /* 4 — Οδυσσέας (Απόδραση) */
+  `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="ag4" cx="50%" cy="40%" r="55%">
+        <stop offset="0%" stop-color="#d0a878"/>
+        <stop offset="100%" stop-color="#8a5830"/>
+      </radialGradient>
+      <radialGradient id="ah4" cx="50%" cy="30%" r="60%">
+        <stop offset="0%" stop-color="#b0b8c8"/>
+        <stop offset="100%" stop-color="#606870"/>
+      </radialGradient>
+    </defs>
+    <!-- Corinthian helmet -->
+    <path d="M15,28 Q14,10 32,8 Q50,10 49,28 L49,34 Q42,30 32,30 Q22,30 15,34 Z" fill="url(#ah4)"/>
+    <!-- Helmet crest -->
+    <path d="M32,8 Q28,2 24,6 L28,12 Q30,10 32,10 Q34,10 36,12 L40,6 Q36,2 32,8" fill="#c9a84c"/>
+    <!-- Nose guard -->
+    <rect x="30" y="22" width="4" height="14" rx="2" fill="#808898"/>
+    <!-- Cheek pieces -->
+    <path d="M15,28 L14,42 Q22,38 22,34" fill="#909aa8"/>
+    <path d="M49,28 L50,42 Q42,38 42,34" fill="#909aa8"/>
+    <!-- Face visible strip -->
+    <ellipse cx="32" cy="36" rx="10" ry="10" fill="url(#ag4)"/>
+    <!-- Eyes — determined sea green -->
+    <ellipse cx="27.5" cy="34" rx="2.8" ry="2.2" fill="#d8f0d8"/>
+    <circle cx="27.5" cy="34" r="1.6" fill="#2a6040"/>
+    <circle cx="26.9" cy="33.4" r=".5" fill="white"/>
+    <ellipse cx="36.5" cy="34" rx="2.8" ry="2.2" fill="#d8f0d8"/>
+    <circle cx="36.5" cy="34" r="1.6" fill="#2a6040"/>
+    <circle cx="35.9" cy="33.4" r=".5" fill="white"/>
+    <!-- Confident brow -->
+    <path d="M24.5,30.5 Q27.5,28.5 30.5,30.5" stroke="#6a4020" stroke-width="1.2" fill="none"/>
+    <path d="M33.5,30.5 Q36.5,28.5 39.5,30.5" stroke="#6a4020" stroke-width="1.2" fill="none"/>
+    <!-- Mouth — determined -->
+    <path d="M27,42 Q32,45 37,42" stroke="#a07050" stroke-width="1.2" fill="none"/>
+    <!-- Spear/staff -->
+    <line x1="8" y1="10" x2="8" y2="62" stroke="#6a4820" stroke-width="2"/>
+    <path d="M4,10 L8,4 L12,10 Z" fill="#808898"/>
+    <!-- Shield edge peek -->
+    <path d="M2,36 Q4,30 6,36 Q8,42 6,48 Q4,42 2,36" fill="#606878" opacity=".7"/>
+    <path d="M2,36 Q4,30 6,36 Q8,42 6,48 Q4,42 2,36" stroke="#c9a84c" stroke-width=".8" fill="none" opacity=".8"/>
+  </svg>`
+];
+
+/* ═══════════════════════════════════════════════════════
+   KEY SVG (earned state)
+═══════════════════════════════════════════════════════ */
+const KEY_SVG_EARNED = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="8" cy="8" r="4" stroke="#c9a84c" stroke-width="1.8" fill="rgba(201,168,76,.2)"/>
+  <path d="M12 8h8M17 8v3" stroke="#c9a84c" stroke-width="1.8" stroke-linecap="round"/>
+</svg>`;
+
+/* ═══════════════════════════════════════════════════════
+   GAME DATA — STAGES (unchanged from original)
+═══════════════════════════════════════════════════════ */
 const STAGES = [
-
-/* ── STAGE 1: ΑΘΗΝΑ – ΟΠΤΙΚΗ ── */
-{
-  num: 1,
-  title: "Αθηνά — Η Θεά της Γνώσης",
-  topic: "Οπτική",
-  emoji: "🦉",
-  color: "#90caf9",
-  storyKey: "🗝️",
-  guide: "ΑΘΗΝΑ",
-  narrative: `Μια κουκουβάγια προσγειώνεται στον ώμο του Οδυσσέα — αγγελιοφόρος της Αθηνάς!
-  "Ήρωά μου, η φωτιά της σπηλιάς είναι το κλειδί. Αν καταλάβεις πώς κινείται το φως,
-  μπορείς να στείλεις σήμα στα πλοία σου. Πρώτα μάθε, μετά δράσε!"`,
-
-  riddles: [
-    {
-      q: "Πώς ταξιδεύει το φως σε ένα ομογενές υλικό (π.χ. στον αέρα);",
-      opts: ["Σε κυκλική τροχιά", "Με ευθύγραμμη πορεία", "Σε ζιγκ-ζακ", "Τυχαία σε κάθε κατεύθυνση"],
-      correct: 1,
-      explain: "Το φως ταξιδεύει σε ευθεία γραμμή μέσα σε ένα ομογενές μέσο. Αυτό εξηγεί γιατί οι σκιές έχουν ευθείες άκρες!"
+  {
+    title:'Αθηνά',
+    topic:'Οπτική',
+    color:'#90caf9',
+    colorRgb:'144,202,249',
+    guide:'Θεά της Σοφίας & του Φωτός',
+    narrative:'«Χαίρε, ταξιδιώτη! Για να σε βοηθήσω, πρέπει να μου αποδείξεις ότι γνωρίζεις τα μυστικά του φωτός. Λύσε τους γρίφους μου!»',
+    riddles:[
+      {q:'Πώς ταξιδεύει το φως;',opts:['Χρειάζεται υλικό μέσο','Ταξιδεύει σε κύκλους','Μόνο σε ευθεία γραμμή','Δεν ταξιδεύει, παράγεται επί τόπου'],ans:2},
+      {q:'Τι συμβαίνει όταν το φως πέφτει σε καθρέφτη;',opts:['Απορροφάται εξ ολοκλήρου','Ανακλάται','Διαθλάται μέσα στον καθρέφτη','Σκεδάζεται τυχαία'],ans:1},
+      {q:'Ποια από τις παρακάτω ύλες είναι αδιαφανής;',opts:['Γυαλί','Νερό','Ξύλο','Πλαστικό μπουκάλι'],ans:2},
+    ],
+    matching:{
+      pairs:[
+        {l:'Διαφανής',r:'Αφήνει το φως να περνά'},
+        {l:'Αδιαφανής',r:'Δεν αφήνει το φως να περνά'},
+        {l:'Ημιδιαφανής',r:'Αφήνει λίγο φως να περνά'},
+        {l:'Ανάκλαση',r:'Το φως αναπηδά στην επιφάνεια'},
+      ]
     },
-    {
-      q: "Ο Οδυσσέας κρατά μια ασπίδα-καθρέφτη. Αν η γωνία πρόσπτωσης της φωτεινής ακτίνας είναι 35°, ποια είναι η γωνία ανάκλασης;",
-      opts: ["70°", "55°", "35°", "90°"],
-      correct: 2,
-      explain: "Νόμος ανάκλασης: η γωνία πρόσπτωσης = γωνία ανάκλασης. Άρα 35° = 35°. Με αυτό το νόμο ο Οδυσσέας μπορεί να κατευθύνει το φως ακριβώς εκεί που θέλει!"
-    },
-    {
-      q: "Ποιο υλικό είναι ΑΔΙΑΦΑΝΕΣ (δεν αφήνει το φως να περάσει);",
-      opts: ["Διαφανές γυαλί παράθυρου", "Καθαρό νερό", "Πέτρα σπηλιάς", "Αέρας"],
-      correct: 2,
-      explain: "Η πέτρα είναι αδιαφανής — δεν αφήνει το φως να περάσει, οπότε δημιουργεί σκιά. Διαφανή είναι το γυαλί και το καθαρό νερό. Ημιδιαφανές λέμε το θολό γυαλί."
+    acrostic:{
+      word:'ΦΑΕΣ',
+      intro:'Η Αθηνά κρύβει τη λέξη-κλειδί στους γρίφους της. Βρες την κρυμμένη λέξη:',
+      clues:[
+        {letter:'Φ', clue:'Ταξιδεύει σε ευθεία — αυτό ταξιδεύει (αρχικό γράμμα)'},
+        {letter:'Α', clue:'Ανακλάται στον καθρέφτη, είναι η ... (αρχικό γράμμα)'},
+        {letter:'Ε', clue:'Η τάξη στην οποία ανήκει η επιστήμη του φωτός (αρχικό)'},
+        {letter:'Σ', clue:'Αυτό που βλέπουμε χάρη στο φως — η ... (αρχικό γράμμα)'},
+      ]
     }
-  ],
-
-  matching: {
-    pairs: [
-      { left: "Ανάκλαση", right: "Επιστροφή φωτός από επιφάνεια" },
-      { left: "Διάθλαση", right: "Αλλαγή κατεύθυνσης φωτός σε άλλο μέσο" },
-      { left: "Κοίλος καθρέφτης", right: "Μαζεύει τις ακτίνες φωτός σε εστία" },
-      { left: "Πρίσμα", right: "Χωρίζει το λευκό φως στα χρώματα του ουράνιου τόξου" }
-    ]
   },
-
-  acrostic: {
-    word: "ΦΑΕΣ",
-    intro: "Τι λέξη κρύβεται κάθετα στα πρώτα γράμματα;",
-    clues: [
-      { clue: "Το «σωματίδιο» του φωτός — η μικρότερη μονάδα φωτεινής ενέργειας", answer: "ΦΩΤΟΝΙΟ" },
-      { clue: "Το «πέταγμα» φωτός από επιφάνεια — η επιστροφή της ακτίνας", answer: "ΑΝΑΚΛΑΣΗ" },
-      { clue: "Αυτό που βλέπουμε στον καθρέφτη — η απεικόνιση ενός αντικειμένου", answer: "ΕΙΔΩΛΟ" },
-      { clue: "Η σκοτεινή περιοχή πίσω από αδιαφανές αντικείμενο που εμποδίζει το φως", answer: "ΣΚΙΑ" }
-    ]
-  },
-
-  completeMsg: "Η Αθηνά χαμογελά! Το σήμα στάλθηκε!",
-  completeSub: "Τα πλοία είδαν το φως. Πηγαίνετε στο επόμενο εμπόδιο!"
-},
-
-/* ── STAGE 2: ΕΡΜΗΣ – ΗΧΟΣ ── */
-{
-  num: 2,
-  title: "Ερμής — Αγγελιαφόρος των Θεών",
-  topic: "Ήχος",
-  emoji: "🪁",
-  color: "#ce93d8",
-  storyKey: "🗝️",
-  guide: "ΕΡΜΗΣ",
-  narrative: `Ο Ερμής κατεβαίνει ταχύτατος με τα φτερωτά του σανδάλια.
-  "Οδυσσέα, ο Κύκλωπας κοιμάται! Αλλά ο ήχος σας μπορεί να τον ξυπνήσει ή να τον μπερδέψει.
-  Αν καταλάβεις πώς λειτουργεί ο ήχος, μπορείς να τον κατευθύνεις μακριά από τα αυτιά του!"`,
-
-  riddles: [
-    {
-      q: "Τι χρειάζεται ο ήχος για να ταξιδέψει από ένα μέρος σε άλλο;",
-      opts: ["Τίποτα — ταξιδεύει παντού", "Μόνο φως", "Υλικό μέσο (αέρας, νερό ή στερεό)", "Ηλεκτρισμό"],
-      correct: 2,
-      explain: "Ο ήχος είναι μηχανικό κύμα — χρειάζεται υλικό μέσο για να ταξιδέψει. Στο κενό (π.χ. στο Διάστημα) δεν ακούμε τίποτα! Γι' αυτό στη σπηλιά ο ήχος ταξιδεύει μέσα στον αέρα."
+  {
+    title:'Ερμής',
+    topic:'Ήχος',
+    color:'#ce93d8',
+    colorRgb:'206,147,216',
+    guide:'Θεός των Αγγελιαφόρων & του Ήχου',
+    narrative:'«Γρήγορα όπως ο άνεμος! Αλλά πόσο γρήγορος είναι ο ήχος; Αν μπορείς να απαντήσεις, θα σε βοηθήσω να ξεφύγεις!»',
+    riddles:[
+      {q:'Πώς μεταδίδεται ο ήχος;',opts:['Μέσω κυμάτων στον αέρα','Χωρίς υλικό μέσο','Μόνο μέσα στο νερό','Μόνο μέσα σε στερεά'],ans:0},
+      {q:'Τι εκφράζει η συχνότητα του ήχου;',opts:['Πόσο δυνατός είναι ο ήχος','Πόσες ταλαντώσεις γίνονται ανά δευτερόλεπτο','Την ταχύτητα του ήχου','Τη διεύθυνση του ήχου'],ans:1},
+      {q:'Σε ποιο μέσο ο ήχος ταξιδεύει πιο γρήγορα;',opts:['Στον αέρα','Στο κενό','Στο νερό','Σε στερεά σώματα'],ans:3},
+    ],
+    matching:{
+      pairs:[
+        {l:'Ηχώ',r:'Ανάκλαση ήχου'},
+        {l:'Ηχομόνωση',r:'Μείωση ήχου με υλικά'},
+        {l:'Συχνότητα',r:'Αριθμός ταλαντώσεων/δευτερόλεπτο'},
+        {l:'Πλάτος',r:'Ένταση ταλάντωσης'},
+      ]
     },
-    {
-      q: "Αν αυξήσουμε τη συχνότητα ενός ήχου, τι γίνεται;",
-      opts: ["Γίνεται πιο δυνατός", "Γίνεται πιο ψηλός (οξύτερος)", "Γίνεται πιο αργός", "Δεν αλλάζει τίποτα"],
-      correct: 1,
-      explain: "Η συχνότητα (Hz) καθορίζει τον τόνο (ψηλός/χαμηλός). Αύξηση συχνότητας → ψηλότερος τόνος (π.χ. παιδικές φωνές). Η ένταση (δυνατός/σιγανός) καθορίζεται από το πλάτος του κύματος."
-    },
-    {
-      q: "Γιατί δεν ακούγεται κανένας ήχος στο Διάστημα;",
-      opts: ["Γιατί είναι πολύ μακριά", "Γιατί οι εκρήξεις δεν παράγουν ήχο", "Γιατί δεν υπάρχει υλικό μέσο (ουσιαστικά κενό)", "Γιατί ο ήχος πάει αντίθετα"],
-      correct: 2,
-      explain: "Στο Διάστημα δεν υπάρχει αέρας ή άλλο υλικό μέσο. Χωρίς μέσο, τα ηχητικά κύματα δεν μπορούν να σχηματιστούν ή να ταξιδέψουν — απόλυτη σιγή!"
+    acrostic:{
+      word:'ΗΧΟΣ',
+      intro:'«Αποκρυπτογράφησε τη λέξη-κλειδί του ήχου:»',
+      clues:[
+        {letter:'Η', clue:'Η ανάκλαση ήχου που ακούς στο βουνό (αρχικό)'},
+        {letter:'Χ', clue:'Αυτό που παράγει το τύμπανο — ένα ηχητικό ... (αρχικό)'},
+        {letter:'Ο', clue:'Το μέσο από το οποίο περνά κυρίως ο ήχος στη φύση (αρχικό)'},
+        {letter:'Σ', clue:'Αυτό που ακούτε με τα αυτιά σας (αρχικό)'},
+      ]
     }
-  ],
-
-  matching: {
-    pairs: [
-      { left: "Συχνότητα (Hz)", right: "Καθορίζει αν ο ήχος είναι ψηλός ή χαμηλός" },
-      { left: "Ένταση (dB)", right: "Καθορίζει αν ο ήχος είναι δυνατός ή σιγανός" },
-      { left: "Ηχώ", right: "Ανάκλαση ήχου σε σκληρή επιφάνεια (π.χ. βουνό)" },
-      { left: "Υπέρηχος", right: "Ήχος πάνω από 20.000 Hz, αόρατος στο αυτί μας" }
-    ]
   },
-
-  acrostic: {
-    word: "ΗΧΟΣ",
-    intro: "Τι λέξη κρύβεται κάθετα στα πρώτα γράμματα;",
-    clues: [
-      { clue: "Τεχνολογία εντοπισμού υποβρυχίων μέσω παλμών ήχου (ακρωνύμιο: Sound Navigation Ranging)", answer: "ΗΧΟΒΟΛΙΣΤΗΣ" },
-      { clue: "Πώς λέμε έναν ήχο με μικρή συχνότητα, το αντίθετο του «ψηλός»;", answer: "ΧΑΜΗΛΟΣ" },
-      { clue: "Η μουσική μονάδα με 12 ημιτόνια (π.χ. ντο-ντο')", answer: "ΟΚΤΑΒΑ" },
-      { clue: "Ο ήχος ταξιδεύει γρηγορότερα σε αυτή την κατάσταση ύλης σε σχέση με τον αέρα", answer: "ΣΤΕΡΕΟ" }
-    ]
-  },
-
-  completeMsg: "Ο Ερμής γελά θριαμβευτικά! Ο Κύκλωπας μπερδεύτηκε!",
-  completeSub: "Τα ηχητικά κόλπα σάς κέρδισαν χρόνο. Συνεχίστε!"
-},
-
-/* ── STAGE 3: ΠΟΣΕΙΔΩΝΑΣ – ΠΙΕΣΗ ── */
-{
-  num: 3,
-  title: "Ποσειδώνας — Κύριος των Θαλασσών",
-  topic: "Πίεση",
-  emoji: "🔱",
-  color: "#4fc3f7",
-  storyKey: "🗝️",
-  guide: "ΠΟΣΕΙΔΩΝΑΣ",
-  narrative: `Η φωνή του Ποσειδώνα ανεβαίνει από μια υπόγεια πηγή της σπηλιάς.
-  "Ανηψιέ μου Κύκλωπα — μα όχι! Δεν θα σε βοηθήσω εγώ, θα βοηθήσω εκείνους τους ανθρώπους!
-  Οδυσσέα, ο βράχος μπορεί να κινηθεί αν καταλάβεις την πίεση. Χρησιμοποίησε τη φυσική!"`,
-
-  riddles: [
-    {
-      q: "Ποιος είναι ο σωστός τύπος για την πίεση;",
-      opts: ["Π = m × g", "Π = F × A", "Π = F / A", "Π = A / F"],
-      correct: 2,
-      explain: "Πίεση (Π) = Δύναμη (F) διά Επιφάνεια (A). Μονάδα: 1 Pascal = 1 N/m². Αν η ίδια δύναμη ασκηθεί σε μικρότερη επιφάνεια, η πίεση μεγαλώνει!"
+  {
+    title:'Ποσειδώνας',
+    topic:'Πίεση',
+    color:'#4fc3f7',
+    colorRgb:'79,195,247',
+    guide:'Θεός της Θάλασσας & της Πίεσης',
+    narrative:'«Από τα βάθη του ωκεανού έρχομαι! Γνωρίζεις γιατί οι δύτες αισθάνονται πίεση στα βάθη; Αποδείξτο!»',
+    riddles:[
+      {q:'Ποιος είναι ο τύπος της Πίεσης;',opts:['P = F × A','P = F / A','P = m × g','P = F + A'],ans:1},
+      {q:'Αν αυξήσω τη δύναμη διατηρώντας σταθερό το εμβαδόν, τι συμβαίνει στην πίεση;',opts:['Μειώνεται','Παραμένει σταθερή','Αυξάνεται','Γίνεται μηδέν'],ans:2},
+      {q:'Ποιο παράδειγμα δείχνει μεγάλη πίεση σε μικρή επιφάνεια;',opts:['Πλατιά βάση καρέκλας','Αιχμή βελόνας','Τακούνι στιλέτου','Ελαστικό αυτοκινήτου'],ans:1},
+    ],
+    matching:{
+      pairs:[
+        {l:'Πίεση (P)',r:'Δύναμη / Εμβαδόν'},
+        {l:'Pascal (Pa)',r:'Μονάδα πίεσης'},
+        {l:'Αύξηση εμβαδού',r:'Μείωση πίεσης'},
+        {l:'Μείωση εμβαδού',r:'Αύξηση πίεσης'},
+      ]
     },
-    {
-      q: "Ο Οδυσσέας θέλει να σφηνώσει ένα ξύλο κάτω από τον βράχο. Αν μειώσει την επιφάνεια επαφής του ξύλου, πώς αλλάζει η πίεση για ίδια δύναμη;",
-      opts: ["Μειώνεται", "Παραμένει ίδια", "Αυξάνεται", "Γίνεται αρνητική"],
-      correct: 2,
-      explain: "Από τον τύπο Π = F/A: αν το Α (επιφάνεια) μικραίνει και η F μένει ίδια, η Π αυξάνεται. Γι' αυτό ένα μυτερό αντικείμενο «μπαίνει» πιο εύκολα — ίδια δύναμη, λιγότερη επιφάνεια, περισσότερη πίεση!"
-    },
-    {
-      q: "Γιατί η τρίαινα του Ποσειδώνα μπαίνει εύκολα στο νερό ενώ μια πλατιά σανίδα δύσκολα (για ίδια δύναμη ώθησης);",
-      opts: ["Η τρίαινα είναι πιο βαριά", "Η τρίαινα έχει μικρότερη επιφάνεια άρα μεγαλύτερη πίεση", "Το νερό αντέχει περισσότερο τις πλατιές επιφάνειες", "Η τρίαινα κινείται γρηγορότερα"],
-      correct: 1,
-      explain: "Η τρίαινα έχει τρία πολύ λεπτά δόντια = πολύ μικρή επιφάνεια. Με ίδια δύναμη, η πίεση (F/A) είναι τεράστια και «κόβει» εύκολα. Η σανίδα έχει μεγάλη επιφάνεια άρα μικρή πίεση."
+    acrostic:{
+      word:'ΑΓΚΥΡΑ',
+      intro:'«Βρες τη λέξη-κλειδί του Ποσειδώνα:»',
+      clues:[
+        {letter:'Α', clue:'Αρχικό της Αρχής — ο νόμος της πίεσης ανακαλύφθηκε από τον ...'},
+        {letter:'Γ', clue:'Το γράμμα που ξεκινά η λέξη "Γεωμετρία" (επιφάνεια = ...) '},
+        {letter:'Κ', clue:'Αρχικό του Κιλό — μονάδα που χρησιμοποιούμε για τη δύναμη (Kg)'},
+        {letter:'Υ', clue:'Αρχικό του Υγρού — τα υγρά ασκούν πίεση σε κάθε ...'},
+        {letter:'Ρ', clue:'Αρχικό Ρευστού — αέρας και νερό είναι ...'},
+        {letter:'Α', clue:'Αρχικό Αέρα — η ατμοσφαιρική ... ασκείται παντού'},
+      ]
     }
-  ],
-
-  matching: {
-    pairs: [
-      { left: "Pascal (Pa)", right: "Μονάδα μέτρησης πίεσης (1 N/m²)" },
-      { left: "Ατμοσφαιρική πίεση", right: "Περίπου 101.325 Pa = 1 atm στη στάθμη της θάλασσας" },
-      { left: "Υδροστατική πίεση", right: "Αυξάνεται καθώς αυξάνεται το βάθος στο νερό" },
-      { left: "Αρχή Pascal", right: "Πίεση σε κλειστό υγρό μεταδίδεται εξίσου προς όλες τις κατευθύνσεις" }
-    ]
   },
-
-  acrostic: {
-    word: "ΑΓΚΥΡΑ",
-    intro: "Τι λέξη κρύβεται κάθετα στα πρώτα γράμματα; (Υπόδειξη: θαλάσσιο εργαλείο)",
-    clues: [
-      { clue: "Η πίεση που ασκεί ο αέρας της ατμόσφαιρας σε κάθε επιφάνεια", answer: "ΑΤΜΟΣΦΑΙΡΙΚΗ" },
-      { clue: "Υδραυλική συσκευή ανύψωσης — χρησιμοποιεί πίεση υγρού για να σηκώνει βαριά φορτία", answer: "ΓΡΥΛΟΣ" },
-      { clue: "Χαρακτηριστικό υγρού στον νόμο Pascal: πίεση μεταδίδεται σε ___ σύστημα", answer: "ΚΛΕΙΣΤΟ" },
-      { clue: "Η πίεση που ασκεί ένα υγρό στον πυθμένα δοχείου (στατικά)", answer: "ΥΔΡΟΣΤΑΤΙΚΗ" },
-      { clue: "Υγρό ή αέριο που μπορεί να ρέει — μεταδίδει πίεση ομοιόμορφα", answer: "ΡΕΥΣΤΟ" },
-      { clue: "Τι γίνεται η πίεση στο νερό καθώς το ψάρι βυθίζεται βαθύτερα;", answer: "ΑΥΞΑΝΕΤΑΙ" }
-    ]
-  },
-
-  completeMsg: "Ο Ποσειδώνας γνέφει με έγκριση! Ο βράχος αρχίζει να κινείται!",
-  completeSub: "Η πίεση υπολογίστηκε. Ένα ακόμα εμπόδιο!"
-},
-
-/* ── STAGE 4: ΗΦΑΙΣΤΟΣ – ΜΟΧΛΟΙ ── */
-{
-  num: 4,
-  title: "Ήφαιστος — Θεός της Τεχνολογίας",
-  topic: "Μοχλοί",
-  emoji: "⚒️",
-  color: "#ffb74d",
-  storyKey: "🗝️",
-  guide: "ΗΦΑΙΣΤΟΣ",
-  narrative: `Ένα εργαλείο εμφανίζεται στο έδαφος της σπηλιάς — δώρο του Ήφαιστου!
-  "Οδυσσέα, με αυτό το ξύλινο δοκάρι μπορείς να σηκώσεις ακόμα και βουνό.
-  Είναι μοχλός — η πιο παλιά μηχανή του κόσμου. Μάθε πώς λειτουργεί και ελευθερώσου!"`,
-
-  riddles: [
-    {
-      q: "Τι είναι ένας μοχλός;",
-      opts: [
-        "Ένα βαρύ αντικείμενο που σπρώχνουμε",
-        "Άκαμπτη ράβδος που περιστρέφεται γύρω από ένα σημείο (υπομόχλιο)",
-        "Ένα σχοινί και μια τροχαλία",
-        "Οποιοδήποτε εργαλείο"
-      ],
-      correct: 1,
-      explain: "Ο μοχλός είναι άκαμπτη ράβδος που στηρίζεται σε ένα σημείο, το υπομόχλιο (ή στήριγμα). Με σωστή τοποθέτηση μπορούμε να ασκούμε μικρή δύναμη για να σηκώσουμε μεγάλο φορτίο!"
+  {
+    title:'Ήφαιστος',
+    topic:'Μοχλοί',
+    color:'#ffb74d',
+    colorRgb:'255,183,77',
+    guide:'Θεός της Φωτιάς & των Μηχανών',
+    narrative:'«Από το σφυρί μου γεννιέται η δύναμη! Αν ξέρεις πώς λειτουργεί ο μοχλός, θα φτιάξω εργαλείο για να σπάσεις τα δεσμά σου!»',
+    riddles:[
+      {q:'Τι είναι ο μοχλός;',opts:['Ένα σφυρί με μεγάλη λαβή','Ένα άκαμπτο στέλεχος που στρέφεται γύρω από ένα σημείο','Ένα σχοινί που χρησιμοποιείται για ανύψωση','Ένα γρανάζι'],ans:1},
+      {q:'Τι ονομάζεται το σημείο στήριξης ενός μοχλού;',opts:['Δύναμη','Κέντρο βάρους','Υπομόχλιο','Αντίσταση'],ans:2},
+      {q:'Αν ο βραχίονας δύναμης είναι μεγαλύτερος από τον βραχίονα αντίστασης, τι επιτυγχάνουμε;',opts:['Ασκούμε μικρότερη δύναμη για να κινήσουμε το φορτίο','Ασκούμε μεγαλύτερη δύναμη','Η ταχύτητα αυξάνεται','Τίποτα δεν αλλάζει'],ans:0},
+    ],
+    matching:{
+      pairs:[
+        {l:'Υπομόχλιο',r:'Σημείο στήριξης μοχλού'},
+        {l:'Βραχίονας δύναμης',r:'Απόσταση δύναμης από υπομόχλιο'},
+        {l:'Βραχίονας αντίστασης',r:'Απόσταση φορτίου από υπομόχλιο'},
+        {l:'Μηχανικό πλεονέκτημα',r:'Λόγος βραχιόνων δύναμης/αντίστασης'},
+      ]
     },
-    {
-      q: "Σε έναν μοχλό 1ης τάξης (όπως η τραμπάλα), πού βρίσκεται το υπομόχλιο;",
-      opts: [
-        "Στη μία άκρη",
-        "Ανάμεσα στη δύναμη και στο φορτίο",
-        "Πάντα κοντά στο φορτίο",
-        "Εκτός του μοχλού"
-      ],
-      correct: 1,
-      explain: "Μοχλός 1ης τάξης: Υπομόχλιο στη μέση, δύναμη και φορτίο στις δύο άκρες. Παραδείγματα: τραμπάλα, μοχλός-βαρύτης (crowbar), ψαλίδι."
-    },
-    {
-      q: "Ο Οδυσσέας ωθεί ένα δοκάρι κάτω από τον βράχο. Ο βράχος (φορτίο) είναι 1 m από το υπομόχλιο, η δύναμη ασκείται 4 m μακριά. Ποιο είναι το Μηχανικό Πλεονέκτημα (ΜΑ = βραχίονας δύναμης / βραχίονας φορτίου);",
-      opts: ["1", "0.25", "4", "2"],
-      correct: 2,
-      explain: "ΜΑ = βραχίονας δύναμης / βραχίονας φορτίου = 4m / 1m = 4. Αυτό σημαίνει ότι ο Οδυσσέας χρειάζεται μόνο το 1/4 της δύναμης που θα χρειαζόταν χωρίς μοχλό — ο μοχλός πολλαπλασιάζει τη δύναμή!"
+    acrostic:{
+      word:'ΑΡΣΗ',
+      intro:'«Βρες τη λέξη-κλειδί του μοχλού:»',
+      clues:[
+        {letter:'Α', clue:'Αυτό που επιτυγχάνεις με μοχλό — ... φορτίου (αρχικό)'},
+        {letter:'Ρ', clue:'Αρχικό Ροπής — η δύναμη × βραχίονας = ... στροφής'},
+        {letter:'Σ', clue:'Αρχικό Σημείου — το υπο... είναι το σημείο στήριξης'},
+        {letter:'Η', clue:'Αρχικό Ηφαίστου — ο θεός που σφυρηλατεί ...'},
+      ]
     }
-  ],
-
-  matching: {
-    pairs: [
-      { left: "Μοχλός 1ης τάξης", right: "Υπομόχλιο ανάμεσα σε δύναμη και φορτίο (π.χ. τραμπάλα)" },
-      { left: "Μοχλός 2ης τάξης", right: "Φορτίο ανάμεσα σε δύναμη και υπομόχλιο (π.χ. καρότσι)" },
-      { left: "Μοχλός 3ης τάξης", right: "Δύναμη ανάμεσα σε φορτίο και υπομόχλιο (π.χ. ψαροκάλαμο)" },
-      { left: "Μηχανικό Πλεονέκτημα", right: "Λόγος βραχίονα δύναμης προς βραχίονα φορτίου" }
-    ]
   },
-
-  acrostic: {
-    word: "ΑΡΣΗ",
-    intro: "Τι λέξη κρύβεται κάθετα; (Υπόδειξη: σχετίζεται με άρση βαρών)",
-    clues: [
-      { clue: "Η απόσταση από το υπομόχλιο ως το σημείο εφαρμογής της δύναμης ονομάζεται «βραχίονας» ή...", answer: "ΑΠΟΣΤΑΣΗ" },
-      { clue: "Η «στρεπτική δύναμη» ενός μοχλού — το γινόμενο δύναμης × βραχίονα", answer: "ΡΟΠΗ" },
-      { clue: "Το σημείο ___ ενός μοχλού είναι το υπομόχλιο — το σημείο γύρω από το οποίο περιστρέφεται", answer: "ΣΤΗΡΙΞΗΣ" },
-      { clue: "Η κατάσταση ενός μοχλού όταν οι ροπές εκατέρωθεν του υπομοχλίου είναι ίσες", answer: "ΗΡΕΜΙΑ" }
-    ]
-  },
-
-  completeMsg: "Ο Ήφαιστος χτυπά το αμόνι! Ο βράχος ανοίγει!",
-  completeSub: "Τέταρτο κλειδί! Η έξοδος είναι σχεδόν ελεύθερη!"
-},
-
-/* ── STAGE 5: ΟΔΥΣΣΕΑΣ – ΑΠΟΔΡΑΣΗ ── */
-{
-  num: 5,
-  title: "Οδυσσέας — Η Τελική Απόδραση",
-  topic: "Απόδραση",
-  emoji: "⚓",
-  color: "#c9a84c",
-  storyKey: "🗝️",
-  guide: "ΟΔΥΣΣΕΑΣ",
-  narrative: `"Σύντροφοι! Είναι η ώρα!" φωνάζει ο Οδυσσέας. "Χρησιμοποιήσαμε το φως,
-  τον ήχο, την πίεση και τους μοχλούς. Τώρα χρειαζόμαστε ΟΛΕΣ τις γνώσεις μαζί.
-  Μία τελευταία πρόκληση: αν περάσετε, η σπηλιά ανοίγει — και γυρίζουμε σπίτι!"`,
-
-  riddles: [
-    {
-      q: "Ο Οδυσσέας θέλει να «τυφλώσει» προσωρινά τον Κύκλωπα με φως. Τι είδους καθρέφτη χρειάζεται για να συγκεντρώσει το φως σε ένα σημείο;",
-      opts: ["Επίπεδο (πλατύ) καθρέφτη", "Κυρτό καθρέφτη", "Κοίλο καθρέφτη", "Διαφανές γυαλί"],
-      correct: 2,
-      explain: "Ο κοίλος (κατακόρυφα καμπύλος προς τα μέσα) καθρέφτης ανακλά τις ακτίνες και τις συγκεντρώνει στην εστία. Τον χρησιμοποιούν σε τηλεσκόπια, φακούς αυτοκινήτου και ηλιακά συγκεντρωτικά συστήματα."
+  {
+    title:'Οδυσσέας',
+    topic:'Απόδραση',
+    color:'#c9a84c',
+    colorRgb:'201,168,76',
+    guide:'Πολυμήχανος Ήρωας της Ιθάκης',
+    narrative:'«Με τη βοήθεια των θεών, ήρθε η ώρα να αποδράσουμε! Χρησιμοποίησε όλες τις γνώσεις σου από Φυσική για να λύσεις τους τελευταίους γρίφους!»',
+    riddles:[
+      {q:'Για να βγούμε από τη σπηλιά χωρίς να μας δει ο Κύκλωπας, χρησιμοποιούμε αντανακλαστήρα φωτός. Τι ιδιότητα του φωτός αξιοποιούμε;',opts:['Διάθλαση','Ανάκλαση','Απορρόφηση','Σκέδαση'],ans:1},
+      {q:'Ο Οδυσσέας χτυπά κωδικοποιημένα μηνύματα στους βράχους. Τι ιδιότητα του ήχου εκμεταλλεύεται;',opts:['Ο ήχος ταξιδεύει γρηγορότερα σε στερεά','Ο ήχος σβήνει γρήγορα σε αέρα','Ο ήχος είναι ορατός','Ο ήχος δεν ταξιδεύει σε υγρά'],ans:0},
+      {q:'Ο Κύκλωπας κλείνει την είσοδο με έναν βράχο. Χρησιμοποιείς έναν μοχλό για να τον μετακινήσεις. Πού τοποθετείς το υπομόχλιο για μέγιστη αποτελεσματικότητα;',opts:['Στη μέση του βράχου','Κοντά στον βράχο (φορτίο)','Μακριά από τον βράχο','Δεν έχει σημασία'],ans:1},
+      {q:'Μπαίνεις στη θάλασσα κρεμαστός κάτω από ένα πρόβατο. Αισθάνεσαι πίεση στα βάθη. Πώς αλλάζει η πίεση καθώς κατεβαίνεις;',opts:['Μειώνεται','Παραμένει ίδια','Αυξάνεται','Γίνεται μηδέν'],ans:2},
+    ],
+    matching:{
+      pairs:[
+        {l:'Φως - Ανάκλαση',r:'Καθρέφτης στη σπηλιά'},
+        {l:'Ήχος σε στερεά',r:'Μηνύματα στους βράχους'},
+        {l:'Μοχλός',r:'Μετακίνηση βράχου εισόδου'},
+        {l:'Πίεση νερού',r:'Αίσθηση στα βάθη της θάλασσας'},
+      ]
     },
-    {
-      q: "Ένας σύντροφος χτυπά μια πέτρα για να κάνει θόρυβο. Αν η συχνότητα του ήχου είναι 440 Hz, περί ποιας νότας πρόκειται;",
-      opts: ["ΣΙ", "ΛΑ", "ΡΕ", "ΜΙ"],
-      correct: 1,
-      explain: "Τα 440 Hz είναι η νότα ΛΑ (A4) — η νότα που χρησιμοποιείται ως πρότυπο συντονισμός σε διεθνές επίπεδο. Ο Οδυσσέας θα εκτιμούσε αυτή τη μουσική γνώση!"
-    },
-    {
-      q: "Για να ανοίξουν την πόρτα, χρειάζονται δύναμη 500 N. Χρησιμοποιώντας μοχλό 2ης τάξης με βραχίονα φορτίου 0.5m και βραχίονα δύναμης 2m, πόση δύναμη χρειάζεται στην πραγματικότητα;",
-      opts: ["500 N", "250 N", "125 N", "1000 N"],
-      correct: 2,
-      explain: "ΜΑ = 2m / 0.5m = 4. Άρα χρειαζόμαστε 500 / 4 = 125 N. Με μοχλό, χρειάζεστε ΤΕΣΣΕΡΙΣ ΦΟΡΕΣ ΛΙΓΟΤΕΡΗ δύναμη! Αυτή είναι η μαγεία των μηχανών!"
-    },
-    {
-      q: "Γιατί ο Κύκλωπας δεν αισθάνεται πίεση στο πλευρό του που ακουμπά τον βράχο (σε σχέση με το ίδιο βάρος σε μικρότερη επιφάνεια);",
-      opts: [
-        "Γιατί είναι δυνατός",
-        "Γιατί μεγαλύτερη επιφάνεια σημαίνει μικρότερη πίεση για ίδια δύναμη",
-        "Γιατί δεν υπάρχει βαρύτητα μέσα στη σπηλιά",
-        "Γιατί οι Κύκλωπες δεν νιώθουν πίεση"
-      ],
-      correct: 1,
-      explain: "Π = F/A. Το βάρος (F) του Κύκλωπα μοιράζεται σε μεγάλη επιφάνεια (A), άρα η πίεση ανά τ.μ. είναι μικρότερη. Αυτό εξηγεί γιατί τα σκι δεν βυθίζονται στο χιόνι — μεγάλη επιφάνεια, μικρή πίεση!"
+    acrostic:{
+      word:'ΟΔΥΣΣΕΑ',
+      intro:'«Η τελευταία λέξη-κλειδί — το όνομα του ήρωά μας:»',
+      clues:[
+        {letter:'Ο', clue:'Αρχικό Οπτικής — επιστήμη του φωτός'},
+        {letter:'Δ', clue:'Αρχικό Δύναμης — το F στον τύπο P=F/A'},
+        {letter:'Υ', clue:'Αρχικό Υπομόχλιου — σημείο στήριξης μοχλού'},
+        {letter:'Σ', clue:'Αρχικό Συχνότητας — ταλαντώσεις/δευτερόλεπτο'},
+        {letter:'Σ', clue:'Αρχικό Στερεού — μέσο γρήγορης μεταφοράς ήχου'},
+        {letter:'Ε', clue:'Αρχικό Εμβαδού — παρονομαστής στον τύπο πίεσης'},
+        {letter:'Α', clue:'Αρχικό Ανάκλασης — επιστροφή φωτός από επιφάνεια'},
+      ]
     }
-  ],
+  }
+];
 
-  matching: {
-    pairs: [
-      { left: "🔆 Οπτική: Νόμος ανάκλασης", right: "Γωνία πρόσπτωσης = Γωνία ανάκλασης" },
-      { left: "🔊 Ήχος: Χαρακτηριστικό συχνότητας", right: "Καθορίζει αν ο ήχος είναι οξύς ή βαρύς" },
-      { left: "⬇️ Πίεση: Τύπος", right: "Π = F / A (Pascal = Newton / m²)" },
-      { left: "⚖️ Μοχλός: Μηχανικό Πλεονέκτημα", right: "ΜΑ = βραχίονας δύναμης ÷ βραχίονας φορτίου" }
-    ]
-  },
-
-  acrostic: {
-    word: "ΟΔΥΣΣΕΑ",
-    intro: "Η τελική ακροστιχίδα — ποιος ήρωας κρύβεται κάθετα;",
-    clues: [
-      { clue: "Χαρακτηριστικό ήχου που σημαίνει «ψηλός τόνος» — αντίθετο του βαρύ", answer: "ΟΞΥΣ" },
-      { clue: "Αλλαγή κατεύθυνσης φωτός όταν περνά από ένα μέσο σε άλλο (π.χ. αέρας→νερό)", answer: "ΔΙΑΘΛΑΣΗ" },
-      { clue: "Ήχος με συχνότητα πάνω από 20.000 Hz — δεν τον ακούμε, αλλά τον χρησιμοποιούν ρόπαλα και ιατρική", answer: "ΥΠΕΡΗΧΟΣ" },
-      { clue: "Ο ήχος ταξιδεύει γρηγορότερα σε αυτή την κατάσταση ύλης (π.χ. σίδερο, ξύλο, πέτρα)", answer: "ΣΤΕΡΕΟ" },
-      { clue: "Η σκοτεινή περιοχή πίσω από αδιαφανές σώμα — αποτέλεσμα ευθύγραμμης διάδοσης φωτός", answer: "ΣΚΙΑ" },
-      { clue: "Στον τύπο Πίεσης Π = F/A, το γράμμα Α συμβολίζει την...", answer: "ΕΠΙΦΑΝΕΙΑ" },
-      { clue: "Στους μοχλούς, η απόσταση από το υπομόχλιο ως το σημείο εφαρμογής δύναμης", answer: "ΑΠΟΣΤΑΣΗ" }
-    ]
-  },
-
-  completeMsg: "ΕΛΕΥΘΕΡΟΙ! Ο Οδυσσέας τρέχει στα πλοία!",
-  completeSub: "Πέντε αίθουσες γνώσης — και η Ιθάκη σας περιμένει!"
-}
-
-]; // end STAGES
-
-
-/* ═══════════════════════════════════════
+/* ═══════════════════════════════════════════════════════
    GAME STATE
-═══════════════════════════════════════ */
-let gs = {
-  stageIdx: 0,  // 0-based index into STAGES
-  score: 0,
-  keys: 0,
-  fontLarge: false,
-  stageState: null // per-stage state (see initStageState)
-};
+═══════════════════════════════════════════════════════ */
+let score = 0;
+let currentStage = 0;
+let stageState = {}; // riddlesDone, matchDone, acroDone per stage
 
-function initStageState(si) {
-  const st = STAGES[si];
-  return {
-    riddlesDone: false,
-    currentRiddle: 0,
-    riddleCorrect: 0,
-    matchingDone: false,
-    acrosticDone: false,
-    // matching state
-    matchSel: null,  // selected left item data-pid
-    matchDone: new Set(),
-    // acrostic state
-    acroCorrect: new Set(),
-    // shuffle right column
-    rightOrder: shuffleArr(st.matching.pairs.map((_,i)=>i))
+function initState(si) {
+  stageState[si] = {
+    riddlesDone: new Array(STAGES[si].riddles.length).fill(false),
+    selectedLeft: null,
+    matchedPairs: new Set(),
+    matchDone: false,
+    acroAnswers: new Array(STAGES[si].acrostic.clues.length).fill(''),
+    acroDone: false
   };
 }
 
-function shuffleArr(arr) {
-  const a = [...arr];
-  for (let i = a.length-1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i+1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
+/* ═══════════════════════════════════════════════════════
+   HELPERS
+═══════════════════════════════════════════════════════ */
+function normalize(s) {
+  return s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().trim();
 }
 
-
-/* ═══════════════════════════════════════
-   SCREEN TRANSITIONS
-═══════════════════════════════════════ */
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+function showFeedback(msg, duration=1800) {
+  const el = document.getElementById('feedback');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('show'), duration);
 }
 
-function startGame() {
-  gs.stageIdx = 0;
-  gs.score = 0;
-  gs.keys = 0;
-  updateHUD();
-  document.getElementById('hud').classList.add('visible');
-  loadStage(0);
-  showScreen('s-stage');
-}
-
-function restartGame() {
-  document.getElementById('hud').classList.remove('visible');
-  gs.stageIdx = 0; gs.score = 0; gs.keys = 0;
-  showScreen('s-intro');
-}
-
-
-/* ═══════════════════════════════════════
-   STAGE RENDERING
-═══════════════════════════════════════ */
-function loadStage(si) {
-  gs.stageIdx = si;
-  gs.stageState = initStageState(si);
+function updateHUD(si) {
   const st = STAGES[si];
+  document.getElementById('hud-level').textContent = `Στάδιο ${si+1}/5 — ${st.title}`;
+  document.getElementById('hud-topic').textContent = st.topic;
+  document.getElementById('hud-score').textContent = `${score} πόντοι`;
 
-  updateHUD();
-  document.getElementById('stage-inner').innerHTML = buildStageHTML(si);
-  window.scrollTo(0, 0);
-  document.getElementById('s-stage').scrollTo(0, 0);
-  attachStageEvents(si);
+  // Stage color on HUD
+  document.documentElement.style.setProperty('--stage-color', st.color);
+  document.documentElement.style.setProperty('--stage-color-rgb', st.colorRgb);
 }
 
-function buildStageHTML(si) {
-  const st = STAGES[si];
-  const ss = gs.stageState;
-
-  // Progress dots
-  let dots = STAGES.map((s, i) => {
-    let cls = i < si ? 'done' : i === si ? 'current' : '';
-    return `<div class="prog-dot ${cls}" title="Επίπεδο ${i+1}"></div>`;
-  }).join('');
-
-  // Right column (shuffled)
-  const rightItems = ss.rightOrder.map(origIdx => st.matching.pairs[origIdx]);
-
-  // Build HTML
-  return `
-  <div class="progress-dots">${dots}</div>
-
-  <div class="stage-header greek-panel">
-    <div class="stage-label">Επίπεδο ${si+1} — ${st.topic}</div>
-    <h2 class="stage-title">${st.title}</h2>
-    <div class="stage-guide">
-      <div class="guide-emoji">${st.emoji}</div>
-      <div class="guide-text">
-        <span class="guide-name">${st.guide}</span>
-        ${st.narrative.replace(/\n/g,' ')}
-      </div>
-    </div>
-  </div>
-
-  <!-- RIDDLES -->
-  <div class="mini-section greek-panel" id="sec-riddles">
-    <div class="mini-title">🗺️ Γρίφοι Γνώσης</div>
-    ${buildRiddlesHTML(si)}
-  </div>
-
-  <!-- MATCHING -->
-  <div class="mini-section greek-panel" id="sec-matching" style="transition:opacity 0.4s">
-    <div class="locked-msg" id="match-locked"><span class="lock-icon">🔒</span> Λύσε πρώτα τους γρίφους για να ξεκλειδωθεί!</div>
-    <div id="match-content" style="display:none">
-      <div class="mini-title">🔗 Αντιστοίχισε τα ζεύγη</div>
-      <p class="match-hint">Κάνε κλικ σε έναν όρο (αριστερά), μετά στον ορισμό του (δεξιά).</p>
-      <div class="matching-game" id="match-grid">
-        <div class="match-col">
-          <div class="match-col-label">Έννοια / Όρος</div>
-          ${st.matching.pairs.map((p, i) =>
-            `<div class="match-item left" data-pid="${i}" id="ml${i}" onclick="clickLeft(${i},${si})">${p.left}</div>`
-          ).join('')}
-        </div>
-        <div class="match-col">
-          <div class="match-col-label">Ορισμός / Περιγραφή</div>
-          ${ss.rightOrder.map((origIdx, pos) =>
-            `<div class="match-item right" data-pid="${origIdx}" id="mr${pos}" onclick="clickRight(${origIdx},${si})">${st.matching.pairs[origIdx].right}</div>`
-          ).join('')}
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ACROSTIC -->
-  <div class="mini-section greek-panel" id="sec-acrostic" style="transition:opacity 0.4s">
-    <div class="locked-msg" id="acro-locked"><span class="lock-icon">🔒</span> Συμπλήρωσε πρώτα την αντιστοιχία!</div>
-    <div id="acro-content" style="display:none">
-      <div class="mini-title">📜 Ακροστιχίδα</div>
-      ${buildAcrosticHTML(si)}
-    </div>
-  </div>
-
-  <!-- STAGE COMPLETE -->
-  <div class="stage-complete greek-panel" id="sec-complete">
-    <div class="complete-emoji">✅</div>
-    <div class="complete-msg" id="complete-msg"></div>
-    <div class="complete-sub" id="complete-sub"></div>
-    <div id="next-btn-wrap"></div>
-  </div>
-  `;
+function awardKey(si) {
+  const slot = document.getElementById(`k${si+1}`);
+  slot.classList.add('earned');
+  slot.innerHTML = KEY_SVG_EARNED;
 }
 
+/* ═══════════════════════════════════════════════════════
+   RIDDLES
+═══════════════════════════════════════════════════════ */
 function buildRiddlesHTML(si) {
   const st = STAGES[si];
-  return st.riddles.map((r, ri) => `
-    <div class="riddle-box" id="riddle-box-${ri}" ${ri > 0 ? 'style="display:none"' : ''}>
-      <div class="riddle-q"><em>Γρίφος ${ri+1}/${st.riddles.length}:</em> ${r.q}</div>
-      <div class="options-grid">
-        ${r.opts.map((opt, oi) =>
-          `<button class="opt-btn" id="opt-${ri}-${oi}" onclick="answerRiddle(${si},${ri},${oi})">${opt}</button>`
-        ).join('')}
+  return st.riddles.map((r,ri) => `
+    <div class="riddle-block" id="riddle-${si}-${ri}">
+      <div class="riddle-q">${ri+1}. ${r.q}</div>
+      <div class="riddle-opts">
+        ${r.opts.map((o,oi) => `
+          <button class="opt-btn" id="opt-${si}-${ri}-${oi}"
+            onclick="answerRiddle(${si},${ri},${oi})">
+            ${String.fromCharCode(945+oi)}) ${o}
+          </button>`).join('')}
       </div>
-      <div class="riddle-feedback" id="rfb-${ri}"></div>
-    </div>
-    ${ri < st.riddles.length-1 ? `<hr class="riddle-sep" id="rsep-${ri}" style="display:none">` : ''}
-  `).join('');
+    </div>`).join('');
 }
 
-function buildAcrosticHTML(si) {
-  const ac = STAGES[si].acrostic;
-  const rows = ac.clues.map((cl, i) => `
-    <div class="acro-row">
-      <div class="acro-letter">${ac.word[i]}</div>
-      <div class="acro-cell">
-        <div class="acro-clue">${cl.clue}</div>
-        <input class="acro-input" id="ai-${si}-${i}" type="text"
-          placeholder="${ac.word[i]}..."
-          oninput="checkAcroInput(${si},${i})"
-          onkeydown="if(event.key==='Enter')checkAcroAll(${si})">
-      </div>
-    </div>
-  `).join('');
-  return `
-    <p style="font-size:0.85rem; color:var(--fg3); font-style:italic; margin-bottom:14px;">${ac.intro}</p>
-    <div class="acrostic-grid">${rows}</div>
-    <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
-      <button class="acro-check-btn" onclick="checkAcroAll(${si})">✔ Έλεγξε τις απαντήσεις</button>
-    </div>
-    <div class="acro-hidden-word" id="acro-reveal-${si}">
-      Η κρυμμένη λέξη είναι: <span>${ac.word}</span> 🎉
-    </div>
-  `;
-}
-
-function attachStageEvents(si) {
-  // nothing extra needed — all via onclick
-}
-
-
-/* ═══════════════════════════════════════
-   RIDDLE LOGIC
-═══════════════════════════════════════ */
 function answerRiddle(si, ri, oi) {
   const st = STAGES[si];
   const r = st.riddles[ri];
-  const ss = gs.stageState;
+  const ss = stageState[si];
+  if (ss.riddlesDone[ri]) return;
 
-  if (ss.currentRiddle !== ri) return; // wrong riddle active
-
-  // Mark all options
-  const opts = document.querySelectorAll(`#riddle-box-${ri} .opt-btn`);
+  const opts = document.querySelectorAll(`[id^="opt-${si}-${ri}-"]`);
   opts.forEach(b => b.disabled = true);
 
-  const isCorrect = oi === r.correct;
-  document.getElementById(`opt-${ri}-${oi}`).classList.add(isCorrect ? 'correct' : 'wrong');
-  if (!isCorrect) document.getElementById(`opt-${ri}-${r.correct}`).classList.add('correct');
+  if (oi === r.ans) {
+    document.getElementById(`opt-${si}-${ri}-${oi}`).classList.add('correct');
+    score += 10;
+    updateScore();
+    showFeedback('✓ Σωστά! +10 πόντοι');
+    ss.riddlesDone[ri] = true;
+  } else {
+    document.getElementById(`opt-${si}-${ri}-${oi}`).classList.add('wrong');
+    document.getElementById(`opt-${si}-${ri}-${r.ans}`).classList.add('correct');
+    showFeedback('✗ Λάθος! Η σωστή απάντηση τονίζεται.');
+    ss.riddlesDone[ri] = true;
+  }
 
-  // Feedback
-  const fb = document.getElementById(`rfb-${ri}`);
-  fb.textContent = (isCorrect ? '✅ Σωστά! ' : '❌ Λάθος! ') + r.explain;
-  fb.className = 'riddle-feedback show ' + (isCorrect ? 'ok' : 'err');
-
-  if (isCorrect) { ss.riddleCorrect++; gs.score += 10; }
-
-  // Next riddle or done
-  setTimeout(() => {
-    ss.currentRiddle = ri + 1;
-    if (ri + 1 < st.riddles.length) {
-      const sep = document.getElementById(`rsep-${ri}`);
-      if (sep) sep.style.display = '';
-      document.getElementById(`riddle-box-${ri+1}`).style.display = '';
-    } else {
-      ss.riddlesDone = true;
-      unlockMatching(si);
-    }
-  }, isCorrect ? 1200 : 2000);
+  checkRiddlesComplete(si);
 }
 
+function checkRiddlesComplete(si) {
+  const ss = stageState[si];
+  if (ss.riddlesDone.every(Boolean)) {
+    // Reveal matching phase
+    document.getElementById(`matching-phase-${si}`).classList.remove('hidden');
+    document.getElementById(`matching-phase-${si}`).scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+}
 
-/* ═══════════════════════════════════════
-   MATCHING LOGIC
-═══════════════════════════════════════ */
-function unlockMatching(si) {
-  document.getElementById('match-locked').style.display = 'none';
-  document.getElementById('match-content').style.display = '';
-  document.getElementById('sec-matching').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+/* ═══════════════════════════════════════════════════════
+   MATCHING
+═══════════════════════════════════════════════════════ */
+function buildMatchingHTML(si) {
+  const pairs = STAGES[si].matching.pairs;
+  const lefts = pairs.map((p,i) => `
+    <button class="match-btn match-left" id="ml-${si}-${i}" onclick="clickLeft(${i},${si})">
+      ${p.l}
+    </button>`).join('');
+
+  // Shuffle right side
+  const rightOrder = pairs.map((_,i)=>i).sort(()=>Math.random()-.5);
+  const rights = rightOrder.map(origI => `
+    <button class="match-btn match-right" id="mr-${si}-${origI}" onclick="clickRight(${origI},${si})">
+      ${pairs[origI].r}
+    </button>`).join('');
+
+  return `
+    <div class="match-grid">
+      <div class="match-col">${lefts}</div>
+      <div class="match-col">${rights}</div>
+    </div>
+    <div class="match-score-msg" id="match-msg-${si}"></div>`;
 }
 
 function clickLeft(pid, si) {
-  const ss = gs.stageState;
-  if (!ss.riddlesDone) return;
-  if (ss.matchDone.has(pid)) return;
+  const ss = stageState[si];
+  if (ss.matchDone) return;
+  if (ss.matchedPairs.has(pid)) return;
 
-  // Deselect all left items
-  document.querySelectorAll('.match-item.left').forEach(el => el.classList.remove('selected'));
-  ss.matchSel = pid;
-  document.getElementById(`ml${pid}`).classList.add('selected');
+  // Deselect previous left
+  if (ss.selectedLeft !== null) {
+    const prev = document.getElementById(`ml-${si}-${ss.selectedLeft}`);
+    if (prev && !ss.matchedPairs.has(ss.selectedLeft)) prev.classList.remove('selected');
+  }
+
+  ss.selectedLeft = pid;
+  document.getElementById(`ml-${si}-${pid}`).classList.add('selected');
 }
 
 function clickRight(origPid, si) {
-  const ss = gs.stageState;
-  if (!ss.riddlesDone) return;
-  if (ss.matchSel === null) return;
-  if (ss.matchDone.has(origPid)) return;
+  const ss = stageState[si];
+  if (ss.matchDone) return;
+  if (ss.matchedPairs.has(origPid)) return;
+  if (ss.selectedLeft === null) {
+    showFeedback('Διάλεξε πρώτα έναν όρο από αριστερά!');
+    return;
+  }
 
-  const selPid = ss.matchSel;
-  const colorClasses = ['m0','m1','m2','m3'];
-
-  if (selPid === origPid) {
+  if (ss.selectedLeft === origPid) {
     // Correct match!
-    const colorIdx = ss.matchDone.size;
-    const leftEl = document.getElementById(`ml${selPid}`);
-    // Find the right element with this origPid
-    const rightEl = document.querySelector(`.match-item.right[data-pid="${origPid}"]`);
-
-    leftEl.classList.remove('selected');
-    leftEl.classList.add(colorClasses[colorIdx]);
-    if (rightEl) rightEl.classList.add(colorClasses[colorIdx]);
-
-    ss.matchDone.add(origPid);
-    ss.matchSel = null;
-    gs.score += 15;
-
-    if (ss.matchDone.size === STAGES[si].matching.pairs.length) {
-      ss.matchingDone = true;
-      gs.score += 20;
-      setTimeout(() => unlockAcrostic(si), 600);
+    ss.matchedPairs.add(origPid);
+    document.getElementById(`ml-${si}-${origPid}`).classList.remove('selected');
+    document.getElementById(`ml-${si}-${origPid}`).classList.add('matched');
+    document.getElementById(`mr-${si}-${origPid}`).classList.add('matched');
+    score += 15;
+    updateScore();
+    ss.selectedLeft = null;
+    document.getElementById(`match-msg-${si}`).textContent = `+15 πόντοι! Σωστό ταίριασμα!`;
+    if (ss.matchedPairs.size === STAGES[si].matching.pairs.length) {
+      score += 20;
+      updateScore();
+      document.getElementById(`match-msg-${si}`).textContent = `🏆 Όλα σωστά! Bonus +20 πόντοι!`;
+      ss.matchDone = true;
+      setTimeout(() => {
+        document.getElementById(`acro-phase-${si}`).classList.remove('hidden');
+        document.getElementById(`acro-phase-${si}`).scrollIntoView({behavior:'smooth', block:'nearest'});
+      }, 700);
     }
   } else {
     // Wrong match
-    const leftEl = document.getElementById(`ml${selPid}`);
-    const rightEl = document.querySelector(`.match-item.right[data-pid="${origPid}"]`);
-    leftEl.classList.add('flash-wrong');
-    if (rightEl) rightEl.classList.add('flash-wrong');
-    setTimeout(() => {
-      leftEl.classList.remove('selected', 'flash-wrong');
-      if (rightEl) rightEl.classList.remove('flash-wrong');
-      ss.matchSel = null;
-    }, 600);
+    const leftBtn = document.getElementById(`ml-${si}-${ss.selectedLeft}`);
+    const rightBtn = document.getElementById(`mr-${si}-${origPid}`);
+    leftBtn.classList.add('wrong-flash');
+    rightBtn.classList.add('wrong-flash');
+    setTimeout(()=>{
+      leftBtn.classList.remove('wrong-flash','selected');
+      rightBtn.classList.remove('wrong-flash');
+    }, 450);
+    document.getElementById(`match-msg-${si}`).textContent = 'Λάθος ταίριασμα — δοκίμασε ξανά!';
+    ss.selectedLeft = null;
   }
-  updateHUD();
 }
 
-
-/* ═══════════════════════════════════════
-   ACROSTIC LOGIC
-═══════════════════════════════════════ */
-function unlockAcrostic(si) {
-  document.getElementById('acro-locked').style.display = 'none';
-  document.getElementById('acro-content').style.display = '';
-  document.getElementById('sec-acrostic').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+/* ═══════════════════════════════════════════════════════
+   ACROSTIC
+═══════════════════════════════════════════════════════ */
+function buildAcrosticHTML(si) {
+  const ac = STAGES[si].acrostic;
+  return `
+    <p class="acro-intro">${ac.intro}</p>
+    ${ac.clues.map((c,i) => `
+      <div class="acro-row">
+        <div class="acro-letter">${c.letter}</div>
+        <div class="acro-clue">${c.clue}</div>
+      </div>
+      <div class="acro-row">
+        <div style="width:34px;flex-shrink:0"></div>
+        <input class="acro-input" id="acro-${si}-${i}"
+          placeholder="Απάντηση..."
+          oninput="checkAcroInput(${si},${i})"
+          onkeydown="if(event.key==='Enter') checkAcroAll(${si})">
+      </div>`).join('')}
+    <div class="acro-word-reveal" id="acro-word-${si}"></div>
+    <button class="btn complete-btn" id="complete-btn-${si}" onclick="completeStage(${si})">
+      🗝️ Πάρε το Κλειδί!
+    </button>`;
 }
 
 function checkAcroInput(si, i) {
-  // Real-time highlight if correct
   const ac = STAGES[si].acrostic;
-  const inp = document.getElementById(`ai-${si}-${i}`);
-  const val = normalize(inp.value);
-  const ans = normalize(ac.clues[i].answer);
-  if (val === ans) {
-    inp.classList.add('ok');
-    inp.classList.remove('err');
+  const inp = document.getElementById(`acro-${si}-${i}`);
+  const val = inp.value;
+  const ss = stageState[si];
+  ss.acroAnswers[i] = val;
+
+  // Check if first letter matches
+  const expected = ac.clues[i].letter;
+  if (val.length > 0) {
+    const firstLetter = normalize(val)[0].toUpperCase();
+    if (firstLetter === expected) {
+      inp.classList.add('ok');
+      inp.classList.remove('err');
+    } else {
+      inp.classList.remove('ok');
+    }
   } else {
-    inp.classList.remove('ok', 'err');
+    inp.classList.remove('ok','err');
   }
+
+  checkAcroAll(si);
 }
 
 function checkAcroAll(si) {
   const ac = STAGES[si].acrostic;
-  const ss = gs.stageState;
+  const ss = stageState[si];
+  const word = ac.word;
   let allOk = true;
 
-  ac.clues.forEach((cl, i) => {
-    const inp = document.getElementById(`ai-${si}-${i}`);
-    const val = normalize(inp.value);
-    const ans = normalize(cl.answer);
-    if (val === ans) {
-      inp.classList.add('ok');
-      inp.classList.remove('err');
-      ss.acroCorrect.add(i);
-    } else {
-      inp.classList.add('err');
-      inp.classList.remove('ok');
+  for (let i = 0; i < ac.clues.length; i++) {
+    const val = ss.acroAnswers[i];
+    if (!val || normalize(val)[0]?.toUpperCase() !== ac.clues[i].letter) {
       allOk = false;
-      setTimeout(() => inp.classList.remove('err'), 600);
+      break;
     }
-  });
+  }
 
   if (allOk) {
-    ss.acrosticDone = true;
-    gs.score += 30;
-    document.getElementById(`acro-reveal-${si}`).classList.add('show');
-    setTimeout(() => completeStage(si), 800);
+    // Show the acrostic word letter by letter
+    const wordEl = document.getElementById(`acro-word-${si}`);
+    wordEl.textContent = word;
+    score += 30;
+    updateScore();
+    ss.acroDone = true;
+    const btn = document.getElementById(`complete-btn-${si}`);
+    btn.classList.add('show');
+    btn.scrollIntoView({behavior:'smooth', block:'nearest'});
+    showFeedback(`✨ Λέξη: ${word}! +30 πόντοι`);
   }
 }
 
-function normalize(s) {
-  return s.trim().toUpperCase()
-    .replace(/Ά/g,'Α').replace(/Έ/g,'Ε').replace(/Ή/g,'Η').replace(/Ί/g,'Ι').replace(/Ό/g,'Ο').replace(/Ύ/g,'Υ').replace(/Ώ/g,'Ω')
-    .replace(/ά/g,'α').replace(/έ/g,'ε').replace(/ή/g,'η').replace(/ί/g,'ι').replace(/ό/g,'ο').replace(/ύ/g,'υ').replace(/ώ/g,'ω')
-    .toUpperCase();
-}
-
-
-/* ═══════════════════════════════════════
-   STAGE COMPLETE
-═══════════════════════════════════════ */
-function completeStage(si) {
+/* ═══════════════════════════════════════════════════════
+   STAGE LIFECYCLE
+═══════════════════════════════════════════════════════ */
+function buildStageHTML(si) {
   const st = STAGES[si];
-  gs.keys++;
-  updateHUD();
+  const progress = Math.round((si / STAGES.length) * 100);
 
-  const sc = document.getElementById('sec-complete');
-  sc.classList.add('show');
-  document.getElementById('complete-msg').textContent = st.completeMsg;
-  document.getElementById('complete-sub').textContent = st.completeSub;
+  return `
+    <div class="stage-header">
+      <div class="guide-portrait">
+        ${PORTRAITS[si]}
+      </div>
+      <div class="stage-header-text">
+        <div class="stage-name">${st.title} — ${st.topic}</div>
+        <div class="stage-topic">${st.guide}</div>
+        <div class="stage-narrative">${st.narrative}</div>
+      </div>
+    </div>
+    <div class="stage-progress">
+      <div class="stage-progress-fill" style="width:${progress}%"></div>
+    </div>
 
-  // Key earn animation
-  const kEl = document.getElementById(`k${si+1}`);
-  if (kEl) kEl.classList.add('earned');
+    <!-- Phase 1: Riddles -->
+    <div class="phase-panel">
+      <div class="phase-label">Γρίφοι</div>
+      ${buildRiddlesHTML(si)}
+    </div>
 
-  // Next button
-  const wrap = document.getElementById('next-btn-wrap');
-  if (si + 1 < STAGES.length) {
-    wrap.innerHTML = `<button class="btn btn-sea" onclick="loadStage(${si+1})" style="font-size:1rem; margin-top:8px;">
-      ➡️ Επόμενη Αίθουσα — ${STAGES[si+1].topic}
-    </button>`;
-  } else {
-    wrap.innerHTML = `<button class="btn btn-gold" onclick="showVictory()" style="font-size:1.1rem; margin-top:8px;">
-      🌊 ΑΠΟΔΡΑΣ — Δες τα αποτελέσματα!
-    </button>`;
-  }
+    <!-- Phase 2: Matching (hidden until riddles done) -->
+    <div class="phase-panel hidden" id="matching-phase-${si}">
+      <div class="phase-label">Ταίριασμα</div>
+      ${buildMatchingHTML(si)}
+    </div>
 
-  sc.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    <!-- Phase 3: Acrostic (hidden until matching done) -->
+    <div class="phase-panel hidden" id="acro-phase-${si}">
+      <div class="phase-label">Ακροστιχίδα</div>
+      ${buildAcrosticHTML(si)}
+    </div>`;
 }
 
+function loadStage(si) {
+  currentStage = si;
+  initState(si);
+  const st = STAGES[si];
+
+  // Update CSS vars
+  document.documentElement.style.setProperty('--stage-color', st.color);
+  document.documentElement.style.setProperty('--stage-color-rgb', st.colorRgb);
+
+  updateHUD(si);
+
+  const content = document.getElementById('stage-content');
+  content.innerHTML = buildStageHTML(si);
+
+  // Show stage screen
+  document.getElementById('s-intro').classList.add('hidden');
+  document.getElementById('s-victory').classList.add('hidden');
+  document.getElementById('s-stage').classList.remove('hidden');
+
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function completeStage(si) {
+  awardKey(si);
+  showFeedback(`🗝️ Κλειδί ${si+1} αποκτήθηκε!`);
+
+  setTimeout(() => {
+    if (si + 1 < STAGES.length) {
+      loadStage(si + 1);
+    } else {
+      showVictory();
+    }
+  }, 1200);
+}
+
+function updateScore() {
+  document.getElementById('hud-score').textContent = `${score} πόντοι`;
+  const fs = document.getElementById('final-score');
+  if (fs) fs.textContent = score;
+}
+
+/* ═══════════════════════════════════════════════════════
+   VICTORY
+═══════════════════════════════════════════════════════ */
 function showVictory() {
-  document.getElementById('v-score').textContent = `Συνολική βαθμολογία: ${gs.score} πόντοι!`;
-  updateHUD();
-  showScreen('s-victory');
-  document.getElementById('hud').classList.remove('visible');
+  document.getElementById('s-stage').classList.add('hidden');
+  document.getElementById('s-victory').classList.remove('hidden');
+  document.getElementById('final-score').textContent = score;
+  document.getElementById('hud-level').textContent = 'Νίκη!';
+  document.getElementById('hud-topic').textContent = '';
+  window.scrollTo({top:0, behavior:'smooth'});
+
+  // Build keys display
+  const kd = document.getElementById('keys-display');
+  kd.innerHTML = STAGES.map((_,i) => `
+    <div class="key-big">${KEY_SVG_EARNED}</div>`).join('');
 }
 
-
-/* ═══════════════════════════════════════
-   HUD + FONT
-═══════════════════════════════════════ */
-function updateHUD() {
-  const si = gs.stageIdx;
-  document.getElementById('hud-stage').textContent = `Επίπεδο ${si+1}/5 — ${STAGES[si].topic}`;
-  document.getElementById('hud-score').textContent = `${gs.score} πόντοι`;
+/* ═══════════════════════════════════════════════════════
+   START
+═══════════════════════════════════════════════════════ */
+function startGame() {
+  score = 0;
+  document.getElementById('hud-score').textContent = '0 πόντοι';
+  loadStage(0);
 }
 
-function toggleFont() {
-  gs.fontLarge = !gs.fontLarge;
-  document.body.classList.toggle('font-large', gs.fontLarge);
-  document.getElementById('font-toggle').textContent = gs.fontLarge ? 'Α−' : 'Α+';
-  try { localStorage.setItem('ody-font-large', gs.fontLarge ? '1' : '0'); } catch(e){}
-}
-
-// Restore font preference
-try {
-  if (localStorage.getItem('ody-font-large') === '1') {
-    gs.fontLarge = true;
-    document.body.classList.add('font-large');
-    document.getElementById('font-toggle').textContent = 'Α−';
-  }
-} catch(e){}
-
-// Register service worker (PWA)
+/* ═══════════════════════════════════════════════════════
+   SERVICE WORKER
+═══════════════════════════════════════════════════════ */
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('service-worker.js').catch(() => {});
-  });
+  navigator.serviceWorker.register('service-worker.js').catch(() => {});
 }
-
-// Add cave drips to background
-(function() {
-  const container = document.getElementById('bg-cave');
-  for (let i = 0; i < 8; i++) {
-    const d = document.createElement('div');
-    d.className = 'drip';
-    d.style.left = `${10 + i*12}%`;
-    d.style.height = `${80 + Math.random()*120}px`;
-    d.style.animationDuration = `${5 + Math.random()*8}s`;
-    d.style.animationDelay = `${Math.random()*6}s`;
-    document.body.appendChild(d);
-  }
-})();
 </script>
-
 </body>
 </html>
